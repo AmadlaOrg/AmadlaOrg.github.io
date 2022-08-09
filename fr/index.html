@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Amadla</title>
+		<link rel="icon" type="image/x-icon" href="../favicon.ico">
+		<link rel="icon" type="image/png" href="../assets/favicon-16x16.png" sizes="16x16">
+		<link rel="icon" type="image/png" href="../assets/favicon-32x32.png" sizes="32x32">
+		<!--<link rel="icon" type="image/png" href="-96x96.png" sizes="96x96">-->
+		<link rel="icon" type="image/png" href="../assets/android-chrome-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="../assets/android-chrome-512x512.png" sizes="512x512">
+		<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../assets/apple-touch-icon.png">
+		<meta property="og:image" content="../assets/android-chrome-512x512.png">
+		<meta name="Keywords" content="amadla, IaC, infonuagique">
+		<meta name="Description" content="Amadla est un environnement infonuagique standard et un ensemble d'outils permettant de déployer et de gérer ces différents environnements infonuagiques à l'aide d'Infrastructure as code (IaC).">
+		<style>
+		html, body {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			font-family: Arial, sans-serif;
+		}
+
+		body {
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+		}
+
+		section {
+			width: 42em;
+			text-align: left;
+			margin: 0 auto auto auto;
+		}
+
+		#top img {
+			width: 5em;
+		}
+
+		#top ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		#top li {
+			float: left;
+		}
+
+		#top li a {
+			display: block;
+		}
+
+		#top li a:hover {
+			box-shadow: 5px 10px 18px #888888;
+		}
+
+		#top li div {
+			width: 14em;
+			height: 14em;
+		}
+
+		#top header {
+			position: fixed;
+		}
+
+		.content {
+			flex: 1 0 auto;
+			float: right;
+			margin: 5em 0 0 200px;
+		}
+
+		#about {
+			margin-top: 5em;
+		}
+
+		#about ul {
+			list-style-type: "-  ";
+		}
+
+		#about header {
+			flex: 1 0 auto;
+			margin-left: 200px;
+		}
+
+		#about .content {
+			margin-top: 0;
+		}
+
+		footer {
+			flex-shrink: 0;
+			padding: 2em;
+			margin-top: 10em;
+		}
+
+		@media only screen and (max-width:683px) {
+			#top header {
+				width: 100%;
+				text-align: center;
+				position: relative;
+			}
+
+			#top {
+				width: 288px;
+			}
+
+			#top .content {
+				margin-top: 5em;
+			}
+
+			#about header {
+				margin-left: 32px;
+			}
+
+			#about .content {
+				margin-top: 0;
+			}
+
+			#about {
+				width: auto;
+			}
+
+			.content {
+				margin-left: 0;
+				padding: 0 2em 0 2em;
+			}
+		}
+
+		/*@media only screen and (max-width:450px) {
+			section {
+				width: 450em;
+			}
+		}*/
+		</style>
+	</head>
+	<body>
+		<section id="top">
+			<header>
+				<h1><img src="../assets/apple-touch-icon.png" alt="Amadla"></h1>
+			</header>
+			<!--<div class="content">-->
+				<!--<ul>
+					<li>
+						<a href="https://amadla.com/" title="Amadla">
+							<div style="background-image: url(./assets/amadla/amadla-logo.svg);"></div>
+						</a>
+					</li>
+					<li>
+						<a href="https://bth.bio/" title="BTH - Beyond The Horizon">
+							<div style="background-image: url(./assets/bth/bth-logo.svg)"></div>
+						</a>
+					</li>
+					<li>
+						<a href="https://boutbiz.com/" title="Bout Biz">
+							<div style="background-image: url(./assets/boutbiz/boutbiz-logo.svg);"></div>
+						</a>
+					</li>
+					<li>
+						<a href="https://yaloub.com/" title="Yaloub">
+							<div style="background-image: url(./assets/yaloub/yaloub-logo.svg);"></div>
+						</a>
+					</li>
+					<li>
+						<a href="https://xtamia.com/" title="XTamia">
+							<div style="background-image: url(./assets/xtamia/xtamia-logo.svg);"></div>
+						</a>
+					</li>
+				</ul>-->
+			<!--</div>-->
+		</section>
+		<section id="about">
+			<header>
+				<h2>À propos</h2>
+			</header>
+			<div class="content">
+				<p>Pour de nombreux développeurs, le besoin d'un environnement infonuagique bien configuré et sécurisé est crucial pour les projets critiques. Le problème est la limite de temps et d'expertise. Le programmeur peut savoir comment créer l'application, mais peut être limité dans ses connaissances infonuagiques, de Linux et des meilleures pratiques pour les configurations de serveur. Un autre besoin qui surgit est celui de l'agnosticisme infonuagique.</p>
+				<p>Amadla peut vous aider à être rapidement opérationnel avec un environnement infonuagique indépendant des services infonuagique et qui suit les meilleures pratiques de sécurité. Avec seulement quelques modifications de fichiers de configuration et quelques commandes, n'importe quel développeur peut générer un environnement infonuagique sécurisé et facile à utiliser avec toutes les bases qui sont généralement nécessaires.</p>
+				<p>Rien n'empêche quiconque de personnaliser le code IaC et de créer un environnement qui répond à ses besoins spécifiques puisque le code est de source libre. Une fois la configuration de l’infonuagique terminée, ceux qui ont l'autorisation peuvent apporter des modifications.</p>
+			</div>
+		</section>
+		<footer>Copyright © Amadla</footer>
+	</body>
+</html>
