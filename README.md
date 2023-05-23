@@ -1,1 +1,1 @@
-# Amadla-com.github.io
+# AmadlaOrg.github.io
