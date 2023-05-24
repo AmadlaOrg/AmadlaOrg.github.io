@@ -1,0 +1,21 @@
+CI/CD
+=========
+
+`CI <https://en.wikipedia.org/wiki/Continuous_integration>`__/`CD <https://en.wikipedia.org/wiki/Continuous_delivery>`__
+tools that Amadla supports: - `GitHub
+Workflow <https://docs.github.com/en/actions/using-workflows>`__ -
+`Jenkins <https://www.jenkins.io/>`__
+
+You can use any other CI/CD tools that you whish but for the moments
+those are the only ones that Amadla will maintain.
+
+CI/CD helps to quickly put everything together and deploy the things
+that you want automatically.
+
+With GitHub Workflow you will be able to just
+`fork <https://docs.github.com/en/get-started/quickstart/fork-a-repo>`__
+this repo and then whenever you make a change to the code, and you
+commit and push the GitHub Workflow will execute the IaC code and deploy
+everything without the need of any other actions on your part.
+
+   More documentation to come.

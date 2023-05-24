@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev &mdash; Amadla 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Amadla
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="how-it-works.html">How It Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ci-cd.html">CI/CD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding-secrets-to-vault.html">Adding Secrets To Vault</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-compatibility.html">Application Compatibility</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Amadla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Dev</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dev.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dev">
+<h1>Dev<a class="headerlink" href="#dev" title="Permalink to this heading"></a></h1>
+<p>There are many layers of automation in Amadla. This makes it very easy
+to make a small mistakes that can have a cascading affect on all the
+other layers of automation for this reason it is important for anyone
+who wants to contribute to familiarize themselves with this
+documentation.</p>
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fail-fast">Fail-fast!</a> - No, it is
+a not a new Fast &amp; Furious movie. It is all about clear errors and
+avoiding cascading issues that make it very hard to clean up and
+debug a problem.</p>
+<ul class="simple">
+<li><p>Don’t hesitate to put conditions to verify if a value is valid.</p></li>
+<li><p>Catch as many possible failures.</p></li>
+<li><p>Testing the fails is a way to make sure we follow the fail-fast
+principle as much as possible.</p></li>
+</ul>
+</li>
+<li><p>Every time you make a change to one of the different ways to run
+Amadla you need to make sure it is mirrored to all the other ways
+(<a class="reference external" href="../Jenkinsfile">Jenkins</a>, <a class="reference external" href="../.github/workflows/generate.yml">GitHub
+Workflow</a> –NOTE– Maybe Worflow
+can just call Jenkin script instead of having a whole seperated CI/CD
+–NOTE–, <a class="reference external" href="../containers/Makefile">containers</a> ???, or all the
+<a class="reference external" href="../Makefile">tools installed on the system itself</a>).</p></li>
+<li><p>Documentation is crucial! Also it is helpful to add links to the
+terms, accronyms, or concepts that might not be well known to the
+average person. Let make it easy.</p></li>
+<li><p>Testing.</p>
+<ul class="simple">
+<li><p>With the four different ways to run Amadla.</p></li>
+<li><p>As many cloud environment as possible</p></li>
+<li><p>Basics:</p>
+<ul>
+<li><p><a class="reference external" href="https://aws.amazon.com/">AWS</a></p></li>
+<li><p><a class="reference external" href="https://azure.microsoft.com/">Azure</a></p></li>
+<li><p><a class="reference external" href="https://cloud.google.com/">Google Cloud</a></p></li>
+<li><p><a class="reference external" href="https://www.digitalocean.com/">DigitalOcean</a></p></li>
+<li><p><a class="reference external" href="https://www.linode.com/">Linode</a></p></li>
+<li><p><a class="reference external" href="https://www.vultr.com/">Vultr</a></p></li>
+<li><p><a class="reference external" href="https://www.rackspace.com/">RackSpace</a> (or any other cloud
+services that uses <a class="reference external" href="https://www.openstack.org/">OpenStack</a>))</p></li>
+<li><p><a class="reference external" href="https://cloudstack.apache.org/">CloudStack</a>(??? - unsure)</p></li>
+</ul>
+</li>
+<li><p>Testing the other layers of automation.</p></li>
+</ul>
+</li>
+<li><p>Following the rules of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">`.editorconfig</span></code> &lt;../.editorconfig&gt;`__</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">`.gitattributes</span></code> &lt;../.gitattributes&gt;`__.</p></li>
+</ul>
+</li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">information_source<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Resources</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/jnbdz/Demystifying-Ansible-Automation-Controller">Demystifying Ansible Automation Controller |
+GitHub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jnbdz/Full-Stack-AWS-Application-Development">Full Stack AWS Application Development |
+GitHub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jnbdz/Cloud-Native-Observability">Cloud Native Observability |
+GitHub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jnbdz/Go-for-DevOps">Go for DevOps | GitHub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jnbdz/Ansible-for-Real-life-Automation">Ansible for Real life Automation |
+GitHub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jnbdz/HashiCorp-Packer-in-Production">HashiCorp Packer in Production |
+GitHub</a></p></li>
+</ul>
+</section>
+<section id="makefile">
+<h2>Makefile<a class="headerlink" href="#makefile" title="Permalink to this heading"></a></h2>
+<p>Rules: - Uppercase is for global variables and lowercase is for a
+specific target</p>
+<blockquote>
+<div><p>Might remove!</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">package<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Containers</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<dl class="field-list simple">
+<dt class="field-odd">cook<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Compose</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<dl class="field-list simple">
+<dt class="field-odd">military_helmet<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Manage Secrets</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Many applications and services need secrets like username, password, TLS
+keys, SSH keys, etc.</p>
+<p>Since Amadla uses compose, here is an example of a compose configuration
+that uses secrets:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">secrets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">nextcloud_admin_password</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">nextcloud_admin_user</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres_db</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres_password</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres_user</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>This example is taken from NextCloud.</p>
+<p>Podman and Docker have tools to manage secrets.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>podman<span class="w"> </span>secret<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>Results:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Manage</span> <span class="n">secrets</span>
+
+<span class="n">Description</span><span class="p">:</span>
+  <span class="n">Manage</span> <span class="n">secrets</span>
+
+<span class="n">Usage</span><span class="p">:</span>
+  <span class="n">podman</span> <span class="n">secret</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span>
+
+<span class="n">Available</span> <span class="n">Commands</span><span class="p">:</span>
+  <span class="n">create</span>      <span class="n">Create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">secret</span>
+  <span class="n">inspect</span>     <span class="n">Inspect</span> <span class="n">a</span> <span class="n">secret</span>
+  <span class="n">ls</span>          <span class="n">List</span> <span class="n">secrets</span>
+  <span class="n">rm</span>          <span class="n">Remove</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">secrets</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">luggage<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Module</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Modules are found in <code class="docutils literal notranslate"><span class="pre">apps.d</span></code>, <code class="docutils literal notranslate"><span class="pre">servers.d</span></code> and <code class="docutils literal notranslate"><span class="pre">clouds.d</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">left_luggage<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adding a Module</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Most of Amadla is tightly integrated with Git with the usage of branches
+and tags. It is not tightly attached to GitHub so you can easily use
+another Git server. But using another code versioning system would be
+very difficult.</p>
+<p>The structure needs to follow the standard so that Amadla is able to use
+and integrate the module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">shinto_shrine<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jinja</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Documentation: <a class="reference external" href="https://jinja.palletsprojects.com/en/3.1.x/templates/">https://jinja.palletsprojects.com/en/3.1.x/templates/</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">ocean<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Git flow</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Amadla is tightly</p>
+<p>Ini:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>flow<span class="w"> </span>init
+</pre></div>
+</div>
+<blockquote>
+<div><p>For <code class="docutils literal notranslate"><span class="pre">Version</span> <span class="pre">tag</span> <span class="pre">prefix?</span> <span class="pre">[]</span> <span class="pre">v</span></code></p>
+</div></blockquote>
+<p>Start a new feature:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>flow<span class="w"> </span>feature<span class="w"> </span>start<span class="w"> </span>pilot
+</pre></div>
+</div>
+<p>It will return:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>flow<span class="w"> </span>feature<span class="w"> </span>start<span class="w"> </span>pilot
+Switched<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;feature/pilot&#39;</span>
+
+Summary<span class="w"> </span>of<span class="w"> </span>actions:
+-<span class="w"> </span>A<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;feature/pilot&#39;</span><span class="w"> </span>was<span class="w"> </span>created,<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span><span class="s1">&#39;develop&#39;</span>
+-<span class="w"> </span>You<span class="w"> </span>are<span class="w"> </span>now<span class="w"> </span>on<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;feature/pilot&#39;</span>
+
+Now,<span class="w"> </span>start<span class="w"> </span>committing<span class="w"> </span>on<span class="w"> </span>your<span class="w"> </span>feature.<span class="w"> </span>When<span class="w"> </span><span class="k">done</span>,<span class="w"> </span>use:
+
+<span class="w">     </span>git<span class="w"> </span>flow<span class="w"> </span>feature<span class="w"> </span>finish<span class="w"> </span>pilot
+</pre></div>
+</div>
+<p>Git push the new branch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>feature/pilot
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">gem<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Applications</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Here is the list of the essentials for <strong>applications</strong>: - <code class="docutils literal notranslate"><span class="pre">config/</span></code> -
+The <code class="docutils literal notranslate"><span class="pre">config</span></code> directory contains the configurations, most of it is
+Jinja format. - <code class="docutils literal notranslate"><span class="pre">compose.yml.j2</span></code> - This is the Jinja template for the
+container compose file that is used by the container engine (Podman or
+Docker). If the application is installed - <code class="docutils literal notranslate"><span class="pre">docs/</span></code> (optional) - The
+<code class="docutils literal notranslate"><span class="pre">docs</span></code> directory contains the Markdown documentation. Only needed if
+there are special actions, details, development instructions. -
+<code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> - <code class="docutils literal notranslate"><span class="pre">module.yml</span></code> - - <code class="docutils literal notranslate"><span class="pre">README.md</span></code> -</p>
+<dl class="field-list simple">
+<dt class="field-odd">paperclips<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">config/</span></code></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<dl class="field-list simple">
+<dt class="field-odd">paperclip<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">compose.yml.j2</span></code></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<dl class="field-list simple">
+<dt class="field-odd">baggage_claim<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">module.yml</span></code></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Lets start with an example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">module</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vault - Secret tool.</span>
+<span class="w">  </span><span class="nt">authors</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Jean-Nicolas Boulay (JN) &lt;https://jean-nicolas.name&gt;</span>
+<span class="w">  </span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Application</span>
+<span class="w">  </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keys</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">security</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secrets</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storage</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">network</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">internal</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">            </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">            </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">      </span><span class="nt">private</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">locations</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/vault</span>
+<span class="w">            </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
+<span class="w">                </span><span class="nt">internal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8200</span>
+<span class="w">                </span><span class="nt">external</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code> - Is the first key to indicate the version of the
+<code class="docutils literal notranslate"><span class="pre">module.yml</span></code> configuration file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module</span></code> - Is to groupe all the module settings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> - The description of the module and what it is about.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authors</span></code> (optional) - You can list the authors of the module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> - …</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">category</span></code> - There are three categories you can use:</p>
+<ul class="simple">
+<li><p>Application</p></li>
+<li><p>Server</p></li>
+<li><p>Cloud</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code> - Is a list of words that help grouping modules.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">configuration</span></code> -</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">network</span></code> -</p>
+<ul>
+<li><dl class="field-list simple">
+<dt class="field-odd">red_circle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">protected</span></code> - This means that only services and</p>
+</dd>
+</dl>
+<p>applications can be access internaly in the same server.</p>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">yellow_circle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">internal</span></code> - This indicates to Amadla that</p>
+</dd>
+</dl>
+<p>this can only be access by internal services and applications.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">locations</span></code> - List of locations (in case you need multiple
+paths).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ports</span></code> - List of ports and protocols that are used with
+the entrypoint, firewall and container.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code> (optional) - <code class="docutils literal notranslate"><span class="pre">tcp</span></code> or <code class="docutils literal notranslate"><span class="pre">udp</span></code> (default
+<code class="docutils literal notranslate"><span class="pre">tcp</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">internal</span></code> - This is the port <strong>in</strong> the container
+(example: <strong>8080</strong>:80).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">external</span></code> - This is the port <strong>outside</strong> of the
+container (example: 8080:<strong>80</strong>).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">large_blue_circle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">private</span></code> - This indicates to Amadla that</p>
+</dd>
+</dl>
+<p>the application can only be access via a VPN.</p>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">green_circle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">public</span></code> - This indicates to Amadla that the</p>
+</dd>
+</dl>
+<p>application can be access via the web without the need of using
+a VPN nor is it just internal.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Local server
+access</p></th>
+<th class="head"><p>Internal
+server access</p></th>
+<th class="head"><p>Need VPN for
+access</p></th>
+<th class="head"><p>Anyone</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>:r
+ed_ci
+rcle:
+prot
+ected</p></td>
+<td><p>:heavy
+_check_mark:</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>:yell
+ow_ci
+rcle:
+int
+ernal</p></td>
+<td><p>:heavy
+_check_mark:</p></td>
+<td><p>:hea
+vy_check_mark:</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>:lar
+ge_bl
+ue_ci
+rcle:
+pr
+ivate</p></td>
+<td><p>:heavy
+_check_mark:</p></td>
+<td><p>:hea
+vy_check_mark:</p></td>
+<td><p>:heavy
+_check_mark:</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>:gre
+en_ci
+rcle:
+p
+ublic</p></td>
+<td><p>:heavy
+_check_mark:</p></td>
+<td><p>:hea
+vy_check_mark:</p></td>
+<td><p>:heavy
+_check_mark:</p></td>
+<td><p>:<a href="#id1"><span class="problematic" id="id2">heavy_</span></a>
+check_mark:</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">open_book<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code></p>
+</dd>
+</dl>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Plugin Name
+Application Plugin Name (link to the website of the application/service).
+
+![Screenshot](http://url_to_project_screenshot) This is optional.
+
+The screenshot is practicle if you have a web interface that communicates what the application is about.
+
+## How to use
+...
+
+## Screenshots
+This section is optional, but encouraged if one screenshot doesn&#39;t tell the whole story. Just a list of images, one per line. We do the resizing, so use actual size screenshots.
+
+![Screenshot 1](http://url_to_project_screenshot)
+![Screenshot 2](http://url_to_project_screenshot)
+![Screenshot 3](http://url_to_project_screenshot)
+![Screenshot 4](http://url_to_project_screenshot)
+
+## Arbitrary section
+This is an arbitrary section. You can have as many of these as you want.
+Some arbitrary section examples:
+
+* FAQ
+* Notes
+* Misc
+* Known issues
+
+The name is up to you, but remember to keep it meaningful, short and simple. If it is very verbose and detailed please use the `docs/` directory. Arbitrary sections are always optional.
+</pre></div>
+</div>
+<section id="server">
+<h3>Server<a class="headerlink" href="#server" title="Permalink to this heading"></a></h3>
+<p>The server configurations use <a class="reference external" href="https://www.ansible.com/">Ansible</a> to
+install all the packages and other components that are needed. It also
+takes care of all the settings of SELinux and other Linux
+configurations.</p>
+<p><strong>Environment variables:</strong> - <code class="docutils literal notranslate"><span class="pre">USER_USERNAME</span></code> -
+<code class="docutils literal notranslate"><span class="pre">USER_SERVER_PASSWORD</span></code></p>
+</section>
+<section id="cloud">
+<h3>Cloud<a class="headerlink" href="#cloud" title="Permalink to this heading"></a></h3>
+<p>The cloud configurations use <a class="reference external" href="https://www.packer.io/">Packer</a>…</p>
+<section id="image-builder">
+<h4>Image Builder<a class="headerlink" href="#image-builder" title="Permalink to this heading"></a></h4>
+<p>Here is the bash script of the container that runs the builder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+
+podman<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>/etc/localtime:/etc/localtime:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>./entry.sh:/home/entry.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>./plugins/packer-builder-vultr:/root/.packer.d/plugins/packer-builder-vultr<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>./plugins/packer-builder-vultr:/bin/packer-builder-vultr<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>./clouds.d/:/home/clouds.d/<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>./ansible/base/:/home/ansible/<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>./.vault:/home/.vault<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>~/.ssh/id_ed25519.pub:/home/.ssh/id_ed25519.pub<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>~/.ssh/id_ed25519:/home/.ssh/id_ed25519<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;GET_INFO=</span><span class="si">${</span><span class="nv">GET_INFO</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;CLOUD_SERVICE=</span><span class="si">${</span><span class="nv">CLOUD_SERVICE</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;VAULT_ADDRESS=</span><span class="si">${</span><span class="nv">VAULT_ADDRESS</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;USER_ID=</span><span class="si">${</span><span class="nv">USER_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;USER_USERNAME=jn&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;USER_SERVER_PASSWORD=amadlatest&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;SERVICE_PROFILE=default&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-e<span class="w"> </span><span class="s2">&quot;PACKER_LOG=</span><span class="si">${</span><span class="nv">PACKER_LOG</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--net<span class="w"> </span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--name<span class="w"> </span>image-builder<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>image-builder
+</pre></div>
+</div>
+</section>
+</section>
+<section id="volumes">
+<h3>Volumes<a class="headerlink" href="#volumes" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/localtime:/etc/localtime:ro</span></code> -</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./entry.sh:/home/entry.sh</span></code> -</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./plugins/packer-builder-vultr:/root/.packer.d/plugins/packer-builder-vultr</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./plugins/packer-builder-vultr:/bin/packer-builder-vultr</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./clouds.d/:/home/clouds.d/</span></code> -</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./ansible/base/:/home/ansible/</span></code> -</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./.vault:/home/.vault</span></code> -</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519.pub:/home/.ssh/id_ed25519.pub</span></code> -</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519:/home/.ssh/id_ed25519</span></code> -</p></li>
+</ul>
+</section>
+<section id="environment-variables">
+<h3>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET_INFO=${GET_INFO}</span></code> - It’s a call for info about</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_SERVICE=${CLOUD_SERVICE}</span></code> - Pass the name of the cloud you
+want to execute (maybe change to a <em>volume</em>…)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VAULT_ADDRESS=${VAULT_ADDRESS}</span></code> - The Vault address (in local
+environment: <a class="reference external" href="http://127.0.0.1:1234/">http://127.0.0.1:1234/</a>). The value comes from Vault
+after it starts, you will only need to copy paste the command given
+by it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USER_ID=${USER_ID}</span></code> - [STRIKEOUT:This is for storing and
+retrieving the secrets of a particular user (this is useful if you
+have multiple users using Amadla)] <strong>DEPRECATED</strong> Instead you will
+use: <a class="reference external" href="https://developer.hashicorp.com/vault/docs/auth/userpass">Userpass |
+Vault</a> +
+<a class="reference external" href="https://developer.hashicorp.com/vault/tutorials/auth-methods/identity">Identity: Entities and Groups |
+Vault</a>
++ <a class="reference external" href="https://developer.hashicorp.com/vault/tutorials/getting-started-ui/getting-started-auth-ui">Manage Authentication Methods |
+Vault</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USER_USERNAME=jn</span></code> - It is the username for the SSH of the server
+(needs a better name… Seriously!) NOTE -&gt; Used in Ansible</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USER_SERVER_PASSWORD=amadlatest</span></code> - Password for the SSH of the
+server (needs also a better name… Very serious!) -&gt; Used in Ansible</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SERVICE_PROFILE=default</span></code> - No idea</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PACKER_LOG=${PACKER_LOG}</span></code> - Log level?? Maybe… No idea</p></li>
+</ul>
+</section>
+<section id="config-containers-image-builder-entry-sh">
+<h3><code class="docutils literal notranslate"><span class="pre">config/containers/image-builder/entry.sh</span></code><a class="headerlink" href="#config-containers-image-builder-entry-sh" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Is the container main entry point bash script</p></li>
+<li><p>It also calls with <code class="docutils literal notranslate"><span class="pre">curl</span></code> the Vault server to get the secrets
+needed to connect to the cloud service</p></li>
+</ul>
+<p><strong>Vault path:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;${VAULT_ADDRESS}/${VAULT_API_VERSION}/secret/data/${CLOUD_SERVICE}/credentials/${SERVICE_PROFILE}&quot;</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VAULT_ADDRESS</span></code> - Is the same value that is pass by the <code class="docutils literal notranslate"><span class="pre">run.sh</span></code>
+script</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VAULT_API_VERSION</span></code> - (Maybe added to <code class="docutils literal notranslate"><span class="pre">run.sh</span></code>??) - For now it is
+hardcoded in the <code class="docutils literal notranslate"><span class="pre">entry.sh</span></code> script it is required in the HTTP API
+enpoint path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_SERVICE</span></code> - Since you can have multiple cloud services the
+storage in Vault is devided by cloud providers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SERVICE_PROFILE</span></code> - Not sure why it’s called that and it’s also
+because they might be different credentials based on what you are
+using it from e.g. Prod, Staging, etc</p></li>
+</ul>
+<section id="step-by-step">
+<h4>Step by step<a class="headerlink" href="#step-by-step" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">entry.sh</span></code> - The entrypoint for the container</p></li>
+<li><p>Call to Vault to get the secrets to connect to the cloud service API</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build.sh</span></code> - Simple bash function that calls another script named
+<code class="docutils literal notranslate"><span class="pre">creds.sh</span></code> and then calls (with the credential from <code class="docutils literal notranslate"><span class="pre">creds.sh</span></code>)
+the secrets needed to execute <code class="docutils literal notranslate"><span class="pre">packer</span> <span class="pre">build</span></code> that will execute the
+packer script</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">creds.sh</span></code> - Calls Vault to get secret uses the bash function in
+the <code class="docutils literal notranslate"><span class="pre">entry.sh</span></code> and populates a environment variable that will later
+be used as source of the secret or secrets to communicated with the
+API of the cloud service</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;cloud</span> <span class="pre">service</span> <span class="pre">name&gt;.base.pkr.hcl</span></code> - The Packer script</p></li>
+<li><p>Ansible is called inside the Packer script (depending on the server
+type you configure it will load the one you set in the configuration
+file)</p></li>
+</ul>
+<blockquote>
+<div><p>&#64;TODO: Add Terraform… For now this is only for generating an server
+image.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="unit-testing">
+<h2>Unit Testing<a class="headerlink" href="#unit-testing" title="Permalink to this heading"></a></h2>
+<p>The command to run the Python unit test:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>unittest<span class="w"> </span>tests/test_amadla.py
+</pre></div>
+</div>
+<p>The unit tests are found <code class="docutils literal notranslate"><span class="pre">./tests/</span></code> directory.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, JN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

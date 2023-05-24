@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs | Amadla IaC CE &mdash; Amadla 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Amadla
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="how-it-works.html">How It Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ci-cd.html">CI/CD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding-secrets-to-vault.html">Adding Secrets To Vault</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-compatibility.html">Application Compatibility</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Amadla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Docs | Amadla IaC CE</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="docs-amadla-iac-ce">
+<h1>Docs | Amadla IaC CE<a class="headerlink" href="#docs-amadla-iac-ce" title="Permalink to this heading"></a></h1>
+<section id="menu">
+<h2>Menu<a class="headerlink" href="#menu" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="./setup.md">Setup</a> - About the commands for making the server
+image and generate infrastructure.</p></li>
+<li><p><a class="reference external" href="./secrets.md">Secrets</a> - About managing secrets with Vault tool.</p></li>
+<li><p><a class="reference external" href="./ci-cd.md">CI/CD</a> - About CI/CD (<a class="reference external" href="https://docs.github.com/en/actions/using-workflows">GitHub
+Workflow</a>,
+<a class="reference external" href="https://www.jenkins.io/">Jenkins</a>).</p></li>
+<li><p><a class="reference external" href="./how-it-works.md">How It Works</a> - An explanation on how all the
+pieces come together.</p></li>
+<li><p><a class="reference external" href="./dev.md">Dev</a> - For those courageous enough to dev for this
+project.</p></li>
+</ul>
+<blockquote>
+<div><p>IMPORTANT! Note that they are multiple ways to run Amadla with:
+<a class="reference external" href="../Jenkinsfile">Jenkins</a>, <a class="reference external" href="../.github/workflows/generate.yml">GitHub
+Workflow</a>,
+<a class="reference external" href="../containers/Makefile">containers</a>, or all the <a class="reference external" href="../Makefile">tools installed
+on the system itself</a>.</p>
+</div></blockquote>
+</section>
+<section id="help">
+<h2>Help<a class="headerlink" href="#help" title="Permalink to this heading"></a></h2>
+<p>To get a list of make command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">help</span>
+</pre></div>
+</div>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>AMADLA_ROOT_PATH</strong> - The Amadla cli application root directory
+path.</p></li>
+<li><p><strong>AMADLA_USE_GIT_MODULES</strong> - To determine if Git is used for the
+storage and management of modules.</p></li>
+<li><p><strong>AMADLA_MODULES_REPO_ROOT_PATH</strong> - The path to the directory where
+the modules are stored (in that directory the file <code class="docutils literal notranslate"><span class="pre">.gitmodules</span></code>
+will be added if it does not exist).</p></li>
+<li><p><strong>AMADLA_MODULES_PATH</strong> - Modules path that contains <code class="docutils literal notranslate"><span class="pre">apps.d</span></code>,
+<code class="docutils literal notranslate"><span class="pre">servers.d</span></code> and <code class="docutils literal notranslate"><span class="pre">clouds.d</span></code>.</p></li>
+<li><p><strong>AMADLA_APPS_PATH</strong> - Path to the <code class="docutils literal notranslate"><span class="pre">apps.d/</span></code> directory.</p></li>
+<li><p><strong>AMADLA_CLOUDS_PATH</strong> - Path to the <code class="docutils literal notranslate"><span class="pre">clouds.d/</span></code> directory.</p></li>
+<li><p><strong>AMADLA_SERVERS_PATH</strong> - Path to the <code class="docutils literal notranslate"><span class="pre">servers.d/</span></code> directory.</p></li>
+<li><p><strong>AMADLA_CONFIG_PATH</strong> - Path to the <code class="docutils literal notranslate"><span class="pre">config/</span></code> directory.</p></li>
+<li><p><strong>AMADLA_CONTAINERS_PATH</strong> - Path to the <code class="docutils literal notranslate"><span class="pre">containers/</span></code> directory.</p></li>
+<li><p><strong>AMADLA_CONTAINER_ENGINE</strong> - The container engine (e.g.: <code class="docutils literal notranslate"><span class="pre">docker</span></code>
+or <code class="docutils literal notranslate"><span class="pre">podman</span></code>) by default it will use <em>Podman</em>.</p></li>
+<li><p><strong>AMADLA_CONTAINER</strong> - Determine if Amadla runs its tools with
+containers or not (values: true or false).</p></li>
+<li><p><strong>AMADLA_LOCK_FILE_PATH</strong> - The path to the Amadla lock file.</p></li>
+<li><p><strong>AMADLA_LOGGING_FILE_PATH</strong> - By default it is stored in the root of
+the project under the name <code class="docutils literal notranslate"><span class="pre">amadla.log</span></code>.</p></li>
+<li><p><strong>AMADLA_LOGGING_LEVEL</strong> - The logging level (CRITICAL, FATAL, ERROR,
+WARNING, WARN, INFO, DEBUG, NOTSET).</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, JN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

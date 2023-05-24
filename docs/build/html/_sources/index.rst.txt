@@ -1,0 +1,24 @@
+Welcome to Amadla's documentation!
+===================================
+
+**Amadla** (/ah-mah-dlah/) is a Python tool
+for 
+Check out the :doc:`setup` section for further information, including
+how to the project.
+
+.. note::
+
+   This project is under active development.
+
+Contents
+--------
+
+.. toctree::
+
+   how-it-works
+   setup
+   ci-cd
+   adding-secrets-to-vault
+   application-compatibility
+
+
