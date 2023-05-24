@@ -74,6 +74,7 @@ section {
 
 .content-sections {
     margin-top: 5em;
+    margin: 0 auto auto auto;
 }
 
 .content-sections ul {
