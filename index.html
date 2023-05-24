@@ -15,211 +15,58 @@
 		<meta property="og:image" content="assets/android-chrome-512x512.png">
 		<meta name="Keywords" content="amadla, IaC, cloud">
 		<meta name="Description" content="Amadla is a standard cloud environment and set of tools to help deploy and manage these various cloud environments with the help of Infrastructure as code (IaC).">
-		<style>
-		html, body {
-			padding: 0;
-			margin: 0;
-			height: 100%;
-			font-family: Arial, sans-serif;
-		}
-
-		body {
-			display: flex;
-			flex-direction: column;
-			text-align: center;
-		}
-	
-		.lang {
-			margin: 25px 25px 0 auto;
-		}
-
-		.lang a, .lang a:visited, .lang a:active {
-			color: black;
-			text-decoration: none;
-		}
-
-		.lang a:hover {
-			color: black;
-			text-decoration: underline;
-		}
-
-		section {
-			width: 42em;
-			text-align: left;
-			margin: 0 auto auto auto;
-		}
-
-		#top img {
-			width: 5em;
-			height: 5em;
-		}
-
-		#top ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		#top li {
-			float: left;
-		}
-
-		#top li a {
-			display: block;
-		}
-
-		#top li a:hover {
-			box-shadow: 5px 10px 18px #888888;
-		}
-
-		#top li div {
-			width: 14em;
-			height: 14em;
-		}
-
-		#top header {
-			position: fixed;
-		}
-
-		.content {
-			flex: 1 0 auto;
-			float: right;
-			margin: 5em 0 0 200px;
-		}
-
-		#about {
-			margin-top: 5em;
-		}
-
-		#about ul {
-			list-style-type: "-  ";
-		}
-
-		#about header {
-			flex: 1 0 auto;
-			margin-left: 200px;
-		}
-
-		#about .content {
-			margin-top: 0;
-		}
-
-		footer {
-			flex-shrink: 0;
-			padding: 2em;
-			margin-top: 10em;
-		}
-
-		footer .socials a span {
-			display: inline-block;
-			width: 30px;
-			height: 30px;
-			filter: grayscale(100%);
-		}
-
-		footer .socials a:hover span {
-			filter: grayscale(0%);
-		}
-
-		@media only screen and (max-width:683px) {
-			#top header {
-				width: 100%;
-				text-align: center;
-				position: relative;
-			}
-
-			#top {
-				width: 288px;
-			}
-
-			#top .content {
-				margin-top: 5em;
-			}
-
-			#about header {
-				margin-left: 32px;
-			}
-
-			#about .content {
-				margin-top: 0;
-			}
-
-			#about {
-				width: auto;
-			}
-
-			.content {
-				margin-left: 0;
-				padding: 0 2em 0 2em;
-			}
-		}
-
-		/*@media only screen and (max-width:450px) {
-			section {
-				width: 450em;
-			}
-		}*/
-		</style>
+		<link rel="stylesheet" href="assets/style.css">
 	</head>
 	<body>
 		<div class="lang"><a href="/fr/" title="Changer la language pour le français" lang="fr">fr</a></div>
 		<section id="top">
 			<header>
 				<h1><img src="./assets/logo-120x120.webp" alt="Amadla"></h1>
+				<menu>
+					<ul>
+						<li><a href="#">Welcome</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#documentation">Documentation</a></li>
+					</ul>
+				</menu>
 			</header>
-			<!--<div class="content">-->
-				<!--<ul>
-					<li>
-						<a href="https://amadla.com/" title="Amadla">
-							<div style="background-image: url(./assets/amadla/amadla-logo.svg);"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://bth.bio/" title="BTH - Beyond The Horizon">
-							<div style="background-image: url(./assets/bth/bth-logo.svg)"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://boutbiz.com/" title="Bout Biz">
-							<div style="background-image: url(./assets/boutbiz/boutbiz-logo.svg);"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://yaloub.com/" title="Yaloub">
-							<div style="background-image: url(./assets/yaloub/yaloub-logo.svg);"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://xtamia.com/" title="XTamia">
-							<div style="background-image: url(./assets/xtamia/xtamia-logo.svg);"></div>
-						</a>
-					</li>
-				</ul>-->
-			<!--</div>-->
 		</section>
-		<section id="about">
-			<header>
-				<h2>About</h2>
-			</header>
-			<div class="content">
-				<p>At Amadla, we specialize in streamlining infrastructure management for businesses of all sizes. Our expertise lies in working with the cloud, virtual machines (VMs), Infrastructure as Code (IaC), dedicated servers, and on-premise infrastructure.</p>
-				<p>Our mission is to make the setup and management of cloud, dedicated servers, and on-premise infrastructure more effortless and efficient. We empower companies to reduce their dependency on cloud services and enhance portability by providing tailored solutions that meet their specific needs.</p>
-				<h3>Our services include:</h3>
-				<ol>
-					<li>Infrastructure Assessment: We analyze your current infrastructure setup to identify areas of improvement and provide expert recommendations for optimization.</li>
-					<li>Cloud and Hybrid Environment Setup: We design and implement customized cloud and hybrid environments, combining cloud and on-premise or dedicated server infrastructure to achieve the perfect balance of flexibility, scalability, and cost-efficiency.</li>
-					<li>VMs and IaC Deployment: Our team assists in setting up virtual machines and implementing Infrastructure as Code solutions to streamline your infrastructure management and ensure a seamless transition.</li>
-					<li>Infrastructure Management and Support: Our ongoing support ensures that your infrastructure remains up-to-date, secure, and optimized for peak performance.</li>
-					<li>Migration Services: We help you migrate your applications and data between different environments, ensuring a smooth transition and minimal downtime.</li>
-				</ol>
-				<p>By partnering with Amadla, you can expect expert guidance, seamless integration, and ongoing support for all your infrastructure needs. Experience the ease and efficiency of working with a team that genuinely understands the challenges of modern infrastructure management.</p>
-			</div>
+		<section class="content-sections">
+			<section>
+				<header>
+					<h2>Welcome</h2>
+				</header>
+				<div class="content">
+					<p>Amadla is a set of <abbr title="Infrastructure as Code">IaC</abbr> tools to help deploy and manage various cloud environments, dedicated servers, and on-premise systems.</p>
+					<p><em>Amadla is a Zulu word meaning "power" or "strength".</em></p>
+				</div>
+			</section>
+			<section id="about">
+				<header>
+					<h2>About</h2>
+				</header>
+				<div class="content">
+					<p>Coming soon...</p>
+				</div>
+			</section>
+			<section id="documentation">
+				<header>
+					<h2>Documentation</h2>
+				</header>
+				<div class="content">
+					<p>Coming soon...</p>
+					<!--<ul>
+						<li><a href="docs/html/">HTML</a></li>
+						<li><a href="docs/epub/">epub</a></li>
+					</ul>-->
+				</div>
+			</section>
 		</section>
 		<footer>
 			<p class="socials">
 				<a href="https://twitter.com/AmadlaOrg" title="Twitter"><span style="background: url(assets/SuperTinyIcons/images/svg/twitter.svg);"></span></a>
 				<a href="https://www.youtube.com/channel/UCgWhkym2mEqatba5j0HD5hw" title="Youtube"><span style="background: url(assets/SuperTinyIcons/images/svg/youtube.svg);"></span></a>
-				<!--<a href="https://linkedin.com/" title="Linkedin"><span style="background: url(assets/SuperTinyIcons/images/svg/linkedin.svg);"></span></a>-->
+				<a href="https://www.linkedin.com/company/amadla/" title="Linkedin"><span style="background: url(assets/SuperTinyIcons/images/svg/linkedin.svg);"></span></a>
 				<a href="https://www.quora.com/profile/Amadla-Org" title="Quora"><span style="background: url(assets/SuperTinyIcons/images/svg/quora.svg);"></span></a>
 				<a href="https://www.pinterest.ca/amadlaorg/" title="Pinterest"><span style="background: url(assets/SuperTinyIcons/images/svg/pinterest.svg);"></span></a>
 				<a href="https://www.reddit.com/r/Amadla/" title="Reddit"><span style="background: url(assets/SuperTinyIcons/images/svg/reddit.svg);"></span></a>

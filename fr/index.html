@@ -15,151 +15,7 @@
 		<meta property="og:image" content="../assets/android-chrome-512x512.png">
 		<meta name="Keywords" content="amadla, IaC, infonuagique">
 		<meta name="Description" content="Amadla est un environnement infonuagique standard et un ensemble d'outils permettant de déployer et de gérer ces différents environnements infonuagiques à l'aide d'Infrastructure as code (IaC).">
-		<style>
-		html, body {
-			padding: 0;
-			margin: 0;
-			height: 100%;
-			font-family: Arial, sans-serif;
-		}
-
-		body {
-			display: flex;
-			flex-direction: column;
-			text-align: center;
-		}
-
-		.lang {
-			margin: 25px 25px 0 auto;
-		}
-
-		.lang a, .lang a:visited, .lang a:active {
-			color: black;
-			text-decoration: none;
-		}
-
-		.lang a:hover {
-			color: black;
-			text-decoration: underline;
-		}
-
-		section {
-			width: 42em;
-			text-align: left;
-			margin: 0 auto auto auto;
-		}
-
-		#top img {
-			width: 5em;
-			height: 5em;
-		}
-
-		#top ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		#top li {
-			float: left;
-		}
-
-		#top li a {
-			display: block;
-		}
-
-		#top li a:hover {
-			box-shadow: 5px 10px 18px #888888;
-		}
-
-		#top li div {
-			width: 14em;
-			height: 14em;
-		}
-
-		#top header {
-			position: fixed;
-		}
-
-		.content {
-			flex: 1 0 auto;
-			float: right;
-			margin: 5em 0 0 200px;
-		}
-
-		#about {
-			margin-top: 5em;
-		}
-
-		#about ul {
-			list-style-type: "-  ";
-		}
-
-		#about header {
-			flex: 1 0 auto;
-			margin-left: 200px;
-		}
-
-		#about .content {
-			margin-top: 0;
-		}
-
-		footer {
-			flex-shrink: 0;
-			padding: 2em;
-			margin-top: 10em;
-		}
-
-		footer .socials a span {
-			display: inline-block;
-			width: 30px;
-			height: 30px;
-			filter: grayscale(100%);
-		}
-
-		footer .socials a:hover span {
-			filter: grayscale(0%);
-		}
-
-		@media only screen and (max-width:683px) {
-			#top header {
-				width: 100%;
-				text-align: center;
-				position: relative;
-			}
-
-			#top {
-				width: 288px;
-			}
-
-			#top .content {
-				margin-top: 5em;
-			}
-
-			#about header {
-				margin-left: 32px;
-			}
-
-			#about .content {
-				margin-top: 0;
-			}
-
-			#about {
-				width: auto;
-			}
-
-			.content {
-				margin-left: 0;
-				padding: 0 2em 0 2em;
-			}
-		}
-
-		/*@media only screen and (max-width:450px) {
-			section {
-				width: 450em;
-			}
-		}*/
-		</style>
+		<link rel="stylesheet" href="../assets/style.css">
 	</head>
 	<body>
 		<div class="lang"><a href="https://amadla.org/" title="Change the language to english" lang="en">en</a></div>
@@ -167,59 +23,44 @@
 			<header>
 				<h1><img src="../assets/logo-120x120.webp" alt="Amadla"></h1>
 			</header>
-			<!--<div class="content">-->
-				<!--<ul>
-					<li>
-						<a href="https://amadla.com/" title="Amadla">
-							<div style="background-image: url(./assets/amadla/amadla-logo.svg);"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://bth.bio/" title="BTH - Beyond The Horizon">
-							<div style="background-image: url(./assets/bth/bth-logo.svg)"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://boutbiz.com/" title="Bout Biz">
-							<div style="background-image: url(./assets/boutbiz/boutbiz-logo.svg);"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://yaloub.com/" title="Yaloub">
-							<div style="background-image: url(./assets/yaloub/yaloub-logo.svg);"></div>
-						</a>
-					</li>
-					<li>
-						<a href="https://xtamia.com/" title="XTamia">
-							<div style="background-image: url(./assets/xtamia/xtamia-logo.svg);"></div>
-						</a>
-					</li>
-				</ul>-->
-			<!--</div>-->
+			<ul>
+				<li><a href="#">Bienvenue</a></li>
+				<li><a href="#about">À propos</a></li>
+				<li><a href="#documentation">Documentation</a></li>
+			</ul>
 		</section>
-		<section id="about">
-			<header>
-				<h2>À propos</h2>
-			</header>
-			<div class="content">
-				<p>Chez Amadla, nous nous spécialisons dans la simplification de la gestion des infrastructures pour les entreprises de toutes tailles. Notre expertise réside dans notre travail avec le infonuage, les machines virtuelles (VM), l'infrastructure en tant que code (IaC), les serveurs dédiés et les infrastructures locale.</p>
-				<p>Notre mission est de faciliter et d'améliorer l'efficacité de la mise en place et de la gestion de l'environement infonuage, des serveurs dédiés et des infrastructures sur site. Nous permettons aux entreprises de réduire leur dépendance aux services infonuagique et d'améliorer la portabilité en fournissant des solutions sur mesure qui répondent à leurs besoins spécifiques.</p>
-				<h3>Nos services comprennent :</h3>
-				<ol>
-					<li>Évaluation de l'infrastructure : Nous analysons votre configuration d'infrastructure pour identifier les domaines à améliorer et fournir des recommandations d'optimisation.</li>
-					<li>Configuration de l'environnement infonuagique et hybride : Nous concevons et mettons en œuvre des environnements infonuagique et hybrides personnalisés, combinant l'infrastructure infonuagique et sur site ou les serveurs dédiés pour obtenir l'équilibre parfait entre flexibilité, évolutivité et rentabilité.</li>
-					<li>Déploiement de VM et d'IaC : Notre équipe de professionnels vous aide à mettre en place des machines virtuelles et à mettre en œuvre des solutions d'infrastructure en tant que code pour améliorer la gestion de votre infrastructure et assurer une transition en douceur.</li>
-					<li>Gestion et support de l'infrastructure : Notre support continu de votre infrastructure pour rester à jour, sécurisée et optimisée pour des performances optimales.</li>
-					<li>Services de migration : Nous vous aidons à migrer vos applications et données entre différents environnements, en assurant une transition en douceur et un temps d'arrêt minimal.</li>
-				</ol>
-				<p>En vous associant à Amadla, vous pouvez vous attendre à des conseils d'experts, à une intégration transparente et à un soutien continu pour tous vos besoins en matière d'infrastructure. Découvrez la facilité et l'efficacité de travailler avec une équipe qui comprend vraiment les défis de la gestion des infrastructures modernes.</p>
-			</div>
+		<section class="content-sections">
+			<section>
+				<header>
+					<h2>Bienvenue</h2>
+				</header>
+				<div id="content">
+					<p>Amadla est un ensemble d'outils <abbr title="Infrastructure as Code">IaC</abbr> conçus pour aider à déployer et gérer divers environnements cloud, serveurs dédiés et systèmes sur site.</p>
+					<p><em>"Amadla" est un mot zoulou signifiant "puissance" ou "force".</em></p>
+				</div>
+			</section>
+			<section id="about">
+				<header>
+					<h2>À propos</h2>
+				</header>
+				<div class="content">
+					<p>Arrive bientôt...</p>
+				</div>
+			</section>
+			<section id="documentation">
+				<header>
+					<h2>Documentation</h2>
+				</header>
+				<div class="content">
+					<p>Arrive bientôt...</p>
+				</div>
+			</section>
 		</section>
 		<footer>
 			<p class="socials">
 				<a href="https://twitter.com/AmadlaOrg" title="Twitter"><span style="background: url(../assets/SuperTinyIcons/images/svg/twitter.svg);"></span></a>
 				<a href="https://www.youtube.com/channel/UCgWhkym2mEqatba5j0HD5hw" title="Youtube"><span style="background: url(../assets/SuperTinyIcons/images/svg/youtube.svg);"></span></a>
-				<!--<a href="https://linkedin.com/" title="Linkedin"><span style="background: url(../assets/SuperTinyIcons/images/svg/linkedin.svg);"></span></a>-->
+				<a href="https://www.linkedin.com/company/amadla/" title="Linkedin"><span style="background: url(../assets/SuperTinyIcons/images/svg/linkedin.svg);"></span></a>
 				<a href="https://www.quora.com/profile/Amadla-Org" title="Quora"><span style="background: url(../assets/SuperTinyIcons/images/svg/quora.svg);"></span></a>
 				<a href="https://www.pinterest.ca/amadlaorg/" title="Pinterest"><span style="background: url(../assets/SuperTinyIcons/images/svg/pinterest.svg);"></span></a>
 				<a href="https://www.reddit.com/r/Amadla/" title="Reddit"><span style="background: url(../assets/SuperTinyIcons/images/svg/reddit.svg);"></span></a>
