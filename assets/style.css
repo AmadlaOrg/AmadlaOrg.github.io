@@ -126,15 +126,15 @@ footer .socials a:hover span {
         margin-top: 5em;
     }
 
-    #about header {
+    .content-sections  header {
         margin-left: 32px;
     }
 
-    #about .content {
+    .content-sections .content {
         margin-top: 0;
     }
 
-    #about {
+    .content-sections {
         width: auto;
     }
 
