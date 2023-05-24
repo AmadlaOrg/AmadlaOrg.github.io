@@ -1,0 +1,14 @@
+Application Compatibility
+===========================
+
+Making Applications Compatible
+---------------------------------------------------
+
+Container
+~~~~~~~~~~~~~~~~~~~
+
+Full Server
+~~~~~~~~~~~~~~~~~~~
+
+X Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

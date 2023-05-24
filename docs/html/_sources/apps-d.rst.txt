@@ -1,0 +1,61 @@
+For All Your Applications (``apps.d``)
+======================================
+
+``apps.d`` contains all the applications configurations that are needed
+to get them to be installed via container, directly on the machine, and
+X11 applications.
+
+Each applications needs settings, the sources for the code or binaries,
+documentation, etc.
+
+The application directory is pulled from a ``git`` repository.
+
+Every version needs a **git tag**. It is important to use **git tags**
+for the version because of Amadla support tools and to use the **git
+branches** for development whilst using `Gitflow
+Workflow <https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow>`__.
+
+|image1| *Git flow*
+
+Using tags:
+
+.. code:: bash
+
+   git tag -a v0.1
+   git push --tags
+
+All the applications that you want to install need to be listed in the
+``/etc/`` directory ``.ini`` files.
+
+In those ``.ini`` you have a clear format on how to add a new
+application.
+
+The IaC tools will read these files and add or update or remove the
+applications based on the configurations.
+
+You can find many application repository: `Amadla
+repository <https://github.com/Amadla-com>`__.
+
+   The version is of the configuration for Amadla not of the application
+   itself. Used to select the right tag in the git server.
+
+The ```applications.yml`` <../etc/applications.yml>`__ contains the
+default configurations for applications but you can always have other
+settings in the ```servers.yml`` <../etc/servers.yml>`__ file.
+
+Here is an example where you have a specific version inside the servers
+configuration ``yml`` file.
+
+.. code:: yaml
+
+   servers:
+     - name: apps-1
+       type: classic
+       cloud: linode
+       instance-type: small-1gb
+       private: true
+       applications:
+         OpenVPN:
+           version: 2
+
+.. |image1| image:: ../assets/git-model%402x.png
