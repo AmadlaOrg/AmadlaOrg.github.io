@@ -130,6 +130,10 @@ footer .socials a:hover span {
         padding-left: 0 !important;
     }
 
+    section {
+        width: auto !important;
+    }
+
     .content-sections  header {
         margin-left: 32px;
     }
