@@ -143,28 +143,33 @@ command:
 For more details about Vault with Amadla you can read
 `secrets <./secrets.md>`__ document.
 
-Basic
-------
-
-Generates the basic image and sets up the infrastructure with Terraform:
+Install Amadla CLI Dependencies
+______
 
 .. code:: bash
 
-   make basic
+   poetry install
 
-Make Server Image
------------------
-
-.. code:: bash
-
-   make image
-
-Generate The Infrastructure
----------------------------------------------------
+Or you can run it with ``python<python version> -m``:
 
 .. code:: bash
 
-   make infrastructure
+   python3 -m poetry install
+
+Start Amadla
+------------
+
+You can try to run the CLI with:
+
+.. code:: bash
+
+   poetry run amadla
+
+Or you can run it with ``python<python version> -m``:
+
+.. code:: bash
+
+   python3 -m poetry run amadlacli
 
 The other commands: - ``clean`` - Remove ``.terraform`` folder, state
 and plan files - ``down`` - Plan and apply a tf destroy
