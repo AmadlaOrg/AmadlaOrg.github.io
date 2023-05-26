@@ -10,6 +10,7 @@ Instructions for local setup
 
 System Packages
 ~~~~~~~~~~~~~~~
+
 - python (11 or higher)
 - pip (you might need to upgrade it after it is installed with ``pip install --upgrade pip`` or ``pip3 install --upgrade pip``)
 - make - optional (needed for the Makefile for generating documentations that is in the ``docs/`` directory)
@@ -28,6 +29,7 @@ Mac OS X
 
 Homebrew
 """"""""
+
 .. code-block:: bash
 
    brew install python
@@ -96,10 +98,12 @@ Fedora
 
 Python Packages
 ~~~~~~~~~~~~~~~
+
 - `poetry <https://python-poetry.org/>`__ (``pip install poetry`` or ``pip3 install poetry``)
 
 Instructions for container setup
 --------------------
+
 The container comes with the same packages as the local system setup except Vault you will need to use the Vault container or point via the configuration to wherever your Vault setup is.
 
 .. note::
@@ -108,15 +112,18 @@ The container comes with the same packages as the local system setup except Vaul
 
 System Packages
 ~~~~~~~~~~~~~~~
+
 - `Podman <https://podman.io/getting-started/installation>`__ (``sudo dnf install podman`` or ``sudo apt install podman``)
 - Or `Docker <https://docs.docker.com/get-docker/>`__ (``sudo dnf install docker-ce`` or ``sudo apt install docker-ce``)
 - Or `Kubernetes <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ (``sudo dnf install kubectl`` or ``sudo apt install kubectl``)
 
 Configurations
 ~~~~~~~~~~~~~~~
+
 For Amadla you can use environment variables or a ``.env`` file. The
 ``.env`` file is loaded automatically if it exists in the root of the project.
-... code:: bash
+
+.. code:: bash
 
    touch .env
 
