@@ -13,6 +13,7 @@ System Packages
 - python (11 or higher)
 - pip (you might need to upgrade it after it is installed with ``pip install --upgrade pip`` or ``pip3 install --upgrade pip``)
 - make - optional (needed for the Makefile for generating documentations that is in the ``docs/`` directory)
+- `git <https://git-scm.com/>`__ (is needed for the pulling of modules)
 - `Terraform <https://www.terraform.io/downloads.html>`__
 - `Vault <https://www.vaultproject.io/downloads.html>`__
 - `Packer <https://www.packer.io/downloads.html>`__
@@ -44,7 +45,7 @@ For Amadla you can use environment variables or a ``.env`` file. The
 
    touch .env
 
-With The Container
+With Container
 ------------------
 
 1. You need to have a Vault instance running.

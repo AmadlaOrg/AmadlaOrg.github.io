@@ -1,11 +1,71 @@
 How It Works
 ==========================
 
-To begin lets explain what the problem Amadla is there to solve by
-reading the first section of the `root ``README.md`` <../README.md>`__.
+Amadla with the help of `Vault <https://www.vaultproject.io/>`__ to store secrets, `Packer <https://www.packer.io/>`__ to create server images, `Ansible <https://www.ansible.com/>`__ for the provisioning and `Terraform <https://www.terraform.io/>`__ deployment of the infrastructure, makes it easier to deploy and manage: cloud environments, dedicated servers, on-premise, VMs, applications amd services.
 
-Flow
+Without Amadla you would have to manually create the server images, provision them and deploy the infrastructure. This is a time consuming process and prone to human error. Amadla automates this process and makes it easier to manage the infrastructure and the many other components.
+
+It is important to note that Amadla is not a replacement for the tools mentioned above. It is a wrapper around them to make it easier to use them together.
+
+In other words it is a abstraction layer on top of the tools mentioned above.
+
+.. note::
+
+    Amadla cli is very dependant of `git <https://git-scm.com/>`__ also. It uses git to pull the modules that are used for the other configuration files.
+
+Amadla is written in Python and uses the following libraries:
+- `Click <https://click.palletsprojects.com/en/7.x/>`__ for the command line interface.
+- `PyYAML <https://pyyaml.org/wiki/PyYAMLDocumentation>`__ for parsing YAML files used for the Amadla configuration files.
+- `Jinja2 <https://jinja.palletsprojects.com/en/2.10.x/>`__ for templating.
+- `jsonschema <https://python-jsonschema.readthedocs.io/en/latest/>`__ for validating JSON files (for the validation of the Amadla configuration files that the user create and manage).
+- `requests <https://2.python-requests.org/en/master/>`__ for making HTTP requests.
+- `python-dotenv <https://pypi.org/project/python-dotenv/>`__ for loading environment variables from a `.env` file.
+
+Overview
 --------------------------------
 
-1. The secrets (username/password, API Keys, etc) are pulled from Vault.
-2. 
+1. Amadla takes your Amadla configurations files and the needed secrets from Vault to then create Packer, Terraform and Ansible variable files.
+2. Those variable files are then used by Packer, Ansible and Terraform to build the server images, provision them and deploy the infrastructure.
+
+User Usage Flow
+--------------------------------
+
+The simple basic steps that user needs to do to deploy the infrastructure are:
+
+1. The user creates a Amadla configuration file (YAML file) that contains the information about the infrastructure they want to deploy.
+2. Populates Vault with the secrets needed for the infrastructure.
+3. The user runs the ``amadla build`` command.
+
+Amadla CLI Flow
+--------------------------------
+
+The simple steps that Amadla CLI does are:
+
+1. The secrets (username/password, API Keys, etc) are pulled from Vault the user added before from Vault or from the environment variables (you can store secrets in the environment variables).
+2. The Amadla configuration file is validated.
+3. The Amadla configuration files are merged together to create the ``amadla.lock`` JSON merged configuration file.
+4. With ``amadla.lock`` all the modules are ``git`` pulled.
+5. The Packer, Ansible and Terraform variable files are created with ``amadla.lock`` and with the secrets that were pulled from Vault or the environment variables (they can be set in the same terminal session where Amadla CLI is executed or added to ``.env`` file).
+6. Terraform variable file is validated.
+7. Terraform using ``terraform.tfstate`` to store the status and state and uses it to determine what are the new elements that need to be modified, removed or added in the infrastructure.
+8. Terraform uses Packer to create the server images.
+9. Packer uses the variable files to create the server images.
+10. Packer then uses Ansible to provision the server images.
+11. Ansible uses the variable files to provision the server images (inside of Ansible is all the packages, applications, services and configurations for the server image).
+12. Once the server images are created and provisioned, Terraform uses the variable files to deploy the infrastructure.
+
+
+.. note::
+
+    You can just run a test instead of deploying the infrastructure. This is useful to test the Amadla configuration files and the secrets.
+
+.. note::
+
+    The Amadla configuration files are validated using JSON Schema. The JSON Schema files are located in the ``amadla/schemas`` directory.
+
+Amadla Configuration Files
+--------------------------------
+
+The Amadla configuration files are YAML files that contain the information about the infrastructures, server images, the clouds, VMs, applications, etc you want to deploy.
+
+The Amadla configuration files are located in the ``amadla/configs`` directory in the git project.

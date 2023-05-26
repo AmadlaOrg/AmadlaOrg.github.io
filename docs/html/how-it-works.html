@@ -48,7 +48,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How It Works</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#flow">Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-usage-flow">User Usage Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amadla-cli-flow">Amadla CLI Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amadla-configuration-files">Amadla Configuration Files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
@@ -83,12 +86,67 @@
              
   <section id="how-it-works">
 <h1>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this heading"></a></h1>
-<p>To begin lets explain what the problem Amadla is there to solve by
-reading the first section of the <cite>root ``README.md`</cite> &lt;../README.md&gt;`__.</p>
-<section id="flow">
-<h2>Flow<a class="headerlink" href="#flow" title="Permalink to this heading"></a></h2>
-<p>1. The secrets (username/password, API Keys, etc) are pulled from Vault.
-2.</p>
+<p>Amadla with the help of <a class="reference external" href="https://www.vaultproject.io/">Vault</a> to store secrets, <a class="reference external" href="https://www.packer.io/">Packer</a> to create server images, <a class="reference external" href="https://www.ansible.com/">Ansible</a> for the provisioning and <a class="reference external" href="https://www.terraform.io/">Terraform</a> deployment of the infrastructure, makes it easier to deploy and manage: cloud environments, dedicated servers, on-premise, VMs, applications amd services.</p>
+<p>Without Amadla you would have to manually create the server images, provision them and deploy the infrastructure. This is a time consuming process and prone to human error. Amadla automates this process and makes it easier to manage the infrastructure and the many other components.</p>
+<p>It is important to note that Amadla is not a replacement for the tools mentioned above. It is a wrapper around them to make it easier to use them together.</p>
+<p>In other words it is a abstraction layer on top of the tools mentioned above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Amadla cli is very dependant of <a class="reference external" href="https://git-scm.com/">git</a> also. It uses git to pull the modules that are used for the other configuration files.</p>
+</div>
+<p>Amadla is written in Python and uses the following libraries:
+- <a class="reference external" href="https://click.palletsprojects.com/en/7.x/">Click</a> for the command line interface.
+- <a class="reference external" href="https://pyyaml.org/wiki/PyYAMLDocumentation">PyYAML</a> for parsing YAML files used for the Amadla configuration files.
+- <a class="reference external" href="https://jinja.palletsprojects.com/en/2.10.x/">Jinja2</a> for templating.
+- <a class="reference external" href="https://python-jsonschema.readthedocs.io/en/latest/">jsonschema</a> for validating JSON files (for the validation of the Amadla configuration files that the user create and manage).
+- <a class="reference external" href="https://2.python-requests.org/en/master/">requests</a> for making HTTP requests.
+- <a class="reference external" href="https://pypi.org/project/python-dotenv/">python-dotenv</a> for loading environment variables from a <cite>.env</cite> file.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Amadla takes your Amadla configurations files and the needed secrets from Vault to then create Packer, Terraform and Ansible variable files.</p></li>
+<li><p>Those variable files are then used by Packer, Ansible and Terraform to build the server images, provision them and deploy the infrastructure.</p></li>
+</ol>
+</section>
+<section id="user-usage-flow">
+<h2>User Usage Flow<a class="headerlink" href="#user-usage-flow" title="Permalink to this heading"></a></h2>
+<p>The simple basic steps that user needs to do to deploy the infrastructure are:</p>
+<ol class="arabic simple">
+<li><p>The user creates a Amadla configuration file (YAML file) that contains the information about the infrastructure they want to deploy.</p></li>
+<li><p>Populates Vault with the secrets needed for the infrastructure.</p></li>
+<li><p>The user runs the <code class="docutils literal notranslate"><span class="pre">amadla</span> <span class="pre">build</span></code> command.</p></li>
+</ol>
+</section>
+<section id="amadla-cli-flow">
+<h2>Amadla CLI Flow<a class="headerlink" href="#amadla-cli-flow" title="Permalink to this heading"></a></h2>
+<p>The simple steps that Amadla CLI does are:</p>
+<ol class="arabic simple">
+<li><p>The secrets (username/password, API Keys, etc) are pulled from Vault the user added before from Vault or from the environment variables (you can store secrets in the environment variables).</p></li>
+<li><p>The Amadla configuration file is validated.</p></li>
+<li><p>The Amadla configuration files are merged together to create the <code class="docutils literal notranslate"><span class="pre">amadla.lock</span></code> JSON merged configuration file.</p></li>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">amadla.lock</span></code> all the modules are <code class="docutils literal notranslate"><span class="pre">git</span></code> pulled.</p></li>
+<li><p>The Packer, Ansible and Terraform variable files are created with <code class="docutils literal notranslate"><span class="pre">amadla.lock</span></code> and with the secrets that were pulled from Vault or the environment variables (they can be set in the same terminal session where Amadla CLI is executed or added to <code class="docutils literal notranslate"><span class="pre">.env</span></code> file).</p></li>
+<li><p>Terraform variable file is validated.</p></li>
+<li><p>Terraform using <code class="docutils literal notranslate"><span class="pre">terraform.tfstate</span></code> to store the status and state and uses it to determine what are the new elements that need to be modified, removed or added in the infrastructure.</p></li>
+<li><p>Terraform uses Packer to create the server images.</p></li>
+<li><p>Packer uses the variable files to create the server images.</p></li>
+<li><p>Packer then uses Ansible to provision the server images.</p></li>
+<li><p>Ansible uses the variable files to provision the server images (inside of Ansible is all the packages, applications, services and configurations for the server image).</p></li>
+<li><p>Once the server images are created and provisioned, Terraform uses the variable files to deploy the infrastructure.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can just run a test instead of deploying the infrastructure. This is useful to test the Amadla configuration files and the secrets.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Amadla configuration files are validated using JSON Schema. The JSON Schema files are located in the <code class="docutils literal notranslate"><span class="pre">amadla/schemas</span></code> directory.</p>
+</div>
+</section>
+<section id="amadla-configuration-files">
+<h2>Amadla Configuration Files<a class="headerlink" href="#amadla-configuration-files" title="Permalink to this heading"></a></h2>
+<p>The Amadla configuration files are YAML files that contain the information about the infrastructures, server images, the clouds, VMs, applications, etc you want to deploy.</p>
+<p>The Amadla configuration files are located in the <code class="docutils literal notranslate"><span class="pre">amadla/configs</span></code> directory in the git project.</p>
 </section>
 </section>
 
