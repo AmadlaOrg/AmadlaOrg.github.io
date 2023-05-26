@@ -13,10 +13,10 @@ System Packages
 - python (11 or higher)
 - pip (you might need to upgrade it after it is installed with ``pip install --upgrade pip`` or ``pip3 install --upgrade pip``)
 - make - optional (needed for the Makefile for generating documentations that is in the ``docs/`` directory)
-- `Terraform<https://www.terraform.io/downloads.html>`__
-- `Vault<https://www.vaultproject.io/downloads.html>`__
-- `Packer<https://www.packer.io/downloads.html>`__
-- `Ansible<https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html>`__
+- `Terraform <https://www.terraform.io/downloads.html>`__
+- `Vault <https://www.vaultproject.io/downloads.html>`__
+- `Packer <https://www.packer.io/downloads.html>`__
+- `Ansible <https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html>`__
 
 Python Packages
 ~~~~~~~~~~~~~~~
@@ -32,9 +32,9 @@ The container comes with the same packages as the local system setup except Vaul
 
 System Packages
 ~~~~~~~~~~~~~~~
-- `Podman<https://podman.io/getting-started/installation>`__ (``sudo dnf install podman`` or ``sudo apt install podman``)
-- Or `Docker<https://docs.docker.com/get-docker/>`__ (``sudo dnf install docker-ce`` or ``sudo apt install docker-ce``)
-- Or `Kubernetes<https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ (``sudo dnf install kubectl`` or ``sudo apt install kubectl``)
+- `Podman <https://podman.io/getting-started/installation>`__ (``sudo dnf install podman`` or ``sudo apt install podman``)
+- Or `Docker <https://docs.docker.com/get-docker/>`__ (``sudo dnf install docker-ce`` or ``sudo apt install docker-ce``)
+- Or `Kubernetes <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ (``sudo dnf install kubectl`` or ``sudo apt install kubectl``)
 
 Configurations
 ~~~~~~~~~~~~~~~
