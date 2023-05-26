@@ -137,21 +137,30 @@ With Container
 
    -  `Adding secrets to Vault <./adding-secrets-to-vault.md>`__
 
-Start Vault
+Add Secrets
 ------------
 
-If you don’t have a Vault instance already running you can run this
-command:
+Vault
+~~~~~
 
-.. code:: bash
+Start Vault
+^^^^^^^^^^^
 
-   make start-vault
+Depending on how you installed Vault you can start it with:
 
-For more details about Vault with Amadla you can read
-`secrets <./secrets.md>`__ document.
+* `Vault <https://www.vaultproject.io/docs/commands/server>`__ - ``vault server -dev`` if it is installed locally.
+* `Podman <https://podman.io/getting-started/installation>`__ - ``podman run -d --name vault -p 8200:8200 vault``.
+* `Docker <https://docs.docker.com/engine/reference/commandline/run/>`__ - ``docker run -d --name vault -p 8200:8200 vault``.
+* `Kubernetes <https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run>`__ - ``kubectl run vault --image vault --port 8200``.
+* `podman-compose <https://github.com/containers/podman-compose>`__ - ``podman-compose up -d`` (or ``docker-compose`` if you are using Docker).
+
+Add Secrets to Vault
+~~~~~~~~~~~~~~~~~~~~
+
+To add, remove, and list secrets you can follow the `Secrets documentation <secrets-management>`__.
 
 Install Amadla CLI Dependencies
-______
+-------------------------------
 
 .. code:: bash
 
