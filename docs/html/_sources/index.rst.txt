@@ -1,14 +1,18 @@
 Welcome to Amadla's documentation!
 ===================================
 
-**Amadla** (/ah-mah-dlah/) is a Python tool
-for 
-Check out the :doc:`setup` section for further information, including
-how to the project.
+**Amadla** (/ah-mah-dlah/) is a set of :abbr:`IaC (Infrastructure as Code)` tools to help deploy and manage various cloud environments, dedicated servers, and on-premise systems.
 
-.. note::
+*Amadla is a Zulu word meaning "power" or "strength".*
+
+.. attention::
 
    This project is under active development.
+
+.. image:: https://raw.githubusercontent.com/AmadlaOrg/AmadlaOrg.github.io/master/assets/android-chrome-192x192.png
+   :target: https://amadla.org
+   :align: center
+   :alt: Amadla Logo
 
 Contents
 --------

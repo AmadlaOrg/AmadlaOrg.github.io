@@ -1,14 +1,51 @@
 Setup
 ==============
 
-Without Containers
+Instructions for local setup
+--------------------
+
+.. note::
+
+   If you are using a container you can skip this section.
+
+System Packages
+~~~~~~~~~~~~~~~
+- python (11 or higher)
+- pip (you might need to upgrade it after it is installed with ``pip install --upgrade pip`` or ``pip3 install --upgrade pip``)
+- make - optional (needed for the Makefile for generating documentations that is in the ``docs/`` directory)
+- `Terraform<https://www.terraform.io/downloads.html>`__
+- `Vault<https://www.vaultproject.io/downloads.html>`__
+- `Packer<https://www.packer.io/downloads.html>`__
+- `Ansible<https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html>`__
+
+Python Packages
+~~~~~~~~~~~~~~~
+- poetry (``pip install poetry`` or ``pip3 install poetry``)
+
+Instructions for container setup
+--------------------
+The container comes with the same packages as the local system setup except Vault you will need to use the Vault container or point via the configuration to wherever your Vault setup is.
+
+.. note::
+
+   If you already have a container engine then you skip the System Packages setup.
+
+System Packages
+~~~~~~~~~~~~~~~
+- `Podman<https://podman.io/getting-started/installation>`__ (``sudo dnf install podman`` or ``sudo apt install podman``)
+- Or `Docker<https://docs.docker.com/get-docker/>`__ (``sudo dnf install docker-ce`` or ``sudo apt install docker-ce``)
+- Or `Kubernetes<https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ (``sudo dnf install kubectl`` or ``sudo apt install kubectl``)
+
+Configurations
+~~~~~~~~~~~~~~~
+For Amadla you can use environment variables or a ``.env`` file. The
+``.env`` file is loaded automatically if it exists in the root of the project.
+... code:: bash
+
+   touch .env
+
+With The Container
 ------------------
-
-1. Install the requirements for the Python script:
-   ``pip install -r requirements.txt``
-
-With Containers
----------------
 
 1. You need to have a Vault instance running.
 2. Add your secrets to your Vault instance (or configure your Vault to

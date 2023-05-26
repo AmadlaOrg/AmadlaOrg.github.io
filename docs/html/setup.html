@@ -49,8 +49,17 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="how-it-works.html">How It Works</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#without-containers">Without Containers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#with-containers">With Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instructions-for-local-setup">Instructions for local setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-packages">System Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-packages">Python Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#instructions-for-container-setup">Instructions for container setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">System Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configurations">Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#with-the-container">With The Container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#start-vault">Start Vault</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basic">Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#make-server-image">Make Server Image</a></li>
@@ -88,15 +97,58 @@
              
   <section id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h1>
-<section id="without-containers">
-<h2>Without Containers<a class="headerlink" href="#without-containers" title="Permalink to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p>Install the requirements for the Python script:
-<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></li>
-</ol>
+<section id="instructions-for-local-setup">
+<h2>Instructions for local setup<a class="headerlink" href="#instructions-for-local-setup" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a container you can skip this section.</p>
+</div>
+<section id="system-packages">
+<h3>System Packages<a class="headerlink" href="#system-packages" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>python (11 or higher)</p></li>
+<li><p>pip (you might need to upgrade it after it is installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code>)</p></li>
+<li><p>make - optional (needed for the Makefile for generating documentations that is in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory)</p></li>
+<li><p><a href="#id2"><span class="problematic" id="id3">`Terraform&lt;https://www.terraform.io/downloads.html&gt;`__</span></a></p></li>
+<li><p><a href="#id2"><span class="problematic" id="id4">`Vault&lt;https://www.vaultproject.io/downloads.html&gt;`__</span></a></p></li>
+<li><p><a href="#id2"><span class="problematic" id="id5">`Packer&lt;https://www.packer.io/downloads.html&gt;`__</span></a></p></li>
+<li><p><a href="#id2"><span class="problematic" id="id6">`Ansible&lt;https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html&gt;`__</span></a></p></li>
+</ul>
 </section>
-<section id="with-containers">
-<h2>With Containers<a class="headerlink" href="#with-containers" title="Permalink to this heading"></a></h2>
+<section id="python-packages">
+<h3>Python Packages<a class="headerlink" href="#python-packages" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>poetry (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">poetry</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">poetry</span></code>)</p></li>
+</ul>
+</section>
+</section>
+<section id="instructions-for-container-setup">
+<h2>Instructions for container setup<a class="headerlink" href="#instructions-for-container-setup" title="Permalink to this heading"></a></h2>
+<p>The container comes with the same packages as the local system setup except Vault you will need to use the Vault container or point via the configuration to wherever your Vault setup is.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you already have a container engine then you skip the System Packages setup.</p>
+</div>
+<section id="id1">
+<h3>System Packages<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a href="#id2"><span class="problematic" id="id7">`Podman&lt;https://podman.io/getting-started/installation&gt;`__</span></a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">podman</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">podman</span></code>)</p></li>
+<li><p>Or <a href="#id2"><span class="problematic" id="id8">`Docker&lt;https://docs.docker.com/get-docker/&gt;`__</span></a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code>)</p></li>
+<li><p>Or <a href="#id2"><span class="problematic" id="id9">`Kubernetes&lt;https://kubernetes.io/docs/tasks/tools/install-kubectl/&gt;`__</span></a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">kubectl</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">kubectl</span></code>)</p></li>
+</ul>
+</section>
+<section id="configurations">
+<h3>Configurations<a class="headerlink" href="#configurations" title="Permalink to this heading"></a></h3>
+<p>For Amadla you can use environment variables or a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file. The
+<code class="docutils literal notranslate"><span class="pre">.env</span></code> file is loaded automatically if it exists in the root of the project.
+… code:: bash</p>
+<blockquote>
+<div><p>touch .env</p>
+</div></blockquote>
+</section>
+</section>
+<section id="with-the-container">
+<h2>With The Container<a class="headerlink" href="#with-the-container" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>You need to have a Vault instance running.</p></li>
 <li><p>Add your secrets to your Vault instance (or configure your Vault to
