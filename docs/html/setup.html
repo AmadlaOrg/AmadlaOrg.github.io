@@ -50,7 +50,12 @@
 <li class="toctree-l1"><a class="reference internal" href="how-it-works.html">How It Works</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#instructions-for-local-setup">Instructions for local setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#system-packages">System Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#system-packages">System Packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mac-os-x">Mac OS X</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#python-packages">Python Packages</a></li>
 </ul>
 </li>
@@ -115,11 +120,78 @@
 <li><p><a class="reference external" href="https://www.packer.io/downloads.html">Packer</a></p></li>
 <li><p><a class="reference external" href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible</a></p></li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>There are multiple ways to install the needed applications. You can download them directly and install them or even compile them or use a package manager on your system.</p>
+</div>
+<section id="mac-os-x">
+<h4>Mac OS X<a class="headerlink" href="#mac-os-x" title="Permalink to this heading"></a></h4>
+<section id="homebrew">
+<h5>Homebrew<a class="headerlink" href="#homebrew" title="Permalink to this heading"></a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>python
+brew<span class="w"> </span>install<span class="w"> </span>git
+brew<span class="w"> </span>tap<span class="w"> </span>hashicorp/tap
+brew<span class="w"> </span>install<span class="w"> </span>hashicorp/tap/terraform<span class="w"> </span>hashicorp/tap/packer<span class="w"> </span>hashicorp/tap/vault
+brew<span class="w"> </span>install<span class="w"> </span>ansible
+</pre></div>
+</div>
+</section>
+<section id="install-pip">
+<h5>Install <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#install-pip" title="Permalink to this heading"></a></h5>
+<p>If your Python default version is 3 or higher:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>https://bootstrap.pypa.io/get-pip.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>python
+</pre></div>
+</div>
+<p>Or if your Python default version is 2 you might need to use this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>https://bootstrap.pypa.io/get-pip.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3
+</pre></div>
+</div>
+</section>
+</section>
+<section id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h4>
+<p>The only it seems that you can install what is needed on Windows is by doing it manually by following the links above and installing them.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://chocolatey.org/">Chocolatey</a> might have some of the packages but it is not guaranteed that they will work.</p>
+</div>
+</section>
+<section id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this heading"></a></h4>
+<section id="debian-ubuntu">
+<h5>Debian/Ubuntu<a class="headerlink" href="#debian-ubuntu" title="Permalink to this heading"></a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>unzip<span class="w"> </span>make<span class="w"> </span>ca-certificates<span class="w"> </span>git
+wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
+sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>terraform<span class="w"> </span>vault<span class="w"> </span>packer
+sudo<span class="w"> </span>apt-add-repository<span class="w"> </span>ppa:ansible/ansible
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ansible
+</pre></div>
+</div>
+</section>
+<section id="centos-rhel">
+<h5>CentOS/RHEL<a class="headerlink" href="#centos-rhel" title="Permalink to this heading"></a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>yum-utils<span class="w"> </span>git<span class="w"> </span>ansible<span class="w"> </span>make<span class="w"> </span>zip
+sudo<span class="w"> </span>yum-config-manager<span class="w"> </span>--add-repo<span class="w"> </span>https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo<span class="w"> </span>yum<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>terraform<span class="w"> </span>vault<span class="w"> </span>packer
+</pre></div>
+</div>
+</section>
+<section id="fedora">
+<h5>Fedora<a class="headerlink" href="#fedora" title="Permalink to this heading"></a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dnf-plugins-core<span class="w"> </span>git<span class="w"> </span>ansible<span class="w"> </span>make<span class="w"> </span>zip
+sudo<span class="w"> </span>dnf<span class="w"> </span>config-manager<span class="w"> </span>--add-repo<span class="w"> </span>https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+sudo<span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>terraform<span class="w"> </span>vault<span class="w"> </span>packer
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 <section id="python-packages">
 <h3>Python Packages<a class="headerlink" href="#python-packages" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>poetry (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">poetry</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">poetry</span></code>)</p></li>
+<li><p><a class="reference external" href="https://python-poetry.org/">poetry</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">poetry</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">poetry</span></code>)</p></li>
 </ul>
 </section>
 </section>
