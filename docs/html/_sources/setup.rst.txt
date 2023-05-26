@@ -140,8 +140,9 @@ With Container
 Add Secrets
 ------------
 
-Vault
-~~~~~
+To add, remove, and list secrets you can follow the `Secrets documentation <secrets-management>`__.
+
+If you are using Vault for your secrets the next step:
 
 Start Vault
 ^^^^^^^^^^^
@@ -149,15 +150,16 @@ Start Vault
 Depending on how you installed Vault you can start it with:
 
 * `Vault <https://www.vaultproject.io/docs/commands/server>`__ - ``vault server -dev`` if it is installed locally.
-* `Podman <https://podman.io/getting-started/installation>`__ - ``podman run -d --name vault -p 8200:8200 vault``.
-* `Docker <https://docs.docker.com/engine/reference/commandline/run/>`__ - ``docker run -d --name vault -p 8200:8200 vault``.
+* `Podman <https://podman.io/getting-started/installation>`__ - ``podman run --rm -d --name vault -p 8200:8200 vault:latest``.
+* `Docker <https://docs.docker.com/engine/reference/commandline/run/>`__ - ``docker run --rm -d --name vault -p 8200:8200 vault:latest``.
 * `Kubernetes <https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run>`__ - ``kubectl run vault --image vault --port 8200``.
 * `podman-compose <https://github.com/containers/podman-compose>`__ - ``podman-compose up -d`` (or ``docker-compose`` if you are using Docker).
 
-Add Secrets to Vault
-~~~~~~~~~~~~~~~~~~~~
+Vault can `store can secrets in many ways <https://developer.hashicorp.com/vault/docs/configuration/storage>`__.
 
-To add, remove, and list secrets you can follow the `Secrets documentation <secrets-management>`__.
+If you are using a file then you will need to add the parameter ``-v ./vault/file:/vault/data`` to the command.
+
+If you are using some other storage backend then you will need to configure it.
 
 Install Amadla CLI Dependencies
 -------------------------------
