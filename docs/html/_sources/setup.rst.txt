@@ -156,6 +156,11 @@ Or you can run it with ``python<python version> -m``:
 
    python3 -m poetry install
 
+.. note::
+
+   For the none development environment you can run ``poetry install --no-dev`` or ``python3 -m poetry install --no-dev``.
+   This will not install the development dependencies that are listed in ``[tool.poetry.dev-dependencies]`` in ``pyproject.toml`` file.
+
 Start Amadla
 ------------
 
