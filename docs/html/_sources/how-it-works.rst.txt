@@ -14,6 +14,7 @@ In other words it is a abstraction layer on top of the tools mentioned above.
     Amadla cli is very dependant of `git <https://git-scm.com/>`__ also. It uses git to pull the modules that are used for the other configuration files.
 
 Amadla is written in Python and uses the following libraries:
+
 * `Click <https://click.palletsprojects.com/en/7.x/>`__ for the command line interface.
 * `PyYAML <https://pyyaml.org/wiki/PyYAMLDocumentation>`__ for parsing YAML files used for the Amadla configuration files.
 * `Jinja2 <https://jinja.palletsprojects.com/en/2.10.x/>`__ for templating.
