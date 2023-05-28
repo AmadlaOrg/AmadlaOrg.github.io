@@ -99,7 +99,44 @@ Fedora
 Python Packages
 ~~~~~~~~~~~~~~~
 
+For installing the packages and Amadla CLI you will need:
+
 - `poetry <https://python-poetry.org/>`__ (``pip install poetry`` or ``pip3 install poetry``)
+
+For generating the documentation you will need:
+
+- `sphinx <https://www.sphinx-doc.org/en/master/usage/installation.html>`__ (``pip install sphinx`` or ``pip3 install sphinx``)
+- `sphinx-rtd-theme <https://sphinx-rtd-theme.readthedocs.io/en/stable/installing.html>`__ (``pip install sphinx-rtd-theme`` or ``pip3 install sphinx-rtd-theme``)
+
+All together:
+
+.. code:: bash
+
+   pip install poetry sphinx sphinx-rtd-theme
+
+Install Everything
+~~~~~~~~~~~~~~~~~~
+
+The last step:
+
+.. code:: bash
+
+   poetry install
+
+OR
+
+.. code:: bash
+
+   python -m poetry install
+
+.. note::
+
+    Depending on your Python setup you might need to use ``python3`` instead of ``python``.
+
+.. tip::
+
+    You might run into an issue with `keyring <https://pypi.org/project/keyring/>`__ whilst you are trying to install Amadla CLI with ``poetry`` (it doesn't really show any errors unless you use the flag ``--verbise`` or ``-vv`` it just stays there with pending messages). To get around this issue you can try to use this environment variable: ``export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring``. Another solution is to upgrade ``pip`` with ``pip install --upgrade pip`` or ``pip3 install --upgrade pip``.
+
 
 Instructions for container setup
 --------------------
@@ -113,9 +150,11 @@ The container comes with the same packages as the local system setup except Vaul
 System Packages
 ~~~~~~~~~~~~~~~
 
+You can choose one of the following container engines:
+
 - `Podman <https://podman.io/getting-started/installation>`__ (``sudo dnf install podman`` or ``sudo apt install podman``)
-- Or `Docker <https://docs.docker.com/get-docker/>`__ (``sudo dnf install docker-ce`` or ``sudo apt install docker-ce``)
-- Or `Kubernetes <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ (``sudo dnf install kubectl`` or ``sudo apt install kubectl``)
+- `Docker <https://docs.docker.com/get-docker/>`__ (``sudo dnf install docker-ce`` or ``sudo apt install docker-ce``)
+- `Kubernetes <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`__ (``sudo dnf install kubectl`` or ``sudo apt install kubectl``)
 
 Configurations
 ~~~~~~~~~~~~~~~

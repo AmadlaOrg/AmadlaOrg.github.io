@@ -57,6 +57,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#python-packages">Python Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-everything">Install Everything</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#instructions-for-container-setup">Instructions for container setup</a><ul>
@@ -188,9 +189,38 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span
 </section>
 <section id="python-packages">
 <h3>Python Packages<a class="headerlink" href="#python-packages" title="Permalink to this heading"></a></h3>
+<p>For installing the packages and Amadla CLI you will need:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://python-poetry.org/">poetry</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">poetry</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">poetry</span></code>)</p></li>
 </ul>
+<p>For generating the documentation you will need:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/installation.html">sphinx</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">sphinx</span></code>)</p></li>
+<li><p><a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/en/stable/installing.html">sphinx-rtd-theme</a> (<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sphinx-rtd-theme</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">sphinx-rtd-theme</span></code>)</p></li>
+</ul>
+<p>All together:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>poetry<span class="w"> </span>sphinx<span class="w"> </span>sphinx-rtd-theme
+</pre></div>
+</div>
+</section>
+<section id="install-everything">
+<h3>Install Everything<a class="headerlink" href="#install-everything" title="Permalink to this heading"></a></h3>
+<p>The last step:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>install
+</pre></div>
+</div>
+<p>OR</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>poetry<span class="w"> </span>install
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on your Python setup you might need to use <code class="docutils literal notranslate"><span class="pre">python3</span></code> instead of <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You might run into an issue with <a class="reference external" href="https://pypi.org/project/keyring/">keyring</a> whilst you are trying to install Amadla CLI with <code class="docutils literal notranslate"><span class="pre">poetry</span></code> (it doesn’t really show any errors unless you use the flag <code class="docutils literal notranslate"><span class="pre">--verbise</span></code> or <code class="docutils literal notranslate"><span class="pre">-vv</span></code> it just stays there with pending messages). To get around this issue you can try to use this environment variable: <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring</span></code>. Another solution is to upgrade <code class="docutils literal notranslate"><span class="pre">pip</span></code> with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">pip</span></code>.</p>
+</div>
 </section>
 </section>
 <section id="instructions-for-container-setup">
@@ -202,10 +232,11 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>-y<span class="w"> </span
 </div>
 <section id="id1">
 <h3>System Packages<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>You can choose one of the following container engines:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://podman.io/getting-started/installation">Podman</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">podman</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">podman</span></code>)</p></li>
-<li><p>Or <a class="reference external" href="https://docs.docker.com/get-docker/">Docker</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code>)</p></li>
-<li><p>Or <a class="reference external" href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubernetes</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">kubectl</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">kubectl</span></code>)</p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/get-docker/">Docker</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">docker-ce</span></code>)</p></li>
+<li><p><a class="reference external" href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubernetes</a> (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dnf</span> <span class="pre">install</span> <span class="pre">kubectl</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">kubectl</span></code>)</p></li>
 </ul>
 </section>
 <section id="configurations">
