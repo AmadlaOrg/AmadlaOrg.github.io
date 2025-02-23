@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="a"
+                 name="Amadla"
+                 start-page="starter.md">
+
+    <toc-element topic="starter.md"/>
+    <toc-element topic="Overview.md"/>
+    <toc-element topic="Tutorial.md"/>
+    <toc-element topic="Changelog.md"/>
+    <toc-element topic="Code-of-Conduct.md"/>
+    <toc-element toc-title="HERY">
+        <toc-element topic="Section-Starting-Page.topic"/>
+        <toc-element topic="Reference_2.md"/>
+        <toc-element toc-title="HERY-Playground">
+            <toc-element topic="Section-Starting-Page_4.topic"/>
+            <toc-element topic="Reference_4.md"/>
+            <toc-element topic="Tutorial_2.md"/>
+        </toc-element>
+    </toc-element>
+    <toc-element toc-title="doorman">
+        <toc-element topic="Section-Starting-Page_2.topic"/>
+        <toc-element topic="Reference.md"/>
+    </toc-element>
+    <toc-element toc-title="judge">
+        <toc-element topic="Section-Starting-Page_3.topic"/>
+        <toc-element topic="Reference_3.md"/>
+    </toc-element>
+    <toc-element toc-title="raise">
+        <toc-element topic="Section-Starting-Page_5.topic"/>
+        <toc-element topic="Reference_5.md"/>
+    </toc-element>
+</instance-profile>
