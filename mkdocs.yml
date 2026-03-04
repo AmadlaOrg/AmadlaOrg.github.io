@@ -1,0 +1,129 @@
+site_name: Amadla
+site_url: https://amadla.org
+site_description: Application-centric infrastructure automation ecosystem
+site_author: AmadlaOrg
+
+repo_url: https://github.com/AmadlaOrg
+repo_name: AmadlaOrg
+
+copyright: Copyright &copy; 2025 AmadlaOrg
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - toc.follow
+
+extra_css:
+  - assets/extra.css
+
+nav:
+  - Home: index.md
+
+  - Vision:
+      - Philosophy: vision/philosophy.md
+
+  - Architecture:
+      - Ecosystem Overview: architecture/ecosystem-overview.md
+      - Data Pipeline: architecture/pipeline.md
+      - HERY Concepts: architecture/hery-concepts.md
+      - Plugin System: architecture/plugin-system.md
+
+  - Tools:
+      - Overview: tools/overview.md
+      - hery: tools/hery.md
+      - doorman: tools/doorman.md
+      - weaver: tools/weaver.md
+      - judge: tools/judge.md
+      - lay: tools/lay.md
+      - raise: tools/raise.md
+      - waiter: tools/waiter.md
+      - unravel: tools/unravel.md
+      - dryrun: tools/dryrun.md
+
+  - Libraries:
+      - Overview: libraries/overview.md
+      - LibraryUtils: libraries/library-utils.md
+      - LibraryFramework: libraries/library-framework.md
+      - LibraryPluginFramework: libraries/library-plugin-framework.md
+      - LibraryClerkFramework: libraries/library-clerk-framework.md
+      - LibraryAuditFramework: libraries/library-audit-framework.md
+
+  - Plugins:
+      - Overview: plugins/overview.md
+      - Clerks: plugins/clerks.md
+      - Auditors: plugins/auditors.md
+      - Weavers: plugins/weavers.md
+
+  - Entities:
+      - Overview: entities/overview.md
+      - EntityApplication: entities/entity-application.md
+      - EntityInfrastructure: entities/entity-infrastructure.md
+      - EntitySystem: entities/entity-system.md
+      - EntityProgrammingLanguage: entities/entity-programming-language.md
+      - EntityContainer: entities/entity-container.md
+      - EntitySecret: entities/entity-secret.md
+      - EntityJudge: entities/entity-judge.md
+
+  - Standards:
+      - Go Conventions: standards/go-conventions.md
+      - Testing: standards/testing.md
+      - Project Structure: standards/project-structure.md
+      - CLI Conventions: standards/cli-conventions.md
+
+  - Roadmap:
+      - Current State: roadmap/current-state.md
+      - Gaps: roadmap/gaps.md
+      - Development Plan: roadmap/development-plan.md
+      - Dependency Graph: roadmap/dependency-graph.md
+
+  - Glossary: glossary/glossary.md
+
+plugins:
+  - search
+  - glightbox
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
