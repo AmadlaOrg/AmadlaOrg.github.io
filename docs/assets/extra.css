@@ -1,0 +1,93 @@
+/* Amadla Brand Colors */
+:root {
+  --md-primary-fg-color: #2c3840;
+  --md-primary-fg-color--light: #3d4f5a;
+  --md-primary-fg-color--dark: #1e2a30;
+  --md-accent-fg-color: #26a69a;
+}
+
+/* Hero section on landing page */
+.md-typeset .amadla-hero {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.md-typeset .amadla-hero img {
+  max-width: 180px;
+  margin-bottom: 1rem;
+}
+
+.md-typeset .amadla-hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.md-typeset .amadla-hero .amadla-tagline {
+  font-size: 1.25rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+/* Feature grid */
+.md-typeset .amadla-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.md-typeset .amadla-feature {
+  padding: 1.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+}
+
+.md-typeset .amadla-feature h3 {
+  margin-top: 0;
+}
+
+/* Quick links */
+.md-typeset .amadla-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.md-typeset .amadla-links a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.md-typeset .amadla-links a.primary {
+  background: var(--md-primary-fg-color);
+  color: white;
+}
+
+.md-typeset .amadla-links a.secondary {
+  border: 2px solid var(--md-primary-fg-color);
+  color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .amadla-links a.secondary {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+/* Pipeline diagram */
+.md-typeset .amadla-pipeline {
+  text-align: center;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.md-typeset .amadla-pipeline code {
+  font-size: 0.95rem;
+}
