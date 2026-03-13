@@ -18,7 +18,7 @@ EntitySystem describes system-level requirements:
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntitySystem@v1.0.0
+_type: amadla.org/entity/system@v1.0.0
 _body:
   package: nginx
   version: ">=1.24"

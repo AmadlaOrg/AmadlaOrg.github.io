@@ -1,0 +1,45 @@
+@startuml c2-plugin-architecture
+!pragma layout smetana
+!define RELATIVE_INCLUDE ""
+!include ../vendor/C4-PlantUML/C4_Container.puml
+
+title Amadla — Plugin Architecture (C2)
+
+System_Boundary(doorman_system, "doorman + Doorman Plugins") {
+    Container(doorman, "doorman", "Go Daemon", "Secrets management\nwith encrypted cache")
+    Container(dm_vault, "doorman-vault", "Go Plugin", "Vault / OpenBao")
+    Container(dm_aws, "doorman-aws", "Go Plugin", "AWS Secrets Manager")
+    Container(dm_kpxc, "doorman-keepassxc", "Go Plugin", "KeePassXC")
+    Container(dm_kc, "doorman-keycloak", "Go Plugin", "Keycloak tokens")
+}
+
+System_Boundary(judge_system, "judge + Judge Plugins") {
+    Container(judge, "judge", "Go CLI", "Audit orchestrator")
+    Container(aud_app, "judge-application", "Go Plugin", "Package checks")
+    Container(aud_sys, "judge-system", "Go Plugin", "System checks")
+    Container(aud_infra, "judge-infrastructure", "Go Plugin", "Infra checks")
+}
+
+System_Boundary(weaver_system, "weaver + Template Engines") {
+    Container(weaver, "weaver", "Go CLI", "Template generator")
+    Container(wvr_jinja, "weaver-jinja", "Plugin", "Jinja2 engine")
+    Container(wvr_hbs, "weaver-js-handlebars", "Plugin", "Handlebars engine")
+    Container(wvr_mst, "weaver-js-mustache", "Plugin", "Mustache engine")
+    Container(wvr_qute, "weaver-qute", "Plugin", "Qute engine")
+}
+
+Rel(doorman, dm_vault, "IPC")
+Rel(doorman, dm_aws, "IPC")
+Rel(doorman, dm_kpxc, "IPC")
+Rel(doorman, dm_kc, "IPC")
+
+Rel(judge, aud_app, "IPC")
+Rel(judge, aud_sys, "IPC")
+Rel(judge, aud_infra, "IPC")
+
+Rel(weaver, wvr_jinja, "IPC")
+Rel(weaver, wvr_hbs, "IPC")
+Rel(weaver, wvr_mst, "IPC")
+Rel(weaver, wvr_qute, "IPC")
+
+@enduml

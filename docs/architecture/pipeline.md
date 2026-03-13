@@ -4,7 +4,7 @@ The Amadla pipeline transforms application requirements into running, audited in
 
 ## Pipeline Stages
 
-<!-- Diagram placeholder: Tool Pipeline (c2-tool-pipeline) -->
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg)
 
 ## Stage Details
 
@@ -13,7 +13,7 @@ The Amadla pipeline transforms application requirements into running, audited in
 **Input:** YAML entity files on disk (or in Git repos)
 **Output:** Structured entity data as JSON
 
-hery reads `.hery` files that describe what an application needs. Each file is an **entity** — a versioned, schema-validated document with five reserved properties (`_type`, `_parent`, `_meta`, `_body`, `_require`). Entity identity is derived from the git path (directory position in repo). The `_require` property declares dependencies between entities — amadla builds a DAG and topologically sorts to determine execution order.
+hery reads `.hery` files that describe what an application needs. Each file is an **entity** — a versioned, schema-validated document with five reserved properties (`_type`, `_extends`, `_meta`, `_body`, `_requires`). Entity identity is derived from the git path (directory position in repo). The `_requires` property declares dependencies between entities — amadla builds a DAG and topologically sorts to determine execution order.
 
 ```bash
 # Query all application entities
@@ -103,7 +103,7 @@ waiter rollback my-app
 ### 7. judge — Validate
 
 **Input:** Expected state (from hery) + actual state (from unravel)
-**Output:** Auditor entity (diff — pass/fail per requirement)
+**Output:** Judge entity (diff — pass/fail per requirement)
 
 judge compares "what IS" (via unravel) vs "what SHOULD BE" (via hery entities) and outputs an judge entity — a diff in entity format. Supports both generic deep diff and type-aware judge plugins.
 
@@ -130,7 +130,7 @@ unravel discover | judge audit | lighthouse notify
 
 The following sequence diagram shows the full pipeline execution:
 
-<!-- Diagram placeholder: Pipeline Execution Flow (seq-pipeline-flow) -->
+![Pipeline Execution Flow](../diagrams/out/seq-pipeline-flow.svg)
 
 A complete flow for deploying a containerized web application:
 

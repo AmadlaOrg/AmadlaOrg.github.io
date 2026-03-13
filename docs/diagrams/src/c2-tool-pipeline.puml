@@ -1,0 +1,43 @@
+@startuml c2-tool-pipeline
+!pragma layout smetana
+!define RELATIVE_INCLUDE ""
+!include ../vendor/C4-PlantUML/C4_Container.puml
+
+title Amadla Ecosystem — Tool Pipeline (C2)
+
+Person(devops, "DevOps Engineer", "Runs the pipeline")
+
+System_Boundary(amadla, "Amadla Ecosystem") {
+    Container(hery, "hery", "Go CLI", "HERY data storage:\nentity management,\nschema validation,\nSQLite caching")
+
+    Container(doorman, "doorman", "Go Daemon", "Secrets management:\nencrypted cache,\nDoorman plugin IPC")
+
+    Container(raise, "raise", "Go CLI", "Infrastructure provisioner:\nwraps OpenTofu/Terraform")
+
+    Container(lay, "lay", "Go CLI", "App installer:\nwraps package managers")
+
+    Container(weaver, "weaver", "Go CLI", "Template generator:\npluggable engines")
+
+    Container(judge, "judge", "Go CLI", "Audit orchestrator:\nruns judge plugins")
+
+    Container(waiter, "waiter", "Go CLI", "Pipeline orchestrator:\nsequences stages")
+}
+
+System_Ext(secrets, "Secret Stores", "Vault, AWS, KeePassXC, ...")
+System_Ext(cloud, "Cloud Providers", "DO, AWS, Linode, ...")
+System_Ext(git, "Git Repos", "Entity definitions")
+
+Rel(devops, waiter, "Runs pipeline")
+Rel(devops, hery, "Defines entities")
+Rel(waiter, hery, "1. Query entities")
+Rel(hery, doorman, "JSON: entity data")
+Rel(doorman, raise, "JSON: data + secrets")
+Rel(raise, lay, "JSON: provisioned infra")
+Rel(lay, weaver, "JSON: installed apps")
+Rel(weaver, judge, "JSON: generated configs")
+
+Rel(hery, git, "Fetches entities")
+Rel(doorman, secrets, "Resolves secrets\nvia Doorman plugins")
+Rel(raise, cloud, "Provisions resources")
+
+@enduml

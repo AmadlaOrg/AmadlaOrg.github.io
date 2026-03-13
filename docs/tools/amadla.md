@@ -3,8 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Meta-tool — executes Pipeline entities, generates D2 diagrams, manages tool inventory |
-| **Module** | — |
-| **Status** | Planned |
 | **Language** | Go |
 | **Repo** | [AmadlaOrg/amadla](https://github.com/AmadlaOrg/amadla) |
 
@@ -19,7 +17,7 @@ The amadla tool itself is written in Go, but it is **replaceable** — the Pipel
 | Command | Status | Description |
 |---------|--------|-------------|
 | `amadla init` | Planned | Bootstrap `tools.hery` by scanning PATH for standard Amadla tools |
-| `amadla run <pipeline>` | Planned | Execute a Pipeline entity (order from `_require` DAG) |
+| `amadla run <pipeline>` | Planned | Execute a Pipeline entity (order from `_requires` DAG) |
 | `amadla diagram <pipeline> --format d2` | Planned | Generate D2 diagram text from a Pipeline entity |
 | `amadla diagram <pipeline> --run-id latest --format d2` | Planned | Generate annotated diagram with pass/fail coloring |
 | `amadla list` | Planned | Show installed tools and their plugins |
@@ -113,10 +111,10 @@ Plugins are standalone CLIs — **any tool or user can call any plugin directly*
 
 ## Execution Ordering
 
-amadla does **not** use hardcoded phases. Execution order is derived from `_require` declarations in entities:
+amadla does **not** use hardcoded phases. Execution order is derived from `_requires` declarations in entities:
 
-1. amadla reads all `.hery` files and collects `_require` declarations
-2. Builds a dependency graph (DAG) from `_require` references
+1. amadla reads all `.hery` files and collects `_requires` declarations
+2. Builds a dependency graph (DAG) from `_requires` references
 3. Topologically sorts the DAG to determine execution order
 4. Independent branches can be parallelized
 5. True cycles are schema design errors — detected and reported (like Go import cycles)

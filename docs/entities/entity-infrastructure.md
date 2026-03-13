@@ -18,7 +18,7 @@ EntityInfrastructure describes what infrastructure an application needs:
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntityInfrastructure@v1.0.0
+_type: amadla.org/entity/infrastructure@v1.0.0
 _body:
   provider: digitalocean
   type: droplet

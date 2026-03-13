@@ -3,8 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Notification and alerting tool — sends notifications via plugins |
-| **Module** | — |
-| **Status** | Planned |
 | **Repo** | [AmadlaOrg/lighthouse](https://github.com/AmadlaOrg/lighthouse) |
 
 ## Overview

@@ -63,10 +63,9 @@ With stable foundations, build out the pipeline tools and plugins:
 
 **Stage 4a: doorman**
 
-- Implement daemon mode (`start` command)
-- Implement `resolve` command
+- Implement `resolve` command (core secret resolution)
 - Replace XOR cache encryption with AES-GCM + TPM
-- Implement Doorman plugin loading
+- Implement Doorman plugin discovery and invocation
 
 **Stage 4b: weaver**
 

@@ -1,0 +1,23 @@
+@startuml c1-ecosystem-context
+!pragma layout smetana
+!define RELATIVE_INCLUDE ""
+!include ../vendor/C4-PlantUML/C4_Context.puml
+
+title Amadla Ecosystem — System Context (C1)
+
+Person(devops, "DevOps Engineer", "Defines application requirements\nand runs the pipeline")
+
+System(amadla, "Amadla Ecosystem", "Infrastructure automation CLI tools\nthat pipe JSON between each other")
+
+System_Ext(cloud, "Cloud Providers", "DigitalOcean, AWS, Linode,\nVultr, OVH, Rackspace")
+System_Ext(secrets, "Secret Stores", "Vault/OpenBao, AWS SM,\nKeePassXC, Keycloak, SOPS")
+System_Ext(servers, "Target Servers", "On-premise or cloud\nservers being provisioned")
+System_Ext(git, "Git Repositories", "Entity definitions,\ntemplates, schemas")
+
+Rel(devops, amadla, "Defines requirements,\nruns pipeline")
+Rel(amadla, cloud, "Provisions infrastructure\nvia raise")
+Rel(amadla, secrets, "Resolves secrets\nvia doorman plugins")
+Rel(amadla, servers, "Installs apps, generates\nconfigs, audits state")
+Rel(amadla, git, "Fetches entity definitions\nand templates")
+
+@enduml

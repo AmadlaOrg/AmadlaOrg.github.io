@@ -18,7 +18,7 @@ EntityJudge describes audit rule definitions:
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntityJudge@v1.0.0
+_type: amadla.org/entity/judge@v1.0.0
 _body:
   check: package-installed
   target: nginx

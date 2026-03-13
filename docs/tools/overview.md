@@ -4,30 +4,21 @@ Amadla's tools form a modular pipeline where each tool handles one responsibilit
 
 ## Tool Inventory
 
-| Tool | Purpose | Input | Output | Status |
-|------|---------|-------|--------|--------|
-| [hery](hery.md) | Source of truth — entity management, deep merge, schema validation, SQLite caching | `.hery` files across layers | Merged entity JSON | Partial |
-| [doorman](doorman.md) | Secrets management — resolves secret references via doorman-* plugins | Entity data with secret refs | Entity data with secrets resolved | Early |
-| [weaver](weaver.md) | Config generation — renders templates from entities (Quadlet, nginx.conf, podman-compose, k8s, CI/CD, etc.) | Entities + templates | Config files | Partial |
-| [lay](lay.md) | Install — packages, applications, JARs, container image pull/build | Entity requirements | Installed software + image ref entity | Partial |
-| [waiter](waiter.md) | Deployment — blue-green, canary, rolling strategies with platform plugins | Entities + rendered configs (from weaver) | Deployed application | Planned |
-| [raise](raise.md) | Infrastructure provisioning — wraps IaC tools via plugin system per cloud API | Infrastructure entities | Provisioned resources | Planned |
-| [unravel](unravel.md) | Discovery — discovers existing system state as entities. Wraps osquery + custom plugins | System state | "What IS" entities | Planned |
-| [judge](judge.md) | Validation — compares "what IS" (unravel) vs "what SHOULD BE" (hery). Outputs judge entity (diff) | Expected + actual entities | Auditor entity (diff) | Early |
-| [conduct](conduct.md) | Multi-server orchestration — coordinates waiter/lay across distributed nodes | Topology entities | Orchestrated deployment | Planned |
-| [lighthouse](lighthouse.md) | Notifications/alerts — sends via plugins (webhook, WebRTC, Twilio SMS, AWS SES, REST API) | Entities from any tool | Notifications | Planned |
-| [garbage](garbage.md) | Trash/uninstall — tracks and removes what's no longer needed | Entity refs | Cleanup | Partial |
-| [dryrun](dryrun.md) | Safety — tests changes with auto-revert (prevents SSH lockout) | Any pipeline | Auto-reverted test | Planned |
-| [amadla](amadla.md) | Meta-tool — executes Pipeline entities, generates D2 diagrams, tool inventory | Pipeline entities | Pipeline execution + D2 text | Planned |
-
-## Status Definitions
-
-| Status | Meaning |
-|--------|---------|
-| **Active** | Fully functional, in regular use |
-| **Partial** | Core functionality works, some commands stubbed or incomplete |
-| **Early** | Basic structure in place, most functionality not yet implemented |
-| **Planned** | Repository exists but contains only stubs or READMEs |
+| Tool | Purpose | Input | Output |
+|------|---------|-------|--------|
+| [hery](hery.md) | Source of truth — entity management, deep merge, schema validation, SQLite caching | `.hery` files across layers | Merged entity JSON |
+| [doorman](doorman.md) | Secrets management — resolves secret references via doorman-* plugins | Entity data with secret refs | Entity data with secrets resolved |
+| [weaver](weaver.md) | Config generation — renders templates from entities (Quadlet, nginx.conf, podman-compose, k8s, CI/CD, etc.) | Entities + templates | Config files |
+| [lay](lay.md) | Install — packages, applications, JARs, container image pull/build | Entity requirements | Installed software + image ref entity |
+| [waiter](waiter.md) | Deployment — blue-green, canary, rolling strategies with platform plugins | Entities + rendered configs (from weaver) | Deployed application |
+| [raise](raise.md) | Infrastructure provisioning — wraps IaC tools via plugin system per cloud API | Infrastructure entities | Provisioned resources |
+| [unravel](unravel.md) | Discovery — discovers existing system state as entities. Wraps osquery + custom plugins | System state | "What IS" entities |
+| [judge](judge.md) | Validation — compares "what IS" (unravel) vs "what SHOULD BE" (hery). Outputs judge entity (diff) | Expected + actual entities | Judge entity (diff) |
+| [conduct](conduct.md) | Multi-server orchestration — coordinates waiter/lay across distributed nodes | Topology entities | Orchestrated deployment |
+| [lighthouse](lighthouse.md) | Notifications/alerts — sends via plugins (webhook, WebRTC, Twilio SMS, AWS SES, REST API) | Entities from any tool | Notifications |
+| [garbage](garbage.md) | Trash/uninstall — tracks and removes what's no longer needed | Entity refs | Cleanup |
+| [dryrun](dryrun.md) | Safety — tests changes with auto-revert (prevents SSH lockout) | Any pipeline | Auto-reverted test |
+| [amadla](amadla.md) | Meta-tool — executes Pipeline entities, generates D2 diagrams, tool inventory | Pipeline entities | Pipeline execution + D2 text |
 
 ## Pipeline Flow
 

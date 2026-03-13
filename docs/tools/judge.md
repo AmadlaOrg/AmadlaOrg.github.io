@@ -3,15 +3,13 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Validation — compares "what IS" (unravel) vs "what SHOULD BE" (hery), outputs judge entity (diff) |
-| **Module** | — |
-| **Status** | Early |
 | **Repo** | [AmadlaOrg/judge](https://github.com/AmadlaOrg/judge) |
 
 ## Overview
 
-judge takes two inputs: the expected state (from hery entities) and the actual state (from unravel). It compares them and outputs an judge entity — a diff in entity format that communicates whether the environment matches expectations and which parts are wrong.
+judge takes two inputs: the expected state (from hery entities) and the actual state (from unravel). It compares them and outputs a judge entity — a diff in entity format that communicates whether the environment matches expectations and which parts are wrong.
 
-judge supports both **generic deep diff** (works with any entity type) and **type-aware plugins** (auditors that understand the semantics of specific entity types, e.g., a network auditor that knows port equivalences).
+judge supports both **generic deep diff** (works with any entity type) and **type-aware plugins** (judge plugins that understand the semantics of specific entity types, e.g., a network judge plugin that knows port equivalences).
 
 ## Commands
 
@@ -54,7 +52,7 @@ unravel discover --type network  →  "what IS" entity
 Example: you expect ports 80 and 443 open. unravel reports ports 80, 443, and 8080 are open. judge outputs:
 
 ```yaml
-_type: amadla.org/entity/Auditor@v1.0.0
+_type: amadla.org/entity/judge@v1.0.0
 _body:
   status: fail
   entity_type: network
@@ -76,7 +74,7 @@ unravel discover | judge audit | lighthouse notify
 
 Each judge plugin understands the semantics of a specific entity type:
 
-| Plugin | Audits | Status |
+| Plugin | Validates | Status |
 |--------|--------|--------|
 | `judge-application` | Whether required apps/packages are installed | Active (Go) |
 | `judge-system` | System-level requirements (OS, kernel, resources) | Stub |
@@ -87,6 +85,6 @@ Plugins are discovered via PATH (`judge-*` naming convention). Each plugin decla
 ## Current Gaps
 
 - Repository exists in early development
-- Auditor entity schema not yet finalized
+- Judge entity schema not yet finalized
 - Generic diff engine not yet implemented
 - Type-aware plugin integration not yet started

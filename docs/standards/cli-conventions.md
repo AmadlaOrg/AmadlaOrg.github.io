@@ -47,12 +47,6 @@ All tools and plugins MUST support:
 | `-v, --version` | Print version |
 | `-h, --help` | Print help |
 
-Additional common flags:
-
-| Flag | Scope | Purpose |
-|------|-------|---------|
-| `--collection` | Entity-related commands | Specify which HERY collection to operate on |
-
 ## Standard I/O
 
 Tools and plugins communicate via standard I/O streams following UNIX conventions:

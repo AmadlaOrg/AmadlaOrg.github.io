@@ -3,7 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Trash/uninstall tool — tracks and removes what's no longer needed |
-| **Status** | Partial |
 | **Repo** | [AmadlaOrg/garbage](https://github.com/AmadlaOrg/garbage) |
 
 ## Commands

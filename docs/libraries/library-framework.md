@@ -3,6 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | CLI framework wrapper around Cobra with decorator pattern for consistent command structure |
+| **Module** | `github.com/AmadlaOrg/LibraryFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryFramework](https://github.com/AmadlaOrg/LibraryFramework) |
 
@@ -20,14 +21,6 @@ LibraryFramework wraps [Cobra](https://github.com/spf13/cobra) to give all Amadl
 | Library | Purpose |
 |---------|---------|
 | LibraryUtils | Foundation utilities |
-
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/spf13/cobra` | CLI framework |
-| `github.com/onsi/ginkgo/v2` | BDD test framework |
-| `github.com/onsi/gomega` | BDD assertions |
 
 ## Consumers
 

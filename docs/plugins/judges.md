@@ -10,8 +10,6 @@ Judge plugins validate whether a system's actual state matches the requirements 
 | `judge-system` | System-level requirements (OS, kernel, resources) | EntitySystem | Stub |
 | `judge-infrastructure` | Infrastructure requirements (networking, storage) | EntityInfrastructure | Stub |
 
-Currently named `auditor-*` — repositories will be renamed to `judge-*`.
-
 ## Protocol
 
 Judge plugins follow the standard [Plugin Protocol](../architecture/plugin-system.md):
@@ -44,10 +42,8 @@ Plugins can also be written in any other language — just implement the protoco
 
 ## Reference Implementation
 
-`judge-application` (currently `judge-application`) is the reference judge plugin:
+`judge-application` is the reference judge plugin:
 
-- **Module:** `github.com/AmadlaOrg/judge-application`
-- **Go Version:** 1.23.3
 - **Dependencies:** LibraryJudgeFramework, LibraryUtils
 - **Entity:** Reads `EntityApplication` to determine what should be installed, then checks the system
 

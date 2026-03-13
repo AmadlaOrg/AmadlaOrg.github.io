@@ -3,6 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Base plugin system framework — plugin discovery, loading, and IPC communication |
+| **Module** | `github.com/AmadlaOrg/LibraryPluginFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryPluginFramework](https://github.com/AmadlaOrg/LibraryPluginFramework) |
 
@@ -14,15 +15,6 @@ LibraryPluginFramework is the base for all Amadla plugin types. It provides:
 - Plugin lifecycle management (start, stop, health check)
 - IPC channel setup
 - Message serialization (JSON)
-
-## Dependencies
-
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/spf13/cobra` | CLI framework |
-| `github.com/stretchr/testify` | Testing assertions and mocks |
 
 ## Consumers
 

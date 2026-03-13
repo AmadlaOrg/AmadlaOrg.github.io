@@ -7,18 +7,15 @@ Amadla-specific terminology and concepts.
 ### amadla (tool)
 The Amadla meta-tool. Executes Pipeline entities, generates D2 diagrams for visualization, and manages tool inventory. Written in Go but replaceable — Pipeline entities are the portable part.
 
-### Auditor
+### Judge Plugin
 A plugin for the **judge** tool that checks whether a system's actual state matches entity requirements. Examples: judge-application, judge-system, judge-infrastructure.
 
 ## B
 
 ### Body (`_body`)
-One of HERY's five reserved YAML properties. Contains the actual entity data. Validated against the entity's JSON Schema. Optional — when omitted, defaults are inherited from `_parent` or the entity definition.
+One of HERY's five reserved YAML properties. Contains the actual entity data. Validated against the entity's JSON Schema. Optional — when omitted, defaults are inherited from `_extends` or the entity definition.
 
 ## C
-
-### Clerk
-A plugin for **doorman** that integrates with a specific secret store (Vault, AWS, KeePassXC, etc.). Named after a hotel desk clerk who handles keys.
 
 ### conduct
 The Amadla multi-server orchestrator. Coordinates waiter/lay across distributed nodes. Handles role-based placement, replica management, and failover. Like a conductor — each server plays a different part.
@@ -26,10 +23,10 @@ The Amadla multi-server orchestrator. Coordinates waiter/lay across distributed 
 ## D
 
 ### Deep Merge
-HERY's merge strategy: objects merge recursively (child overrides, parent-only keys preserved), arrays replace entirely, scalars use child value. Applied during `_parent` inheritance and layer composition.
+HERY's merge strategy: objects merge recursively (child overrides, parent-only keys preserved), arrays replace entirely, scalars use child value. Applied during `_extends` inheritance and layer composition to `_body`, `_meta`, and `_requires`.
 
 ### doorman
-The Amadla secrets management daemon. Pulls secrets from Doorman plugins and stores them in an encrypted in-memory cache with TTL.
+The Amadla secrets management CLI tool. Resolves secrets from Doorman plugins on demand via the `resolve` command.
 
 ### dryrun
 A tool that safely tests settings by applying them and automatically reverting if something goes wrong (e.g., prevents SSH lockout). Currently written in Python, may move to Go.
@@ -37,7 +34,7 @@ A tool that safely tests settings by applying them and automatically reverting i
 ## E
 
 ### Entity Type
-A versioned schema defining a category of configuration. Analogous to a table schema. Identified by a type URI (e.g., `amadla.org/entity/application@v1.0.0`). Lives in a Git repo as `schema.hery.json` + default `.hery` files.
+A versioned schema defining a category of configuration. Analogous to a table schema. Identified by a type URI (e.g., `amadla.org/entity/application@v1.0.0`) where the version maps directly to a Git tag. Lives in a Git repo as `schema.hery.json` + default `.hery` files.
 
 ### Entity Instance
 A specific `.hery` document with actual data. Analogous to a row.
@@ -53,7 +50,7 @@ The Amadla trash/uninstall tool. Tracks and removes what's no longer needed. Com
 ## H
 
 ### HERY
-Hierarchical Entity Relational YAML. The data model and storage system at the core of the Amadla ecosystem. Extends YAML with five reserved properties (`_type`, `_parent`, `_meta`, `_body`, `_require`) for entity management with schema validation, dependency ordering, and Git-based versioning.
+Hierarchical Entity Relational YAML. The data model and storage system at the core of the Amadla ecosystem. Extends YAML with five reserved properties (`_type`, `_extends`, `_meta`, `_body`, `_requires`) for entity management with schema validation, dependency ordering, and Git-based versioning.
 
 ### hery (tool)
 The CLI tool that manages HERY data: entity operations, querying, and composition. Deep-merges entities by directory path, generates `.lock` files, caches in SQLite.
@@ -97,8 +94,8 @@ Constructor pattern used across all Amadla Go code. `New()` returns an interface
 
 ## P
 
-### Parent (`_parent`)
-One of HERY's five reserved YAML properties. A URI pointing to another entity instance of the same type. Purely a data/merge operation — no execution ordering implied. Values from the parent are deep-merged as defaults — the child only specifies overrides. Targets specific elements via filename path segment (e.g., `github.com/SomeOrg/WordPress/database.hery`). Parents can chain transitively. Cycles are detected and rejected.
+### Extends (`_extends`)
+One of HERY's five reserved YAML properties. A URI pointing to another entity instance of the same type. Purely a data/merge operation — no execution ordering implied. The extended entity's `_body`, `_meta`, and `_requires` are deep-merged as defaults — the child only specifies overrides. `_type` is never merged. Targets specific elements via filename path segment (e.g., `github.com/SomeOrg/WordPress/database.hery`). Extends chains can cascade transitively. Cycles are detected and rejected.
 
 ## R
 
@@ -112,13 +109,13 @@ Go module `replace` directive in `go.mod` that points to a sibling directory for
 
 ## R
 
-### Require (`_require`)
-One of HERY's five reserved YAML properties. Declares hard dependencies on other entities for execution ordering. amadla builds a DAG from `_require` declarations and topologically sorts. References entity type URIs (with version constraints), `#filename.hery` for specific elements, or local `#element.hery`. Orthogonal to `_parent` (which handles data merge, not ordering).
+### Requires (`_requires`)
+One of HERY's five reserved YAML properties. Declares hard dependencies on other entities for execution ordering. amadla builds a DAG from `_requires` declarations and topologically sorts. References entity type URIs (with version constraints), `#filename.hery` for specific elements, or local `#element.hery`. Orthogonal to `_extends` (which handles data merge, not ordering).
 
 ## T
 
 ### Type (`_type`)
-One of HERY's five reserved YAML properties (the only required one). A URI declaring the entity's schema/type and version (e.g., `amadla.org/entity/Network@v1.0.0`). Determines which JSON Schema validates the document. When used with `_parent`, `_type` declares the schema while `_parent` declares data inheritance — both can be present simultaneously.
+One of HERY's five reserved YAML properties (the only required one). A URI declaring the entity's schema/type and version (e.g., `amadla.org/entity/Network@v1.0.0`). Determines which JSON Schema validates the document. When used with `_extends`, `_type` declares the schema while `_extends` declares data inheritance — both can be present simultaneously.
 
 ## U
 
@@ -139,10 +136,10 @@ A template engine plugin for the weaver tool. Each provides a different renderin
 ## Symbols
 
 ### `_type`
-HERY reserved property (required): the schema/type URI with version. Determines validation and entity type. Can be inherited from `_parent` when not explicitly set.
+HERY reserved property (required): the schema/type URI with version. Determines validation and entity type. Can be inherited from `_extends` when not explicitly set.
 
-### `_parent`
-HERY reserved property (optional): URI to another instance of the same type. Enables deep merge inheritance. Purely a data operation — does not imply execution ordering. Targets specific elements via filename path segment.
+### `_extends`
+HERY reserved property (optional): URI to another instance of the same type. Enables deep merge inheritance of `_body`, `_meta`, and `_requires`. Purely a data/merge operation — does not imply execution ordering. Targets specific elements via filename path segment.
 
 ### `_meta`
 HERY reserved property (optional): metadata for filtering and search.
@@ -150,5 +147,5 @@ HERY reserved property (optional): metadata for filtering and search.
 ### `_body`
 HERY reserved property (optional): the actual entity data content. Validated against the entity's JSON Schema.
 
-### `_require`
+### `_requires`
 HERY reserved property (optional): declares hard dependencies on other entities. Used by amadla to build a DAG and determine execution order. Supports versioned entity type URIs and `#element.hery` references.

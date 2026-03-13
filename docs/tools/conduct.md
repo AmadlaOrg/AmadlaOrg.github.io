@@ -3,8 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Multi-server orchestrator — coordinates waiter/lay across distributed nodes |
-| **Module** | — |
-| **Status** | Planned |
 | **Repo** | [AmadlaOrg/conduct](https://github.com/AmadlaOrg/conduct) |
 
 ## Overview

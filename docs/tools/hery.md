@@ -3,10 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | HERY (Hierarchical Entity Relational YAML) data storage with schema validation, Git versioning, and SQLite caching |
-| **Module** | `github.com/AmadlaOrg/hery` |
-| **Status** | Partial |
 | **Repo** | [AmadlaOrg/hery](https://github.com/AmadlaOrg/hery) |
-| **Go Version** | 1.24.0 |
 
 ## Commands
 
@@ -26,29 +23,19 @@
 | LibraryUtils | Git operations, file system, database, configuration |
 | LibraryFramework | CLI framework (Cobra wrapper) |
 
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/goccy/go-yaml` | YAML parsing with comment support |
-| `github.com/santhosh-tekuri/jsonschema/v6` | JSON Schema validation |
-| `github.com/mattn/go-sqlite3` | SQLite caching layer |
-| `github.com/itchyny/gojq` | JQ-style query engine |
-| `github.com/google/uuid` | Entity ID generation |
-
 ## Pipeline Position
 
 hery is the **first stage** in the Amadla pipeline. It reads YAML entity files from disk (or Git repos), validates them, caches them in SQLite, and outputs structured JSON for downstream tools.
 
 ```
-YAML files -> [hery] -> JSON entity data -> doorman -> ...
+YAML files → [hery] → JSON entity data → doorman → ...
 ```
 
 No tool feeds into hery — it is the data source.
 
 ## Architecture
 
-<!-- Diagram placeholder: hery Internal Components (c3-hery-internals) -->
+![hery Internal Components](../diagrams/out/c3-hery-internals.svg)
 
 ### Package Structure
 
@@ -83,7 +70,7 @@ message/                # Error types
 - **Git-based versioning:** Entity URIs include version tags resolved from Git
 - **JSON Schema validation:** Every entity type has a schema; validation is enforced
 - **Deep merge:** Objects merge recursively, arrays replace, scalars use child value
-- **URI resolution:** Go-module-style resolution for `_type` and `_parent` URIs
+- **URI resolution:** Go-module-style resolution for `_type` and `_extends` URIs
 - **Two-stage query:** Selection flags (SQLite-indexed) + jq transformation (gojq compiled in)
 - **Comment-aware YAML:** Uses goccy/go-yaml to preserve `$schema` comments
 - **Interface-based design:** `Entity`, `Storage`, `Cache` — all mockable (idiomatic Go naming, no I/S prefix)
@@ -91,8 +78,8 @@ message/                # Error types
 
 ## Current Gaps
 
-- Add `_require` as 5th reserved property (Draft 3.4)
-- `_require` syntax validation at parse time (URI format, `../` escape prevention)
+- Add `_requires` as 5th reserved property (Draft 3.5)
+- `_requires` syntax validation at parse time (URI format, `../` escape prevention)
 - Cache rebuild from source YAML may have edge cases
 - URI resolution (Go-module-style, meta tag discovery) not yet implemented
 - Documentation within the project is sparse
@@ -103,7 +90,7 @@ message/                # Error types
 |------|---------|
 | `cmd/entity.go` | Entity command registration and flag setup |
 | `cmd/query.go` | Query command entry point |
-| `entity/entity.go` | Core `IEntity` / `SEntity` interface and implementation |
+| `entity/entity.go` | Core `Entity` interface and implementation |
 | `entity/merge/` | Deep merge engine |
 | `entity/query/` | Two-stage query (selection + gojq) |
 | `cache/database/` | SQLite schema and operations |

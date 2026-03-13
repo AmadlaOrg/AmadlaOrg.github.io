@@ -3,7 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Package and application installer — installs packages, applications, JARs, and container images |
-| **Status** | Partial |
 | **Repo** | [AmadlaOrg/lay](https://github.com/AmadlaOrg/lay) |
 
 ## Overview

@@ -28,7 +28,7 @@ You must know that this app needs nginx, where the config goes, and how to start
 # yaml-language-server: $schema=https://amadla.org/entity/hery/v1.0.0/schema.hery.json
 ---
 _type: github.com/AmadlaOrg/EntityApplication@v1.0.0
-_require:
+_requires:
   - github.com/AmadlaOrg/Entities/Application/DB/RDBMS@^v1.0.0
 _meta:
   name: my-web-app
@@ -37,17 +37,17 @@ _body:
   port: 80
 ```
 
-The resource declares its own requirements and dependencies. The schema enforces them. `_require` declares what must be processed first — amadla builds a dependency graph (DAG) and topologically sorts execution order. Tools downstream (raise, lay, weaver, waiter, judge) read these declarations and act accordingly.
+The resource declares its own requirements and dependencies. The schema enforces them. `_requires` declares what must be processed first — amadla builds a dependency graph (DAG) and topologically sorts execution order. Tools downstream (raise, lay, weaver, waiter, judge) read these declarations and act accordingly.
 
 ## Layered Composition
 
 Resources don't exist in isolation. A system has multiple applications, each with its own HERY configuration. The OS has its own. The cloud service has its own. HERY merges them — think of it as layers:
 
 ```
-Cloud/Infra layer    <- EntityInfrastructure (AWS, DigitalOcean, bare metal...)
-  +-- OS layer        <- EntitySystem (Ubuntu, NixOS...)
-    +-- App layer     <- EntityApplication (nginx, postgres...)
-      +-- Override    <- User's site-specific HERY
+Cloud/Infra layer    ← EntityInfrastructure (AWS, DigitalOcean, bare metal...)
+  └─ OS layer        ← EntitySystem (Ubuntu, NixOS...)
+    └─ App layer     ← EntityApplication (nginx, postgres...)
+      └─ Override    ← User's site-specific HERY
 ```
 
 Each layer can override or extend the layers below it. The directory path determines whether a value is overridden (same path = deep merge) or added (different path = accumulate). The merged result is the source of truth, but every individual layer is preserved and queryable.
@@ -70,7 +70,7 @@ Amadla follows the UNIX philosophy:
 
 The Amadla pipeline flows from requirements to running infrastructure:
 
-<!-- Diagram placeholder: Tool Pipeline (c2-tool-pipeline) -->
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg)
 
 | Stage | Tool | Input | Output |
 |-------|------|-------|--------|
@@ -80,7 +80,7 @@ The Amadla pipeline flows from requirements to running infrastructure:
 | **Provision** | raise | Infrastructure entities | Provisioned servers/resources |
 | **Install** | lay | Application entities | Installed software + image ref entity |
 | **Deploy** | waiter | Entities + configs | Deployed application |
-| **Validate** | judge | Expected + actual entities | Auditor entity (diff) |
+| **Validate** | judge | Expected + actual entities | Judge entity (diff) |
 
 ### Supporting Tools
 

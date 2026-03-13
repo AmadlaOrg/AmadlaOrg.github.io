@@ -11,7 +11,7 @@ HERY (Hierarchical Entity Relational YAML) is the data foundation of the Amadla 
 
 ## File Format
 
-HERY files use the `.hery` extension and are valid YAML. A file may contain multiple YAML documents separated by `---`, each representing an independent entity instance. However, if an element needs to be individually addressable via `_parent`, it must be its own file — multi-document YAML is only for anonymous accumulation (e.g., multiple firewall rules in one file).
+HERY files use the `.hery` extension and are valid YAML. A file may contain multiple YAML documents separated by `---`, each representing an independent entity instance. However, if an element needs to be individually addressable via `_extends`, it must be its own file — multi-document YAML is only for anonymous accumulation (e.g., multiple firewall rules in one file).
 
 ```yaml
 ---
@@ -34,18 +34,18 @@ Declares the entity type and version. Determines which JSON Schema validates thi
 _type: amadla.org/entity/application/webserver@v1.0.0
 ```
 
-Versions follow semver. Use `@latest` for the most recent version. Both vanity URIs (`amadla.org/entity/...`) and direct Git URIs (`github.com/...`) are supported.
+Versions follow semver and map directly to Git tags (e.g., `@v1.0.0` → git tag `v1.0.0`). Use `@latest` for the most recent tag. Both vanity URIs (`amadla.org/entity/...`) and direct Git URIs (`github.com/...`) are supported.
 
-When used with `_parent`, `_type` and `_parent` serve different roles: `_type` declares the schema (what this entity *is*), `_parent` declares data inheritance (who it inherits from). When only `_parent` is present, `_type` is inherited from the parent. When both are present and they conflict, hery warns but allows it (e.g., for schema version upgrades).
+When used with `_extends`, `_type` and `_extends` serve different roles: `_type` declares the schema (what this entity *is*), `_extends` declares data inheritance (who it inherits from). When only `_extends` is present, `_type` is inherited from the extended entity. When both are present and they conflict, hery warns but allows it (e.g., for schema version upgrades).
 
-### `_parent` — Parent (optional)
+### `_extends` — Extends (optional)
 
-Inherit values from another entity instance of the **same type**. The parent's values are deep-merged as defaults — the child only specifies overrides. `_parent` is purely a data/merge operation — it does not imply execution ordering.
+Inherit values from another entity instance of the **same type**. The extended entity's `_body`, `_meta`, and `_requires` values are deep-merged as defaults — the child only specifies overrides. `_extends` is purely a data/merge operation — it does not imply execution ordering.
 
-`_parent` targets specific elements using the filename as a path segment in the URI:
+`_extends` targets specific elements using the filename as a path segment in the URI:
 
 ```yaml
-_parent: github.com/SomeOrg/WordPress/database.hery
+_extends: github.com/SomeOrg/WordPress/database.hery
 _body:
   engine: mariadb
   version: "11.4"
@@ -53,7 +53,7 @@ _body:
 
 This overrides just the `database.hery` element from the WordPress entity. The filename is the element identity — one addressable element = one file.
 
-If the parent defines `protocol: tcp` and the child doesn't override it, the merged result includes `protocol: tcp`. Parents can chain transitively. Cycles are detected and rejected.
+If the extended entity defines `protocol: tcp` and the child doesn't override it, the merged result includes `protocol: tcp`. Extends chains can cascade transitively. Cycles are detected and rejected.
 
 ### `_meta` — Metadata (optional)
 
@@ -77,30 +77,30 @@ _body:
   protocol: tcp
 ```
 
-When `_body` is omitted, the entity inherits all defaults from its `_parent` (if any).
+When `_body` is omitted, the entity inherits all defaults via `_extends` (if any).
 
-### `_require` — Dependencies (optional)
+### `_requires` — Dependencies (optional)
 
 Declares hard dependencies on other entities. Used by amadla to build a dependency graph (DAG) and determine execution order via topological sort.
 
 ```yaml
-_require:
+_requires:
   - github.com/AmadlaOrg/Entities/Application/DB/RDBMS@^v1.0.0   # any RDBMS entity
   - github.com/SomeOrg/WordPress#php.hery                          # specific element
   - #database.hery                                                  # local element (same directory)
 ```
 
-`_require` references can be:
+`_requires` references can be:
 
 - **Entity type URIs** — "at least one entity of this type must exist and be processed before me." Supports version constraints (`@v1.0.0` exact, `@^v1.0.0` compatible range).
 - **`#filename.hery`** — targets a specific element within an entity (local or remote).
 - Relative paths are **sandboxed** to the entity directory (no `../` escape).
 
-`_require` is orthogonal to `_parent`: `_parent` handles data inheritance (merge), `_require` handles execution ordering. Use both when you need inheritance AND ordering.
+`_requires` is orthogonal to `_extends`: `_extends` handles data inheritance (merge), `_requires` handles execution ordering. Use both when you need inheritance AND ordering.
 
-hery validates `_require` syntax at parse time. amadla validates that referenced entities actually exist at orchestration time.
+hery validates `_requires` syntax at parse time. amadla validates that referenced entities actually exist at orchestration time.
 
-Note: `_require` declares entity-level dependencies. Application-specific dependencies (like podman-compose `depends_on`) go in `_body` as `require` — these are handled by the relevant tool (e.g., lay), not amadla.
+Note: `_requires` declares entity-level dependencies. Application-specific dependencies (like podman-compose `depends_on`) go in `_body` as `require` — these are handled by the relevant tool (e.g., lay), not amadla.
 
 **Reservation rules:**
 
@@ -126,10 +126,10 @@ The WebServer schema declares that `database` conforms to the DB entity schema v
 
 ## Deep Merge Model
 
-When values are merged (via `_parent` inheritance or layer composition):
+When values are merged (via `_extends` inheritance or layer composition), deep merge applies to `_body`, `_meta`, and `_requires`. `_type` is never merged — it is either set explicitly or inherited as-is from the extended entity.
 
-- **Objects:** Merge recursively. Child values override, parent-only keys preserved.
-- **Arrays:** Replace — if the child defines an array, it replaces the parent's entirely.
+- **Objects:** Merge recursively. Child values override, extended-entity-only keys preserved.
+- **Arrays:** Replace — if the child defines an array, it replaces the extended entity's entirely (this means a child's `_requires` list replaces the extended entity's entirely).
 - **Scalars:** Child value wins.
 
 All layers are preserved in the cache. The merged view shows the deep-merged result, but individual layers can be queried independently.
@@ -150,7 +150,7 @@ Entity schemas extend the base HERY schema (`amadla.org/entity/hery@v1.0.0`) whi
 
 ## URI Resolution
 
-HERY resolves `_type` and `_parent` URIs using a Go-module-inspired algorithm:
+HERY resolves `_type` and `_extends` URIs using a Go-module-inspired algorithm:
 
 - **Known hosts** (github.com, gitlab.com): convention-based — `host/owner/repo` (3 segments) is the repo root, remainder is path within repo
 - **Custom domains** (amadla.org): meta tag discovery — hery sends `GET https://host/path?hery-get=1` and reads a `<meta name="hery-import">` tag to find the actual Git repo
@@ -225,11 +225,11 @@ Results are always JSON, designed for piping to downstream tools. All layers are
 
 ## Entity Versioning
 
-Entities are versioned via Git tags. The type URI includes the version:
+Entity versions map directly to Git tags. The `@version` in a type URI corresponds to a git tag on the entity type repository. For example, `github.com/AmadlaOrg/Entities/Application@v1.0.0` resolves to the git tag `v1.0.0`.
 
 ```
-amadla.org/entity/application@v1.0.0
-amadla.org/entity/application@latest
+amadla.org/entity/application@v1.0.0     # → git tag v1.0.0
+amadla.org/entity/application@latest      # → most recent git tag
 ```
 
-hery resolves `@latest` to the most recent Git tag. Version pinning ensures reproducible deployments.
+Version pinning ensures reproducible deployments.
