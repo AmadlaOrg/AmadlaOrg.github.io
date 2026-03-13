@@ -37,10 +37,10 @@ LibraryUtils is the foundation for everything else. All tools and frameworks dep
 - Stabilize plugin loading and IPC protocol
 - Ensure consistent command structure across tools
 
-**Stage 2b: LibraryClerkFramework + LibraryAuditFramework**
+**Stage 2b: LibraryDoormanFramework + LibraryJudgeFramework**
 
 - These specialize the plugin framework for their domains
-- Validate the patterns with existing reference implementations (clerk-keepassxc, auditor-application)
+- Validate the patterns with existing reference implementations (doorman-keepassxc, judge-application)
 
 ### Phase 3: hery — Core Data Layer
 
@@ -66,7 +66,7 @@ With stable foundations, build out the pipeline tools and plugins:
 - Implement daemon mode (`start` command)
 - Implement `resolve` command
 - Replace XOR cache encryption with AES-GCM + TPM
-- Implement Clerk plugin loading
+- Implement Doorman plugin loading
 
 **Stage 4b: weaver**
 
@@ -76,9 +76,9 @@ With stable foundations, build out the pipeline tools and plugins:
 
 **Stage 4c: Priority plugins**
 
-- clerk-vault — Most common enterprise secret store
-- clerk-aws — Cloud deployments
-- auditor-system — System compliance
+- doorman-vault — Most common enterprise secret store
+- doorman-aws — Cloud deployments
+- judge-system — System compliance
 
 **Stage 4d: Remaining tools**
 
@@ -106,10 +106,10 @@ For each repository, follow this sequence:
 | P1 | hery | Core data layer for the pipeline |
 | P1 | LibraryPluginFramework | Plugin system foundation |
 | P2 | doorman | Secrets are needed early in the pipeline |
-| P2 | LibraryClerkFramework | doorman needs clerk plugins |
+| P2 | LibraryDoormanFramework | doorman needs doorman plugins |
 | P2 | weaver | Config generation is a core use case |
-| P3 | clerk-vault | Most requested secret backend |
-| P3 | clerk-aws | Cloud deployment support |
-| P3 | LibraryAuditFramework | Audit pipeline foundation |
+| P3 | doorman-vault | Most requested secret backend |
+| P3 | doorman-aws | Cloud deployment support |
+| P3 | LibraryJudgeFramework | Audit pipeline foundation |
 | P4 | raise, lay, judge | Pipeline completion |
 | P4 | waiter, unravel | Orchestration and debugging |

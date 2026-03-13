@@ -12,12 +12,10 @@
 
 | Command | Status | Description |
 |---------|--------|-------------|
-| `hery collection init` | Working | Initialize a new collection |
-| `hery collection list` | Working | List collections |
 | `hery entity get` | Working | Retrieve a specific entity |
-| `hery entity list` | Working | List entities in a collection |
+| `hery entity list` | Working | List entities |
 | `hery entity validate` | Working | Validate entity content against JSON Schema |
-| `hery query` | Working | Query entities using filter expressions |
+| `hery query` | Working | Query entities with selection flags + jq transformation |
 | `hery compose` | Working | Compose multiple entities into a unified view |
 | `hery settings` | Working | Manage hery configuration |
 
@@ -32,7 +30,7 @@
 
 | Package | Purpose |
 |---------|---------|
-| `gopkg.in/yaml.v3` | YAML parsing |
+| `github.com/goccy/go-yaml` | YAML parsing with comment support |
 | `github.com/santhosh-tekuri/jsonschema/v6` | JSON Schema validation |
 | `github.com/mattn/go-sqlite3` | SQLite caching layer |
 | `github.com/itchyny/gojq` | JQ-style query engine |
@@ -43,21 +41,20 @@
 hery is the **first stage** in the Amadla pipeline. It reads YAML entity files from disk (or Git repos), validates them, caches them in SQLite, and outputs structured JSON for downstream tools.
 
 ```
-YAML files → [hery] → JSON entity data → doorman → ...
+YAML files -> [hery] -> JSON entity data -> doorman -> ...
 ```
 
 No tool feeds into hery — it is the data source.
 
 ## Architecture
 
-<!-- Diagram placeholder -->
+<!-- Diagram placeholder: hery Internal Components (c3-hery-internals) -->
 
 ### Package Structure
 
 ```
 cmd/                    # Cobra CLI commands
 ├── entity.go           # hery entity (get, list, validate)
-├── collection.go       # hery collection (init, list)
 ├── query.go            # hery query
 ├── compose.go          # hery compose
 └── settings.go         # hery settings
@@ -67,12 +64,12 @@ entity/                 # Core entity logic
 ├── cmd/                # Entity subcommand implementations
 ├── compose/            # Multi-entity composition
 ├── get/                # Entity retrieval
-├── query/              # Query engine
+├── merge/              # Deep merge engine
+├── query/              # Query engine (selection flags + gojq)
 ├── schema/             # JSON Schema handling
 ├── validation/         # Entity validation against schema
 └── version/            # Semver version resolution
 
-collection/             # Collection management
 cache/                  # SQLite caching layer
 ├── database/           # SQLite operations
 └── parser/             # Cache parsing
@@ -85,26 +82,30 @@ message/                # Error types
 - **Dual storage:** YAML files (source of truth) + SQLite (fast queries)
 - **Git-based versioning:** Entity URIs include version tags resolved from Git
 - **JSON Schema validation:** Every entity type has a schema; validation is enforced
-- **Interface-based design:** `IEntity`, `ICollection`, `IStorage`, `ICache` — all mockable
+- **Deep merge:** Objects merge recursively, arrays replace, scalars use child value
+- **URI resolution:** Go-module-style resolution for `_type` and `_parent` URIs
+- **Two-stage query:** Selection flags (SQLite-indexed) + jq transformation (gojq compiled in)
+- **Comment-aware YAML:** Uses goccy/go-yaml to preserve `$schema` comments
+- **Interface-based design:** `Entity`, `Storage`, `Cache` — all mockable (idiomatic Go naming, no I/S prefix)
 - **BDD testing:** Uses Ginkgo v2 + Gomega (unlike most Amadla projects which use testify)
 
 ## Current Gaps
 
-- 34 files contain TODO comments indicating incomplete implementations
+- Add `_require` as 5th reserved property (Draft 3.4)
+- `_require` syntax validation at parse time (URI format, `../` escape prevention)
 - Cache rebuild from source YAML may have edge cases
-- Query engine covers basic cases but advanced queries need work
-- Entity composition (`compose`) has known limitations
+- URI resolution (Go-module-style, meta tag discovery) not yet implemented
 - Documentation within the project is sparse
-- Estimated ~70 hours of remaining work across all components
 
 ## Key Files
 
 | Path | Purpose |
 |------|---------|
 | `cmd/entity.go` | Entity command registration and flag setup |
-| `cmd/collection.go` | Collection command registration |
 | `cmd/query.go` | Query command entry point |
 | `entity/entity.go` | Core `IEntity` / `SEntity` interface and implementation |
+| `entity/merge/` | Deep merge engine |
+| `entity/query/` | Two-stage query (selection + gojq) |
 | `cache/database/` | SQLite schema and operations |
 | `entity/schema/` | JSON Schema loading and validation |
 | `entity/version/` | Semver resolution from Git tags |

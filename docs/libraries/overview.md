@@ -4,13 +4,13 @@ Amadla's shared Go libraries provide common functionality used across all tools 
 
 ## Library Inventory
 
-| Library | Module | Purpose | Status |
-|---------|--------|---------|--------|
-| [LibraryUtils](library-utils.md) | `github.com/AmadlaOrg/LibraryUtils` | Foundation utilities: git, file, database, IPC, encryption | Active |
-| [LibraryFramework](library-framework.md) | `github.com/AmadlaOrg/LibraryFramework` | CLI framework wrapper around Cobra | Active |
-| [LibraryPluginFramework](library-plugin-framework.md) | `github.com/AmadlaOrg/LibraryPluginFramework` | Base plugin loading and IPC communication | Active |
-| [LibraryClerkFramework](library-clerk-framework.md) | `github.com/AmadlaOrg/LibraryClerkFramework` | Clerk plugin specialization for secret sources | Active |
-| [LibraryAuditFramework](library-audit-framework.md) | `github.com/AmadlaOrg/LibraryAuditFramework` | Auditor plugin specialization for compliance checks | Active |
+| Library | Purpose | Status |
+|---------|---------|--------|
+| [LibraryUtils](library-utils.md) | Foundation utilities: git, file, database, IPC, encryption | Active |
+| [LibraryFramework](library-framework.md) | CLI framework wrapper around Cobra | Active |
+| [LibraryPluginFramework](library-plugin-framework.md) | Base plugin loading and IPC communication | Active |
+| [LibraryDoormanFramework](library-doorman-framework.md) | Doorman plugin specialization for secret sources | Active |
+| [LibraryJudgeFramework](library-judge-framework.md) | Judge plugin specialization for compliance checks | Active |
 
 ## Dependency Graph
 
@@ -23,8 +23,8 @@ Libraries must be built bottom-up due to `replace` directives:
 1. **LibraryUtils** — No Amadla dependencies
 2. **LibraryFramework** — Depends on LibraryUtils
 3. **LibraryPluginFramework** — Depends on LibraryUtils
-4. **LibraryClerkFramework** — Depends on LibraryUtils
-5. **LibraryAuditFramework** — Depends on LibraryUtils, LibraryFramework
+4. **LibraryDoormanFramework** — Depends on LibraryUtils
+5. **LibraryJudgeFramework** — Depends on LibraryUtils, LibraryFramework
 
 ## Shared Patterns
 

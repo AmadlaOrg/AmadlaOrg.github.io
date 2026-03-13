@@ -8,8 +8,8 @@ Full inventory of every repository in the Amadla ecosystem as of February 2026.
 |----------|-------|--------|---------|-------|--------------|
 | Core Tools | 8 | 0 | 2 | 1 | 5 |
 | Libraries | 5 | 5 | 0 | 0 | 0 |
-| Clerk Plugins | 16 | 1 | 0 | 0 | 15 |
-| Auditor Plugins | 3 | 1 | 0 | 0 | 2 |
+| Doorman Plugins | 16 | 1 | 0 | 0 | 15 |
+| Judge Plugins | 3 | 1 | 0 | 0 | 2 |
 | Weaver Plugins | 4 | 0 | 0 | 0 | 4 |
 | Entity Definitions | 8 | 8 | 0 | 0 | 0 |
 | Other | 8 | 4 | 0 | 0 | 4 |
@@ -19,19 +19,19 @@ Full inventory of every repository in the Amadla ecosystem as of February 2026.
 
 These 11 repositories contain actual Go code:
 
-| Repo | Module | Go Version | Status | Has CLAUDE.md |
-|------|--------|------------|--------|---------------|
-| LibraryUtils | `github.com/AmadlaOrg/LibraryUtils` | 1.24.0 | Active | Yes |
-| LibraryFramework | `github.com/AmadlaOrg/LibraryFramework` | 1.24.0 | Active | No |
-| LibraryPluginFramework | `github.com/AmadlaOrg/LibraryPluginFramework` | 1.24.0 | Active | No |
-| LibraryClerkFramework | `github.com/AmadlaOrg/LibraryClerkFramework` | 1.24.0 | Active | No |
-| LibraryAuditFramework | `github.com/AmadlaOrg/LibraryAuditFramework` | 1.24.0 | Active | No |
-| hery | `github.com/AmadlaOrg/hery` | 1.24.0 | Partial | Yes |
-| doorman | `github.com/AmadlaOrg/doorman` | 1.24.0 | Early | Yes |
-| weaver | `github.com/AmadlaOrg/weaver` | 1.24.0 | Partial | No |
-| hery-playground | `github.com/AmadlaOrg/hery-playground` | 1.24.0 | Active | No |
-| auditor-application | `github.com/AmadlaOrg/auditor-application` | 1.23.3 | Active | No |
-| clerk-keepassxc | `github.com/AmadlaOrg/clerk-keepassxc` | 1.23.5 | Active | No |
+| Repo | Go Version | Status | Has CLAUDE.md |
+|------|------------|--------|---------------|
+| LibraryUtils | 1.24.0 | Active | Yes |
+| LibraryFramework | 1.24.0 | Active | No |
+| LibraryPluginFramework | 1.24.0 | Active | No |
+| LibraryDoormanFramework | 1.24.0 | Active | No |
+| LibraryJudgeFramework | 1.24.0 | Active | No |
+| hery | 1.24.0 | Partial | Yes |
+| doorman | 1.24.0 | Early | Yes |
+| weaver | 1.24.0 | Partial | No |
+| hery-playground | 1.24.0 | Active | No |
+| judge-application | 1.23.3 | Active | No |
+| doorman-keepassxc | 1.23.5 | Active | No |
 
 ## Core Tools Detail
 
@@ -75,8 +75,8 @@ All 8 entity repos contain JSON Schema definitions in `.amadla/schema.json`:
 
 41 repositories are non-Go (no go.mod) — primarily:
 
-- 15 clerk plugin stubs (README-only or minimal Makefile)
-- 2 auditor plugin stubs
+- 15 doorman plugin stubs (README-only or minimal Makefile)
+- 2 judge plugin stubs
 - 4 weaver plugin stubs
 - 8 entity definition repos (JSON Schema, not Go)
 - Editor plugins, templates, CI/CD workflows

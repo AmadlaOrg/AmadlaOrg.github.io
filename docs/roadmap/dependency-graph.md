@@ -11,9 +11,9 @@ LibraryUtils                          (no Amadla dependencies)
 │
 ├── LibraryPluginFramework            (depends on: LibraryUtils)
 │
-├── LibraryClerkFramework             (depends on: LibraryUtils)
+├── LibraryDoormanFramework             (depends on: LibraryUtils)
 │
-└── LibraryAuditFramework             (depends on: LibraryUtils, LibraryFramework)
+└── LibraryJudgeFramework             (depends on: LibraryUtils, LibraryFramework)
 ```
 
 ## Tool Dependencies
@@ -22,8 +22,8 @@ LibraryUtils                          (no Amadla dependencies)
 hery                                  (depends on: LibraryUtils, LibraryFramework)
 doorman                               (depends on: LibraryUtils, LibraryFramework)
 weaver                                (depends on: LibraryUtils)
-auditor-application                   (depends on: LibraryUtils, LibraryAuditFramework)
-clerk-keepassxc                       (depends on: dbus — minimal Amadla deps)
+judge-application                   (depends on: LibraryUtils, LibraryJudgeFramework)
+doorman-keepassxc                       (depends on: dbus — minimal Amadla deps)
 hery-playground                       (independent — uses Gin, no Amadla libs)
 ```
 
@@ -33,13 +33,13 @@ hery-playground                       (independent — uses Gin, no Amadla libs)
 |------|:---:|:---:|:---:|:---:|:---:|
 | LibraryFramework | x | — | — | — | — |
 | LibraryPluginFramework | x | — | — | — | — |
-| LibraryClerkFramework | x | — | — | — | — |
-| LibraryAuditFramework | x | x | — | — | — |
+| LibraryDoormanFramework | x | — | — | — | — |
+| LibraryJudgeFramework | x | x | — | — | — |
 | hery | x | x | — | — | — |
 | doorman | x | x | — | — | — |
 | weaver | x | — | — | — | — |
-| auditor-application | x | — | — | — | x |
-| clerk-keepassxc | — | — | — | — | — |
+| judge-application | x | — | — | — | x |
+| doorman-keepassxc | — | — | — | — | — |
 
 ## Build Order
 
@@ -47,9 +47,9 @@ The ecosystem must be built in this order (each level can be built in parallel):
 
 ```
 Level 0: LibraryUtils
-Level 1: LibraryFramework, LibraryPluginFramework, LibraryClerkFramework
-Level 2: LibraryAuditFramework, hery, doorman, weaver
-Level 3: auditor-application, clerk-keepassxc
+Level 1: LibraryFramework, LibraryPluginFramework, LibraryDoormanFramework
+Level 2: LibraryJudgeFramework, hery, doorman, weaver
+Level 3: judge-application, doorman-keepassxc
 Level 4: (future tools: raise, lay, judge, waiter, unravel)
 ```
 
@@ -62,9 +62,9 @@ All inter-project dependencies use `replace` directives pointing to sibling dire
 | hery | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
 | doorman | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
 | weaver | `LibraryUtils => ../LibraryUtils` |
-| LibraryClerkFramework | `LibraryUtils => ../LibraryUtils` |
-| LibraryAuditFramework | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
-| auditor-application | `LibraryUtils => ../LibraryUtils`, `LibraryAuditFramework => ../LibraryAuditFramework` |
+| LibraryDoormanFramework | `LibraryUtils => ../LibraryUtils` |
+| LibraryJudgeFramework | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
+| judge-application | `LibraryUtils => ../LibraryUtils`, `LibraryJudgeFramework => ../LibraryJudgeFramework` |
 
 This means **all repositories must be checked out as siblings** in the same parent directory for local development to work.
 
@@ -75,9 +75,9 @@ Changes to foundational libraries have cascading impact:
 | Change In | Affects |
 |-----------|---------|
 | LibraryUtils | **Everything** — all 10 other Go projects |
-| LibraryFramework | hery, doorman, LibraryAuditFramework, auditor-application |
-| LibraryPluginFramework | LibraryClerkFramework, LibraryAuditFramework |
-| LibraryClerkFramework | All clerk plugins |
-| LibraryAuditFramework | All auditor plugins |
+| LibraryFramework | hery, doorman, LibraryJudgeFramework, judge-application |
+| LibraryPluginFramework | LibraryDoormanFramework, LibraryJudgeFramework |
+| LibraryDoormanFramework | All doorman plugins |
+| LibraryJudgeFramework | All judge plugins |
 
 This is why the development plan starts bottom-up with LibraryUtils.

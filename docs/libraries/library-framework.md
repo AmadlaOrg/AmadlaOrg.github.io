@@ -3,10 +3,8 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | CLI framework wrapper around Cobra with decorator pattern for consistent command structure |
-| **Module** | `github.com/AmadlaOrg/LibraryFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryFramework](https://github.com/AmadlaOrg/LibraryFramework) |
-| **Go Version** | 1.24.0 |
 
 ## What It Provides
 
@@ -35,7 +33,7 @@ LibraryFramework wraps [Cobra](https://github.com/spf13/cobra) to give all Amadl
 
 - hery
 - doorman
-- LibraryAuditFramework (and by extension, auditor plugins)
+- LibraryJudgeFramework (and by extension, judge plugins)
 
 ## Development Notes
 
