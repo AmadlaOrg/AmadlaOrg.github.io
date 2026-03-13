@@ -1,14 +1,14 @@
-# Clerk Plugins
+# Doorman Plugins
 
-Clerks are plugins for **doorman** that integrate with specific secret stores. Each clerk knows how to authenticate with and retrieve secrets from one backend.
+Doorman plugins integrate with specific secret stores. Each plugin knows how to authenticate with and retrieve secrets from one backend, outputting secrets in a universal entity format.
 
-## Clerk Inventory
+## Plugin Inventory
 
 ### Active
 
 | Plugin | Integrates With | Language | Notes |
 |--------|----------------|----------|-------|
-| `clerk-keepassxc` | KeePassXC password manager | Go | Uses D-Bus for communication |
+| `doorman-keepassxc` | KeePassXC password manager | Go | Currently named `doorman-keepassxc` (will be renamed) |
 
 ### Stubs (Awaiting Implementation)
 
@@ -16,51 +16,69 @@ Clerks are plugins for **doorman** that integrate with specific secret stores. E
 
 | Plugin | Integrates With |
 |--------|----------------|
-| `clerk-aws` | AWS Secrets Manager / SSM Parameter Store |
-| `clerk-digitalocean` | DigitalOcean secrets |
-| `clerk-linode` | Linode/Akamai secrets |
-| `clerk-vultr` | Vultr secrets |
-| `clerk-ovh` | OVH secrets |
-| `clerk-rackspace` | Rackspace secrets |
+| `doorman-aws` | AWS Secrets Manager / SSM Parameter Store |
+| `doorman-digitalocean` | DigitalOcean secrets |
+| `doorman-linode` | Linode/Akamai secrets |
+| `doorman-vultr` | Vultr secrets |
+| `doorman-ovh` | OVH secrets |
+| `doorman-rackspace` | Rackspace secrets |
 
 #### Secret Managers
 
 | Plugin | Integrates With |
 |--------|----------------|
-| `clerk-vault` | HashiCorp Vault / OpenBao |
-| `clerk-sops` | Mozilla SOPS (encrypted files) |
-| `clerk-bitwarden` | Bitwarden password manager |
+| `doorman-vault` | HashiCorp Vault / OpenBao |
+| `doorman-sops` | Mozilla SOPS (encrypted files) |
+| `doorman-bitwarden` | Bitwarden password manager |
 
 #### Identity Providers
 
 | Plugin | Integrates With |
 |--------|----------------|
-| `clerk-keycloak` | Keycloak identity server (OAuth2/OIDC tokens) |
+| `doorman-keycloak` | Keycloak identity server (OAuth2/OIDC tokens) |
 
 #### Desktop Keystores
 
 | Plugin | Integrates With |
 |--------|----------------|
-| `clerk-gnomekeyring` | GNOME Keyring (Linux desktop) |
-| `clerk-chrome` | Chrome browser stored passwords |
-| `clerk-chromium` | Chromium browser stored passwords |
-| `clerk-firefox` | Firefox browser stored passwords |
-| `clerk-thunderbird` | Thunderbird stored credentials |
+| `doorman-gnomekeyring` | GNOME Keyring (Linux desktop) |
+| `doorman-chrome` | Chrome browser stored passwords |
+| `doorman-chromium` | Chromium browser stored passwords |
+| `doorman-firefox` | Firefox browser stored passwords |
+| `doorman-thunderbird` | Thunderbird stored credentials |
 
-## Framework
+## Protocol
 
-All clerk plugins use **LibraryClerkFramework**, which provides:
+Doorman plugins follow the standard [Plugin Protocol](../architecture/plugin-system.md):
+
+```bash
+# Plugin metadata
+doorman-vault info
+# {"name": "doorman-vault", "version": "1.0.0", "supports": ["amadla.org/entity/secret@^v1.0.0"], ...}
+
+# Retrieve a secret (entity in via stdin, secret entity out via stdout)
+echo '{"_type": "amadla.org/entity/secret@v1.0.0", "_body": {"key": "db_password", "path": "secret/data/myapp"}}' \
+  | doorman-vault get
+```
+
+Output is always a universal secret entity format, regardless of the backend.
+
+## Go Framework (Optional)
+
+**LibraryDoormanFramework** provides convenience wrappers for Go plugin authors:
 
 - Standard secret-fetching interface
-- IPC communication with doorman (Unix sockets on Linux, named pipes on Windows)
-- Integration with doorman's encrypted in-memory cache
+- Secret entity output formatting
+- Common authentication patterns
+
+Plugins can also be written in any other language — just implement the protocol.
 
 ## Implementation Priority
 
 Suggested implementation order based on ecosystem needs:
 
-1. **clerk-vault** — Most common enterprise secret store
-2. **clerk-aws** — Cloud deployments
-3. **clerk-keycloak** — Identity/OAuth2 token management
-4. **clerk-sops** — Git-friendly encrypted secrets
+1. **doorman-vault** — Most common enterprise secret store
+2. **doorman-aws** — Cloud deployments
+3. **doorman-keycloak** — Identity/OAuth2 token management
+4. **doorman-sops** — Git-friendly encrypted secrets
 5. Remaining cloud providers and desktop keystores

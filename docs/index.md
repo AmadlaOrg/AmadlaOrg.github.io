@@ -90,11 +90,11 @@ Each tool reads structured data, does its job, and passes results downstream as 
 | Stage | Tool | What it does |
 |-------|------|-------------|
 | **Define** | [hery](tools/hery.md) | Manage YAML entities with schema validation and SQLite caching |
-| **Secrets** | [doorman](tools/doorman.md) | Resolve secrets from any source via Clerk plugins |
+| **Secrets** | [doorman](tools/doorman.md) | Resolve secrets from any source via Doorman plugins |
 | **Provision** | [raise](tools/raise.md) | Provision infrastructure using IaC wrappers |
 | **Install** | [lay](tools/lay.md) | Install applications via package managers |
 | **Configure** | [weaver](tools/weaver.md) | Generate config files from templates + entity data |
-| **Audit** | [judge](tools/judge.md) | Verify compliance via Auditor plugins |
+| **Audit** | [judge](tools/judge.md) | Verify compliance via Judge plugins |
 
 ## Ecosystem at a Glance
 
@@ -102,8 +102,8 @@ Each tool reads structured data, does its job, and passes results downstream as 
 |----------|-------|---------|
 | **Core Tools** | 8 | hery, doorman, weaver, judge, lay, raise, waiter, unravel |
 | **Libraries** | 5 | LibraryUtils, LibraryFramework, LibraryPluginFramework, ... |
-| **Clerk Plugins** | 16 | clerk-vault, clerk-aws, clerk-keepassxc, clerk-keycloak, ... |
-| **Auditor Plugins** | 3 | auditor-application, auditor-system, auditor-infrastructure |
+| **Doorman Plugins** | 16 | doorman-vault, doorman-aws, doorman-keepassxc, doorman-keycloak, ... |
+| **Judge Plugins** | 3 | judge-application, judge-system, judge-infrastructure |
 | **Weaver Plugins** | 4 | weaver-jinja, weaver-js-handlebars, weaver-js-mustache, weaver-qute |
 | **Entity Definitions** | 8 | Entity, EntityApplication, EntitySystem, EntityInfrastructure, ... |
 

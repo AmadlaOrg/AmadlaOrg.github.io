@@ -29,5 +29,5 @@ _body:
 
 | Tool | How It Uses EntitySecret |
 |------|--------------------------|
-| doorman | Resolves secret references to actual values via clerk plugins |
+| doorman | Resolves secret references to actual values via doorman plugins |
 | weaver | Injects resolved secrets into configuration templates |

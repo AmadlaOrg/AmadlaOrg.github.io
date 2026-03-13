@@ -3,10 +3,8 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Base plugin system framework — plugin discovery, loading, and IPC communication |
-| **Module** | `github.com/AmadlaOrg/LibraryPluginFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryPluginFramework](https://github.com/AmadlaOrg/LibraryPluginFramework) |
-| **Go Version** | 1.24.0 |
 
 ## What It Provides
 
@@ -28,11 +26,11 @@ LibraryPluginFramework is the base for all Amadla plugin types. It provides:
 
 ## Consumers
 
-- LibraryClerkFramework (specializes for secret source plugins)
-- LibraryAuditFramework (specializes for audit plugins)
+- LibraryDoormanFramework (specializes for secret source plugins)
+- LibraryJudgeFramework (specializes for audit plugins)
 
 ## Development Notes
 
 - **Phase 2** in the development plan
 - Needs solidification alongside LibraryFramework
-- The specialization pattern (Clerk, Audit) should be clearly documented
+- The specialization pattern (Doorman, Judge) should be clearly documented

@@ -29,4 +29,4 @@ _body:
 | Tool | How It Uses EntitySystem |
 |------|--------------------------|
 | lay | Installs required system packages |
-| auditor-system | Checks whether system matches requirements |
+| judge-system | Checks whether system matches requirements |

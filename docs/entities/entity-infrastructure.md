@@ -31,4 +31,4 @@ _body:
 | Tool | How It Uses EntityInfrastructure |
 |------|----------------------------------|
 | raise | Provisions the declared infrastructure resources |
-| auditor-infrastructure | Checks whether infrastructure matches requirements |
+| judge-infrastructure | Checks whether infrastructure matches requirements |

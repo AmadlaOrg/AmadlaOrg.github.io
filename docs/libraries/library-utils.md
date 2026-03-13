@@ -3,10 +3,8 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Foundation utility library — shared functionality across all Amadla projects |
-| **Module** | `github.com/AmadlaOrg/LibraryUtils` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryUtils](https://github.com/AmadlaOrg/LibraryUtils) |
-| **Go Version** | 1.24.0 |
 
 ## Package Structure
 
@@ -41,8 +39,8 @@
 Every Go project in the ecosystem depends on LibraryUtils:
 
 - hery, doorman, weaver (directly)
-- LibraryFramework, LibraryClerkFramework, LibraryAuditFramework
-- auditor-application, clerk-keepassxc
+- LibraryFramework, LibraryDoormanFramework, LibraryJudgeFramework
+- judge-application, doorman-keepassxc
 
 ## Development Notes
 

@@ -1,16 +1,14 @@
-# LibraryClerkFramework
+# LibraryDoormanFramework
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Clerk plugin framework — specialization for secret source plugins used by doorman |
-| **Module** | `github.com/AmadlaOrg/LibraryClerkFramework` |
+| **Purpose** | Doorman plugin framework — specialization for secret source plugins used by doorman |
 | **Status** | Active |
-| **Repo** | [AmadlaOrg/LibraryClerkFramework](https://github.com/AmadlaOrg/LibraryClerkFramework) |
-| **Go Version** | 1.24.0 |
+| **Repo** | [AmadlaOrg/LibraryDoormanFramework](https://github.com/AmadlaOrg/LibraryDoormanFramework) |
 
 ## What It Provides
 
-LibraryClerkFramework extends LibraryPluginFramework for secret source plugins:
+LibraryDoormanFramework extends LibraryPluginFramework for secret source plugins:
 
 - Standard interface for fetching secrets by key/path
 - Integration hooks for doorman's encrypted cache
@@ -32,10 +30,10 @@ LibraryClerkFramework extends LibraryPluginFramework for secret source plugins:
 
 ## Consumers
 
-- clerk-keepassxc
-- clerk-vault (planned)
-- clerk-aws (planned)
-- All other clerk-* plugins
+- doorman-keepassxc
+- doorman-vault (planned)
+- doorman-aws (planned)
+- All other doorman-* plugins
 
 ## Development Notes
 

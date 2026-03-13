@@ -52,6 +52,7 @@ nav:
       - Ecosystem Overview: architecture/ecosystem-overview.md
       - Data Pipeline: architecture/pipeline.md
       - HERY Concepts: architecture/hery-concepts.md
+      - Stack Comparison: architecture/comparison.md
       - Plugin System: architecture/plugin-system.md
 
   - Tools:
@@ -64,15 +65,19 @@ nav:
       - raise: tools/raise.md
       - waiter: tools/waiter.md
       - unravel: tools/unravel.md
+      - conduct: tools/conduct.md
+      - lighthouse: tools/lighthouse.md
       - dryrun: tools/dryrun.md
+      - garbage: tools/garbage.md
+      - amadla: tools/amadla.md
 
   - Libraries:
       - Overview: libraries/overview.md
       - LibraryUtils: libraries/library-utils.md
       - LibraryFramework: libraries/library-framework.md
       - LibraryPluginFramework: libraries/library-plugin-framework.md
-      - LibraryClerkFramework: libraries/library-clerk-framework.md
-      - LibraryAuditFramework: libraries/library-audit-framework.md
+      - LibraryDoormanFramework: libraries/library-doorman-framework.md
+      - LibraryJudgeFramework: libraries/library-judge-framework.md
 
   - Plugins:
       - Overview: plugins/overview.md
@@ -89,6 +94,7 @@ nav:
       - EntityContainer: entities/entity-container.md
       - EntitySecret: entities/entity-secret.md
       - EntityJudge: entities/entity-judge.md
+      - EntityTemplate: entities/entity-template.md
 
   - Standards:
       - Go Conventions: standards/go-conventions.md

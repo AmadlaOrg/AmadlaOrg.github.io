@@ -39,5 +39,5 @@ _body:
 | Tool | How It Uses EntityApplication |
 |------|------------------------------|
 | lay | Reads requirements and installs packages |
-| auditor-application | Checks whether required apps are actually installed |
+| judge-application | Checks whether required apps are actually installed |
 | weaver | Uses application data to fill config templates |

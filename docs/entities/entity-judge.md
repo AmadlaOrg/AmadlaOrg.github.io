@@ -30,4 +30,4 @@ _body:
 
 | Tool | How It Uses EntityJudge |
 |------|-------------------------|
-| judge | Reads audit rules and dispatches to appropriate auditor plugins |
+| judge | Reads audit rules and dispatches to appropriate judge plugins |

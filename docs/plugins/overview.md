@@ -1,39 +1,63 @@
 # Plugins Overview
 
-Amadla uses plugins to extend core tools with external integrations. Each plugin is a **separate executable** that communicates with its host tool via IPC.
+Amadla uses plugins to extend core tools with external integrations. Each plugin is a **standalone CLI executable** that communicates via stdin/stdout/stderr following the [Plugin Protocol](../architecture/plugin-system.md).
+
+Plugins can be written in **any language** — Go, Python, Bash, or anything that follows the protocol. Go framework libraries are available as optional convenience wrappers.
 
 ## Plugin Categories
 
-| Category | Host Tool | Count | Active | Stubs |
-|----------|-----------|-------|--------|-------|
-| [Clerks](clerks.md) | doorman | 16 | 1 | 15 |
-| [Auditors](auditors.md) | judge | 3 | 1 | 2 |
-| [Weavers](weavers.md) | weaver | 4 | 0 | 4 |
-| **Total** | | **23** | **2** | **21** |
+| Category | Host Tool | Naming | Count | Active | Stubs |
+|----------|-----------|--------|-------|--------|-------|
+| [Doorman Plugins](clerks.md) | doorman | `doorman-*` | 16 | 1 | 15 |
+| [Judge Plugins](auditors.md) | judge | `judge-*` | 3 | 1 | 2 |
+| [Weaver Plugins](weavers.md) | weaver | `weaver-*` | 4 | 0 | 4 |
+| **Total** | | | **23** | **2** | **21** |
 
 ## Naming Convention
 
-Plugins follow the pattern `{host}-{name}`:
+Plugins use the `<tool>-<name>` pattern, where the prefix matches the host tool name:
 
-- `clerk-vault` — Clerk plugin for HashiCorp Vault
-- `auditor-application` — Auditor plugin for application checks
+- `doorman-vault` — Doorman plugin for HashiCorp Vault
+- `judge-application` — Judge plugin for application validation
 - `weaver-jinja` — Weaver plugin for Jinja2 templates
 
-## Plugin Frameworks
+Tools discover plugins by scanning `$PATH` for binaries matching their prefix.
 
-Each plugin category has a dedicated framework library:
+## Plugin Protocol Summary
 
-| Framework | For | Base |
-|-----------|-----|------|
-| LibraryClerkFramework | Clerk plugins | LibraryPluginFramework |
-| LibraryAuditFramework | Auditor plugins | LibraryPluginFramework |
-| — | Weaver plugins | Direct (no framework yet) |
+Every plugin must implement:
 
-See [Plugin System Architecture](../architecture/plugin-system.md) for technical details.
+```bash
+<plugin> info              # JSON metadata (name, version, supported entities)
+<plugin> <verb> [flags]    # Business logic
+```
+
+Standard I/O:
+
+| Channel | Purpose |
+|---------|---------|
+| stdin | Entity data (YAML or JSON, auto-detected) |
+| stdout | Result data (`-o table|json|yaml`) |
+| stderr | Diagnostics and errors |
+| exit code | `0` success, `1` failure, `2` usage error |
+
+See [Plugin System Architecture](../architecture/plugin-system.md) for the full protocol specification.
+
+## Go Frameworks (Optional)
+
+| Framework | For | Provides |
+|-----------|-----|----------|
+| LibraryDoormanFramework | Doorman plugins | Secret-fetching boilerplate, output formatting |
+| LibraryJudgeFramework | Judge plugins | Validation boilerplate, pass/fail reporting |
+| — | Weaver plugins | No framework yet (direct protocol implementation) |
+
+These frameworks are **convenience wrappers** that reduce boilerplate for Go authors. They are not required — any language that implements the protocol works.
 
 ## Development Status
 
 Most plugins are currently stubs (README-only repositories). The two active plugins serve as reference implementations:
 
-- **clerk-keepassxc** — Reference Clerk plugin (Go, D-Bus integration)
-- **auditor-application** — Reference Auditor plugin (Go, LibraryAuditFramework)
+- **doorman-keepassxc** (currently `doorman-keepassxc`) — Reference Doorman plugin (Go)
+- **judge-application** (currently `judge-application`) — Reference Judge plugin (Go)
+
+Plugin repositories will be renamed to match the new `<tool>-<name>` convention.

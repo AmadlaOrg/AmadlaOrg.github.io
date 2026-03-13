@@ -6,13 +6,15 @@ Known gaps in the Amadla ecosystem, identified through code exploration.
 
 ### 1. No Working Pipeline
 
-The core pipeline (hery → doorman → raise → lay → weaver → judge) cannot be run end-to-end. Only hery and weaver have partial implementations. This means:
+The core pipeline (hery → doorman → weaver → lay → waiter → judge) cannot be run end-to-end. Only hery and weaver have partial implementations. This means:
 
 - No infrastructure provisioning (raise)
-- No application installation (lay)
-- No compliance auditing (judge)
-- No pipeline orchestration (waiter)
-- No pipeline debugging (unravel)
+- No deployment strategies (waiter)
+- No system discovery (unravel)
+- No compliance auditing/drift detection (judge)
+- No multi-server orchestration (conduct)
+- No notifications/alerting (lighthouse)
+- No pipeline orchestration (amadla meta-tool)
 
 ### 2. doorman Has No Daemon Mode
 
@@ -20,7 +22,7 @@ doorman's core function — running as a secrets daemon — is not implemented. 
 
 - `start` command (daemon mode)
 - `resolve` command (secret resolution)
-- Clerk plugin loading and IPC
+- Doorman plugin loading and IPC
 - Proper cache encryption (current XOR placeholder is insecure)
 
 ### 3. hery Has Significant Incomplete Code
@@ -50,23 +52,23 @@ doorman's core function — running as a secrets daemon — is not implemented. 
 - Plugin discovery and lifecycle management needs testing
 - IPC protocol documentation missing
 
-### LibraryClerkFramework / LibraryAuditFramework
+### LibraryDoormanFramework / LibraryJudgeFramework
 
-- Only one reference implementation each (clerk-keepassxc, auditor-application)
+- Only one reference implementation each (doorman-keepassxc, judge-application)
 - Platform-specific IPC (Windows) untested
 
 ## Plugin Gaps
 
-### Clerk Plugins
+### Doorman Plugins
 
-- 15 of 16 clerk plugins are stubs (README-only)
-- Only clerk-keepassxc has Go code
+- 15 of 16 doorman plugins are stubs (README-only)
+- Only doorman-keepassxc has Go code
 - Most enterprise-critical clerks (vault, aws, keycloak) are not implemented
 
-### Auditor Plugins
+### Judge Plugins
 
-- 2 of 3 auditor plugins are stubs
-- Only auditor-application has Go code
+- 2 of 3 judge plugins are stubs
+- Only judge-application has Go code
 
 ### Weaver Plugins
 
