@@ -1,6 +1,6 @@
 # Current State
 
-Full inventory of every repository in the Amadla ecosystem as of February 2026.
+Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 ## Summary
 
@@ -14,24 +14,6 @@ Full inventory of every repository in the Amadla ecosystem as of February 2026.
 | Entity Definitions | 8 | 8 | 0 | 0 | 0 |
 | Other | 8 | 4 | 0 | 0 | 4 |
 | **Total** | **52** | **19** | **2** | **1** | **30** |
-
-## Go Projects (with go.mod)
-
-These 11 repositories contain actual Go code:
-
-| Repo | Go Version | Status | Has CLAUDE.md |
-|------|------------|--------|---------------|
-| LibraryUtils | 1.24.0 | Active | Yes |
-| LibraryFramework | 1.24.0 | Active | No |
-| LibraryPluginFramework | 1.24.0 | Active | No |
-| LibraryDoormanFramework | 1.24.0 | Active | No |
-| LibraryJudgeFramework | 1.24.0 | Active | No |
-| hery | 1.24.0 | Partial | Yes |
-| doorman | 1.24.0 | Early | Yes |
-| weaver | 1.24.0 | Partial | No |
-| hery-playground | 1.24.0 | Active | No |
-| judge-application | 1.23.3 | Active | No |
-| doorman-keepassxc | 1.23.5 | Active | No |
 
 ## Core Tools Detail
 
@@ -48,7 +30,7 @@ These 11 repositories contain actual Go code:
 
 - **Commands:** Only `settings` is functional
 - **`collection` and `compose`** are commented out in source
-- **No daemon mode** yet (start/resolve not implemented)
+- **`resolve` command** not yet implemented (core secret resolution via plugins)
 - **Cache encryption** uses XOR placeholder (needs AES-GCM + TPM)
 - **Dependencies:** LibraryUtils, LibraryFramework, Ristretto
 
@@ -66,10 +48,11 @@ These 11 repositories contain actual Go code:
 
 ## Entity Definitions
 
-All 8 entity repos contain JSON Schema definitions in `.amadla/schema.json`:
+All entity types contain JSON Schema definitions in `schema.hery.json` at the entity type directory root:
 
 - Entity, EntityApplication, EntitySystem, EntityInfrastructure
 - EntityProgrammingLanguage, EntityContainer, EntitySecret, EntityJudge
+- EntityTemplate, Entities/Tools (27 schemas total across 15 top-level types and 12 sub-types)
 
 ## Plugin Stubs
 

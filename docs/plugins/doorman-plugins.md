@@ -8,7 +8,7 @@ Doorman plugins integrate with specific secret stores. Each plugin knows how to 
 
 | Plugin | Integrates With | Language | Notes |
 |--------|----------------|----------|-------|
-| `doorman-keepassxc` | KeePassXC password manager | Go | Currently named `doorman-keepassxc` (will be renamed) |
+| `doorman-keepassxc` | KeePassXC password manager | Go | Reference implementation |
 
 ### Stubs (Awaiting Implementation)
 

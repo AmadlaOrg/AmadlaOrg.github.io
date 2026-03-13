@@ -24,7 +24,7 @@ Amadla uses a plugin architecture to extend tools with external integrations. Pl
 
 ## Architecture
 
-<!-- Diagram placeholder: Plugin Architecture (c2-plugin-architecture) -->
+![Plugin Architecture](../diagrams/out/c2-plugin-architecture.svg)
 
 ### Plugin Discovery
 
@@ -241,6 +241,6 @@ if __name__ == "__main__":
 
 See the full plugin listings:
 
-- [Doorman Plugins](../plugins/clerks.md) — 16 plugins (1 active, 15 stubs)
-- [Judge Plugins](../plugins/auditors.md) — 3 plugins (1 active, 2 stubs)
+- [Doorman Plugins](../plugins/doorman-plugins.md) — 16 plugins (1 active, 15 stubs)
+- [Judge Plugins](../plugins/judges.md) — 3 plugins (1 active, 2 stubs)
 - [Weaver Plugins](../plugins/weavers.md) — 4 plugins (all stubs)

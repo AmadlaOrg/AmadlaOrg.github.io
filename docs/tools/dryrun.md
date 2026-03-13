@@ -2,27 +2,31 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Dry run tool — tests settings and configuration files, useful for testing network configurations |
-| **Module** | — |
-| **Status** | Planned |
+| **Purpose** | Safely tests settings by applying them and auto-reverting if something goes wrong |
 | **Repo** | [AmadlaOrg/dryrun](https://github.com/AmadlaOrg/dryrun) |
+| **Language** | Python (may move to Go) |
 
 ## Commands
 
 | Command | Status | Description |
 |---------|--------|-------------|
-| `dryrun run` | Planned | Execute a dry run against settings and configuration files |
+| `dryrun run` | Planned | Apply settings temporarily and auto-revert on failure or timeout |
 | `dryrun settings` | Planned | Manage dryrun configuration |
 
 ## Pipeline Position
 
-dryrun is **not part of the main pipeline** — it is a **validation tool** that tests settings and configuration files before they are applied, particularly useful for verifying network configurations.
+dryrun is **not part of the main pipeline** — it is a **safety tool** that tests settings before committing to them.
 
 ## Intended Design
 
-dryrun will allow operators to validate configuration files and settings without applying them to live systems. This is especially valuable for network configurations where mistakes can cause outages.
+dryrun applies a setting or configuration change and then automatically reverts it if something goes wrong. The primary use case is preventing SSH lockout when modifying network or firewall settings remotely.
+
+### Use Cases
+
+- **SSH safety:** Apply network/firewall settings, verify SSH still works, revert if connection is lost
+- **Temporary settings:** Try an OS setting temporarily to verify behavior before making it permanent
 
 ## Current Gaps
 
 - Repository exists with a README but minimal implementation
-- No Go module definition confirmed
+- Currently Python, may move to Go

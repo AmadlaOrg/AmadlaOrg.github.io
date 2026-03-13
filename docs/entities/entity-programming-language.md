@@ -17,7 +17,7 @@ EntityProgrammingLanguage describes language runtime needs:
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntityProgrammingLanguage@v1.0.0
+_type: amadla.org/entity/programming-language@v1.0.0
 _body:
   language: go
   version: ">=1.24"

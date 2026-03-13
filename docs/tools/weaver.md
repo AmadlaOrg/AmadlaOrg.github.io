@@ -3,7 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Template generator — renders configuration files using HERY entities and pluggable template engines |
-| **Status** | Partial |
 | **Repo** | [AmadlaOrg/weaver](https://github.com/AmadlaOrg/weaver) |
 
 ## Commands
@@ -19,14 +18,6 @@
 | Library | Purpose |
 |---------|---------|
 | LibraryUtils | File operations, configuration |
-
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/spf13/cobra` | CLI framework |
-| `gopkg.in/yaml.v3` | YAML parsing |
-| `github.com/olekukonko/tablewriter` | Formatted table output |
 
 ## Pipeline Position
 

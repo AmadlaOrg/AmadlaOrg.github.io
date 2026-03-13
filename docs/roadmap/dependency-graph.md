@@ -29,7 +29,7 @@ hery-playground                       (independent — uses Gin, no Amadla libs)
 
 ## Full Dependency Matrix
 
-| Repo | LibraryUtils | LibraryFramework | LibraryPluginFW | LibraryClerkFW | LibraryAuditFW |
+| Repo | LibraryUtils | LibraryFramework | LibraryPluginFW | LibraryDoormanFW | LibraryJudgeFW |
 |------|:---:|:---:|:---:|:---:|:---:|
 | LibraryFramework | x | — | — | — | — |
 | LibraryPluginFramework | x | — | — | — | — |
@@ -52,21 +52,6 @@ Level 2: LibraryJudgeFramework, hery, doorman, weaver
 Level 3: judge-application, doorman-keepassxc
 Level 4: (future tools: raise, lay, judge, waiter, unravel)
 ```
-
-## go.mod Replace Directives
-
-All inter-project dependencies use `replace` directives pointing to sibling directories:
-
-| Project | Replace Directives |
-|---------|-------------------|
-| hery | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
-| doorman | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
-| weaver | `LibraryUtils => ../LibraryUtils` |
-| LibraryDoormanFramework | `LibraryUtils => ../LibraryUtils` |
-| LibraryJudgeFramework | `LibraryUtils => ../LibraryUtils`, `LibraryFramework => ../LibraryFramework` |
-| judge-application | `LibraryUtils => ../LibraryUtils`, `LibraryJudgeFramework => ../LibraryJudgeFramework` |
-
-This means **all repositories must be checked out as siblings** in the same parent directory for local development to work.
 
 ## Impact Analysis
 

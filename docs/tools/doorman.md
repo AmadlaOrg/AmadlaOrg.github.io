@@ -3,7 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Secrets management — discovers `doorman-*` plugins on PATH and provides a unified interface for retrieving secrets from any backend |
-| **Status** | Early |
 | **Repo** | [AmadlaOrg/doorman](https://github.com/AmadlaOrg/doorman) |
 
 ## Commands
@@ -23,14 +22,6 @@
 | LibraryFramework | CLI framework (Cobra wrapper) |
 | LibraryPluginFramework | Plugin discovery (PATH scanning for `doorman-*`) |
 
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/dgraph-io/ristretto` | High-performance in-memory cache with TTL |
-| `github.com/spf13/cobra` | CLI framework |
-| `golang.org/x/sys` | Platform-specific system calls |
-
 ## Pipeline Position
 
 doorman sits **between hery and raise** in the pipeline. It receives entity data containing secret references and resolves them to actual values before passing data downstream.
@@ -39,7 +30,7 @@ doorman sits **between hery and raise** in the pipeline. It receives entity data
 hery → [doorman] → raise → lay → weaver → judge
          │
     ┌────┴────────┐
-    │ Clerk       │
+    │ Doorman     │
     │ Plugins     │
     │ (vault,     │
     │  aws, ...)  │
@@ -48,7 +39,7 @@ hery → [doorman] → raise → lay → weaver → judge
 
 ## Architecture
 
-<!-- Diagram placeholder -->
+![doorman Internal Components](../diagrams/out/c3-doorman-internals.svg)
 
 ### Core Flow
 

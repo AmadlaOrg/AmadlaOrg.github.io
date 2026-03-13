@@ -3,8 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Infrastructure provisioner — provisions servers and resources from entity requirements |
-| **Module** | — |
-| **Status** | Planned |
 | **Repo** | [AmadlaOrg/raise](https://github.com/AmadlaOrg/raise) |
 
 ## Commands
@@ -72,4 +70,4 @@ hery query --type '*/Infrastructure@*' | doorman resolve | raise up
 ## Current Gaps
 
 - Repository exists as a stub only
-- No Go code or module definition
+- No Go code yet

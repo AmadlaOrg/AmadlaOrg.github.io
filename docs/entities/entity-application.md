@@ -19,19 +19,16 @@ EntityApplication describes what an application needs to run:
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntityApplication@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 _meta:
   description: "Web application with nginx reverse proxy"
-_id:
-  - github.com/AmadlaOrg/EntitySystem@v1.0.0
-  - github.com/AmadlaOrg/EntitySecret@v1.0.0
 _body:
   name: my-web-app
-  requires:
-    - _entity: github.com/AmadlaOrg/EntitySystem@v1.0.0
-      _body:
-        package: nginx
-        version: ">=1.24"
+  install:
+    - method: package
+      packages:
+        - nginx
+  version: ">=1.24"
 ```
 
 ## Consumers

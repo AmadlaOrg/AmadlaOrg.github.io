@@ -16,13 +16,12 @@ The core pipeline (hery → doorman → weaver → lay → waiter → judge) can
 - No notifications/alerting (lighthouse)
 - No pipeline orchestration (amadla meta-tool)
 
-### 2. doorman Has No Daemon Mode
+### 2. doorman Has No Working `resolve` Command
 
-doorman's core function — running as a secrets daemon — is not implemented. Only the `settings` command works. Missing:
+doorman's core function — resolving secrets via plugins — is not implemented. Only the `settings` command works. Missing:
 
-- `start` command (daemon mode)
-- `resolve` command (secret resolution)
-- Doorman plugin loading and IPC
+- `resolve` command (secret resolution via doorman-* plugins)
+- Doorman plugin discovery and invocation
 - Proper cache encryption (current XOR placeholder is insecure)
 
 ### 3. hery Has Significant Incomplete Code
@@ -63,7 +62,7 @@ doorman's core function — running as a secrets daemon — is not implemented. 
 
 - 15 of 16 doorman plugins are stubs (README-only)
 - Only doorman-keepassxc has Go code
-- Most enterprise-critical clerks (vault, aws, keycloak) are not implemented
+- Most enterprise-critical plugins (vault, aws, keycloak) are not implemented
 
 ### Judge Plugins
 

@@ -8,8 +8,8 @@ Plugins can be written in **any language** — Go, Python, Bash, or anything tha
 
 | Category | Host Tool | Naming | Count | Active | Stubs |
 |----------|-----------|--------|-------|--------|-------|
-| [Doorman Plugins](clerks.md) | doorman | `doorman-*` | 16 | 1 | 15 |
-| [Judge Plugins](auditors.md) | judge | `judge-*` | 3 | 1 | 2 |
+| [Doorman Plugins](doorman-plugins.md) | doorman | `doorman-*` | 16 | 1 | 15 |
+| [Judge Plugins](judges.md) | judge | `judge-*` | 3 | 1 | 2 |
 | [Weaver Plugins](weavers.md) | weaver | `weaver-*` | 4 | 0 | 4 |
 | **Total** | | | **23** | **2** | **21** |
 
@@ -57,7 +57,5 @@ These frameworks are **convenience wrappers** that reduce boilerplate for Go aut
 
 Most plugins are currently stubs (README-only repositories). The two active plugins serve as reference implementations:
 
-- **doorman-keepassxc** (currently `doorman-keepassxc`) — Reference Doorman plugin (Go)
-- **judge-application** (currently `judge-application`) — Reference Judge plugin (Go)
-
-Plugin repositories will be renamed to match the new `<tool>-<name>` convention.
+- **doorman-keepassxc** — Reference Doorman plugin (Go)
+- **judge-application** — Reference Judge plugin (Go)

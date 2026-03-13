@@ -81,8 +81,8 @@ nav:
 
   - Plugins:
       - Overview: plugins/overview.md
-      - Clerks: plugins/clerks.md
-      - Auditors: plugins/auditors.md
+      - Doorman Plugins: plugins/doorman-plugins.md
+      - Judge Plugins: plugins/judges.md
       - Weavers: plugins/weavers.md
 
   - Entities:

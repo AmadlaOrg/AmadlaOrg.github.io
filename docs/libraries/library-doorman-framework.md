@@ -3,6 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Doorman plugin framework — specialization for secret source plugins used by doorman |
+| **Module** | `github.com/AmadlaOrg/LibraryDoormanFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryDoormanFramework](https://github.com/AmadlaOrg/LibraryDoormanFramework) |
 
@@ -19,14 +20,6 @@ LibraryDoormanFramework extends LibraryPluginFramework for secret source plugins
 | Library | Purpose |
 |---------|---------|
 | LibraryUtils | IPC, encryption, configuration |
-
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/Microsoft/go-winio` | Windows named pipe support |
-| `github.com/godbus/dbus/v5` | Linux D-Bus communication |
-| `golang.org/x/sys` | Platform-specific system calls |
 
 ## Consumers
 

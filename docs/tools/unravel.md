@@ -3,8 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Discovery — discovers existing system state and outputs it as entities. Wraps osquery + custom plugins |
-| **Module** | — |
-| **Status** | Planned |
 | **Repo** | [AmadlaOrg/unravel](https://github.com/AmadlaOrg/unravel) |
 
 ## Overview

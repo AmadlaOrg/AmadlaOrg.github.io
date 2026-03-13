@@ -3,6 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Judge plugin framework — specialization for audit/compliance plugins used by judge |
+| **Module** | `github.com/AmadlaOrg/LibraryJudgeFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryJudgeFramework](https://github.com/AmadlaOrg/LibraryJudgeFramework) |
 
@@ -21,14 +22,6 @@ LibraryJudgeFramework extends LibraryPluginFramework for audit plugins:
 |---------|---------|
 | LibraryUtils | Foundation utilities |
 | LibraryFramework | CLI framework |
-
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/spf13/cobra` | CLI framework |
-| `gopkg.in/yaml.v3` | YAML parsing |
-| `github.com/olekukonko/tablewriter` | Formatted table output |
 
 ## Consumers
 

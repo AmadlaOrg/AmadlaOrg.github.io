@@ -3,8 +3,6 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Deployment tool — manages deployment strategies (blue-green, canary, rolling) |
-| **Module** | — |
-| **Status** | Planned |
 | **Repo** | [AmadlaOrg/waiter](https://github.com/AmadlaOrg/waiter) |
 
 ## Overview
@@ -93,4 +91,4 @@ waiter abort my-app
 
 - Concept stage — based on VFRMate infra scripts (may be ported to Go)
 - Platform plugins not yet implemented
-- No Go module definition
+- No Go code yet

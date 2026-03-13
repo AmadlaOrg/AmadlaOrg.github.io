@@ -11,14 +11,14 @@
 EntitySecret describes secret requirements:
 
 - Secret key/name
-- Source backend (which clerk to use)
+- Source backend (which doorman plugin to use)
 - Path within the backend
 - TTL / rotation policy
 
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntitySecret@v1.0.0
+_type: amadla.org/entity/secret@v1.0.0
 _body:
   key: tls-certificate
   source: vault

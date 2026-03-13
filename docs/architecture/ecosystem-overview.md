@@ -11,7 +11,7 @@ CLI applications that form the data pipeline.
 | Repo | Purpose | Status |
 |------|---------|--------|
 | [hery](https://github.com/AmadlaOrg/hery) | HERY data storage — entity management with schema validation, Git versioning, SQLite caching | Partial |
-| [doorman](https://github.com/AmadlaOrg/doorman) | Secrets daemon — pulls secrets from Doorman plugins, encrypted in-memory cache | Early |
+| [doorman](https://github.com/AmadlaOrg/doorman) | Secrets management CLI — resolves secrets from Doorman plugins on demand | Early |
 | [weaver](https://github.com/AmadlaOrg/weaver) | Template generator — renders config files using HERY entities and pluggable template engines | Partial |
 | [dryrun](https://github.com/AmadlaOrg/dryrun) | Safely tests settings with auto-revert (e.g., prevents SSH lockout). Currently Python, may move to Go | Planned |
 | [judge](https://github.com/AmadlaOrg/judge) | Validates merged entity state — checks requirements, cross-entity conflicts, drift detection (with unravel) | Early |
@@ -38,7 +38,7 @@ Shared Go libraries that provide common functionality.
 
 ### Doorman Plugins (Secret Sources)
 
-Each clerk integrates doorman with a specific secret store.
+Each plugin integrates doorman with a specific secret store.
 
 | Repo | Integrates With | Status |
 |------|----------------|--------|
@@ -61,9 +61,9 @@ Each clerk integrates doorman with a specific secret store.
 
 ### Judge Plugins
 
-Each auditor checks a specific aspect of system compliance.
+Each plugin checks a specific aspect of system compliance.
 
-| Repo | Audits | Status |
+| Repo | Validates | Status |
 |------|--------|--------|
 | [judge-application](https://github.com/AmadlaOrg/judge-application) | Whether required applications/packages are installed | Active (Go) |
 | [judge-system](https://github.com/AmadlaOrg/judge-system) | System-level requirements (OS, kernel, resources) | Stub |
@@ -86,7 +86,7 @@ JSON Schema definitions that describe the structure of HERY entities.
 
 | Repo | Defines | Status |
 |------|---------|--------|
-| [Entity](https://github.com/AmadlaOrg/Entity) | Base entity schema — common `_meta`, `_entity`, `_id`, `_body` structure | Active |
+| [Entity](https://github.com/AmadlaOrg/Entity) | Base HERY schema — common `_type`, `_extends`, `_meta`, `_body`, `_requires` structure | Active |
 | [EntityApplication](https://github.com/AmadlaOrg/EntityApplication) | Application requirements (packages, services, configurations) | Active |
 | [EntitySystem](https://github.com/AmadlaOrg/EntitySystem) | System requirements (OS, kernel, resources) | Active |
 | [EntityInfrastructure](https://github.com/AmadlaOrg/EntityInfrastructure) | Infrastructure requirements (servers, networks, storage) | Active |
@@ -94,6 +94,7 @@ JSON Schema definitions that describe the structure of HERY entities.
 | [EntityContainer](https://github.com/AmadlaOrg/EntityContainer) | Container/image definitions | Active |
 | [EntitySecret](https://github.com/AmadlaOrg/EntitySecret) | Secret references and metadata | Active |
 | [EntityJudge](https://github.com/AmadlaOrg/EntityJudge) | Audit rule definitions | Active |
+| [Entities/Tools](https://github.com/AmadlaOrg/Entities) | Tool inventory and discovery configuration | Active |
 
 ### Other Repositories
 
@@ -109,7 +110,7 @@ JSON Schema definitions that describe the structure of HERY entities.
 
 ## How Components Connect
 
-<!-- Diagram placeholder: Library Dependencies (c2-library-dependencies) -->
+![Library Dependencies](../diagrams/out/c2-library-dependencies.svg)
 
 All Go projects use `replace` directives in `go.mod` to reference sibling directories during development:
 

@@ -19,7 +19,7 @@ EntityContainer describes container definitions:
 ## Example
 
 ```yaml
-_entity: github.com/AmadlaOrg/EntityContainer@v1.0.0
+_type: amadla.org/entity/container@v1.0.0
 _body:
   image: nginx:1.24-alpine
   ports:
