@@ -385,6 +385,6 @@ These scenarios surfaced questions that have now been answered:
 
 4. **Cross-node data flow**: Runtime values (like DB server IP) are injected by `conduct` after `raise` provisions. conduct knows node IPs from raise output and injects them into the data context before calling weaver/lay on each node. Can also be pulled from unravel. `_requires` handles entity-level ordering; node placement is conduct's `_body` concern.
 
-5. **Execution ordering**: Derived from `_requires` declarations — amadla builds a DAG and topologically sorts. No hardcoded phases. `_requires` is the 5th reserved HERY property (Draft 3.5). Independent branches can be parallelized. True cycles are detected and reported.
+5. **Execution ordering**: Derived from `_requires` declarations — amadla builds a DAG and topologically sorts. No hardcoded phases. `_requires` is the 5th reserved [HERY](../architecture/hery-concepts.md) property (Draft 3.5). Independent branches can be parallelized. True cycles are detected and reported.
 
 6. **Install method selection**: No runtime `--prefer` flag. Everything is declared in `.hery` files (IaC). Per-entity default is the first item in the install array. Override via `_extends` to lock a choice. Source of truth is always in `.hery` files — keeps the audit trail clean.

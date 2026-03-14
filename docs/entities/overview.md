@@ -68,7 +68,7 @@ Entities/
 
 ## How Entities Connect
 
-Entities compose via JSON Schema `$ref`. The schema declares which parts of `_body` correspond to other entity types. No HERY-specific markup is needed inside `_body` — composition is handled at the schema level.
+Entities compose via JSON Schema `$ref`. The schema declares which parts of `_body` correspond to other entity types. No [HERY](../architecture/hery-concepts.md)-specific markup is needed inside `_body` — composition is handled at the schema level.
 
 Entities declare dependencies using `_requires` — the 5th reserved HERY property (Draft 3.5). amadla builds a dependency graph (DAG) from `_requires` declarations and topologically sorts to determine execution order.
 
