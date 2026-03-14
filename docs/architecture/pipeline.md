@@ -45,7 +45,7 @@ doorman list
 **Input:** Templates + entity data (with resolved secrets), via UNIX piping or direct cache queries
 **Output:** Rendered configuration files (Quadlet, nginx.conf, podman-compose, k8s, GitHub Actions, or any text file)
 
-weaver takes template files and fills them with data from HERY entities. It supports multiple template engines via **Weaver plugins** (Jinja, Mustache, Handlebars, Qute).
+weaver takes template files and fills them with data from [HERY](hery-concepts.md) entities. It supports multiple template engines via **Weaver plugins** (Jinja, Mustache, Handlebars, Qute).
 
 ```bash
 # Render templates — weaver discovers template entities from hery automatically

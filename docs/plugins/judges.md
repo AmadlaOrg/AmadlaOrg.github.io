@@ -1,6 +1,6 @@
 # Judge Plugins
 
-Judge plugins validate whether a system's actual state matches the requirements declared in HERY entities. Each plugin specializes in a specific entity type.
+Judge plugins validate whether a system's actual state matches the requirements declared in [HERY](../architecture/hery-concepts.md) entities. Each plugin specializes in a specific entity type.
 
 ## Plugin Inventory
 

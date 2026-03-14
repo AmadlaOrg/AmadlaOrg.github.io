@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | HERY (Hierarchical Entity Relational YAML) data storage with schema validation, Git versioning, and SQLite caching |
+| **Purpose** | [HERY](../architecture/hery-concepts.md) (Hierarchical Entity Relational YAML) data storage with schema validation, Git versioning, and SQLite caching |
 | **Repo** | [AmadlaOrg/hery](https://github.com/AmadlaOrg/hery) |
 
 ## Commands

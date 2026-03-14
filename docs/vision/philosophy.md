@@ -8,7 +8,7 @@ Requirements are often given in documentation format — or not at all. The know
 
 ## The Solution: Resource-Centric Configuration
 
-Amadla inverts this. It is **resource-centric**: each resource (application, service, database) carries its own configuration as a schema-validated HERY entity. Requirements are **declared explicitly** — not buried in docs — and enforced by schemas.
+Amadla inverts this. It is **resource-centric**: each resource (application, service, database) carries its own configuration as a schema-validated [HERY](../architecture/hery-concepts.md) entity. Requirements are **declared explicitly** — not buried in docs — and enforced by schemas.
 
 ### Example
 

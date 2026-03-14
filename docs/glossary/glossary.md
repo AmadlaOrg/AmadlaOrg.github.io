@@ -13,7 +13,7 @@ A plugin for the **judge** tool that checks whether a system's actual state matc
 ## B
 
 ### Body (`_body`)
-One of HERY's five reserved YAML properties. Contains the actual entity data. Validated against the entity's JSON Schema. Optional — when omitted, defaults are inherited from `_extends` or the entity definition.
+One of [HERY](../architecture/hery-concepts.md)'s five reserved YAML properties. Contains the actual entity data. Validated against the entity's JSON Schema. Optional — when omitted, defaults are inherited from `_extends` or the entity definition.
 
 ## C
 

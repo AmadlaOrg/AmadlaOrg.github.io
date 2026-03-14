@@ -27,7 +27,7 @@ The amadla tool itself is written in Go, but it is **replaceable** — the Pipel
 
 ## Pipeline Entity
 
-Pipelines are defined as HERY entities — data, not executable code (like GitHub Actions YAML or podman-compose):
+Pipelines are defined as [HERY](../architecture/hery-concepts.md) entities — data, not executable code (like GitHub Actions YAML or podman-compose):
 
 ```yaml
 # yaml-language-server: $schema=https://amadla.org/entity/hery/v1.0.0/schema.hery.json

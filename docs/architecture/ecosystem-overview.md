@@ -10,7 +10,7 @@ CLI applications that form the data pipeline.
 
 | Repo | Purpose | Status |
 |------|---------|--------|
-| [hery](https://github.com/AmadlaOrg/hery) | HERY data storage — entity management with schema validation, Git versioning, SQLite caching | Partial |
+| [hery](https://github.com/AmadlaOrg/hery) | [HERY](hery-concepts.md) data storage — entity management with schema validation, Git versioning, SQLite caching | Partial |
 | [doorman](https://github.com/AmadlaOrg/doorman) | Secrets management CLI — resolves secrets from Doorman plugins on demand | Early |
 | [weaver](https://github.com/AmadlaOrg/weaver) | Template generator — renders config files using HERY entities and pluggable template engines | Partial |
 | [dryrun](https://github.com/AmadlaOrg/dryrun) | Safely tests settings with auto-revert (e.g., prevents SSH lockout). Currently Python, may move to Go | Planned |

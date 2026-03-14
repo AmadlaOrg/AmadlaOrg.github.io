@@ -7,7 +7,7 @@
 
 ## Overview
 
-unravel discovers the actual state of a system and outputs it as HERY entities. It wraps [osquery](https://osquery.io/) for system-level discovery (ports, processes, packages, etc.) and supports custom plugins for things osquery doesn't cover (application-specific state, container topology, etc.).
+unravel discovers the actual state of a system and outputs it as [HERY](../architecture/hery-concepts.md) entities. It wraps [osquery](https://osquery.io/) for system-level discovery (ports, processes, packages, etc.) and supports custom plugins for things osquery doesn't cover (application-specific state, container topology, etc.).
 
 unravel is **stateless and on-demand** — it discovers and outputs, following the UNIX philosophy. If the user wants to cache the output, they pipe it to a file. No daemon mode.
 

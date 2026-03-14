@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Template generator — renders configuration files using HERY entities and pluggable template engines |
+| **Purpose** | Template generator — renders configuration files using [HERY](../architecture/hery-concepts.md) entities and pluggable template engines |
 | **Repo** | [AmadlaOrg/weaver](https://github.com/AmadlaOrg/weaver) |
 
 ## Commands

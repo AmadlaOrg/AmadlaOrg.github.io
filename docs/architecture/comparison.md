@@ -62,7 +62,7 @@ raise fills the same role as Vagrant — managing VM lifecycles — but extends 
 |---------|-------|---------|
 | **Local VMs** | Plugin-based (libvirt, VirtualBox, VMware) | Provider-based (VirtualBox, libvirt, VMware) |
 | **Cloud instances** | Plugin-based (AWS, Hetzner, DigitalOcean) | Limited (community plugins, not core focus) |
-| **VM definition** | HERY entity (`EntityInfrastructure`) | Vagrantfile (Ruby DSL) |
+| **VM definition** | [HERY](hery-concepts.md) entity (`EntityInfrastructure`) | Vagrantfile (Ruby DSL) |
 | **Provisioning** | Pipeline: raise → lay → weaver | Built-in: shell, Ansible, Puppet, Chef |
 | **Multi-machine** | conduct orchestrates across machines | Multi-machine Vagrantfile |
 | **Secret injection** | doorman (separate tool, UNIX philosophy) | Vault (HashiCorp integration) |
