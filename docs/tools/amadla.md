@@ -86,7 +86,7 @@ amadla discovers tools via a **config-driven** model (like xdg-open):
 1. **`~/.config/amadla/tools.hery`** — lists tool names, optionally with explicit paths. This is the sole source of truth — **no hardcoded tool names**.
 2. **PATH resolution** — amadla looks up each tool name on PATH (same logic across OSes). Explicit path overrides are optional.
 3. **`<tool> info`** — amadla calls `info` on each discovered tool to learn capabilities (supported entity types, version, etc.)
-4. **Cache** — results are cached at `~/.cache/amadla/tools.json`. Cache invalidation is mtime-based: if `tools.hery` is newer than the cache, amadla re-runs `info` on all tools.
+4. **Cache** — results are cached at `~/.cache/amadla/tool-info.json`. Invalidation is per-tool, based on the **binary's mtime**: if the tool binary changes on disk, amadla re-runs `<tool> info` for that tool. New tools in `tools.hery` are fetched automatically (no cache entry yet). Removed tools leave stale entries that are harmlessly ignored.
 5. **`amadla init`** — bootstraps a default `tools.hery` by scanning PATH for standard Amadla tool names.
 
 ### tools.hery Example
@@ -119,9 +119,11 @@ amadla does **not** use hardcoded phases. Execution order is derived from `_requ
 4. Independent branches can be parallelized
 5. True cycles are schema design errors — detected and reported (like Go import cycles)
 
-## Current Gaps
+## Current Status
 
-- Concept stage — no repository or code yet
+- Core implementation complete: `run`, `init`, `list`, `doctor` commands
+- DAG builder + topological sort working
+- Tool config parsing (`tools.hery`) and info caching implemented
+- Tools entity schema defined (`amadla.org/entity/tools@v1.0.0`)
 - Pipeline entity schema not yet defined
-- Tools entity schema (`amadla.org/entity/tools@v1.0.0`) not yet defined
-- D2 text generation not yet implemented
+- D2 diagram generation not yet implemented

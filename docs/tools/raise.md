@@ -34,7 +34,7 @@ hery → doorman → [raise] → lay → weaver → judge
 
 ## Intended Design
 
-raise will read `EntityInfrastructure` declarations and provision the required resources. It manages the full lifecycle of infrastructure — creating, starting, stopping, and destroying machines — whether they are local VMs or cloud instances. This makes raise the Amadla equivalent of Vagrant, but unified with cloud provisioning under one tool.
+raise will read `Infrastructure` declarations and provision the required resources. It manages the full lifecycle of infrastructure — creating, starting, stopping, and destroying machines — whether they are local VMs or cloud instances. This makes raise the Amadla equivalent of Vagrant, but unified with cloud provisioning under one tool.
 
 raise uses a **plugin system** for different providers, translating entity requirements into provider-specific resource definitions.
 

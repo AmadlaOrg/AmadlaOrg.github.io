@@ -50,9 +50,9 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 All entity types contain JSON Schema definitions in `schema.hery.json` at the entity type directory root:
 
-- Entity, EntityApplication, EntitySystem, EntityInfrastructure
-- EntityProgrammingLanguage, EntityContainer, EntitySecret, EntityJudge
-- EntityTemplate, Entities/Tools (27 schemas total across 15 top-level types and 12 sub-types)
+- Entity, Application, System, Infrastructure
+- ProgrammingLanguage, Container, Secret, Judge
+- Template, Entities/Tools (27 schemas total across 15 top-level types and 12 sub-types)
 
 ## Plugin Stubs
 

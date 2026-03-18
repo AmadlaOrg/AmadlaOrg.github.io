@@ -20,7 +20,7 @@ hery reads `.hery` files that describe what an application needs. Each file is a
 hery query --type '*/application@*'
 
 # Get a specific entity
-hery entity get "github.com/AmadlaOrg/EntityApplication@v1.0.0"
+hery entity get "amadla.org/entity/application@v1.0.0"
 ```
 
 Entities are cached in SQLite for fast querying. The source of truth remains the `.hery` files (optionally version-controlled via Git).
@@ -137,7 +137,7 @@ A complete flow for deploying a containerized web application:
 ```yaml
 # yaml-language-server: $schema=https://amadla.org/entity/hery/v1.0.0/schema.hery.json
 ---
-_type: github.com/AmadlaOrg/EntityApplication/WebServer@v1.0.0
+_type: amadla.org/entity/application/webserver@v1.0.0
 _meta:
   name: my-web-app
   description: Web application with TLS

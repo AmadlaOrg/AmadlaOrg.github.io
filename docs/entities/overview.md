@@ -6,22 +6,23 @@ Entities are the core data model of the Amadla ecosystem. Each entity type defin
 
 In Amadla, an entity is a versioned, schema-validated YAML document that describes a requirement. Instead of writing imperative scripts ("install nginx, configure it like this"), you write declarative entities ("this application needs nginx >=1.24 with TLS").
 
-Entity definitions live in the `Entities/` directory structure, each with a `schema.hery.json` at its root:
+Entity definitions live in the `Entities/` directory structure, each with a `<name>.hery.json` schema file at its root (e.g., `application.hery.json`, `package.hery.json`):
 
 ```
 Entities/
-├── Application/          # + DB/, DB/RDBMS/, IAM/, WebServer/
-├── Certificate/
+├── Application/          # + DB/, IAM/, WebServer/, Timekeeping/, Logging/,
+│                         #   Monitoring/, Backup/, DNSResolver/, MailRelay/, LogShipping/
 ├── Container/
 ├── Cron/
-├── Firewall/
 ├── Infrastructure/       # + Cloud/, Container/, VM/
 ├── Judge/
+├── OS/                   # + Preference/
 ├── Package/
 ├── ProgrammingLanguage/  # + PHP/
 ├── Secret/
+├── Security/             # + Certificate/, Firewall/, IDS/, Network/, SELinux/
 ├── Service/
-├── System/               # + CPU/, Memory/, Net/, Storage/
+├── System/               # + CPU/, Filesystem/, Memory/, Network/
 ├── Template/
 ├── Tools/
 └── User/
@@ -33,38 +34,94 @@ Entities/
 
 | Entity | Describes | Used By |
 |--------|-----------|---------|
-| [Application](entity-application.md) | Application requirements (packages, services, healthchecks) | lay, waiter, judge |
-| [Certificate](entity-certificate.md) | TLS/SSL certificates (ACME, self-signed, manual) | lay, doorman |
-| [Container](entity-container.md) | Container/image definitions (Docker Compose-inspired) | lay, waiter |
-| [Cron](entity-cron.md) | Scheduled tasks (cron expressions, systemd timers) | lay |
-| [Firewall](entity-firewall.md) | Firewall rules (iptables, nftables, ufw, firewalld) | lay, judge |
-| [Infrastructure](entity-infrastructure.md) | Infrastructure requirements (provider, region, SSH) | raise |
-| [Judge](entity-judge.md) | Audit/validation rule definitions | judge |
-| [Package](entity-package.md) | System package installation (apt, yum, dnf, pacman, brew) | lay, garbage |
-| [ProgrammingLanguage](entity-programming-language.md) | Language runtime requirements | lay |
-| [Secret](entity-secret.md) | Secret references and metadata | doorman |
-| [Service](entity-service.md) | Systemd service configuration | lay, weaver |
-| [System](entity-system.md) | System requirements (OS, kernel, resources) | lay, judge |
-| [Template](entity-template.md) | Template configuration (engine, path, output) | weaver |
-| [Tools](entity-tools.md) | Tool inventory and discovery configuration | amadla |
-| [User](entity-user.md) | System users and groups | lay, doorman |
+| [Application](application.md) | Application requirements (packages, services, healthchecks) | lay, waiter, judge |
+| [Container](container.md) | Container/image definitions (Docker Compose-inspired) | lay, waiter |
+| [Cron](cron.md) | Scheduled tasks (cron expressions, systemd timers) | enjoin |
+| [Infrastructure](infrastructure.md) | Infrastructure requirements (provider, region, SSH) | raise |
+| [Judge](judge.md) | Audit/validation rule definitions | judge |
+| [OS](os.md) | Operating system identity (distro, version, arch, init) | lay, enjoin, raise, unravel |
+| [Package](package.md) | System package installation (apt, yum, dnf, pacman, brew) | lay, garbage |
+| [ProgrammingLanguage](programming-language.md) | Language runtime requirements | lay |
+| [Secret](secret.md) | Secret references and metadata | doorman |
+| [Security](security.md) | Security posture and baseline configuration | enjoin, judge |
+| [Service](service.md) | Systemd service configuration | enjoin, weaver |
+| [System](system.md) | System configuration (hostname, timezone, sysctl, limits) | enjoin, raise |
+| [Template](template.md) | Template configuration (engine, source, output) | weaver |
+| [Tools](tools.md) | Tool inventory and discovery configuration | amadla |
+| [User](user.md) | System users and groups | enjoin, doorman |
 
 ### Sub-types
 
 | Entity | Parent | Describes | Used By |
 |--------|--------|-----------|---------|
-| [Application/DB](entity-application-db.md) | Application | Database engine, auth, databases to create | lay, doorman |
-| [Application/DB/RDBMS](entity-application-db-rdbms.md) | Application/DB | Migrations, replication, backup, connection pooling | lay, weaver |
-| [Application/IAM](entity-application-iam.md) | Application | Identity providers, OAuth2/OIDC clients, users | lay, doorman |
-| [Application/WebServer](entity-application-webserver.md) | Application | Virtual hosts, locations, SSL, proxying | lay, weaver |
-| [Infrastructure/Cloud](entity-infrastructure-cloud.md) | Infrastructure | Cloud instances (AWS, Hetzner, DigitalOcean) | raise |
-| [Infrastructure/Container](entity-infrastructure-container.md) | Infrastructure | Container runtime setup, registry access | raise, lay |
-| [Infrastructure/VM](entity-infrastructure-vm.md) | Infrastructure | Virtual machines (libvirt, VirtualBox, VMware) | raise |
-| [ProgrammingLanguage/PHP](entity-programming-language-php.md) | ProgrammingLanguage | PHP extensions, php.ini, FPM pools, Composer | lay, weaver |
-| [System/CPU](entity-system-cpu.md) | System | CPU resource constraints | lay, raise |
-| [System/Memory](entity-system-memory.md) | System | Memory resource constraints | lay, raise |
-| [System/Net](entity-system-net.md) | System | Network configuration (IPAM, ports, DNS) | lay, raise |
-| [System/Storage](entity-system-storage.md) | System | Volumes, mounts, tmpfs | lay, raise |
+| [Application/DB](application-db.md) | Application | Database engine, auth, databases to create | lay, doorman |
+| [Application/DB/RDBMS](application-db-rdbms.md) | Application/DB | Migrations, replication, backup, connection pooling | lay, weaver |
+| [Application/IAM](application-iam.md) | Application | Identity providers, OAuth2/OIDC clients, users | lay, doorman |
+| [Application/WebServer](application-webserver.md) | Application | Virtual hosts, locations, SSL, proxying | lay, weaver |
+| [Application/Timekeeping](application-timekeeping.md) | Application | Time synchronization (common: servers, pools) | lay, enjoin-service |
+| [Application/Timekeeping/NTP](application-timekeeping-ntp.md) | Application/Timekeeping | ntpd configuration | lay, weaver |
+| [Application/Timekeeping/Chrony](application-timekeeping-chrony.md) | Application/Timekeeping | chrony configuration | lay, weaver |
+| [Application/Timekeeping/Timesyncd](application-timekeeping-timesyncd.md) | Application/Timekeeping | systemd-timesyncd configuration | enjoin |
+| [Application/Timekeeping/OpenNTPD](application-timekeeping-openntpd.md) | Application/Timekeeping | OpenNTPD configuration | lay, weaver |
+| [Application/Timekeeping/PTP](application-timekeeping-ptp.md) | Application/Timekeeping | Precision Time Protocol (linuxptp) | lay, weaver |
+| [Application/Logging](application-logging.md) | Application | Log management (common: log_dir, retention, remote) | lay, weaver |
+| [Application/Monitoring](application-monitoring.md) | Application | Monitoring agents (common: listen, interval, tags) | lay, weaver |
+| [Application/Backup](application-backup.md) | Application | Backup (common: schedule, retention, encryption, paths) | lay, weaver |
+| [Application/DNSResolver](application-dns-resolver.md) | Application | Local DNS resolution/caching | lay, weaver |
+| [Application/MailRelay](application-mail-relay.md) | Application | System mail relay (common: relay_host, TLS, auth) | lay, weaver |
+| [Application/LogShipping](application-log-shipping.md) | Application | Centralized log forwarding (common: inputs, output) | lay, weaver |
+| [Infrastructure/Cloud](infrastructure-cloud.md) | Infrastructure | Cloud instances (AWS, Hetzner, DigitalOcean) | raise |
+| [Infrastructure/Container](infrastructure-container.md) | Infrastructure | Container runtime setup, registry access | raise, lay |
+| [Infrastructure/VM](infrastructure-vm.md) | Infrastructure | Virtual machines (libvirt, VirtualBox, VMware) | raise |
+| [OS/Preference](os-preference.md) | OS | Preferred system tools per concern | lay, enjoin |
+| [ProgrammingLanguage/PHP](programming-language-php.md) | ProgrammingLanguage | PHP extensions, php.ini, FPM pools, Composer | lay, weaver |
+| [Security/Certificate](security-certificate.md) | Security | TLS/SSL certificate provisioning | enjoin-certificate |
+| [Security/Firewall](security-firewall.md) | Security | Firewall rules, default policies, NAT, rate limiting | enjoin-firewall |
+| [Security/IDS](security-ids.md) | Security | Intrusion detection/prevention (fail2ban, OSSEC) | enjoin |
+| [Security/Network](security-network.md) | Security | Network security posture: TLS, isolation, hardening | enjoin-network |
+| [Security/SELinux](security-selinux.md) | Security | SELinux policies, booleans, contexts | enjoin-selinux |
+| [System/CPU](system-cpu.md) | System | CPU resource constraints | enjoin, raise |
+| [System/Filesystem](system-filesystem.md) | System | Volumes, mounts, tmpfs | enjoin-filesystem |
+| [System/Memory](system-memory.md) | System | Memory resource constraints | enjoin, raise |
+| [System/Network](system-network.md) | System | Network configuration (IPAM, ports, DNS) | enjoin-network, raise |
+
+## Custom Entities
+
+The built-in entity types listed above have direct support in Amadla's tools — each tool knows how to read and act on specific entity types via its `info` response. But you are **not locked in** to only using these types.
+
+You can create your own entity types with your own JSON Schemas. Custom entities won't be handled by the built-in tools (they don't know about your schema), with one exception: **weaver**. Because weaver's routing is driven by the [Template](template.md) entity's `entity_types` field, you can write templates that target any entity type — including your own custom ones. Weaver doesn't care what the entity type is, only that a template declares it can render for it.
+
+For anything beyond templating, you can write your own tools that understand your custom entities. These tools just need to follow the [plugin protocol](../architecture/plugin-system.md) (stdin/stdout, `info` subcommand, exit codes) and can be added to your [tools.hery](tools.md) so that the `amadla` orchestrator discovers and runs them alongside the built-in tools.
+
+```yaml
+# Your custom entity
+_type: myorg.com/entity/monitoring@v1.0.0
+_body:
+  agent: datadog
+  api_key_secret: monitoring/datadog/api-key
+  checks:
+    - name: nginx
+      port: 80
+
+# A template that targets your custom entity
+_type: amadla.org/entity/template@v1.0.0
+_body:
+  engine: jinja2
+  source: ./templates/datadog.yaml.j2
+  output: /etc/datadog-agent/conf.d/nginx.yaml
+  entity_types:
+    - myorg.com/entity/monitoring@^v1.0.0
+
+# Your custom tool in tools.hery
+_type: amadla.org/entity/tools@v1.0.0
+_body:
+  tools:
+    - name: hery
+    - name: lay
+    - name: weaver
+    - name: my-monitoring-tool
+      path: /opt/myorg/bin/my-monitoring-tool
+```
 
 ## How Entities Connect
 
@@ -73,9 +130,9 @@ Entities compose via JSON Schema `$ref`. The schema declares which parts of `_bo
 Entities declare dependencies using `_requires` — the 5th reserved HERY property (Draft 3.5). amadla builds a dependency graph (DAG) from `_requires` declarations and topologically sorts to determine execution order.
 
 ```
-EntityApplication (my-web-app)
+Application (my-web-app)
 ├── _requires:
-│   └── github.com/AmadlaOrg/Entities/Application/DB/RDBMS@^v1.0.0
+│   └── amadla.org/entity/application/db/rdbms@^v1.0.0
 └── _body:
     ├── network (via $ref to Network schema)
     ├── database (via $ref to Database schema)
@@ -96,8 +153,6 @@ Every entity's `_body` is validated against a JSON Schema defined in the entity'
 - Consistent data structure across all instances
 - Early detection of configuration errors
 - Machine-readable requirement definitions
-
-The schemas are stored in `common-json-schemas` and referenced by each entity repo.
 
 ## Entity Development
 
