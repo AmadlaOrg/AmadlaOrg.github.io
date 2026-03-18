@@ -87,13 +87,13 @@ JSON Schema definitions that describe the structure of HERY entities.
 | Repo | Defines | Status |
 |------|---------|--------|
 | [Entity](https://github.com/AmadlaOrg/Entity) | Base HERY schema — common `_type`, `_extends`, `_meta`, `_body`, `_requires` structure | Active |
-| [EntityApplication](https://github.com/AmadlaOrg/EntityApplication) | Application requirements (packages, services, configurations) | Active |
-| [EntitySystem](https://github.com/AmadlaOrg/EntitySystem) | System requirements (OS, kernel, resources) | Active |
-| [EntityInfrastructure](https://github.com/AmadlaOrg/EntityInfrastructure) | Infrastructure requirements (servers, networks, storage) | Active |
-| [EntityProgrammingLanguage](https://github.com/AmadlaOrg/EntityProgrammingLanguage) | Programming language runtime requirements | Active |
-| [EntityContainer](https://github.com/AmadlaOrg/EntityContainer) | Container/image definitions | Active |
-| [EntitySecret](https://github.com/AmadlaOrg/EntitySecret) | Secret references and metadata | Active |
-| [EntityJudge](https://github.com/AmadlaOrg/EntityJudge) | Audit rule definitions | Active |
+| [Application](https://github.com/AmadlaOrg/Entities/Application) | Application requirements (packages, services, configurations) | Active |
+| [System](https://github.com/AmadlaOrg/Entities/System) | System requirements (OS, kernel, resources) | Active |
+| [Infrastructure](https://github.com/AmadlaOrg/Entities/Infrastructure) | Infrastructure requirements (servers, networks, storage) | Active |
+| [ProgrammingLanguage](https://github.com/AmadlaOrg/Entities/ProgrammingLanguage) | Programming language runtime requirements | Active |
+| [Container](https://github.com/AmadlaOrg/Entities/Container) | Container/image definitions | Active |
+| [Secret](https://github.com/AmadlaOrg/Entities/Secret) | Secret references and metadata | Active |
+| [Judge](https://github.com/AmadlaOrg/Entities/Judge) | Audit rule definitions | Active |
 | [Entities/Tools](https://github.com/AmadlaOrg/Entities) | Tool inventory and discovery configuration | Active |
 
 ### Other Repositories

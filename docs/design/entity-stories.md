@@ -22,7 +22,7 @@ github.com/SomeOrg/WordPress/
 
 #### app.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 name: wordpress
 description: WordPress CMS
 install:
@@ -37,7 +37,7 @@ install:
 
 #### php.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 name: php
 version: ["8.3", "8.2", "8.1"]   # first = default
 install:
@@ -51,7 +51,7 @@ install:
 
 #### database.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application/DB/RDBMS@v1.0.0
+_type: amadla.org/entity/application/db/rdbms@v1.0.0
 engine: [mariadb, mysql, postgresql]   # first = default
 version:
   mariadb: ["11.4", "10.11"]
@@ -67,7 +67,7 @@ authentication:
 
 #### webserver.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application/WebServer@v1.0.0
+_type: amadla.org/entity/application/webserver@v1.0.0
 server_name: localhost
 listen: [80, 443]
 root: /var/www/wordpress
@@ -84,7 +84,7 @@ install:
 
 #### network.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Network@v1.0.0
+_type: amadla.org/entity/system/network@v1.0.0
 ports:
   - port: 80
     protocol: tcp
@@ -100,7 +100,7 @@ ports:
 
 #### templates/wp-config.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Template@v1.0.0
+_type: amadla.org/entity/template@v1.0.0
 engine: jinja2
 source: wp-config.php.j2
 output: /var/www/wordpress/wp-config.php
@@ -179,7 +179,7 @@ github.com/MyCompany/user-service/
 
 #### app.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 name: user-service
 description: User management API
 install:
@@ -201,7 +201,7 @@ healthcheck:
 
 #### database.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application/DB/RDBMS@v1.0.0
+_type: amadla.org/entity/application/db/rdbms@v1.0.0
 engine: postgresql
 version: "17"
 databases:
@@ -217,7 +217,7 @@ authentication:
 
 #### network.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Network@v1.0.0
+_type: amadla.org/entity/system/network@v1.0.0
 ports:
   - port: 8080
     protocol: tcp
@@ -251,7 +251,7 @@ github.com/MyCompany/wp-production/
 
 #### conduct.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Infrastructure@v1.0.0
+_type: amadla.org/entity/infrastructure@v1.0.0
 nodes:
   - name: wp-server
     ref: wp-node.hery
@@ -263,7 +263,7 @@ nodes:
 
 #### wp-node.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Infrastructure/VM@v1.0.0
+_type: amadla.org/entity/infrastructure/vm@v1.0.0
 provider: libvirt
 cpus: 2
 memory: 4096
@@ -297,7 +297,7 @@ github.com/AmadlaOrg/Entities/Firewall/
 
 #### firewall.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 name: firewall
 install:
   - method: package
@@ -329,7 +329,7 @@ github.com/SomeOrg/WordPress/
 
 #### elasticsearch.hery
 ```yaml
-_type: github.com/AmadlaOrg/Entities/Application@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 name: elasticsearch
 optional: true          # Not required for WordPress to function
 version: ["8.17", "7.17"]

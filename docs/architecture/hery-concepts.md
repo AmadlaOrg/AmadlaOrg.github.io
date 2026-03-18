@@ -85,7 +85,7 @@ Declares hard dependencies on other entities. Used by amadla to build a dependen
 
 ```yaml
 _requires:
-  - github.com/AmadlaOrg/Entities/Application/DB/RDBMS@^v1.0.0   # any RDBMS entity
+  - amadla.org/entity/application/db/rdbms@^v1.0.0   # any RDBMS entity
   - github.com/SomeOrg/WordPress#php.hery                          # specific element
   - #database.hery                                                  # local element (same directory)
 ```
@@ -157,10 +157,10 @@ HERY resolves `_type` and `_extends` URIs using a Go-module-inspired algorithm:
 
 Example meta tag:
 ```html
-<meta name="hery-import" content="amadla.org/entity/application git https://github.com/AmadlaOrg/EntityApplication">
+<meta name="hery-import" content="amadla.org/entity/application git https://github.com/AmadlaOrg/Entities/Application">
 ```
 
-This enables vanity URIs (`amadla.org/entity/network` → `github.com/AmadlaOrg/EntitySystem/Net`), host migration without breaking references, and can be served as static HTML.
+This enables vanity URIs (`amadla.org/entity/network` → `github.com/AmadlaOrg/Entities/System/Network`), host migration without breaking references, and can be served as static HTML.
 
 ## Storage Layout
 
@@ -225,7 +225,7 @@ Results are always JSON, designed for piping to downstream tools. All layers are
 
 ## Entity Versioning
 
-Entity versions map directly to Git tags. The `@version` in a type URI corresponds to a git tag on the entity type repository. For example, `github.com/AmadlaOrg/Entities/Application@v1.0.0` resolves to the git tag `v1.0.0`.
+Entity versions map directly to Git tags. The `@version` in a type URI corresponds to a git tag on the entity type repository. For example, `amadla.org/entity/application@v1.0.0` resolves to the git tag `v1.0.0`.
 
 ```
 amadla.org/entity/application@v1.0.0     # → git tag v1.0.0

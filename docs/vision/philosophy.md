@@ -27,9 +27,9 @@ You must know that this app needs nginx, where the config goes, and how to start
 ```yaml
 # yaml-language-server: $schema=https://amadla.org/entity/hery/v1.0.0/schema.hery.json
 ---
-_type: github.com/AmadlaOrg/EntityApplication@v1.0.0
+_type: amadla.org/entity/application@v1.0.0
 _requires:
-  - github.com/AmadlaOrg/Entities/Application/DB/RDBMS@^v1.0.0
+  - amadla.org/entity/application/db/rdbms@^v1.0.0
 _meta:
   name: my-web-app
 _body:
@@ -44,9 +44,9 @@ The resource declares its own requirements and dependencies. The schema enforces
 Resources don't exist in isolation. A system has multiple applications, each with its own HERY configuration. The OS has its own. The cloud service has its own. HERY merges them — think of it as layers:
 
 ```
-Cloud/Infra layer    ← EntityInfrastructure (AWS, DigitalOcean, bare metal...)
-  └─ OS layer        ← EntitySystem (Ubuntu, NixOS...)
-    └─ App layer     ← EntityApplication (nginx, postgres...)
+Cloud/Infra layer    ← Infrastructure (AWS, DigitalOcean, bare metal...)
+  └─ OS layer        ← System (Ubuntu, NixOS...)
+    └─ App layer     ← Application (nginx, postgres...)
       └─ Override    ← User's site-specific HERY
 ```
 

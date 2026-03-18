@@ -6,9 +6,9 @@ Judge plugins validate whether a system's actual state matches the requirements 
 
 | Plugin | Validates | Entity | Status |
 |--------|-----------|--------|--------|
-| `judge-application` | Whether required apps/packages are installed | EntityApplication | Active (Go) |
-| `judge-system` | System-level requirements (OS, kernel, resources) | EntitySystem | Stub |
-| `judge-infrastructure` | Infrastructure requirements (networking, storage) | EntityInfrastructure | Stub |
+| `judge-application` | Whether required apps/packages are installed | Application | Active (Go) |
+| `judge-system` | System-level requirements (OS, kernel, resources) | System | Stub |
+| `judge-infrastructure` | Infrastructure requirements (networking, storage) | Infrastructure | Stub |
 
 ## Protocol
 
@@ -45,7 +45,7 @@ Plugins can also be written in any other language — just implement the protoco
 `judge-application` is the reference judge plugin:
 
 - **Dependencies:** LibraryJudgeFramework, LibraryUtils
-- **Entity:** Reads `EntityApplication` to determine what should be installed, then checks the system
+- **Entity:** Reads `Application` to determine what should be installed, then checks the system
 
 ## Workflow
 

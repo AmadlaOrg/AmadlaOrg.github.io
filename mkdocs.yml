@@ -68,6 +68,7 @@ nav:
       - conduct: tools/conduct.md
       - lighthouse: tools/lighthouse.md
       - dryrun: tools/dryrun.md
+      - enjoin: tools/enjoin.md
       - garbage: tools/garbage.md
       - amadla: tools/amadla.md
 
@@ -78,29 +79,221 @@ nav:
       - LibraryPluginFramework: libraries/library-plugin-framework.md
       - LibraryDoormanFramework: libraries/library-doorman-framework.md
       - LibraryJudgeFramework: libraries/library-judge-framework.md
+      - LibraryEnjoinFramework: libraries/library-enjoin-framework.md
 
   - Plugins:
       - Overview: plugins/overview.md
       - Doorman Plugins: plugins/doorman-plugins.md
       - Judge Plugins: plugins/judges.md
       - Weavers: plugins/weavers.md
+      - Enjoin Plugins: plugins/enjoin-plugins.md
 
   - Entities:
       - Overview: entities/overview.md
-      - EntityApplication: entities/entity-application.md
-      - EntityInfrastructure: entities/entity-infrastructure.md
-      - EntitySystem: entities/entity-system.md
-      - EntityProgrammingLanguage: entities/entity-programming-language.md
-      - EntityContainer: entities/entity-container.md
-      - EntitySecret: entities/entity-secret.md
-      - EntityJudge: entities/entity-judge.md
-      - EntityTemplate: entities/entity-template.md
+      - Application: entities/application.md
+      - Application/DB: entities/application-db.md
+      - Application/DB/RDBMS: entities/application-db-rdbms.md
+      - Application/IAM: entities/application-iam.md
+      - Application/WebServer: entities/application-webserver.md
+      - Application/Timekeeping: entities/application-timekeeping.md
+      - Application/Timekeeping/NTP: entities/application-timekeeping-ntp.md
+      - Application/Timekeeping/Chrony: entities/application-timekeeping-chrony.md
+      - Application/Timekeeping/Timesyncd: entities/application-timekeeping-timesyncd.md
+      - Application/Timekeeping/OpenNTPD: entities/application-timekeeping-openntpd.md
+      - Application/Timekeeping/PTP: entities/application-timekeeping-ptp.md
+      - Application/Logging: entities/application-logging.md
+      - Application/Logging/Rsyslog: entities/application-logging-rsyslog.md
+      - Application/Logging/SyslogNG: entities/application-logging-syslog-ng.md
+      - Application/Logging/Journald: entities/application-logging-journald.md
+      - Application/Logging/Logrotate: entities/application-logging-logrotate.md
+      - Application/Monitoring: entities/application-monitoring.md
+      - Application/Monitoring/NodeExporter: entities/application-monitoring-node-exporter.md
+      - Application/Monitoring/ZabbixAgent: entities/application-monitoring-zabbix-agent.md
+      - Application/Monitoring/Telegraf: entities/application-monitoring-telegraf.md
+      - Application/Monitoring/Collectd: entities/application-monitoring-collectd.md
+      - Application/Backup: entities/application-backup.md
+      - Application/Backup/Restic: entities/application-backup-restic.md
+      - Application/Backup/Borg: entities/application-backup-borg.md
+      - Application/DNSResolver: entities/application-dns-resolver.md
+      - Application/DNSResolver/Unbound: entities/application-dns-resolver-unbound.md
+      - Application/DNSResolver/Dnsmasq: entities/application-dns-resolver-dnsmasq.md
+      - Application/DNSResolver/SystemdResolved: entities/application-dns-resolver-systemd-resolved.md
+      - Application/MailRelay: entities/application-mail-relay.md
+      - Application/MailRelay/Postfix: entities/application-mail-relay-postfix.md
+      - Application/MailRelay/Msmtp: entities/application-mail-relay-msmtp.md
+      - Application/LogShipping: entities/application-log-shipping.md
+      - Application/LogShipping/Filebeat: entities/application-log-shipping-filebeat.md
+      - Application/LogShipping/Fluentbit: entities/application-log-shipping-fluentbit.md
+      - Application/LogShipping/Promtail: entities/application-log-shipping-promtail.md
+      - Application/LogShipping/Vector: entities/application-log-shipping-vector.md
+      - Application/Cache: entities/application-cache.md
+      - Application/Cache/Redis: entities/application-cache-redis.md
+      - Application/Cache/Memcached: entities/application-cache-memcached.md
+      - Application/Cache/Varnish: entities/application-cache-varnish.md
+      - Application/MessageQueue: entities/application-message-queue.md
+      - Application/MessageQueue/RabbitMQ: entities/application-message-queue-rabbitmq.md
+      - Application/MessageQueue/Kafka: entities/application-message-queue-kafka.md
+      - Application/MessageQueue/NATS: entities/application-message-queue-nats.md
+      - Application/SearchEngine: entities/application-search-engine.md
+      - Application/SearchEngine/Elasticsearch: entities/application-search-engine-elasticsearch.md
+      - Application/SearchEngine/OpenSearch: entities/application-search-engine-opensearch.md
+      - Application/SearchEngine/Meilisearch: entities/application-search-engine-meilisearch.md
+      - Application/LoadBalancer: entities/application-load-balancer.md
+      - Application/LoadBalancer/HAProxy: entities/application-load-balancer-haproxy.md
+      - Application/LoadBalancer/Traefik: entities/application-load-balancer-traefik.md
+      - Application/LoadBalancer/Envoy: entities/application-load-balancer-envoy.md
+      - Application/VPN: entities/application-vpn.md
+      - Application/VPN/WireGuard: entities/application-vpn-wireguard.md
+      - Application/VPN/OpenVPN: entities/application-vpn-openvpn.md
+      - Application/VPN/StrongSwan: entities/application-vpn-strongswan.md
+      - Application/ServiceDiscovery: entities/application-service-discovery.md
+      - Application/ServiceDiscovery/Consul: entities/application-service-discovery-consul.md
+      - Application/ServiceDiscovery/Etcd: entities/application-service-discovery-etcd.md
+      - Application/ServiceDiscovery/ZooKeeper: entities/application-service-discovery-zookeeper.md
+      - Application/SNMP: entities/application-snmp.md
+      - Application/SNMP/NetSNMP: entities/application-snmp-net-snmp.md
+      - Application/ContainerRegistry: entities/application-container-registry.md
+      - Application/ContainerRegistry/Harbor: entities/application-container-registry-harbor.md
+      - Application/ContainerRegistry/DockerRegistry: entities/application-container-registry-docker-registry.md
+      - Application/ContainerRegistry/Nexus: entities/application-container-registry-nexus.md
+      - Application/Proxy: entities/application-proxy.md
+      - Application/Proxy/Squid: entities/application-proxy-squid.md
+      - Application/Proxy/Privoxy: entities/application-proxy-privoxy.md
+      - Application/Proxy/Tinyproxy: entities/application-proxy-tinyproxy.md
+      - Application/AuthProxy: entities/application-auth-proxy.md
+      - Application/AuthProxy/OAuth2Proxy: entities/application-auth-proxy-oauth2-proxy.md
+      - Application/AuthProxy/Authelia: entities/application-auth-proxy-authelia.md
+      - Application/AuthProxy/KeycloakGatekeeper: entities/application-auth-proxy-keycloak-gatekeeper.md
+      - Application/CICD: entities/application-cicd.md
+      - Application/CICD/GitLabRunner: entities/application-cicd-gitlab-runner.md
+      - Application/CICD/JenkinsAgent: entities/application-cicd-jenkins-agent.md
+      - Application/CICD/DroneRunner: entities/application-cicd-drone-runner.md
+      - Application/CICD/BuildkiteAgent: entities/application-cicd-buildkite-agent.md
+      - Application/GitServer: entities/application-git-server.md
+      - Application/GitServer/Gitea: entities/application-git-server-gitea.md
+      - Application/GitServer/GitLab: entities/application-git-server-gitlab.md
+      - Application/GitServer/Gogs: entities/application-git-server-gogs.md
+      - Application/APIGateway: entities/application-api-gateway.md
+      - Application/APIGateway/Kong: entities/application-api-gateway-kong.md
+      - Application/APIGateway/Tyk: entities/application-api-gateway-tyk.md
+      - Application/APIGateway/KrakenD: entities/application-api-gateway-krakend.md
+      - Application/IdentityProvider: entities/application-identity-provider.md
+      - Application/IdentityProvider/Keycloak: entities/application-identity-provider-keycloak.md
+      - Application/IdentityProvider/Authentik: entities/application-identity-provider-authentik.md
+      - Application/IdentityProvider/Dex: entities/application-identity-provider-dex.md
+      - Application/FTP: entities/application-ftp.md
+      - Application/FTP/Vsftpd: entities/application-ftp-vsftpd.md
+      - Application/FTP/ProFTPD: entities/application-ftp-proftpd.md
+      - Application/FTP/PureFTPD: entities/application-ftp-pure-ftpd.md
+      - Application/FileSharing: entities/application-file-sharing.md
+      - Application/FileSharing/Nextcloud: entities/application-file-sharing-nextcloud.md
+      - Application/FileSharing/Seafile: entities/application-file-sharing-seafile.md
+      - Application/FileSharing/Syncthing: entities/application-file-sharing-syncthing.md
+      - Application/RemoteAccess: entities/application-remote-access.md
+      - Application/RemoteAccess/XRDP: entities/application-remote-access-xrdp.md
+      - Application/RemoteAccess/VNC: entities/application-remote-access-vnc.md
+      - Application/RemoteAccess/Guacamole: entities/application-remote-access-guacamole.md
+      - Container: entities/container.md
+      - Cron: entities/cron.md
+      - Infrastructure: entities/infrastructure.md
+      - Infrastructure/Cloud: entities/infrastructure-cloud.md
+      - Infrastructure/Cloud/Compute: entities/infrastructure-cloud-compute.md
+      - Infrastructure/Cloud/Compute/EC2: entities/infrastructure-cloud-compute-ec2.md
+      - Infrastructure/Cloud/Compute/GCE: entities/infrastructure-cloud-compute-gce.md
+      - Infrastructure/Cloud/Compute/Azure VM: entities/infrastructure-cloud-compute-azure-vm.md
+      - Infrastructure/Cloud/Compute/Hetzner Server: entities/infrastructure-cloud-compute-hetzner-server.md
+      - Infrastructure/Cloud/Compute/DigitalOcean Droplet: entities/infrastructure-cloud-compute-digitalocean-droplet.md
+      - Infrastructure/Cloud/Network: entities/infrastructure-cloud-network.md
+      - Infrastructure/Cloud/Network/AWS VPC: entities/infrastructure-cloud-network-aws-vpc.md
+      - Infrastructure/Cloud/Network/GCP VPC: entities/infrastructure-cloud-network-gcp-vpc.md
+      - Infrastructure/Cloud/Network/Azure VNet: entities/infrastructure-cloud-network-azure-vnet.md
+      - Infrastructure/Cloud/DNS: entities/infrastructure-cloud-dns.md
+      - Infrastructure/Cloud/DNS/Route53: entities/infrastructure-cloud-dns-route53.md
+      - Infrastructure/Cloud/DNS/Cloud DNS: entities/infrastructure-cloud-dns-cloud-dns.md
+      - Infrastructure/Cloud/DNS/Azure DNS: entities/infrastructure-cloud-dns-azure-dns.md
+      - Infrastructure/Cloud/DNS/Cloudflare: entities/infrastructure-cloud-dns-cloudflare.md
+      - Infrastructure/Cloud/CDN: entities/infrastructure-cloud-cdn.md
+      - Infrastructure/Cloud/CDN/CloudFront: entities/infrastructure-cloud-cdn-cloudfront.md
+      - Infrastructure/Cloud/CDN/Cloudflare: entities/infrastructure-cloud-cdn-cloudflare.md
+      - Infrastructure/Cloud/CDN/Fastly: entities/infrastructure-cloud-cdn-fastly.md
+      - Infrastructure/Cloud/ObjectStorage: entities/infrastructure-cloud-object-storage.md
+      - Infrastructure/Cloud/ObjectStorage/S3: entities/infrastructure-cloud-object-storage-s3.md
+      - Infrastructure/Cloud/ObjectStorage/GCS: entities/infrastructure-cloud-object-storage-gcs.md
+      - Infrastructure/Cloud/ObjectStorage/Azure Blob: entities/infrastructure-cloud-object-storage-azure-blob.md
+      - Infrastructure/Cloud/Database: entities/infrastructure-cloud-database.md
+      - Infrastructure/Cloud/Database/RDS: entities/infrastructure-cloud-database-rds.md
+      - Infrastructure/Cloud/Database/Cloud SQL: entities/infrastructure-cloud-database-cloud-sql.md
+      - Infrastructure/Cloud/Database/Azure Database: entities/infrastructure-cloud-database-azure-database.md
+      - Infrastructure/Cloud/Kubernetes: entities/infrastructure-cloud-kubernetes.md
+      - Infrastructure/Cloud/Kubernetes/EKS: entities/infrastructure-cloud-kubernetes-eks.md
+      - Infrastructure/Cloud/Kubernetes/GKE: entities/infrastructure-cloud-kubernetes-gke.md
+      - Infrastructure/Cloud/Kubernetes/AKS: entities/infrastructure-cloud-kubernetes-aks.md
+      - Infrastructure/Cloud/LoadBalancer: entities/infrastructure-cloud-load-balancer.md
+      - Infrastructure/Cloud/LoadBalancer/ALB: entities/infrastructure-cloud-load-balancer-alb.md
+      - Infrastructure/Cloud/LoadBalancer/GCP: entities/infrastructure-cloud-load-balancer-gcp.md
+      - Infrastructure/Cloud/LoadBalancer/Azure: entities/infrastructure-cloud-load-balancer-azure.md
+      - Infrastructure/Cloud/Serverless: entities/infrastructure-cloud-serverless.md
+      - Infrastructure/Cloud/Serverless/Lambda: entities/infrastructure-cloud-serverless-lambda.md
+      - Infrastructure/Cloud/Serverless/Cloud Functions: entities/infrastructure-cloud-serverless-cloud-functions.md
+      - Infrastructure/Cloud/Serverless/Azure Functions: entities/infrastructure-cloud-serverless-azure-functions.md
+      - Infrastructure/Cloud/Queue: entities/infrastructure-cloud-queue.md
+      - Infrastructure/Cloud/Queue/SQS: entities/infrastructure-cloud-queue-sqs.md
+      - Infrastructure/Cloud/Queue/Pub/Sub: entities/infrastructure-cloud-queue-pubsub.md
+      - Infrastructure/Cloud/Queue/Service Bus: entities/infrastructure-cloud-queue-service-bus.md
+      - Infrastructure/Cloud/IAM: entities/infrastructure-cloud-iam.md
+      - Infrastructure/Cloud/IAM/AWS: entities/infrastructure-cloud-iam-aws.md
+      - Infrastructure/Cloud/IAM/GCP: entities/infrastructure-cloud-iam-gcp.md
+      - Infrastructure/Cloud/IAM/Azure: entities/infrastructure-cloud-iam-azure.md
+      - Infrastructure/Container: entities/infrastructure-container.md
+      - Infrastructure/VM: entities/infrastructure-vm.md
+      - Infrastructure/Storage: entities/infrastructure-storage.md
+      - Infrastructure/Storage/MinIO: entities/infrastructure-storage-minio.md
+      - Infrastructure/Storage/Ceph: entities/infrastructure-storage-ceph.md
+      - Infrastructure/Storage/GlusterFS: entities/infrastructure-storage-glusterfs.md
+      - Infrastructure/DNS: entities/infrastructure-dns.md
+      - Infrastructure/DNS/BIND: entities/infrastructure-dns-bind.md
+      - Infrastructure/DNS/PowerDNS: entities/infrastructure-dns-powerdns.md
+      - Infrastructure/DNS/CoreDNS: entities/infrastructure-dns-coredns.md
+      - Infrastructure/DNS/Knot: entities/infrastructure-dns-knot.md
+      - Judge: entities/judge.md
+      - OS: entities/os.md
+      - OS/Preference: entities/os-preference.md
+      - Package: entities/package.md
+      - ProgrammingLanguage: entities/programming-language.md
+      - ProgrammingLanguage/PHP: entities/programming-language-php.md
+      - ProgrammingLanguage/Python: entities/programming-language-python.md
+      - ProgrammingLanguage/NodeJS: entities/programming-language-nodejs.md
+      - ProgrammingLanguage/Ruby: entities/programming-language-ruby.md
+      - ProgrammingLanguage/Java: entities/programming-language-java.md
+      - ProgrammingLanguage/Go: entities/programming-language-go.md
+      - ProgrammingLanguage/Rust: entities/programming-language-rust.md
+      - Secret: entities/secret.md
+      - Security: entities/security.md
+      - Security/Certificate: entities/security-certificate.md
+      - Security/Firewall: entities/security-firewall.md
+      - Security/IDS: entities/security-ids.md
+      - Security/Network: entities/security-network.md
+      - Security/SELinux: entities/security-selinux.md
+      - Security/AppArmor: entities/security-apparmor.md
+      - Security/WAF: entities/security-waf.md
+      - Security/WAF/ModSecurity: entities/security-waf-modsecurity.md
+      - Security/WAF/Coraza: entities/security-waf-coraza.md
+      - Service: entities/service.md
+      - System: entities/system.md
+      - System/CPU: entities/system-cpu.md
+      - System/Filesystem: entities/system-filesystem.md
+      - System/Memory: entities/system-memory.md
+      - System/Network: entities/system-network.md
+      - Template: entities/template.md
+      - Tools: entities/tools.md
+      - User: entities/user.md
 
   - Standards:
       - Go Conventions: standards/go-conventions.md
       - Testing: standards/testing.md
       - Project Structure: standards/project-structure.md
       - CLI Conventions: standards/cli-conventions.md
+      - Best Practices: standards/best-practices.md
 
   - Roadmap:
       - Current State: roadmap/current-state.md
