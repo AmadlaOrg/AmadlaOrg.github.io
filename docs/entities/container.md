@@ -31,5 +31,5 @@ _body:
 
 | Tool | How It Uses Container |
 |------|------------------------------|
-| raise | Provisions container infrastructure |
-| weaver | Generates container configuration files |
+| [raise](../tools/raise.md) | Provisions container infrastructure |
+| [weaver](../tools/weaver.md) | Generates container configuration files |

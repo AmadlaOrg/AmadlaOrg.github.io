@@ -20,12 +20,12 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [DNS/Route53](infrastructure-cloud-dns-route53.md) | AWS Route 53 | Stable |
-| [DNS/Cloud DNS](infrastructure-cloud-dns-cloud-dns.md) | Google Cloud DNS | Stable |
-| [DNS/Azure DNS](infrastructure-cloud-dns-azure-dns.md) | Azure DNS | Stable |
-| [DNS/Cloudflare](infrastructure-cloud-dns-cloudflare.md) | Cloudflare DNS | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [DNS/Route53](infrastructure-cloud-dns-route53.md) | AWS Route 53 |
+| [DNS/Cloud DNS](infrastructure-cloud-dns-cloud-dns.md) | Google Cloud DNS |
+| [DNS/Azure DNS](infrastructure-cloud-dns-azure-dns.md) | Azure DNS |
+| [DNS/Cloudflare](infrastructure-cloud-dns-cloudflare.md) | Cloudflare DNS |
 
 ## Example
 
@@ -52,4 +52,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/DNS |
 |------|-------------------------------------|
-| raise | Provisions DNS zones and records via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions DNS zones and records via provider-specific plugins |

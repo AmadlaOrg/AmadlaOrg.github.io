@@ -24,12 +24,12 @@ These properties are common across all log shipping implementations. Sub-types a
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [LogShipping/Filebeat](application-log-shipping-filebeat.md) | Filebeat — lightweight log shipper from Elastic | Elasticsearch ecosystem |
-| [LogShipping/Fluentbit](application-log-shipping-fluentbit.md) | Fluent Bit — lightweight log processor and forwarder | Cloud-native, CNCF |
-| [LogShipping/Promtail](application-log-shipping-promtail.md) | Promtail — log collector for Grafana Loki | Loki ecosystem |
-| [LogShipping/Vector](application-log-shipping-vector.md) | Vector — high-performance observability data pipeline | Multi-purpose |
+| Sub-type | Application |
+|----------|-------------|
+| [LogShipping/Filebeat](application-log-shipping-filebeat.md) | Filebeat — lightweight log shipper from Elastic |
+| [LogShipping/Fluentbit](application-log-shipping-fluentbit.md) | Fluent Bit — lightweight log processor and forwarder |
+| [LogShipping/Promtail](application-log-shipping-promtail.md) | Promtail — log collector for Grafana Loki |
+| [LogShipping/Vector](application-log-shipping-vector.md) | Vector — high-performance observability data pipeline |
 
 ## Example
 
@@ -53,6 +53,6 @@ _body:
 
 | Tool | How It Uses Application/LogShipping |
 |------|-------------------------------------|
-| lay | Installs the log shipping application (filebeat, fluent-bit, etc.) |
+| [lay](../tools/lay.md) | Installs the log shipping application (filebeat, fluent-bit, etc.) |
 | enjoin-service | Enables/starts the log shipping service |
-| weaver | Generates configuration files |
+| [weaver](../tools/weaver.md) | Generates configuration files |

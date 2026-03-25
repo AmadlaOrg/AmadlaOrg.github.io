@@ -57,4 +57,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/Java |
 |------|--------------------------------------|
-| lay | Installs JDK, Maven, Gradle, and configures keystore |
+| [lay](../tools/lay.md) | Installs JDK, Maven, Gradle, and configures keystore |

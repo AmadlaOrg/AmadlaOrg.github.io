@@ -52,6 +52,6 @@ _body:
 
 | Tool | How It Uses Security/WAF/ModSecurity |
 |------|---------------------------------------|
-| enjoin | Configures ModSecurity module and loads CRS rules |
-| weaver | Generates `modsecurity.conf` and CRS configuration |
-| judge | Validates ModSecurity rules and tests for bypasses |
+| [enjoin](../tools/enjoin.md) | Configures ModSecurity module and loads CRS rules |
+| [weaver](../tools/weaver.md) | Generates `modsecurity.conf` and CRS configuration |
+| [judge](../tools/judge.md) | Validates ModSecurity rules and tests for bypasses |

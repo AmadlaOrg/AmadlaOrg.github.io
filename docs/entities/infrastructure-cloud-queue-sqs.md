@@ -40,4 +40,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Queue/SQS |
 |------|-------------------------------------------|
-| raise | Provisions SQS queues via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions SQS queues via raise-aws plugin |

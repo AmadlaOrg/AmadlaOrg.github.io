@@ -47,6 +47,6 @@ _body:
 
 | Tool | How It Uses Application/DB/RDBMS |
 |------|----------------------------------------|
-| lay | Installs migration tools, poolers, backup agents |
-| weaver | Generates replication and pooler configuration |
-| judge-application | Validates replication status and backup schedule |
+| [lay](../tools/lay.md) | Installs migration tools, poolers, backup agents |
+| [weaver](../tools/weaver.md) | Generates replication and pooler configuration |
+| [judge-application](../plugins/judges.md) | Validates replication status and backup schedule |

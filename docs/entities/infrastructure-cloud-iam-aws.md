@@ -47,4 +47,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/IAM/AWS |
 |------|------------------------------------------|
-| raise | Provisions AWS IAM resources via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions AWS IAM resources via raise-aws plugin |

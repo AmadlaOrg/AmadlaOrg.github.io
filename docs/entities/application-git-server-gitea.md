@@ -70,6 +70,6 @@ _body:
 
 | Tool | How It Uses Application/GitServer/Gitea |
 |------|------------------------------------------|
-| lay | Installs the `gitea` binary |
-| weaver | Generates `app.ini` configuration |
+| [lay](../tools/lay.md) | Installs the `gitea` binary |
+| [weaver](../tools/weaver.md) | Generates `app.ini` configuration |
 | enjoin-service | Enables/starts the `gitea` service |

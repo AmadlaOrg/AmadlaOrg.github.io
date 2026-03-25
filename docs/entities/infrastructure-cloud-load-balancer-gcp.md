@@ -50,4 +50,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/LoadBalancer/GCP |
 |------|--------------------------------------------------|
-| raise | Provisions GCP load balancers via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions GCP load balancers via raise-gcp plugin |

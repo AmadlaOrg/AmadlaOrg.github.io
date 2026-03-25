@@ -85,6 +85,6 @@ _body:
 
 | Tool | How It Uses Application/SNMP/Net-SNMP |
 |------|---------------------------------------|
-| lay | Installs the `net-snmp` package |
-| weaver | Generates `/etc/snmp/snmpd.conf` |
+| [lay](../tools/lay.md) | Installs the `net-snmp` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/snmp/snmpd.conf` |
 | enjoin-service | Enables/starts `snmpd` service |

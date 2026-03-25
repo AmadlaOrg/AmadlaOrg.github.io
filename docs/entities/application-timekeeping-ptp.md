@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/Timekeeping/PTP |
 |------|----------------------------------|
-| lay | Installs the `linuxptp` package |
-| weaver | Generates `/etc/ptp4l.conf` and phc2sys config |
+| [lay](../tools/lay.md) | Installs the `linuxptp` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/ptp4l.conf` and phc2sys config |
 | enjoin-service | Enables/starts `ptp4l` and `phc2sys` services |

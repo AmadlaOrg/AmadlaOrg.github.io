@@ -20,11 +20,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [Serverless/Lambda](infrastructure-cloud-serverless-lambda.md) | AWS Lambda | Stable |
-| [Serverless/Cloud Functions](infrastructure-cloud-serverless-cloud-functions.md) | GCP Cloud Functions | Stable |
-| [Serverless/Azure Functions](infrastructure-cloud-serverless-azure-functions.md) | Azure Functions | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [Serverless/Lambda](infrastructure-cloud-serverless-lambda.md) | AWS Lambda |
+| [Serverless/Cloud Functions](infrastructure-cloud-serverless-cloud-functions.md) | GCP Cloud Functions |
+| [Serverless/Azure Functions](infrastructure-cloud-serverless-azure-functions.md) | Azure Functions |
 
 ## Example
 
@@ -45,4 +45,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Serverless |
 |------|---------------------------------------------|
-| raise | Provisions serverless functions via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions serverless functions via provider-specific plugins |

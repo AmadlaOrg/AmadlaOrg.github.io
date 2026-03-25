@@ -55,6 +55,6 @@ _body:
 
 | Tool | How It Uses Application/ContainerRegistry/Harbor |
 |------|--------------------------------------------------|
-| lay | Installs Harbor components |
-| weaver | Generates `harbor.yml` configuration |
+| [lay](../tools/lay.md) | Installs Harbor components |
+| [weaver](../tools/weaver.md) | Generates `harbor.yml` configuration |
 | enjoin-service | Enables/starts Harbor services |

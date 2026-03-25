@@ -13,17 +13,31 @@ Each concern is handled by a **fat plugin** (`enjoin-*`) with multiple OS-aware 
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `enjoin apply --from <plugin> -f <data>` | Active | Apply system state configuration via a plugin |
-| `enjoin validate --from <plugin> -f <data>` | Active | Dry-run validation — shows what would change without applying |
-| `enjoin plugins` | Active | List discovered enjoin plugins on PATH |
+| Command | Description |
+|---------|-------------|
+| `enjoin apply --from <plugin> -f <data>` | Apply system state configuration via a plugin |
+| `enjoin validate --from <plugin> -f <data>` | Dry-run validation — shows what would change without applying |
+| `enjoin plugins` | List discovered enjoin plugins on PATH |
 
 ## Dependencies
 
 | Library | Purpose |
 |---------|---------|
 | LibraryEnjoinFramework | Enjoin plugin loading and communication |
+
+## Entity Types
+
+| Entity | Plugin | What enjoin Does |
+|--------|--------|-----------------|
+| [User](../entities/user.md) | enjoin-user | Creates/manages system users and groups |
+| [Service](../entities/service.md) | enjoin-service | Manages systemd services |
+| [Security/Firewall](../entities/security-firewall.md) | enjoin-firewall | Configures firewall rules |
+| [Cron](../entities/cron.md) | enjoin-cron | Manages scheduled tasks |
+| [System/Network](../entities/system-network.md) | enjoin-network | Configures network interfaces and routes |
+| [System/Filesystem](../entities/system-filesystem.md) | enjoin-filesystem | Manages mounts and fstab entries |
+| [Security/Certificate](../entities/security-certificate.md) | enjoin-certificate | Manages TLS certificates |
+| [Security/SELinux](../entities/security-selinux.md) | enjoin-selinux | Manages SELinux policies |
+| [Security/AppArmor](../entities/security-apparmor.md) | enjoin-apparmor | Manages AppArmor profiles |
 
 ## Pipeline Position
 
@@ -70,18 +84,18 @@ Each enjoin plugin is a **fat plugin** — it contains multiple backends interna
 
 ## Enjoin Plugins
 
-| Plugin | Manages | Backends | Entity | Status |
-|--------|---------|----------|--------|--------|
-| `enjoin-user` | Users, groups, sudoers | useradd, groupadd | [User](../entities/user.md) | Active |
-| `enjoin-service` | System services | systemctl, init.d, rc-service | [Service](../entities/service.md) | Active |
-| `enjoin-firewall` | Firewall rules | ufw, iptables, nftables, firewalld | [Security/Firewall](../entities/security-firewall.md) | Active |
-| `enjoin-cron` | Scheduled tasks | crontab, systemd timers | [Cron](../entities/cron.md) | Planned |
-| `enjoin-network` | Network config | ip, nmcli, netplan, ifupdown | [System/Network](../entities/system-network.md) | Planned |
-| `enjoin-filesystem` | Mounts, fstab | mount, fstab, tmpfs | [System/Filesystem](../entities/system-filesystem.md) | Planned |
-| `enjoin-certificate` | TLS certificates | certbot, openssl, mkcert | [Security/Certificate](../entities/security-certificate.md) | Planned |
-| `enjoin-selinux` | SELinux policies | semanage, setsebool, restorecon | — | Planned |
-| `enjoin-apparmor` | AppArmor profiles | aa-enforce, aa-complain | — | Planned |
-| `enjoin-sysctl` | Kernel parameters | sysctl.conf | — | Planned |
+| Plugin | Manages | Backends | Entity |
+|--------|---------|----------|--------|
+| `enjoin-user` | Users, groups, sudoers | useradd, groupadd | [User](../entities/user.md) |
+| `enjoin-service` | System services | systemctl, init.d, rc-service | [Service](../entities/service.md) |
+| `enjoin-firewall` | Firewall rules | ufw, iptables, nftables, firewalld | [Security/Firewall](../entities/security-firewall.md) |
+| `enjoin-cron` | Scheduled tasks | crontab, systemd timers | [Cron](../entities/cron.md) |
+| `enjoin-network` | Network config | ip, nmcli, netplan, ifupdown | [System/Network](../entities/system-network.md) |
+| `enjoin-filesystem` | Mounts, fstab | mount, fstab, tmpfs | [System/Filesystem](../entities/system-filesystem.md) |
+| `enjoin-certificate` | TLS certificates | certbot, openssl, mkcert | [Security/Certificate](../entities/security-certificate.md) |
+| `enjoin-selinux` | SELinux policies | semanage, setsebool, restorecon | — |
+| `enjoin-apparmor` | AppArmor profiles | aa-enforce, aa-complain | — |
+| `enjoin-sysctl` | Kernel parameters | sysctl.conf | — |
 
 Plugins are discovered via PATH (`enjoin-*` naming convention). Each plugin declares supported entity types via its `info` subcommand.
 

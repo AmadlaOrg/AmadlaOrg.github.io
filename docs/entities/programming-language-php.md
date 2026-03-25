@@ -61,6 +61,6 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/PHP |
 |------|-------------------------------------------|
-| lay | Installs PHP, extensions, SAPIs, and Composer |
-| weaver | Generates php.ini and FPM pool configuration files |
-| judge-application | Validates PHP version, extensions, and FPM configuration |
+| [lay](../tools/lay.md) | Installs PHP, extensions, SAPIs, and Composer |
+| [weaver](../tools/weaver.md) | Generates php.ini and FPM pool configuration files |
+| [judge-application](../plugins/judges.md) | Validates PHP version, extensions, and FPM configuration |

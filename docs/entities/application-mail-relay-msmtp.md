@@ -41,6 +41,6 @@ _body:
 
 | Tool | How It Uses Application/MailRelay/Msmtp |
 |------|----------------------------------------|
-| lay | Installs the `msmtp` and `msmtp-mta` packages |
-| weaver | Generates `/etc/msmtprc` |
+| [lay](../tools/lay.md) | Installs the `msmtp` and `msmtp-mta` packages |
+| [weaver](../tools/weaver.md) | Generates `/etc/msmtprc` |
 | enjoin-service | Sets msmtp as the system sendmail alternative |

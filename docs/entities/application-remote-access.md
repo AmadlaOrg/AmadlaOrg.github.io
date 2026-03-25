@@ -22,11 +22,11 @@ These properties are common across all remote access implementations. Sub-types 
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [RemoteAccess/XRDP](application-remote-access-xrdp.md) | XRDP — open-source RDP server for Linux | RDP protocol |
-| [RemoteAccess/VNC](application-remote-access-vnc.md) | VNC — platform-independent remote framebuffer | VNC protocol |
-| [RemoteAccess/Guacamole](application-remote-access-guacamole.md) | Apache Guacamole — clientless remote desktop gateway | Web-based |
+| Sub-type | Application |
+|----------|-------------|
+| [RemoteAccess/XRDP](application-remote-access-xrdp.md) | XRDP — open-source RDP server for Linux |
+| [RemoteAccess/VNC](application-remote-access-vnc.md) | VNC — platform-independent remote framebuffer |
+| [RemoteAccess/Guacamole](application-remote-access-guacamole.md) | Apache Guacamole — clientless remote desktop gateway |
 
 ## Example
 
@@ -46,6 +46,6 @@ _body:
 
 | Tool | How It Uses Application/RemoteAccess |
 |------|--------------------------------------|
-| lay | Installs the remote access application |
-| weaver | Generates configuration files |
+| [lay](../tools/lay.md) | Installs the remote access application |
+| [weaver](../tools/weaver.md) | Generates configuration files |
 | enjoin-service | Enables/starts the remote access service |

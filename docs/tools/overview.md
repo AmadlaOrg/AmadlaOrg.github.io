@@ -1,3 +1,7 @@
+---
+description: Amadla's modular CLI tools — hery, doorman, weaver, raise, lay, enjoin, judge, waiter, and more. Each handles one responsibility in the infrastructure pipeline.
+---
+
 # Tools Overview
 
 Amadla's tools form a modular pipeline where each tool handles one responsibility. Tools communicate via JSON entities over standard I/O, following the UNIX philosophy.

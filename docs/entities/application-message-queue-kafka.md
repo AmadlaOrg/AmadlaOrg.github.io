@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/MessageQueue/Kafka |
 |------|-------------------------------------------|
-| lay | Installs the `kafka` package |
-| weaver | Generates `/etc/kafka/server.properties` |
+| [lay](../tools/lay.md) | Installs the `kafka` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/kafka/server.properties` |
 | enjoin-service | Enables/starts `kafka` service |

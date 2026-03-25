@@ -13,13 +13,13 @@ Inspired by [kamal-deploy.org](https://kamal-deploy.org/) and the VFRMate infra 
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `waiter deploy --strategy <strategy>` | Planned | Deploy with a specific strategy |
-| `waiter promote` | Planned | Promote a canary deployment to full traffic |
-| `waiter abort` | Planned | Abort a canary deployment |
-| `waiter rollback` | Planned | Roll back to the previous version |
-| `waiter settings` | Planned | Manage waiter configuration |
+| Command | Description |
+|---------|-------------|
+| `waiter deploy --strategy <strategy>` | Deploy with a specific strategy |
+| `waiter promote` | Promote a canary deployment to full traffic |
+| `waiter abort` | Abort a canary deployment |
+| `waiter rollback` | Roll back to the previous version |
+| `waiter settings` | Manage waiter configuration |
 
 ## Deployment Strategies
 

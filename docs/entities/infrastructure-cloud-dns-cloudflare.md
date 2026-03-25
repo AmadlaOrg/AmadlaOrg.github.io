@@ -41,4 +41,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/DNS/Cloudflare |
 |------|-----------------------------------------------|
-| raise | Provisions Cloudflare DNS zones via raise-cloudflare plugin |
+| [raise](../tools/raise.md) | Provisions Cloudflare DNS zones via raise-cloudflare plugin |

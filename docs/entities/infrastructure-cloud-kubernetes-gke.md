@@ -40,4 +40,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Kubernetes/GKE |
 |------|------------------------------------------------|
-| raise | Provisions GKE clusters via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions GKE clusters via raise-gcp plugin |

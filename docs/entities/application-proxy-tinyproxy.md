@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Application/Proxy/Tinyproxy |
 |------|----------------------------------------|
-| lay | Installs the `tinyproxy` package |
-| weaver | Generates `/etc/tinyproxy/tinyproxy.conf` |
+| [lay](../tools/lay.md) | Installs the `tinyproxy` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/tinyproxy/tinyproxy.conf` |
 | enjoin-service | Enables/starts the `tinyproxy` service |

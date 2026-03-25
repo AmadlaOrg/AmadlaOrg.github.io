@@ -46,4 +46,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Serverless/Azure Functions |
 |------|-----------------------------------------------------------|
-| raise | Provisions Azure Functions via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure Functions via raise-azure plugin |

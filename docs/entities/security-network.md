@@ -77,4 +77,4 @@ _body:
 |------|------------------------------|
 | enjoin-network | Applies TLS settings, protocol hardening (sysctl), DNS security, and isolation rules |
 | enjoin-sysctl | Applies protocol hardening kernel parameters (SYN cookies, RP filter, ICMP redirects) |
-| judge | Validates network security posture matches declared policy |
+| [judge](../tools/judge.md) | Validates network security posture matches declared policy |

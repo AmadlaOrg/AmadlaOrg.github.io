@@ -38,4 +38,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/ObjectStorage/Azure Blob |
 |------|----------------------------------------------------------|
-| raise | Provisions Azure Blob Storage via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure Blob Storage via raise-azure plugin |

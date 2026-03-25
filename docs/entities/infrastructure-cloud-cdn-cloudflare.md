@@ -43,4 +43,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/CDN/Cloudflare |
 |------|------------------------------------------------|
-| raise | Provisions Cloudflare CDN zones via raise-cloudflare plugin |
+| [raise](../tools/raise.md) | Provisions Cloudflare CDN zones via raise-cloudflare plugin |

@@ -45,6 +45,6 @@ _body:
 
 | Tool | How It Uses System/Memory |
 |------|----------------------------------|
-| enjoin | Configures cgroup memory constraints |
-| raise | Provisions VMs/instances with specified memory |
-| judge-system | Validates that memory resources meet requirements |
+| [enjoin](../tools/enjoin.md) | Configures cgroup memory constraints |
+| [raise](../tools/raise.md) | Provisions VMs/instances with specified memory |
+| [judge-system](../plugins/judges.md) | Validates that memory resources meet requirements |

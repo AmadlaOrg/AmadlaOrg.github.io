@@ -52,6 +52,6 @@ _body:
 
 | Tool | How It Uses Application/MessageQueue/NATS |
 |------|------------------------------------------|
-| lay | Installs the `nats-server` package |
-| weaver | Generates `/etc/nats/nats-server.conf` |
+| [lay](../tools/lay.md) | Installs the `nats-server` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/nats/nats-server.conf` |
 | enjoin-service | Enables/starts `nats-server` service |

@@ -47,5 +47,5 @@ _body:
 
 | Tool | How It Uses Security |
 |------|----------------------|
-| enjoin | Applies security baseline (enforcement mode, audit log path) |
-| judge | Validates system state against the declared compliance profile |
+| [enjoin](../tools/enjoin.md) | Applies security baseline (enforcement mode, audit log path) |
+| [judge](../tools/judge.md) | Validates system state against the declared compliance profile |

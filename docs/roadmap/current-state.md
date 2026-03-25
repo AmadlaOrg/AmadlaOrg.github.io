@@ -66,12 +66,12 @@ All entity types contain JSON Schema definitions in `schema.hery.json` at the en
 
 ## Other Repositories
 
-| Repo | Type | Status |
-|------|------|--------|
-| `common-json-schemas` | JSON Schema definitions | Active |
-| `hery-playground` | Web app (Gin) | Active |
-| `hery-jetbrains-editor-plugin` | IDE plugin | Stub |
-| `hery-code-editor-plugin` | VS Code extension | Stub |
-| `template-application-golang` | Go project template | Active |
-| `GitHub-Actions` | CI/CD workflows | Active |
-| `AmadlaOrg.github.io` | GitHub Pages | Minimal |
+| Repo | Type |
+|------|------|
+| `common-json-schemas` | JSON Schema definitions |
+| `hery-playground` | Web app (Gin) |
+| `hery-jetbrains-editor-plugin` | IDE plugin |
+| `hery-code-editor-plugin` | VS Code extension |
+| `template-application-golang` | Go project template |
+| `GitHub-Actions` | CI/CD workflows |
+| `AmadlaOrg.github.io` | GitHub Pages |

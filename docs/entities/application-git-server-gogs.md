@@ -57,6 +57,6 @@ _body:
 
 | Tool | How It Uses Application/GitServer/Gogs |
 |------|----------------------------------------|
-| lay | Installs the `gogs` binary |
-| weaver | Generates `app.ini` configuration |
+| [lay](../tools/lay.md) | Installs the `gogs` binary |
+| [weaver](../tools/weaver.md) | Generates `app.ini` configuration |
 | enjoin-service | Enables/starts the `gogs` service |

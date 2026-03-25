@@ -45,5 +45,6 @@ _body:
 
 | Tool | How It Uses Cron |
 |------|------------------------|
-| lay | Creates crontab entries or systemd timer units |
-| judge | Validates that scheduled jobs exist and match requirements |
+| [enjoin](../tools/enjoin.md) | Manages scheduled tasks via enjoin-cron plugin |
+| [lay](../tools/lay.md) | Creates crontab entries or systemd timer units |
+| [judge](../tools/judge.md) | Validates that scheduled jobs exist and match requirements |

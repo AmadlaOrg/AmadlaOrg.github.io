@@ -83,6 +83,7 @@ nav:
 
   - Plugins:
       - Overview: plugins/overview.md
+      - Raise Plugins: plugins/raise-plugins.md
       - Doorman Plugins: plugins/doorman-plugins.md
       - Judge Plugins: plugins/judges.md
       - Weavers: plugins/weavers.md
@@ -303,9 +304,15 @@ nav:
 
   - Glossary: glossary/glossary.md
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/AmadlaOrg
+
 plugins:
   - search
   - glightbox
+  - meta
 
 markdown_extensions:
   - admonition

@@ -59,6 +59,6 @@ _body:
 
 | Tool | How It Uses Application/MessageQueue/RabbitMQ |
 |------|-----------------------------------------------|
-| lay | Installs the `rabbitmq-server` package |
-| weaver | Generates `/etc/rabbitmq/rabbitmq.conf` |
+| [lay](../tools/lay.md) | Installs the `rabbitmq-server` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/rabbitmq/rabbitmq.conf` |
 | enjoin-service | Enables/starts `rabbitmq-server` service |

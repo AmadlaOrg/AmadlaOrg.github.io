@@ -45,4 +45,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Compute/Hetzner Server |
 |------|-------------------------------------------------------|
-| raise | Provisions Hetzner servers via raise-hetzner plugin |
+| [raise](../tools/raise.md) | Provisions Hetzner servers via raise-hetzner plugin |

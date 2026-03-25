@@ -45,4 +45,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/IAM/Azure |
 |------|---------------------------------------------|
-| raise | Provisions Azure Entra ID resources via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure Entra ID resources via raise-azure plugin |

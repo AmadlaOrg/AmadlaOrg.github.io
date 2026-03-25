@@ -47,6 +47,6 @@ _body:
 
 | Tool | How It Uses Application/Monitoring/NodeExporter |
 |------|------------------------------------------------|
-| lay | Installs the `node_exporter` binary |
-| weaver | Generates web config YAML and systemd unit overrides |
+| [lay](../tools/lay.md) | Installs the `node_exporter` binary |
+| [weaver](../tools/weaver.md) | Generates web config YAML and systemd unit overrides |
 | enjoin-service | Enables/starts `node_exporter` service |

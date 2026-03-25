@@ -54,6 +54,6 @@ _body:
 
 | Tool | How It Uses Application/FTP/ProFTPD |
 |------|-------------------------------------|
-| lay | Installs the `proftpd` package |
-| weaver | Generates `/etc/proftpd/proftpd.conf` |
+| [lay](../tools/lay.md) | Installs the `proftpd` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/proftpd/proftpd.conf` |
 | enjoin-service | Enables/starts `proftpd` service |

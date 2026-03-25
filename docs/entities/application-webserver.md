@@ -55,6 +55,6 @@ _body:
 
 | Tool | How It Uses Application/WebServer |
 |------|----------------------------------------|
-| lay | Installs the web server (nginx, apache, caddy) |
-| weaver | Generates virtual host / server block configuration files |
-| judge-application | Validates web server is running with correct configuration |
+| [lay](../tools/lay.md) | Installs the web server (nginx, apache, caddy) |
+| [weaver](../tools/weaver.md) | Generates virtual host / server block configuration files |
+| [judge-application](../plugins/judges.md) | Validates web server is running with correct configuration |

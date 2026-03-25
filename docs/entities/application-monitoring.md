@@ -20,12 +20,12 @@ These properties are common across all monitoring implementations. Sub-types add
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [Monitoring/NodeExporter](application-monitoring-node-exporter.md) | Prometheus node_exporter — hardware/OS metrics | Prometheus ecosystem |
-| [Monitoring/ZabbixAgent](application-monitoring-zabbix-agent.md) | Zabbix agent — enterprise monitoring | Enterprise |
-| [Monitoring/Telegraf](application-monitoring-telegraf.md) | Telegraf — plugin-driven metrics collector | InfluxDB ecosystem |
-| [Monitoring/Collectd](application-monitoring-collectd.md) | collectd — system statistics daemon | Lightweight, C-based |
+| Sub-type | Application |
+|----------|-------------|
+| [Monitoring/NodeExporter](application-monitoring-node-exporter.md) | Prometheus node_exporter — hardware/OS metrics |
+| [Monitoring/ZabbixAgent](application-monitoring-zabbix-agent.md) | Zabbix agent — enterprise monitoring |
+| [Monitoring/Telegraf](application-monitoring-telegraf.md) | Telegraf — plugin-driven metrics collector |
+| [Monitoring/Collectd](application-monitoring-collectd.md) | collectd — system statistics daemon |
 
 ## Example
 
@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses Application/Monitoring |
 |------|------------------------------------|
-| lay | Installs the monitoring agent (node_exporter, telegraf, etc.) |
+| [lay](../tools/lay.md) | Installs the monitoring agent (node_exporter, telegraf, etc.) |
 | enjoin-service | Enables/starts the monitoring service |
-| weaver | Generates configuration files |
+| [weaver](../tools/weaver.md) | Generates configuration files |

@@ -18,11 +18,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [CDN/CloudFront](infrastructure-cloud-cdn-cloudfront.md) | AWS CloudFront | Stable |
-| [CDN/Cloudflare](infrastructure-cloud-cdn-cloudflare.md) | Cloudflare CDN | Stable |
-| [CDN/Fastly](infrastructure-cloud-cdn-fastly.md) | Fastly CDN | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [CDN/CloudFront](infrastructure-cloud-cdn-cloudfront.md) | AWS CloudFront |
+| [CDN/Cloudflare](infrastructure-cloud-cdn-cloudflare.md) | Cloudflare CDN |
+| [CDN/Fastly](infrastructure-cloud-cdn-fastly.md) | Fastly CDN |
 
 ## Example
 
@@ -40,4 +40,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/CDN |
 |------|-------------------------------------|
-| raise | Provisions CDN distributions via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions CDN distributions via provider-specific plugins |

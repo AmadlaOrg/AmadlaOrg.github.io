@@ -57,6 +57,6 @@ _body:
 
 | Tool | How It Uses Application/ServiceDiscovery/Consul |
 |------|--------------------------------------------------|
-| lay | Installs the `consul` binary |
-| weaver | Generates `/etc/consul.d/consul.hcl` |
+| [lay](../tools/lay.md) | Installs the `consul` binary |
+| [weaver](../tools/weaver.md) | Generates `/etc/consul.d/consul.hcl` |
 | enjoin-service | Enables/starts `consul` service |

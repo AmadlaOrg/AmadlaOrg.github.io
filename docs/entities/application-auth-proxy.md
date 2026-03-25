@@ -23,11 +23,11 @@ These properties are common across all authentication proxy implementations. Sub
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [AuthProxy/OAuth2Proxy](application-auth-proxy-oauth2-proxy.md) | OAuth2 Proxy — multi-provider OAuth2 reverse proxy | Most common |
-| [AuthProxy/Authelia](application-auth-proxy-authelia.md) | Authelia — SSO and 2FA authentication server | Feature-rich |
-| [AuthProxy/KeycloakGatekeeper](application-auth-proxy-keycloak-gatekeeper.md) | Keycloak Gatekeeper — Keycloak-integrated auth proxy | Keycloak ecosystems |
+| Sub-type | Application |
+|----------|-------------|
+| [AuthProxy/OAuth2Proxy](application-auth-proxy-oauth2-proxy.md) | OAuth2 Proxy — multi-provider OAuth2 reverse proxy |
+| [AuthProxy/Authelia](application-auth-proxy-authelia.md) | Authelia — SSO and 2FA authentication server |
+| [AuthProxy/KeycloakGatekeeper](application-auth-proxy-keycloak-gatekeeper.md) | Keycloak Gatekeeper — Keycloak-integrated auth proxy |
 
 ## Example
 
@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/AuthProxy |
 |------|-----------------------------------|
-| lay | Installs the authentication proxy application |
+| [lay](../tools/lay.md) | Installs the authentication proxy application |
 | enjoin-service | Enables/starts the auth proxy service |
-| weaver | Generates configuration files |
+| [weaver](../tools/weaver.md) | Generates configuration files |

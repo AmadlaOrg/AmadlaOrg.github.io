@@ -58,6 +58,6 @@ _body:
 
 | Tool | How It Uses Application/CICD/GitLabRunner |
 |------|-------------------------------------------|
-| lay | Installs the `gitlab-runner` package |
-| weaver | Generates `config.toml` |
+| [lay](../tools/lay.md) | Installs the `gitlab-runner` package |
+| [weaver](../tools/weaver.md) | Generates `config.toml` |
 | enjoin-service | Enables/starts the `gitlab-runner` service |

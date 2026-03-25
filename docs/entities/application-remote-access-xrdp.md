@@ -46,6 +46,6 @@ _body:
 
 | Tool | How It Uses Application/RemoteAccess/XRDP |
 |------|-------------------------------------------|
-| lay | Installs the `xrdp` package |
-| weaver | Generates `/etc/xrdp/xrdp.ini` and `/etc/xrdp/sesman.ini` |
+| [lay](../tools/lay.md) | Installs the `xrdp` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/xrdp/xrdp.ini` and `/etc/xrdp/sesman.ini` |
 | enjoin-service | Enables/starts `xrdp` and `xrdp-sesman` services |

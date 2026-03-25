@@ -46,6 +46,6 @@ _body:
 
 | Tool | How It Uses Application/ContainerRegistry/DockerRegistry |
 |------|----------------------------------------------------------|
-| lay | Installs the Docker Registry binary |
-| weaver | Generates `config.yml` for the registry |
+| [lay](../tools/lay.md) | Installs the Docker Registry binary |
+| [weaver](../tools/weaver.md) | Generates `config.yml` for the registry |
 | enjoin-service | Enables/starts the registry service |

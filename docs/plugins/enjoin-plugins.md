@@ -4,18 +4,18 @@ Enjoin plugins apply system state configuration based on [HERY](../architecture/
 
 ## Plugin Inventory
 
-| Plugin | Manages | Backends | Entity | Status |
-|--------|---------|----------|--------|--------|
-| `enjoin-user` | Users, groups, sudoers | useradd, groupadd | [User](../entities/user.md) | Active (Go) |
-| `enjoin-service` | System services | systemctl, init.d, rc-service | [Service](../entities/service.md) | Active (Go) |
-| `enjoin-firewall` | Firewall rules | ufw, iptables, nftables, firewalld | [Security/Firewall](../entities/security-firewall.md) | Active (Go) |
-| `enjoin-cron` | Scheduled tasks | crontab, systemd timers | [Cron](../entities/cron.md) | Planned |
-| `enjoin-network` | Network config | ip, nmcli, netplan, ifupdown | [System/Network](../entities/system-network.md) | Planned |
-| `enjoin-filesystem` | Mounts, fstab | mount, fstab, tmpfs | [System/Filesystem](../entities/system-filesystem.md) | Planned |
-| `enjoin-certificate` | TLS certificates | certbot, openssl, mkcert | [Security/Certificate](../entities/security-certificate.md) | Planned |
-| `enjoin-selinux` | SELinux policies | semanage, setsebool, restorecon | — | Planned |
-| `enjoin-apparmor` | AppArmor profiles | aa-enforce, aa-complain | — | Planned |
-| `enjoin-sysctl` | Kernel parameters | sysctl.conf | — | Planned |
+| Plugin | Manages | Backends | Entity |
+|--------|---------|----------|--------|
+| `enjoin-user` | Users, groups, sudoers | useradd, groupadd | [User](../entities/user.md) |
+| `enjoin-service` | System services | systemctl, init.d, rc-service | [Service](../entities/service.md) |
+| `enjoin-firewall` | Firewall rules | ufw, iptables, nftables, firewalld | [Security/Firewall](../entities/security-firewall.md) |
+| `enjoin-cron` | Scheduled tasks | crontab, systemd timers | [Cron](../entities/cron.md) |
+| `enjoin-network` | Network config | ip, nmcli, netplan, ifupdown | [System/Network](../entities/system-network.md) |
+| `enjoin-filesystem` | Mounts, fstab | mount, fstab, tmpfs | [System/Filesystem](../entities/system-filesystem.md) |
+| `enjoin-certificate` | TLS certificates | certbot, openssl, mkcert | [Security/Certificate](../entities/security-certificate.md) |
+| `enjoin-selinux` | SELinux policies | semanage, setsebool, restorecon | — |
+| `enjoin-apparmor` | AppArmor profiles | aa-enforce, aa-complain | — |
+| `enjoin-sysctl` | Kernel parameters | sysctl.conf | — |
 
 ## Protocol
 

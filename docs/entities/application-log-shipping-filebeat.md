@@ -55,6 +55,6 @@ _body:
 
 | Tool | How It Uses Application/LogShipping/Filebeat |
 |------|----------------------------------------------|
-| lay | Installs the `filebeat` package |
-| weaver | Generates `/etc/filebeat/filebeat.yml` |
+| [lay](../tools/lay.md) | Installs the `filebeat` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/filebeat/filebeat.yml` |
 | enjoin-service | Enables/starts `filebeat` service |

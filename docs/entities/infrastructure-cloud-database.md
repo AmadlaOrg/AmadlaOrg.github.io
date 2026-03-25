@@ -22,11 +22,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [Database/RDS](infrastructure-cloud-database-rds.md) | AWS RDS | Stable |
-| [Database/Cloud SQL](infrastructure-cloud-database-cloud-sql.md) | Google Cloud SQL | Stable |
-| [Database/Azure Database](infrastructure-cloud-database-azure-database.md) | Azure Database | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [Database/RDS](infrastructure-cloud-database-rds.md) | AWS RDS |
+| [Database/Cloud SQL](infrastructure-cloud-database-cloud-sql.md) | Google Cloud SQL |
+| [Database/Azure Database](infrastructure-cloud-database-azure-database.md) | Azure Database |
 
 ## Example
 
@@ -48,4 +48,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Database |
 |------|------------------------------------------|
-| raise | Provisions managed database instances via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions managed database instances via provider-specific plugins |

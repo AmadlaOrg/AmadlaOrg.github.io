@@ -45,4 +45,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Network/GCP VPC |
 |------|------------------------------------------------|
-| raise | Provisions GCP VPC networks via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions GCP VPC networks via raise-gcp plugin |

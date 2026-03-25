@@ -17,11 +17,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [IAM/AWS](infrastructure-cloud-iam-aws.md) | AWS Identity and Access Management | Stable |
-| [IAM/GCP](infrastructure-cloud-iam-gcp.md) | GCP IAM | Stable |
-| [IAM/Azure](infrastructure-cloud-iam-azure.md) | Azure Entra ID | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [IAM/AWS](infrastructure-cloud-iam-aws.md) | AWS Identity and Access Management |
+| [IAM/GCP](infrastructure-cloud-iam-gcp.md) | GCP IAM |
+| [IAM/Azure](infrastructure-cloud-iam-azure.md) | Azure Entra ID |
 
 ## Example
 
@@ -47,4 +47,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/IAM |
 |------|-------------------------------------|
-| raise | Provisions IAM resources via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions IAM resources via provider-specific plugins |

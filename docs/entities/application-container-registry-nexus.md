@@ -65,6 +65,6 @@ _body:
 
 | Tool | How It Uses Application/ContainerRegistry/Nexus |
 |------|-------------------------------------------------|
-| lay | Installs Nexus Repository Manager |
-| weaver | Generates Nexus configuration |
+| [lay](../tools/lay.md) | Installs Nexus Repository Manager |
+| [weaver](../tools/weaver.md) | Generates Nexus configuration |
 | enjoin-service | Enables/starts the Nexus service |

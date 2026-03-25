@@ -44,4 +44,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Kubernetes/EKS |
 |------|------------------------------------------------|
-| raise | Provisions EKS clusters via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions EKS clusters via raise-aws plugin |

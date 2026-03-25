@@ -49,4 +49,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Compute/GCE |
 |------|---------------------------------------------|
-| raise | Provisions GCE instances via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions GCE instances via raise-gcp plugin |

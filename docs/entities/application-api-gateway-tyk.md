@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Application/APIGateway/Tyk |
 |------|----------------------------------------|
-| lay | Installs Tyk gateway |
-| weaver | Generates `tyk.conf` and API definitions |
+| [lay](../tools/lay.md) | Installs Tyk gateway |
+| [weaver](../tools/weaver.md) | Generates `tyk.conf` and API definitions |
 | enjoin-service | Enables/starts the `tyk-gateway` service |

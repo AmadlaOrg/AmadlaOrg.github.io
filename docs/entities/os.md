@@ -54,8 +54,8 @@ _body:
 
 | Tool | How It Uses OS |
 |------|----------------|
-| lay | Selects package manager and install commands based on distro/family |
-| enjoin | Selects backend tools (firewall, service manager, cron) based on OS identity |
-| raise | Chooses VM images and cloud AMIs matching distro/version/arch |
-| unravel | Discovers and outputs the OS entity from a running system |
-| judge | Validates that the running OS matches declared requirements |
+| [lay](../tools/lay.md) | Selects package manager and install commands based on distro/family |
+| [enjoin](../tools/enjoin.md) | Selects backend tools (firewall, service manager, cron) based on OS identity |
+| [raise](../tools/raise.md) | Chooses VM images and cloud AMIs matching distro/version/arch |
+| [unravel](../tools/unravel.md) | Discovers and outputs the OS entity from a running system |
+| [judge](../tools/judge.md) | Validates that the running OS matches declared requirements |

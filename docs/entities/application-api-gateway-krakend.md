@@ -61,6 +61,6 @@ _body:
 
 | Tool | How It Uses Application/APIGateway/KrakenD |
 |------|---------------------------------------------|
-| lay | Installs KrakenD gateway |
-| weaver | Generates `krakend.json` configuration |
+| [lay](../tools/lay.md) | Installs KrakenD gateway |
+| [weaver](../tools/weaver.md) | Generates `krakend.json` configuration |
 | enjoin-service | Enables/starts the `krakend` service |

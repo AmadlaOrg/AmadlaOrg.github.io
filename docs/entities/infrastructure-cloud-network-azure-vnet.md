@@ -53,4 +53,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Network/Azure VNet |
 |------|---------------------------------------------------|
-| raise | Provisions Azure VNets via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure VNets via raise-azure plugin |

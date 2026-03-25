@@ -38,6 +38,6 @@ _body:
 
 | Tool | How It Uses Application/RemoteAccess/VNC |
 |------|------------------------------------------|
-| lay | Installs the VNC server package (e.g., `tigervnc-server`) |
-| weaver | Generates VNC config and systemd unit files |
+| [lay](../tools/lay.md) | Installs the VNC server package (e.g., `tigervnc-server`) |
+| [weaver](../tools/weaver.md) | Generates VNC config and systemd unit files |
 | enjoin-service | Enables/starts `vncserver@:<display>` service |

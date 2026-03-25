@@ -44,4 +44,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Database/RDS |
 |------|----------------------------------------------|
-| raise | Provisions RDS instances via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions RDS instances via raise-aws plugin |

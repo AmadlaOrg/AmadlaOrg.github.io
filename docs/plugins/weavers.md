@@ -4,12 +4,12 @@ Weaver plugins are template engine integrations for the **weaver** tool. Each pl
 
 ## Plugin Inventory
 
-| Plugin | Engine | Language | Status |
-|--------|--------|----------|--------|
-| `weaver-jinja` | Jinja2 | Python | Stub |
-| `weaver-js-handlebars` | Handlebars | JavaScript | Stub |
-| `weaver-js-mustache` | Mustache | JavaScript | Stub |
-| `weaver-qute` | Qute | Java (Quarkus) | Stub |
+| Plugin | Engine | Language |
+|--------|--------|----------|
+| `weaver-jinja` | Jinja2 | Python |
+| `weaver-js-handlebars` | Handlebars | JavaScript |
+| `weaver-js-mustache` | Mustache | JavaScript |
+| `weaver-qute` | Qute | Java (Quarkus) |
 
 ## How They Work
 

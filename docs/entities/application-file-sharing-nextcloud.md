@@ -69,6 +69,6 @@ _body:
 
 | Tool | How It Uses Application/FileSharing/Nextcloud |
 |------|-----------------------------------------------|
-| lay | Installs Nextcloud (PHP, web server, dependencies) |
-| weaver | Generates `config.php`, Apache/Nginx vhost, PHP pool config |
+| [lay](../tools/lay.md) | Installs Nextcloud (PHP, web server, dependencies) |
+| [weaver](../tools/weaver.md) | Generates `config.php`, Apache/Nginx vhost, PHP pool config |
 | enjoin-service | Enables/starts web server and PHP-FPM services |

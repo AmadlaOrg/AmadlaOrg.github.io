@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Application/CICD/JenkinsAgent |
 |------|-------------------------------------------|
-| lay | Installs the Jenkins agent JAR |
-| weaver | Generates agent launch configuration |
+| [lay](../tools/lay.md) | Installs the Jenkins agent JAR |
+| [weaver](../tools/weaver.md) | Generates agent launch configuration |
 | enjoin-service | Enables/starts the Jenkins agent service |

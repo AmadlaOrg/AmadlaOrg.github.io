@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/SearchEngine/OpenSearch |
 |------|-------------------------------------------------|
-| lay | Installs the `opensearch` package |
-| weaver | Generates `/etc/opensearch/opensearch.yml` and `/etc/opensearch/jvm.options` |
+| [lay](../tools/lay.md) | Installs the `opensearch` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/opensearch/opensearch.yml` and `/etc/opensearch/jvm.options` |
 | enjoin-service | Enables/starts `opensearch` service |

@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Security/WAF/Coraza |
 |------|----------------------------------|
-| enjoin | Configures Coraza WAF and loads rule sets |
-| weaver | Generates Coraza configuration files |
-| judge | Validates Coraza rules and tests for bypasses |
+| [enjoin](../tools/enjoin.md) | Configures Coraza WAF and loads rule sets |
+| [weaver](../tools/weaver.md) | Generates Coraza configuration files |
+| [judge](../tools/judge.md) | Validates Coraza rules and tests for bypasses |

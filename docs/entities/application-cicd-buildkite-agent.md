@@ -45,6 +45,6 @@ _body:
 
 | Tool | How It Uses Application/CICD/BuildkiteAgent |
 |------|----------------------------------------------|
-| lay | Installs the `buildkite-agent` package |
-| weaver | Generates `buildkite-agent.cfg` |
+| [lay](../tools/lay.md) | Installs the `buildkite-agent` package |
+| [weaver](../tools/weaver.md) | Generates `buildkite-agent.cfg` |
 | enjoin-service | Enables/starts the `buildkite-agent` service |

@@ -53,4 +53,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/LoadBalancer/Azure |
 |------|---------------------------------------------------|
-| raise | Provisions Azure Load Balancers via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure Load Balancers via raise-azure plugin |

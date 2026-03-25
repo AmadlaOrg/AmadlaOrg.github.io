@@ -55,7 +55,7 @@ _body:
 
 | Tool | How It Uses Infrastructure/Storage/Ceph |
 |------|-----------------------------------------|
-| raise | Provisions VMs/instances for Ceph MON, OSD, and MDS nodes |
-| lay | Installs `ceph-mon`, `ceph-osd`, `ceph-mds`, `ceph-radosgw` packages |
-| weaver | Generates `/etc/ceph/ceph.conf` |
+| [raise](../tools/raise.md) | Provisions VMs/instances for Ceph MON, OSD, and MDS nodes |
+| [lay](../tools/lay.md) | Installs `ceph-mon`, `ceph-osd`, `ceph-mds`, `ceph-radosgw` packages |
+| [weaver](../tools/weaver.md) | Generates `/etc/ceph/ceph.conf` |
 | enjoin-service | Enables/starts `ceph-mon`, `ceph-osd`, `ceph-mds` services |

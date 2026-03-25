@@ -67,6 +67,6 @@ _body:
 
 | Tool | How It Uses Application/LogShipping/Vector |
 |------|---------------------------------------------|
-| lay | Installs the `vector` package |
-| weaver | Generates `/etc/vector/vector.toml` |
+| [lay](../tools/lay.md) | Installs the `vector` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/vector/vector.toml` |
 | enjoin-service | Enables/starts `vector` service |

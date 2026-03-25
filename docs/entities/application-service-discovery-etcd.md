@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Application/ServiceDiscovery/Etcd |
 |------|------------------------------------------------|
-| lay | Installs the `etcd` binary |
-| weaver | Generates `/etc/etcd/etcd.conf.yml` |
+| [lay](../tools/lay.md) | Installs the `etcd` binary |
+| [weaver](../tools/weaver.md) | Generates `/etc/etcd/etcd.conf.yml` |
 | enjoin-service | Enables/starts `etcd` service |

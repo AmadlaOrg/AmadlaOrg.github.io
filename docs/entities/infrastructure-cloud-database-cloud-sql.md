@@ -45,4 +45,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Database/Cloud SQL |
 |------|---------------------------------------------------|
-| raise | Provisions Cloud SQL instances via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions Cloud SQL instances via raise-gcp plugin |

@@ -45,6 +45,6 @@ _body:
 
 | Tool | How It Uses Application/DNSResolver/SystemdResolved |
 |------|-----------------------------------------------------|
-| lay | Ensures `systemd-resolved` is present (typically built-in) |
-| weaver | Generates `/etc/systemd/resolved.conf` |
+| [lay](../tools/lay.md) | Ensures `systemd-resolved` is present (typically built-in) |
+| [weaver](../tools/weaver.md) | Generates `/etc/systemd/resolved.conf` |
 | enjoin-service | Restarts `systemd-resolved` to apply configuration |

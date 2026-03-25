@@ -58,6 +58,6 @@ _body:
 
 | Tool | How It Uses Application/VPN/WireGuard |
 |------|---------------------------------------|
-| lay | Installs `wireguard-tools` package |
-| weaver | Generates `/etc/wireguard/wg0.conf` |
+| [lay](../tools/lay.md) | Installs `wireguard-tools` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/wireguard/wg0.conf` |
 | enjoin-service | Enables/starts `wg-quick@wg0` service |

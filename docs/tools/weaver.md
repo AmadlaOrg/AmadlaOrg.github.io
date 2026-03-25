@@ -7,11 +7,11 @@
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `weaver weave` | Partial | Render templates with entity data |
-| `weaver settings` | Working | Manage weaver configuration |
-| `weaver version` | Working | Show version information |
+| Command | Description |
+|---------|-------------|
+| `weaver weave` | Render templates with entity data |
+| `weaver settings` | Manage weaver configuration |
+| `weaver version` | Show version information |
 
 ## Dependencies
 
@@ -33,6 +33,15 @@ hery → doorman → raise → lay → [weaver] → judge
                           │  qute)           │
                           └──────────────────┘
 ```
+
+## Entity Types
+
+| Entity | What weaver Does |
+|--------|-----------------|
+| [Template](../entities/template.md) | Reads template definitions to discover which engine and template file to use |
+| [Application](../entities/application.md) | Fills templates with application entity data |
+| [Service](../entities/service.md) | Generates service unit files from service entities |
+| [Infrastructure](../entities/infrastructure.md) | Generates infrastructure configuration files |
 
 ## Architecture
 

@@ -21,11 +21,11 @@ These properties are common across all distributed storage implementations. Sub-
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [Storage/MinIO](infrastructure-storage-minio.md) | MinIO -- S3-compatible object storage | Most common for S3 API |
-| [Storage/Ceph](infrastructure-storage-ceph.md) | Ceph -- unified block, object, and file storage | Enterprise, OpenStack |
-| [Storage/GlusterFS](infrastructure-storage-glusterfs.md) | GlusterFS -- distributed POSIX filesystem | File-level replication |
+| Sub-type | Application |
+|----------|-------------|
+| [Storage/MinIO](infrastructure-storage-minio.md) | MinIO -- S3-compatible object storage |
+| [Storage/Ceph](infrastructure-storage-ceph.md) | Ceph -- unified block, object, and file storage |
+| [Storage/GlusterFS](infrastructure-storage-glusterfs.md) | GlusterFS -- distributed POSIX filesystem |
 
 ## Example
 
@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Infrastructure/Storage |
 |------|-------------------------------------|
-| raise | Provisions VMs/instances for storage nodes |
-| lay | Installs the storage application (minio, ceph, glusterfs) |
+| [raise](../tools/raise.md) | Provisions VMs/instances for storage nodes |
+| [lay](../tools/lay.md) | Installs the storage application (minio, ceph, glusterfs) |
 | enjoin-service | Enables/starts the storage service |

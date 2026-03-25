@@ -66,6 +66,6 @@ _body:
 | Tool | How It Uses System |
 |------|-------------------|
 | enjoin-sysctl | Applies kernel parameters from `sysctl` |
-| enjoin | Applies hostname, timezone, locale, swap, limits |
-| raise | Provisions VMs/instances with system-level settings |
-| judge-system | Validates system state matches requirements |
+| [enjoin](../tools/enjoin.md) | Applies hostname, timezone, locale, swap, limits |
+| [raise](../tools/raise.md) | Provisions VMs/instances with system-level settings |
+| [judge-system](../plugins/judges.md) | Validates system state matches requirements |

@@ -46,6 +46,6 @@ _body:
 
 | Tool | How It Uses Application/MailRelay/Postfix |
 |------|-------------------------------------------|
-| lay | Installs the `postfix` package |
-| weaver | Generates `/etc/postfix/main.cf` and `/etc/postfix/sasl_passwd` |
+| [lay](../tools/lay.md) | Installs the `postfix` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/postfix/main.cf` and `/etc/postfix/sasl_passwd` |
 | enjoin-service | Enables/starts `postfix` service |

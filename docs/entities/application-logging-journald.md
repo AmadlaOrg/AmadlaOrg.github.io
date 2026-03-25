@@ -41,6 +41,6 @@ _body:
 
 | Tool | How It Uses Application/Logging/Journald |
 |------|------------------------------------------|
-| lay | Ensures `systemd-journald` is present (typically built-in) |
-| weaver | Generates `/etc/systemd/journald.conf` |
+| [lay](../tools/lay.md) | Ensures `systemd-journald` is present (typically built-in) |
+| [weaver](../tools/weaver.md) | Generates `/etc/systemd/journald.conf` |
 | enjoin-service | Restarts `systemd-journald` to apply configuration |

@@ -55,6 +55,6 @@ _body:
 
 | Tool | How It Uses User |
 |------|------------------------|
-| lay | Creates/manages system users and groups |
-| doorman | Resolves password secrets referenced by `password_secret` |
-| judge | Validates that users exist with correct configuration |
+| [enjoin](../tools/enjoin.md) | Creates/manages system users and groups via enjoin-user plugin |
+| [doorman](../tools/doorman.md) | Resolves password secrets referenced by `password_secret` |
+| [judge](../tools/judge.md) | Validates that users exist with correct configuration |

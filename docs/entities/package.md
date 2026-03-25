@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses Package |
 |------|--------------------------|
-| lay | Installs packages using the specified or detected package manager |
-| judge-application | Checks that required packages are installed at correct versions |
-| garbage | Tracks and removes packages that are no longer needed |
+| [lay](../tools/lay.md) | Installs packages using the specified or detected package manager |
+| [judge-application](../plugins/judges.md) | Checks that required packages are installed at correct versions |
+| [garbage](../tools/garbage.md) | Tracks and removes packages that are no longer needed |

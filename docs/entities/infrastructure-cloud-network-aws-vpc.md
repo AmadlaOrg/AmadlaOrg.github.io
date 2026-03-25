@@ -51,4 +51,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Network/AWS VPC |
 |------|------------------------------------------------|
-| raise | Provisions AWS VPCs via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions AWS VPCs via raise-aws plugin |

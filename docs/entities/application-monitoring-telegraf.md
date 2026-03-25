@@ -53,6 +53,6 @@ _body:
 
 | Tool | How It Uses Application/Monitoring/Telegraf |
 |------|---------------------------------------------|
-| lay | Installs the `telegraf` package |
-| weaver | Generates `/etc/telegraf/telegraf.conf` |
+| [lay](../tools/lay.md) | Installs the `telegraf` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/telegraf/telegraf.conf` |
 | enjoin-service | Enables/starts `telegraf` service |

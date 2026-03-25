@@ -18,11 +18,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [ObjectStorage/S3](infrastructure-cloud-object-storage-s3.md) | AWS S3 | Stable |
-| [ObjectStorage/GCS](infrastructure-cloud-object-storage-gcs.md) | Google Cloud Storage | Stable |
-| [ObjectStorage/Azure Blob](infrastructure-cloud-object-storage-azure-blob.md) | Azure Blob Storage | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [ObjectStorage/S3](infrastructure-cloud-object-storage-s3.md) | AWS S3 |
+| [ObjectStorage/GCS](infrastructure-cloud-object-storage-gcs.md) | Google Cloud Storage |
+| [ObjectStorage/Azure Blob](infrastructure-cloud-object-storage-azure-blob.md) | Azure Blob Storage |
 
 ## Example
 
@@ -46,4 +46,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/ObjectStorage |
 |------|----------------------------------------------|
-| raise | Provisions storage buckets via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions storage buckets via provider-specific plugins |

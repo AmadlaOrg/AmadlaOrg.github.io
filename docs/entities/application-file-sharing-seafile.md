@@ -51,6 +51,6 @@ _body:
 
 | Tool | How It Uses Application/FileSharing/Seafile |
 |------|---------------------------------------------|
-| lay | Installs Seafile server and dependencies |
-| weaver | Generates `seahub_settings.py`, Nginx proxy config |
+| [lay](../tools/lay.md) | Installs Seafile server and dependencies |
+| [weaver](../tools/weaver.md) | Generates `seahub_settings.py`, Nginx proxy config |
 | enjoin-service | Enables/starts `seafile` and `seahub` services |

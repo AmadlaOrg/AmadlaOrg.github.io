@@ -26,11 +26,11 @@ These properties are common across all FTP implementations. Sub-types add applic
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [FTP/Vsftpd](application-ftp-vsftpd.md) | vsftpd — lightweight, secure FTP daemon | Most common on Linux |
-| [FTP/ProFTPD](application-ftp-proftpd.md) | ProFTPD — highly configurable, Apache-style config | Feature-rich |
-| [FTP/PureFTPD](application-ftp-pure-ftpd.md) | Pure-FTPd — security-focused with virtual users | BSD-friendly |
+| Sub-type | Application |
+|----------|-------------|
+| [FTP/Vsftpd](application-ftp-vsftpd.md) | vsftpd — lightweight, secure FTP daemon |
+| [FTP/ProFTPD](application-ftp-proftpd.md) | ProFTPD — highly configurable, Apache-style config |
+| [FTP/PureFTPD](application-ftp-pure-ftpd.md) | Pure-FTPd — security-focused with virtual users |
 
 ## Example
 
@@ -54,6 +54,6 @@ _body:
 
 | Tool | How It Uses Application/FTP |
 |------|----------------------------|
-| lay | Installs the FTP server package |
-| weaver | Generates FTP server configuration files |
+| [lay](../tools/lay.md) | Installs the FTP server package |
+| [weaver](../tools/weaver.md) | Generates FTP server configuration files |
 | enjoin-service | Enables/starts the FTP service |

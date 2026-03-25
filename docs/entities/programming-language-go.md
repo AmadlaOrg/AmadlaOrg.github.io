@@ -41,4 +41,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/Go |
 |------|-------------------------------------|
-| lay | Installs Go runtime, sets environment variables, installs tools via `go install` |
+| [lay](../tools/lay.md) | Installs Go runtime, sets environment variables, installs tools via `go install` |

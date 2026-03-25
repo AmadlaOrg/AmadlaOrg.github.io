@@ -46,4 +46,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Serverless/Lambda |
 |------|---------------------------------------------------|
-| raise | Provisions Lambda functions via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions Lambda functions via raise-aws plugin |

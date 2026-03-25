@@ -49,4 +49,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/IAM/GCP |
 |------|------------------------------------------|
-| raise | Provisions GCP IAM resources via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions GCP IAM resources via raise-gcp plugin |

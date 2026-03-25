@@ -45,6 +45,6 @@ _body:
 
 | Tool | How It Uses Application/Proxy/Privoxy |
 |------|---------------------------------------|
-| lay | Installs the `privoxy` package |
-| weaver | Generates `/etc/privoxy/config` |
+| [lay](../tools/lay.md) | Installs the `privoxy` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/privoxy/config` |
 | enjoin-service | Enables/starts the `privoxy` service |

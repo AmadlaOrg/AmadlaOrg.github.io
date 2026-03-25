@@ -61,6 +61,6 @@ _body:
 
 | Tool | How It Uses Application/ServiceDiscovery/ZooKeeper |
 |------|-----------------------------------------------------|
-| lay | Installs the `zookeeper` package |
-| weaver | Generates `/etc/zookeeper/zoo.cfg` and `myid` file |
+| [lay](../tools/lay.md) | Installs the `zookeeper` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/zookeeper/zoo.cfg` and `myid` file |
 | enjoin-service | Enables/starts `zookeeper` service |

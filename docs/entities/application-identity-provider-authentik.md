@@ -69,6 +69,6 @@ _body:
 
 | Tool | How It Uses Application/IdentityProvider/Authentik |
 |------|-----------------------------------------------------|
-| lay | Installs Authentik |
-| weaver | Generates Authentik environment and configuration files |
+| [lay](../tools/lay.md) | Installs Authentik |
+| [weaver](../tools/weaver.md) | Generates Authentik environment and configuration files |
 | enjoin-service | Enables/starts the `authentik-server` and `authentik-worker` services |

@@ -1,3 +1,7 @@
+---
+description: HERY (Hierarchical Entity Relational YAML) — Amadla's data foundation combining YAML with entity management, schema validation, Git versioning, and SQLite caching.
+---
+
 # HERY Concepts
 
 HERY (Hierarchical Entity Relational YAML) is the data foundation of the Amadla ecosystem. It extends YAML with entity management capabilities, combining concepts from relational databases and package managers.

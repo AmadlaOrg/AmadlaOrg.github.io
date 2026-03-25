@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Service |
 |------|--------------------------|
-| lay | Creates/manages systemd service units |
-| weaver | Generates service unit files from templates |
-| judge | Validates that services are in the expected state |
+| [enjoin](../tools/enjoin.md) | Manages systemd service state (start, stop, enable) via enjoin-service plugin |
+| [weaver](../tools/weaver.md) | Generates service unit files from templates |
+| [judge](../tools/judge.md) | Validates that services are in the expected state |

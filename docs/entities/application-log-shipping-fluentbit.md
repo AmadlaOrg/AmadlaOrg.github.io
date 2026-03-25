@@ -64,6 +64,6 @@ _body:
 
 | Tool | How It Uses Application/LogShipping/Fluentbit |
 |------|------------------------------------------------|
-| lay | Installs the `fluent-bit` package |
-| weaver | Generates `/etc/fluent-bit/fluent-bit.conf` and parsers config |
+| [lay](../tools/lay.md) | Installs the `fluent-bit` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/fluent-bit/fluent-bit.conf` and parsers config |
 | enjoin-service | Enables/starts `fluent-bit` service |

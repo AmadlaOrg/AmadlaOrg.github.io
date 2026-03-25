@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses Application/Timekeeping/NTP |
 |------|----------------------------------|
-| lay | Installs the `ntp` package |
-| weaver | Generates `/etc/ntp.conf` |
+| [lay](../tools/lay.md) | Installs the `ntp` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/ntp.conf` |
 | enjoin-service | Enables/starts `ntpd` service |

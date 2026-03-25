@@ -4,11 +4,11 @@ Judge plugins validate whether a system's actual state matches the requirements 
 
 ## Plugin Inventory
 
-| Plugin | Validates | Entity | Status |
-|--------|-----------|--------|--------|
-| `judge-application` | Whether required apps/packages are installed | Application | Active (Go) |
-| `judge-system` | System-level requirements (OS, kernel, resources) | System | Stub |
-| `judge-infrastructure` | Infrastructure requirements (networking, storage) | Infrastructure | Stub |
+| Plugin | Validates | Entity |
+|--------|-----------|--------|
+| `judge-application` | Whether required apps/packages are installed | Application |
+| `judge-system` | System-level requirements (OS, kernel, resources) | System |
+| `judge-infrastructure` | Infrastructure requirements (networking, storage) | Infrastructure |
 
 ## Protocol
 

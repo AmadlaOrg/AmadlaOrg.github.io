@@ -51,4 +51,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Queue/Service Bus |
 |------|---------------------------------------------------|
-| raise | Provisions Service Bus namespaces via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Service Bus namespaces via raise-azure plugin |

@@ -55,4 +55,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/LoadBalancer/ALB |
 |------|--------------------------------------------------|
-| raise | Provisions ALBs via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions ALBs via raise-aws plugin |
