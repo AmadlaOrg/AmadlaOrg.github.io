@@ -40,4 +40,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/NodeJS |
 |------|----------------------------------------|
-| lay | Installs Node.js runtime, package manager, and global packages |
+| [lay](../tools/lay.md) | Installs Node.js runtime, package manager, and global packages |

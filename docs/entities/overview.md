@@ -1,3 +1,7 @@
+---
+description: HERY entity types — schema-validated YAML definitions for applications, infrastructure, security, system configuration, and more.
+---
+
 # Entities Overview
 
 Entities are the core data model of the Amadla ecosystem. Each entity type defines a **schema** for a specific kind of requirement — applications, systems, infrastructure, secrets, etc.

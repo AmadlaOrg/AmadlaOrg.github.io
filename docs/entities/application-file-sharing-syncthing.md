@@ -58,6 +58,6 @@ _body:
 
 | Tool | How It Uses Application/FileSharing/Syncthing |
 |------|------------------------------------------------|
-| lay | Installs the `syncthing` package |
-| weaver | Generates `config.xml` |
+| [lay](../tools/lay.md) | Installs the `syncthing` package |
+| [weaver](../tools/weaver.md) | Generates `config.xml` |
 | enjoin-service | Enables/starts `syncthing@<user>` service |

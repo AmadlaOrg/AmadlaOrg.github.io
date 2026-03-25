@@ -24,12 +24,12 @@ These properties are common across all DNS server implementations. Sub-types add
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [DNS/BIND](infrastructure-dns-bind.md) | BIND (named) — most widely deployed DNS server | Industry standard |
-| [DNS/PowerDNS](infrastructure-dns-powerdns.md) | PowerDNS — database-backed authoritative server with API | Modern |
-| [DNS/CoreDNS](infrastructure-dns-coredns.md) | CoreDNS — plugin-based DNS server, Kubernetes default | Cloud-native |
-| [DNS/Knot](infrastructure-dns-knot.md) | Knot DNS — high-performance authoritative server | High-performance |
+| Sub-type | Application |
+|----------|-------------|
+| [DNS/BIND](infrastructure-dns-bind.md) | BIND (named) — most widely deployed DNS server |
+| [DNS/PowerDNS](infrastructure-dns-powerdns.md) | PowerDNS — database-backed authoritative server with API |
+| [DNS/CoreDNS](infrastructure-dns-coredns.md) | CoreDNS — plugin-based DNS server, Kubernetes default |
+| [DNS/Knot](infrastructure-dns-knot.md) | Knot DNS — high-performance authoritative server |
 
 ## Example
 
@@ -55,7 +55,7 @@ _body:
 
 | Tool | How It Uses Infrastructure/DNS |
 |------|--------------------------------|
-| raise | Provisions infrastructure for DNS servers |
-| lay | Installs the DNS server application |
-| weaver | Generates zone files and server configuration |
+| [raise](../tools/raise.md) | Provisions infrastructure for DNS servers |
+| [lay](../tools/lay.md) | Installs the DNS server application |
+| [weaver](../tools/weaver.md) | Generates zone files and server configuration |
 | enjoin-service | Enables/starts the DNS service |

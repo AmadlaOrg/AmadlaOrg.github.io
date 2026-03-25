@@ -11,10 +11,10 @@ lighthouse grabs information from any tool's entity output and sends notificatio
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `lighthouse notify` | Planned | Send notification based on input entity data |
-| `lighthouse settings` | Planned | Manage lighthouse configuration |
+| Command | Description |
+|---------|-------------|
+| `lighthouse notify` | Send notification based on input entity data |
+| `lighthouse settings` | Manage lighthouse configuration |
 
 ## Dependencies
 
@@ -37,19 +37,40 @@ waiter deploy --strategy canary my-app img:v2 | lighthouse notify
 
 Each plugin integrates lighthouse with a notification channel:
 
-| Plugin | Channel | Status |
-|--------|---------|--------|
-| lighthouse-webhook | Webhook (HTTP POST) | Planned |
-| lighthouse-webrtc | WebRTC | Planned |
-| lighthouse-twilio | Twilio SMS | Planned |
-| lighthouse-ses | AWS SES (email) | Planned |
-| lighthouse-rest | RESTful API calls | Planned |
+| Plugin | Channel |
+|--------|---------|
+| lighthouse-webhook | Webhook (HTTP POST) |
+| lighthouse-webrtc | WebRTC |
+| lighthouse-twilio | Twilio SMS |
+| lighthouse-ses | AWS SES (email) |
+| lighthouse-rest | RESTful API calls |
 
-## Intended Design
+## How It Works
 
-- Receives entity data via UNIX pipe (standard input)
-- Plugin system for different notification channels
-- Entity-aware: can extract relevant fields from any entity type for notification content
+lighthouse receives entity data via UNIX pipe (standard input), extracts relevant fields, and routes notifications through the appropriate plugin based on configuration.
+
+```
+Entity data (stdin) → lighthouse notify → lighthouse-* plugin → Notification sent
+```
+
+### Use Cases
+
+- **Drift alerting:** Pipe [judge](judge.md) audit results to lighthouse — get notified when system state diverges from expected
+- **Deployment notifications:** Pipe [waiter](waiter.md) deploy output to Slack/email
+- **Health monitoring:** Combine with [unravel](unravel.md) on a cron schedule to monitor system state
+
+### Example Usage
+
+```bash
+# Alert on drift via webhook
+unravel discover | judge audit | lighthouse notify --via webhook
+
+# Notify deployment result via SMS
+waiter deploy --strategy canary my-app img:v2 | lighthouse notify --via twilio
+
+# Email daily system audit
+unravel discover | judge audit | lighthouse notify --via ses
+```
 
 ## Current Gaps
 

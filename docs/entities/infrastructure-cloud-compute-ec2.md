@@ -49,4 +49,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Compute/EC2 |
 |------|---------------------------------------------|
-| raise | Provisions EC2 instances via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions EC2 instances via raise-aws plugin |

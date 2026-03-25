@@ -29,5 +29,5 @@ _body:
 
 | Tool | How It Uses Secret |
 |------|--------------------------|
-| doorman | Resolves secret references to actual values via doorman plugins |
-| weaver | Injects resolved secrets into configuration templates |
+| [doorman](../tools/doorman.md) | Resolves secret references to actual values via doorman plugins |
+| [weaver](../tools/weaver.md) | Injects resolved secrets into configuration templates |

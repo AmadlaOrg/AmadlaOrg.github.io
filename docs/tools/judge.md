@@ -13,10 +13,10 @@ judge supports both **generic deep diff** (works with any entity type) and **typ
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `judge audit` | Early | Compare expected vs actual state, output judge entity |
-| `judge settings` | Planned | Manage judge configuration |
+| Command | Description |
+|---------|-------------|
+| `judge audit` | Compare expected vs actual state, output judge entity |
+| `judge settings` | Manage judge configuration |
 
 ## Dependencies
 
@@ -70,15 +70,27 @@ This judge entity can then pipe to lighthouse for alerting:
 unravel discover | judge audit | lighthouse notify
 ```
 
+## Entity Types
+
+judge can validate any entity type via its generic deep diff engine. Type-aware plugins add semantic understanding for specific entities:
+
+| Entity | Plugin | What It Checks |
+|--------|--------|---------------|
+| [Package](../entities/package.md) | [judge-application](../plugins/judges.md) | Required packages installed at correct versions |
+| [Application](../entities/application.md) | [judge-application](../plugins/judges.md) | Required applications present and configured |
+| [System](../entities/system.md) | [judge-system](../plugins/judges.md) | OS, kernel, and resource requirements met |
+| [Infrastructure](../entities/infrastructure.md) | [judge-infrastructure](../plugins/judges.md) | Networking, storage, and compute requirements met |
+| [Judge](../entities/judge.md) | — | Audit rule definitions (judge's own output format) |
+
 ## Judge Plugins
 
 Each judge plugin understands the semantics of a specific entity type:
 
-| Plugin | Validates | Status |
-|--------|--------|--------|
-| `judge-application` | Whether required apps/packages are installed | Active (Go) |
-| `judge-system` | System-level requirements (OS, kernel, resources) | Stub |
-| `judge-infrastructure` | Infrastructure requirements (networking, storage) | Stub |
+| Plugin | Validates |
+|--------|--------|
+| `judge-application` | Whether required apps/packages are installed |
+| `judge-system` | System-level requirements (OS, kernel, resources) |
+| `judge-infrastructure` | Infrastructure requirements (networking, storage) |
 
 Plugins are discovered via PATH (`judge-*` naming convention). Each plugin declares supported entity types via its `info` subcommand. If multiple plugins support the same entity type, **all are called** — they may validate different aspects. Overall verdict: fail if ANY plugin fails.
 

@@ -76,6 +76,6 @@ _body:
 
 | Tool | How It Uses Application/IdentityProvider/Keycloak |
 |------|---------------------------------------------------|
-| lay | Installs Keycloak |
-| weaver | Generates `keycloak.conf` and realm import files |
+| [lay](../tools/lay.md) | Installs Keycloak |
+| [weaver](../tools/weaver.md) | Generates `keycloak.conf` and realm import files |
 | enjoin-service | Enables/starts the `keycloak` service |

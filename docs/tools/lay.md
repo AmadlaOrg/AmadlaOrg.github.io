@@ -11,10 +11,10 @@ lay handles installation: packages via system package managers, applications, JA
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `lay install` | Partial | Install applications from entity requirements |
-| `lay settings` | Partial | Manage lay configuration |
+| Command | Description |
+|---------|-------------|
+| `lay install` | Install applications from entity requirements |
+| `lay settings` | Manage lay configuration |
 
 ## Dependencies
 
@@ -44,6 +44,15 @@ hery → doorman → raise → [lay] → waiter
 | Install system packages | **lay** |
 | Install JAR applications | **lay** |
 | Deploy with strategy | **waiter** |
+
+## Entity Types
+
+| Entity | What lay Does |
+|--------|--------------|
+| [Package](../entities/package.md) | Installs packages via the appropriate package manager |
+| [Application](../entities/application.md) | Installs applications, JAR files, and container images |
+| [ProgrammingLanguage](../entities/programming-language.md) | Installs language runtimes and version managers |
+| [Container](../entities/container.md) | Pulls or builds container images |
 
 ## Output
 

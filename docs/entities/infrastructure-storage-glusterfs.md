@@ -65,7 +65,7 @@ _body:
 
 | Tool | How It Uses Infrastructure/Storage/GlusterFS |
 |------|-----------------------------------------------|
-| raise | Provisions VMs/instances for GlusterFS nodes |
-| lay | Installs the `glusterfs-server` package |
-| weaver | Generates volume configuration scripts |
+| [raise](../tools/raise.md) | Provisions VMs/instances for GlusterFS nodes |
+| [lay](../tools/lay.md) | Installs the `glusterfs-server` package |
+| [weaver](../tools/weaver.md) | Generates volume configuration scripts |
 | enjoin-service | Enables/starts `glusterd` service |

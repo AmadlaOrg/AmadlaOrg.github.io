@@ -25,11 +25,11 @@ These properties are common across all container registry implementations. Sub-t
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [ContainerRegistry/Harbor](application-container-registry-harbor.md) | Harbor — enterprise registry with scanning and replication | Enterprise |
-| [ContainerRegistry/DockerRegistry](application-container-registry-docker-registry.md) | Docker Registry (distribution) — lightweight OCI registry | Most common |
-| [ContainerRegistry/Nexus](application-container-registry-nexus.md) | Sonatype Nexus — multi-format repository manager | Enterprise |
+| Sub-type | Application |
+|----------|-------------|
+| [ContainerRegistry/Harbor](application-container-registry-harbor.md) | Harbor — enterprise registry with scanning and replication |
+| [ContainerRegistry/DockerRegistry](application-container-registry-docker-registry.md) | Docker Registry (distribution) — lightweight OCI registry |
+| [ContainerRegistry/Nexus](application-container-registry-nexus.md) | Sonatype Nexus — multi-format repository manager |
 
 ## Example
 
@@ -52,6 +52,6 @@ _body:
 
 | Tool | How It Uses Application/ContainerRegistry |
 |------|-------------------------------------------|
-| lay | Installs the container registry application |
+| [lay](../tools/lay.md) | Installs the container registry application |
 | enjoin-service | Enables/starts the registry service |
-| weaver | Generates configuration files |
+| [weaver](../tools/weaver.md) | Generates configuration files |

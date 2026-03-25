@@ -42,6 +42,6 @@ _body:
 
 | Tool | How It Uses Application/Timekeeping/OpenNTPD |
 |------|---------------------------------------|
-| lay | Installs the `openntpd` package |
-| weaver | Generates `/etc/ntpd.conf` |
+| [lay](../tools/lay.md) | Installs the `openntpd` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/ntpd.conf` |
 | enjoin-service | Enables/starts `ntpd` (OpenNTPD) service |

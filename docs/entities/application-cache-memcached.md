@@ -39,6 +39,6 @@ _body:
 
 | Tool | How It Uses Application/Cache/Memcached |
 |------|----------------------------------------|
-| lay | Installs the `memcached` package |
-| weaver | Generates `/etc/memcached.conf` |
+| [lay](../tools/lay.md) | Installs the `memcached` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/memcached.conf` |
 | enjoin-service | Enables/starts `memcached` service |

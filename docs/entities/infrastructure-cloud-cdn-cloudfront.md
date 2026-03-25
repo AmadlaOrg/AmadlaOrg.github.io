@@ -43,4 +43,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/CDN/CloudFront |
 |------|------------------------------------------------|
-| raise | Provisions CloudFront distributions via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions CloudFront distributions via raise-aws plugin |

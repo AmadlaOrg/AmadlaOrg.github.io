@@ -44,4 +44,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/Ruby |
 |------|--------------------------------------|
-| lay | Installs Ruby runtime, Bundler, and global gems |
+| [lay](../tools/lay.md) | Installs Ruby runtime, Bundler, and global gems |

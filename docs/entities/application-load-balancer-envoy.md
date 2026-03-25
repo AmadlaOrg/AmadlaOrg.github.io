@@ -62,6 +62,6 @@ _body:
 
 | Tool | How It Uses Application/LoadBalancer/Envoy |
 |------|---------------------------------------------|
-| lay | Installs the `envoy` binary |
-| weaver | Generates `/etc/envoy/envoy.yaml` |
+| [lay](../tools/lay.md) | Installs the `envoy` binary |
+| [weaver](../tools/weaver.md) | Generates `/etc/envoy/envoy.yaml` |
 | enjoin-service | Enables/starts `envoy` service |

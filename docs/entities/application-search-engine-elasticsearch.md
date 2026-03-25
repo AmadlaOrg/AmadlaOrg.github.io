@@ -57,6 +57,6 @@ _body:
 
 | Tool | How It Uses Application/SearchEngine/Elasticsearch |
 |------|---------------------------------------------------|
-| lay | Installs the `elasticsearch` package |
-| weaver | Generates `/etc/elasticsearch/elasticsearch.yml` and `/etc/elasticsearch/jvm.options` |
+| [lay](../tools/lay.md) | Installs the `elasticsearch` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/elasticsearch/elasticsearch.yml` and `/etc/elasticsearch/jvm.options` |
 | enjoin-service | Enables/starts `elasticsearch` service |

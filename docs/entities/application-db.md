@@ -49,10 +49,10 @@ _body:
 
 | Tool | How It Uses Application/DB |
 |------|----------------------------------|
-| lay | Installs and configures the database engine |
-| doorman | Resolves `admin_password_secret` |
-| weaver | Generates database configuration files |
-| judge-application | Validates database is installed and running correctly |
+| [lay](../tools/lay.md) | Installs and configures the database engine |
+| [doorman](../tools/doorman.md) | Resolves `admin_password_secret` |
+| [weaver](../tools/weaver.md) | Generates database configuration files |
+| [judge-application](../plugins/judges.md) | Validates database is installed and running correctly |
 
 ## Sub-types
 

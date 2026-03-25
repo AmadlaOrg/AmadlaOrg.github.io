@@ -73,6 +73,6 @@ _body:
 
 | Tool | How It Uses Application/GitServer/GitLab |
 |------|------------------------------------------|
-| lay | Installs the `gitlab-ce` or `gitlab-ee` package |
-| weaver | Generates `gitlab.rb` configuration |
+| [lay](../tools/lay.md) | Installs the `gitlab-ce` or `gitlab-ee` package |
+| [weaver](../tools/weaver.md) | Generates `gitlab.rb` configuration |
 | enjoin-service | Enables/starts GitLab services via `gitlab-ctl` |

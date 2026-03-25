@@ -30,5 +30,5 @@ _body:
 
 | Tool | How It Uses Infrastructure |
 |------|----------------------------------|
-| raise | Provisions the declared infrastructure resources |
-| judge-infrastructure | Checks whether infrastructure matches requirements |
+| [raise](../tools/raise.md) | Provisions the declared infrastructure resources |
+| [judge-infrastructure](../plugins/judges.md) | Checks whether infrastructure matches requirements |

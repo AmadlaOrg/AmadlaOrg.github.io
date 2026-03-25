@@ -13,11 +13,11 @@ unravel is **stateless and on-demand** — it discovers and outputs, following t
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `unravel discover` | Planned | Discover system state and output as entities |
-| `unravel discover --type <entity-type>` | Planned | Discover specific entity type (e.g., network) |
-| `unravel settings` | Planned | Manage unravel configuration |
+| Command | Description |
+|---------|-------------|
+| `unravel discover` | Discover system state and output as entities |
+| `unravel discover --type <entity-type>` | Discover specific entity type (e.g., network) |
+| `unravel settings` | Manage unravel configuration |
 
 ## Dependencies
 
@@ -41,6 +41,21 @@ unravel discover | judge audit
 # Reconciliation loop (on cron/systemd timer)
 unravel discover | judge audit | lighthouse notify
 ```
+
+## Entity Types Discovered
+
+unravel can discover and output entities for these types:
+
+| Entity Type | Source | Examples |
+|------------|--------|----------|
+| [System/Network](../entities/system-network.md) | osquery | Interfaces, routes, DNS |
+| [System/Filesystem](../entities/system-filesystem.md) | osquery | Mounts, disk usage |
+| [Package](../entities/package.md) | osquery | Installed packages |
+| [Service](../entities/service.md) | osquery | Running services |
+| [Security/Firewall](../entities/security-firewall.md) | osquery | Firewall rules, open ports |
+| [User](../entities/user.md) | osquery | System users and groups |
+| [Application](../entities/application.md) | Plugins | Application-specific state |
+| [Container](../entities/container.md) | Plugins | Container topology |
 
 ## How It Works
 

@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/Backup/Restic |
 |------|---------------------------------------|
-| lay | Installs the `restic` binary |
-| weaver | Generates backup scripts and systemd timer units |
+| [lay](../tools/lay.md) | Installs the `restic` binary |
+| [weaver](../tools/weaver.md) | Generates backup scripts and systemd timer units |
 | enjoin-service | Enables/starts `restic-backup.timer` |

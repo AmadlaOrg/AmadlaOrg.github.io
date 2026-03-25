@@ -54,6 +54,6 @@ _body:
 
 | Tool | How It Uses System/Filesystem |
 |------|-----------------------------------|
-| enjoin-filesystem | Creates volumes, mount points, fstab entries, tmpfs |
-| raise | Provisions storage for VMs/cloud instances |
-| judge | Validates that volumes and mounts exist with correct configuration |
+| [enjoin](../tools/enjoin.md) | Manages mounts and fstab entries via enjoin-filesystem plugin |
+| [raise](../tools/raise.md) | Provisions storage for VMs/cloud instances |
+| [judge](../tools/judge.md) | Validates that volumes and mounts exist with correct configuration |

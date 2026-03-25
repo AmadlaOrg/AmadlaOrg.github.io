@@ -21,12 +21,12 @@ These properties are common across all CI/CD runner implementations. Sub-types a
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [CICD/GitLabRunner](application-cicd-gitlab-runner.md) | GitLab Runner — multi-executor CI/CD runner | Most common |
-| [CICD/JenkinsAgent](application-cicd-jenkins-agent.md) | Jenkins Agent — distributed build agent | Enterprise |
-| [CICD/DroneRunner](application-cicd-drone-runner.md) | Drone Runner — container-native CI runner | Lightweight |
-| [CICD/BuildkiteAgent](application-cicd-buildkite-agent.md) | Buildkite Agent — hybrid CI/CD agent | Cloud-hybrid |
+| Sub-type | Application |
+|----------|-------------|
+| [CICD/GitLabRunner](application-cicd-gitlab-runner.md) | GitLab Runner — multi-executor CI/CD runner |
+| [CICD/JenkinsAgent](application-cicd-jenkins-agent.md) | Jenkins Agent — distributed build agent |
+| [CICD/DroneRunner](application-cicd-drone-runner.md) | Drone Runner — container-native CI runner |
+| [CICD/BuildkiteAgent](application-cicd-buildkite-agent.md) | Buildkite Agent — hybrid CI/CD agent |
 
 ## Example
 
@@ -46,6 +46,6 @@ _body:
 
 | Tool | How It Uses Application/CICD |
 |------|------------------------------|
-| lay | Installs the CI/CD runner application |
+| [lay](../tools/lay.md) | Installs the CI/CD runner application |
 | enjoin-service | Enables/starts the runner service |
-| weaver | Generates runner configuration files |
+| [weaver](../tools/weaver.md) | Generates runner configuration files |

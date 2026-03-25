@@ -49,4 +49,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/Rust |
 |------|--------------------------------------|
-| lay | Installs Rust via rustup, adds targets, components, and cargo crates |
+| [lay](../tools/lay.md) | Installs Rust via rustup, adds targets, components, and cargo crates |

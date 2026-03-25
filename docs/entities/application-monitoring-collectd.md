@@ -47,6 +47,6 @@ _body:
 
 | Tool | How It Uses Application/Monitoring/Collectd |
 |------|----------------------------------------------|
-| lay | Installs the `collectd` package |
-| weaver | Generates `/etc/collectd/collectd.conf` |
+| [lay](../tools/lay.md) | Installs the `collectd` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/collectd/collectd.conf` |
 | enjoin-service | Enables/starts `collectd` service |

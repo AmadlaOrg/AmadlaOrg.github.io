@@ -43,4 +43,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Queue/Pub/Sub |
 |------|-----------------------------------------------|
-| raise | Provisions Pub/Sub topics and subscriptions via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions Pub/Sub topics and subscriptions via raise-gcp plugin |

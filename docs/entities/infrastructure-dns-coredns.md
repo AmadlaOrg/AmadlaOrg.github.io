@@ -50,6 +50,6 @@ _body:
 
 | Tool | How It Uses Infrastructure/DNS/CoreDNS |
 |------|----------------------------------------|
-| lay | Installs the `coredns` binary |
-| weaver | Generates `Corefile` and zone files |
+| [lay](../tools/lay.md) | Installs the `coredns` binary |
+| [weaver](../tools/weaver.md) | Generates `Corefile` and zone files |
 | enjoin-service | Enables/starts the `coredns` service |

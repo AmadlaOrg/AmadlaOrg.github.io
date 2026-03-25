@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/AuthProxy/OAuth2Proxy |
 |------|------------------------------------------------|
-| lay | Installs the `oauth2-proxy` binary |
-| weaver | Generates OAuth2 Proxy configuration |
+| [lay](../tools/lay.md) | Installs the `oauth2-proxy` binary |
+| [weaver](../tools/weaver.md) | Generates OAuth2 Proxy configuration |
 | enjoin-service | Enables/starts the `oauth2-proxy` service |

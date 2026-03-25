@@ -56,6 +56,6 @@ _body:
 
 | Tool | How It Uses Application/Logging/Logrotate |
 |------|-------------------------------------------|
-| lay | Installs the `logrotate` package |
-| weaver | Generates `/etc/logrotate.conf` and `/etc/logrotate.d/*.conf` |
+| [lay](../tools/lay.md) | Installs the `logrotate` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/logrotate.conf` and `/etc/logrotate.d/*.conf` |
 | enjoin-service | Ensures logrotate cron/timer is active |

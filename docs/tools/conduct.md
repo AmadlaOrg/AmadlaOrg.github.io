@@ -13,11 +13,11 @@ On a single server, Podman (rootless, Quadlet) with systemd handles container re
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `conduct orchestrate` | Planned | Coordinate waiter/lay across nodes based on topology entity |
-| `conduct status` | Planned | Show cluster-wide status |
-| `conduct settings` | Planned | Manage conduct configuration |
+| Command | Description |
+|---------|-------------|
+| `conduct orchestrate` | Coordinate waiter/lay across nodes based on topology entity |
+| `conduct status` | Show cluster-wide status |
+| `conduct settings` | Manage conduct configuration |
 
 ## Dependencies
 
@@ -36,12 +36,27 @@ Server B ─── lay + waiter (app tier)      ← conduct coordinates
 Server C ─── lay + waiter (database tier)
 ```
 
-## Intended Design
+## How It Works
+
+conduct reads topology/cluster entities that describe which servers exist, what role each plays, and how they relate. It then coordinates [lay](lay.md) and [waiter](waiter.md) across those nodes — installing software and deploying services in the right order on the right machines.
 
 - Reads topology/cluster entities describing node roles and placement
-- Orchestrates waiter/lay across distributed nodes
+- Orchestrates [waiter](waiter.md)/[lay](lay.md) across distributed nodes
 - Handles role-based placement, replica management, failover
 - Supports heterogeneous node roles (not all servers run the same thing)
+
+### Example Usage
+
+```bash
+# Deploy across a 3-node cluster
+conduct orchestrate -f cluster.yaml
+
+# Check status of all nodes
+conduct status
+
+# Deploy only the web tier
+conduct orchestrate -f cluster.yaml --role web
+```
 
 ## Encouraged Infrastructure
 

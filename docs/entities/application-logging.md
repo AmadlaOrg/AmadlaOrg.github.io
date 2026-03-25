@@ -23,12 +23,12 @@ These properties are common across all logging implementations. Sub-types add ap
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [Logging/Rsyslog](application-logging-rsyslog.md) | rsyslog — rocket-fast syslog processing | Most common on Debian/Ubuntu |
-| [Logging/SyslogNG](application-logging-syslog-ng.md) | syslog-ng — flexible log management | Enterprise, advanced routing |
-| [Logging/Journald](application-logging-journald.md) | systemd-journald — binary structured logging | Default on systemd distros |
-| [Logging/Logrotate](application-logging-logrotate.md) | logrotate — log rotation utility | Ubiquitous on Linux |
+| Sub-type | Application |
+|----------|-------------|
+| [Logging/Rsyslog](application-logging-rsyslog.md) | rsyslog — rocket-fast syslog processing |
+| [Logging/SyslogNG](application-logging-syslog-ng.md) | syslog-ng — flexible log management |
+| [Logging/Journald](application-logging-journald.md) | systemd-journald — binary structured logging |
+| [Logging/Logrotate](application-logging-logrotate.md) | logrotate — log rotation utility |
 
 ## Example
 
@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Application/Logging |
 |------|-------------------------------|
-| lay | Installs the logging application (rsyslog, syslog-ng, etc.) |
+| [lay](../tools/lay.md) | Installs the logging application (rsyslog, syslog-ng, etc.) |
 | enjoin-service | Enables/starts the logging service |
-| weaver | Generates configuration files (rsyslog.conf, syslog-ng.conf) |
+| [weaver](../tools/weaver.md) | Generates configuration files (rsyslog.conf, syslog-ng.conf) |

@@ -51,6 +51,6 @@ _body:
 
 | Tool | How It Uses Application/MessageQueue |
 |------|--------------------------------------|
-| lay | Installs the message queue application (rabbitmq, kafka, nats) |
+| [lay](../tools/lay.md) | Installs the message queue application (rabbitmq, kafka, nats) |
 | enjoin-service | Enables/starts the message queue service |
-| weaver | Generates configuration files (rabbitmq.conf, server.properties, nats.conf) |
+| [weaver](../tools/weaver.md) | Generates configuration files (rabbitmq.conf, server.properties, nats.conf) |

@@ -90,5 +90,5 @@ _body:
 
 | Tool | How It Uses Security/IDS |
 |------|--------------------------|
-| enjoin | Installs and configures the IDS backend, deploys jails and rules |
-| judge | Validates that IDS is running and configured as declared |
+| [enjoin](../tools/enjoin.md) | Installs and configures the IDS backend, deploys jails and rules |
+| [judge](../tools/judge.md) | Validates that IDS is running and configured as declared |

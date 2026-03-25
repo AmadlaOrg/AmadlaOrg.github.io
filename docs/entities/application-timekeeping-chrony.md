@@ -57,6 +57,6 @@ _body:
 
 | Tool | How It Uses Application/Timekeeping/Chrony |
 |------|-------------------------------------|
-| lay | Installs the `chrony` package |
-| weaver | Generates `/etc/chrony.conf` |
+| [lay](../tools/lay.md) | Installs the `chrony` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/chrony.conf` |
 | enjoin-service | Enables/starts `chronyd` service |

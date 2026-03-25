@@ -27,4 +27,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage |
 |------|---------------------------------------|
-| lay | Installs the required language runtime |
+| [lay](../tools/lay.md) | Installs the required language runtime |

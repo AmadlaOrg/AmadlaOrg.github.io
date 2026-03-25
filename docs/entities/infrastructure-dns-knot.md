@@ -68,6 +68,6 @@ _body:
 
 | Tool | How It Uses Infrastructure/DNS/Knot |
 |------|-------------------------------------|
-| lay | Installs the `knot` package |
-| weaver | Generates `knot.conf` and zone files |
+| [lay](../tools/lay.md) | Installs the `knot` package |
+| [weaver](../tools/weaver.md) | Generates `knot.conf` and zone files |
 | enjoin-service | Enables/starts the `knot` service |

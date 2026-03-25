@@ -60,6 +60,6 @@ _body:
 
 | Tool | How It Uses Application/Proxy/Squid |
 |------|-------------------------------------|
-| lay | Installs the `squid` package |
-| weaver | Generates `/etc/squid/squid.conf` |
+| [lay](../tools/lay.md) | Installs the `squid` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/squid/squid.conf` |
 | enjoin-service | Enables/starts the `squid` service |

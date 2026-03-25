@@ -20,11 +20,11 @@ These properties are common across all VPN implementations. Sub-types add applic
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [VPN/WireGuard](application-vpn-wireguard.md) | WireGuard -- kernel-level VPN, minimal attack surface | Most common today |
-| [VPN/OpenVPN](application-vpn-openvpn.md) | OpenVPN -- TLS-based VPN, broad platform support | Mature, widely deployed |
-| [VPN/StrongSwan](application-vpn-strongswan.md) | StrongSwan -- IPsec/IKEv2, standards-compliant | Enterprise, site-to-site |
+| Sub-type | Application |
+|----------|-------------|
+| [VPN/WireGuard](application-vpn-wireguard.md) | WireGuard -- kernel-level VPN, minimal attack surface |
+| [VPN/OpenVPN](application-vpn-openvpn.md) | OpenVPN -- TLS-based VPN, broad platform support |
+| [VPN/StrongSwan](application-vpn-strongswan.md) | StrongSwan -- IPsec/IKEv2, standards-compliant |
 
 ## Example
 
@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Application/VPN |
 |------|----------------------------|
-| lay | Installs the VPN application (wireguard-tools, openvpn, strongswan) |
-| weaver | Generates configuration files (wg0.conf, server.conf, ipsec.conf) |
+| [lay](../tools/lay.md) | Installs the VPN application (wireguard-tools, openvpn, strongswan) |
+| [weaver](../tools/weaver.md) | Generates configuration files (wg0.conf, server.conf, ipsec.conf) |
 | enjoin-service | Enables/starts the VPN service |

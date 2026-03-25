@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses System/CPU |
 |------|------------------------------|
-| enjoin | Configures cgroup CPU constraints |
-| raise | Provisions VMs/instances with specified CPU resources |
-| judge-system | Validates that CPU resources meet requirements |
+| [enjoin](../tools/enjoin.md) | Configures cgroup CPU constraints |
+| [raise](../tools/raise.md) | Provisions VMs/instances with specified CPU resources |
+| [judge-system](../plugins/judges.md) | Validates that CPU resources meet requirements |

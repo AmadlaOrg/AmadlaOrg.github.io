@@ -79,6 +79,6 @@ _body:
 
 | Tool | How It Uses Application/AuthProxy/Authelia |
 |------|---------------------------------------------|
-| lay | Installs the `authelia` binary |
-| weaver | Generates `configuration.yml` |
+| [lay](../tools/lay.md) | Installs the `authelia` binary |
+| [weaver](../tools/weaver.md) | Generates `configuration.yml` |
 | enjoin-service | Enables/starts the `authelia` service |

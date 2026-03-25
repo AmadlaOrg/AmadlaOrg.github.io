@@ -25,10 +25,10 @@ These properties are common across all backup implementations. Sub-types add app
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [Backup/Restic](application-backup-restic.md) | Restic — fast, secure, efficient deduplicating backup | Modern, multi-backend |
-| [Backup/Borg](application-backup-borg.md) | BorgBackup — deduplicating archiver with compression | Mature, SSH-based |
+| Sub-type | Application |
+|----------|-------------|
+| [Backup/Restic](application-backup-restic.md) | Restic — fast, secure, efficient deduplicating backup |
+| [Backup/Borg](application-backup-borg.md) | BorgBackup — deduplicating archiver with compression |
 
 ## Example
 
@@ -57,6 +57,6 @@ _body:
 
 | Tool | How It Uses Application/Backup |
 |------|-------------------------------|
-| lay | Installs the backup application (restic, borg, etc.) |
+| [lay](../tools/lay.md) | Installs the backup application (restic, borg, etc.) |
 | enjoin-service | Enables/starts backup timer or cron job |
-| weaver | Generates backup configuration and wrapper scripts |
+| [weaver](../tools/weaver.md) | Generates backup configuration and wrapper scripts |

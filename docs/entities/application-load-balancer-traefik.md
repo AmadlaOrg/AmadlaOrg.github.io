@@ -65,6 +65,6 @@ _body:
 
 | Tool | How It Uses Application/LoadBalancer/Traefik |
 |------|----------------------------------------------|
-| lay | Installs the `traefik` binary |
-| weaver | Generates `/etc/traefik/traefik.yml` and dynamic configuration files |
+| [lay](../tools/lay.md) | Installs the `traefik` binary |
+| [weaver](../tools/weaver.md) | Generates `/etc/traefik/traefik.yml` and dynamic configuration files |
 | enjoin-service | Enables/starts `traefik` service |

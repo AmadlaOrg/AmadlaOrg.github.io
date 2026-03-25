@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses Application/Monitoring/ZabbixAgent |
 |------|------------------------------------------------|
-| lay | Installs the `zabbix-agent2` package |
-| weaver | Generates `/etc/zabbix/zabbix_agent2.conf` |
+| [lay](../tools/lay.md) | Installs the `zabbix-agent2` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/zabbix/zabbix_agent2.conf` |
 | enjoin-service | Enables/starts `zabbix-agent2` service |

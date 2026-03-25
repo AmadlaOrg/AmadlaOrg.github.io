@@ -39,6 +39,6 @@ _body:
 
 | Tool | How It Uses Application/CICD/DroneRunner |
 |------|------------------------------------------|
-| lay | Installs the `drone-runner-docker` binary |
-| weaver | Generates runner environment configuration |
+| [lay](../tools/lay.md) | Installs the `drone-runner-docker` binary |
+| [weaver](../tools/weaver.md) | Generates runner environment configuration |
 | enjoin-service | Enables/starts the drone runner service |

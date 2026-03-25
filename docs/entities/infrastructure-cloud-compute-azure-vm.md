@@ -51,4 +51,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Compute/Azure VM |
 |------|--------------------------------------------------|
-| raise | Provisions Azure VMs via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure VMs via raise-azure plugin |

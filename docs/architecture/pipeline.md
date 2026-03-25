@@ -1,3 +1,7 @@
+---
+description: How Amadla tools form a data pipeline — from defining requirements in HERY entities through provisioning, installation, configuration, and auditing.
+---
+
 # Data Pipeline
 
 The Amadla pipeline transforms application requirements into running, audited infrastructure. Each tool handles one stage, reading structured entity data from upstream and emitting JSON for the next stage.

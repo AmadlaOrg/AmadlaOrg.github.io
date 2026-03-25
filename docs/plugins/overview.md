@@ -1,3 +1,7 @@
+---
+description: Amadla's plugin ecosystem — raise, doorman, judge, weaver, and enjoin plugins that extend tools with provider-specific functionality.
+---
+
 # Plugins Overview
 
 Amadla uses plugins to extend core tools with external integrations. Each plugin is a **standalone CLI executable** that communicates via stdin/stdout/stderr following the [Plugin Protocol](../architecture/plugin-system.md).
@@ -6,12 +10,13 @@ Plugins can be written in **any language** — Go, Python, Bash, or anything tha
 
 ## Plugin Categories
 
-| Category | Host Tool | Naming | Count | Active | Stubs |
-|----------|-----------|--------|-------|--------|-------|
+| Category | Host Tool | Naming | Count | Active | Planned/Stubs |
+|----------|-----------|--------|-------|--------|---------------|
+| [Raise Plugins](raise-plugins.md) | raise | `raise-*` | 10 | 3 | 7 |
 | [Doorman Plugins](doorman-plugins.md) | doorman | `doorman-*` | 16 | 1 | 15 |
 | [Judge Plugins](judges.md) | judge | `judge-*` | 3 | 1 | 2 |
 | [Weaver Plugins](weavers.md) | weaver | `weaver-*` | 4 | 0 | 4 |
-| **Total** | | | **23** | **2** | **21** |
+| **Total** | | | **33** | **5** | **28** |
 
 ## Naming Convention
 
@@ -55,7 +60,12 @@ These frameworks are **convenience wrappers** that reduce boilerplate for Go aut
 
 ## Development Status
 
-Most plugins are currently stubs (README-only repositories). The two active plugins serve as reference implementations:
+Active plugins serve as reference implementations:
 
+- **raise-libvirt** — Reference Raise plugin (Go) — local KVM/QEMU VMs
+- **raise-virtualbox** — Raise plugin for VirtualBox (Go)
+- **raise-wsl** — Raise plugin for WSL2 (Go)
 - **doorman-keepassxc** — Reference Doorman plugin (Go)
 - **judge-application** — Reference Judge plugin (Go)
+
+`raise-xen` is the next planned plugin — required for building the Amadla Linux distro.

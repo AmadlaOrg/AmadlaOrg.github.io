@@ -80,6 +80,6 @@ _body:
 
 | Tool | How It Uses Application/IdentityProvider/Dex |
 |------|-----------------------------------------------|
-| lay | Installs Dex |
-| weaver | Generates `dex.yaml` configuration |
+| [lay](../tools/lay.md) | Installs Dex |
+| [weaver](../tools/weaver.md) | Generates `dex.yaml` configuration |
 | enjoin-service | Enables/starts the `dex` service |

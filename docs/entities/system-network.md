@@ -54,6 +54,6 @@ _body:
 
 | Tool | How It Uses System/Network |
 |------|------------------------------|
-| enjoin-network | Configures network interfaces, DNS, ports, routes |
-| raise | Creates virtual networks for VMs/containers |
-| judge | Validates network configuration matches requirements |
+| [enjoin](../tools/enjoin.md) | Configures network interfaces and routes via enjoin-network plugin |
+| [raise](../tools/raise.md) | Creates virtual networks for VMs/containers |
+| [judge](../tools/judge.md) | Validates network configuration matches requirements |

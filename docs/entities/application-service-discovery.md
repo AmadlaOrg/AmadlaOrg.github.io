@@ -20,11 +20,11 @@ These properties are common across all service discovery implementations. Sub-ty
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [ServiceDiscovery/Consul](application-service-discovery-consul.md) | Consul -- service mesh, health checking, KV store | Most feature-rich |
-| [ServiceDiscovery/Etcd](application-service-discovery-etcd.md) | etcd -- distributed key-value store, Kubernetes backbone | Widely deployed |
-| [ServiceDiscovery/ZooKeeper](application-service-discovery-zookeeper.md) | ZooKeeper -- coordination service for distributed systems | Legacy, Kafka/Hadoop |
+| Sub-type | Application |
+|----------|-------------|
+| [ServiceDiscovery/Consul](application-service-discovery-consul.md) | Consul -- service mesh, health checking, KV store |
+| [ServiceDiscovery/Etcd](application-service-discovery-etcd.md) | etcd -- distributed key-value store, Kubernetes backbone |
+| [ServiceDiscovery/ZooKeeper](application-service-discovery-zookeeper.md) | ZooKeeper -- coordination service for distributed systems |
 
 ## Example
 
@@ -41,6 +41,6 @@ _body:
 
 | Tool | How It Uses Application/ServiceDiscovery |
 |------|------------------------------------------|
-| lay | Installs the service discovery application (consul, etcd, zookeeper) |
-| weaver | Generates configuration files |
+| [lay](../tools/lay.md) | Installs the service discovery application (consul, etcd, zookeeper) |
+| [weaver](../tools/weaver.md) | Generates configuration files |
 | enjoin-service | Enables/starts the service discovery daemon |

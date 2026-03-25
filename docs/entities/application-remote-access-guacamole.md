@@ -72,6 +72,6 @@ _body:
 
 | Tool | How It Uses Application/RemoteAccess/Guacamole |
 |------|------------------------------------------------|
-| lay | Installs Guacamole server, guacd, and dependencies |
-| weaver | Generates `guacamole.properties`, Tomcat/Nginx config |
+| [lay](../tools/lay.md) | Installs Guacamole server, guacd, and dependencies |
+| [weaver](../tools/weaver.md) | Generates `guacamole.properties`, Tomcat/Nginx config |
 | enjoin-service | Enables/starts `guacd` and `tomcat` services |

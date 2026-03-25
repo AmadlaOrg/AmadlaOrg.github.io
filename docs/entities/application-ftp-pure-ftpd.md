@@ -52,6 +52,6 @@ _body:
 
 | Tool | How It Uses Application/FTP/PureFTPD |
 |------|--------------------------------------|
-| lay | Installs the `pure-ftpd` package |
-| weaver | Generates Pure-FTPd configuration files |
+| [lay](../tools/lay.md) | Installs the `pure-ftpd` package |
+| [weaver](../tools/weaver.md) | Generates Pure-FTPd configuration files |
 | enjoin-service | Enables/starts `pure-ftpd` service |

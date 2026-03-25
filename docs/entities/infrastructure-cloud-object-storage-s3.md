@@ -46,4 +46,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/ObjectStorage/S3 |
 |------|--------------------------------------------------|
-| raise | Provisions S3 buckets via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions S3 buckets via raise-aws plugin |

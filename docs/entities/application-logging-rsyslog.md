@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Application/Logging/Rsyslog |
 |------|----------------------------------------|
-| lay | Installs the `rsyslog` package |
-| weaver | Generates `/etc/rsyslog.conf` and `/etc/rsyslog.d/*.conf` |
+| [lay](../tools/lay.md) | Installs the `rsyslog` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/rsyslog.conf` and `/etc/rsyslog.d/*.conf` |
 | enjoin-service | Enables/starts `rsyslog` service |

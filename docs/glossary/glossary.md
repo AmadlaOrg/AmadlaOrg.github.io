@@ -1,3 +1,7 @@
+---
+description: Definitions of Amadla-specific terminology — HERY, entities, tools, plugins, and infrastructure automation concepts.
+---
+
 # Glossary
 
 Amadla-specific terminology and concepts.

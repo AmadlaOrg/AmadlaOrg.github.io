@@ -7,14 +7,14 @@
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `hery entity get` | Working | Retrieve a specific entity |
-| `hery entity list` | Working | List entities |
-| `hery entity validate` | Working | Validate entity content against JSON Schema |
-| `hery query` | Working | Query entities with selection flags + jq transformation |
-| `hery compose` | Working | Compose multiple entities into a unified view |
-| `hery settings` | Working | Manage hery configuration |
+| Command | Description |
+|---------|-------------|
+| `hery entity get` | Retrieve a specific entity |
+| `hery entity list` | List entities |
+| `hery entity validate` | Validate entity content against JSON Schema |
+| `hery query` | Query entities with selection flags + jq transformation |
+| `hery compose` | Compose multiple entities into a unified view |
+| `hery settings` | Manage hery configuration |
 
 ## Dependencies
 

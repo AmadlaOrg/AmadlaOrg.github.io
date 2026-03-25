@@ -51,6 +51,6 @@ _body:
 
 | Tool | How It Uses Application/DNSResolver/Dnsmasq |
 |------|----------------------------------------------|
-| lay | Installs the `dnsmasq` package |
-| weaver | Generates `/etc/dnsmasq.conf` and `/etc/dnsmasq.d/*.conf` |
+| [lay](../tools/lay.md) | Installs the `dnsmasq` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/dnsmasq.conf` and `/etc/dnsmasq.d/*.conf` |
 | enjoin-service | Enables/starts `dnsmasq` service |

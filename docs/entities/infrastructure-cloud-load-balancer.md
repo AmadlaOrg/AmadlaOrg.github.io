@@ -19,11 +19,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [LoadBalancer/ALB](infrastructure-cloud-load-balancer-alb.md) | AWS Application Load Balancer | Stable |
-| [LoadBalancer/GCP](infrastructure-cloud-load-balancer-gcp.md) | GCP Cloud Load Balancing | Stable |
-| [LoadBalancer/Azure](infrastructure-cloud-load-balancer-azure.md) | Azure Load Balancer | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [LoadBalancer/ALB](infrastructure-cloud-load-balancer-alb.md) | AWS Application Load Balancer |
+| [LoadBalancer/GCP](infrastructure-cloud-load-balancer-gcp.md) | GCP Cloud Load Balancing |
+| [LoadBalancer/Azure](infrastructure-cloud-load-balancer-azure.md) | Azure Load Balancer |
 
 ## Example
 
@@ -50,4 +50,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/LoadBalancer |
 |------|----------------------------------------------|
-| raise | Provisions load balancers via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions load balancers via provider-specific plugins |

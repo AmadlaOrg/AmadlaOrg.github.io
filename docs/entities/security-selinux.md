@@ -61,5 +61,5 @@ _body:
 
 | Tool | How It Uses Security/SELinux |
 |------|-----------------------------|
-| enjoin-selinux | Sets SELinux mode, applies booleans, file contexts, port labels, and installs modules |
-| judge | Validates SELinux is in the declared mode with correct booleans and contexts |
+| [enjoin](../tools/enjoin.md) | Manages SELinux policies via enjoin-selinux plugin |
+| [judge](../tools/judge.md) | Validates SELinux is in the declared mode with correct booleans and contexts |

@@ -55,5 +55,6 @@ _body:
 
 | Tool | How It Uses Firewall |
 |------|---------------------------|
-| lay | Configures firewall rules using the detected or specified backend |
-| judge | Validates that firewall rules match requirements |
+| [enjoin](../tools/enjoin.md) | Configures firewall rules via enjoin-firewall plugin |
+| [lay](../tools/lay.md) | Configures firewall rules using the detected or specified backend |
+| [judge](../tools/judge.md) | Validates that firewall rules match requirements |

@@ -35,6 +35,6 @@ _body:
 
 | Tool | How It Uses Application |
 |------|------------------------------|
-| lay | Reads requirements and installs packages |
-| judge-application | Checks whether required apps are actually installed |
-| weaver | Uses application data to fill config templates |
+| [lay](../tools/lay.md) | Reads requirements and installs packages |
+| [judge-application](../plugins/judges.md) | Checks whether required apps are actually installed |
+| [weaver](../tools/weaver.md) | Uses application data to fill config templates |

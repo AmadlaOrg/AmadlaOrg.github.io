@@ -45,5 +45,5 @@ _body:
 
 | Tool | How It Uses Application/Timekeeping/Timesyncd |
 |------|----------------------------------------|
-| enjoin | Configures `/etc/systemd/timesyncd.conf` |
+| [enjoin](../tools/enjoin.md) | Configures `/etc/systemd/timesyncd.conf` |
 | enjoin-service | Enables/starts `systemd-timesyncd` service |

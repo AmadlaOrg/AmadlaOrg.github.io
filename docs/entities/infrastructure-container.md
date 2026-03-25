@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses Infrastructure/Container |
 |------|---------------------------------------------|
-| raise | Sets up container runtime environment |
-| lay | Builds/pulls container images |
-| doorman | Resolves `password_secret` for registry auth |
+| [raise](../tools/raise.md) | Sets up container runtime environment |
+| [lay](../tools/lay.md) | Builds/pulls container images |
+| [doorman](../tools/doorman.md) | Resolves `password_secret` for registry auth |

@@ -55,7 +55,7 @@ _body:
 
 | Tool | How It Uses Application/IAM |
 |------|-----------------------------------|
-| lay | Installs the IAM provider |
-| weaver | Generates realm/client configuration files |
-| doorman | Resolves `password_secret` references |
-| judge-application | Validates IAM provider is running with correct configuration |
+| [lay](../tools/lay.md) | Installs the IAM provider |
+| [weaver](../tools/weaver.md) | Generates realm/client configuration files |
+| [doorman](../tools/doorman.md) | Resolves `password_secret` references |
+| [judge-application](../plugins/judges.md) | Validates IAM provider is running with correct configuration |

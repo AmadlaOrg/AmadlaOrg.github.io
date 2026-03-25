@@ -1,3 +1,7 @@
+---
+description: Amadla is an infrastructure automation ecosystem for setting up and managing servers. Small, focused CLI tools that each do one thing well, connected by structured YAML entities.
+---
+
 # Amadla Ecosystem
 
 Amadla is an infrastructure automation ecosystem for setting up and managing servers — from a single laptop to a fleet of cloud instances. It works on **any OS** (Linux, macOS, Windows, OpenBSD) and follows the **UNIX philosophy**: small, focused tools that each do one thing well and can be mixed, replaced, or extended independently.
@@ -25,7 +29,7 @@ Now imagine doing this **without lists**. You walk into the grocery store and tr
 - **Tools** are the specialists — each reads specific entity types and knows how to act on them
 - **The pipeline** is your Saturday route — [amadla](tools/amadla.md) looks at all your lists, figures out which specialist handles each one, and works out the right order
 
-A package entity goes to [lay](tools/lay.md) (the installer). A template entity goes to [weaver](tools/weaver.md) (the config generator). A secret entity goes to [doorman](tools/doorman.md) (the secrets resolver). Each tool only understands its own entity types — and that's the point. Simple tools, clear boundaries, no confusion.
+A package entity goes to [lay](tools/lay.md) (the installer). A template entity goes to [weaver](tools/weaver.md) (the config generator). A secret entity goes to [doorman](tools/doorman.md) (the secrets resolver). A user entity goes to [enjoin](tools/enjoin.md) (the system configurator). Each tool only understands its own entity types — and that's the point. Simple tools, clear boundaries, no confusion.
 
 ## The Pipeline
 
@@ -33,7 +37,7 @@ A package entity goes to [lay](tools/lay.md) (the installer). A template entity 
 
 ```
 Define requirements (hery) → Resolve secrets (doorman) → Provision infra (raise)
-    → Install apps (lay) → Generate configs (weaver) → Audit state (judge)
+    → Install apps (lay) → Configure system (enjoin) → Generate configs (weaver) → Audit state (judge)
 ```
 
 Because every tool follows the same protocol (stdin/stdout, structured data, standard exit codes), you can:
@@ -47,12 +51,14 @@ Because every tool follows the same protocol (stdin/stdout, structured data, sta
 
 | Category | Count | Examples |
 |----------|-------|---------|
-| **Core Tools** | 13 | [hery](tools/hery.md), [doorman](tools/doorman.md), [weaver](tools/weaver.md), [judge](tools/judge.md), [lay](tools/lay.md), [raise](tools/raise.md), [waiter](tools/waiter.md), [unravel](tools/unravel.md), [conduct](tools/conduct.md), [lighthouse](tools/lighthouse.md), [garbage](tools/garbage.md), [dryrun](tools/dryrun.md), [amadla](tools/amadla.md) |
-| **Libraries** | 5 | LibraryUtils, LibraryFramework, LibraryPluginFramework, LibraryDoormanFramework, LibraryJudgeFramework |
-| **Doorman Plugins** | 16 | doorman-vault, doorman-aws, doorman-keepassxc, doorman-keycloak, ... |
-| **Judge Plugins** | 3 | judge-application, judge-system, judge-infrastructure |
-| **Weaver Plugins** | 5 | weaver-go, weaver-jinja2, weaver-mustache, weaver-qute, weaver-freemarker |
-| **Entity Definitions** | 27 | [15 types + 11 sub-types + Tools](entities/overview.md) |
+| **Core Tools** | 14 | [hery](tools/hery.md), [doorman](tools/doorman.md), [weaver](tools/weaver.md), [judge](tools/judge.md), [lay](tools/lay.md), [raise](tools/raise.md), [enjoin](tools/enjoin.md), [waiter](tools/waiter.md), [unravel](tools/unravel.md), [conduct](tools/conduct.md), [lighthouse](tools/lighthouse.md), [garbage](tools/garbage.md), [dryrun](tools/dryrun.md), [amadla](tools/amadla.md) |
+| **Libraries** | 6 | [LibraryUtils](libraries/library-utils.md), [LibraryFramework](libraries/library-framework.md), [LibraryPluginFramework](libraries/library-plugin-framework.md), [LibraryDoormanFramework](libraries/library-doorman-framework.md), [LibraryJudgeFramework](libraries/library-judge-framework.md), [LibraryEnjoinFramework](libraries/library-enjoin-framework.md) |
+| **Doorman Plugins** | 16 | [doorman-vault, doorman-aws, doorman-keepassxc, doorman-keycloak, ...](plugins/doorman-plugins.md) |
+| **Raise Plugins** | 10 | [raise-libvirt, raise-virtualbox, raise-wsl, raise-xen, ...](plugins/raise-plugins.md) |
+| **Judge Plugins** | 3 | [judge-application, judge-system, judge-infrastructure](plugins/judges.md) |
+| **Weaver Plugins** | 4 | [weaver-jinja, weaver-js-handlebars, weaver-js-mustache, weaver-qute](plugins/weavers.md) |
+| **Enjoin Plugins** | 10 | [enjoin-user, enjoin-service, enjoin-firewall, enjoin-cron, ...](plugins/enjoin-plugins.md) |
+| **Entity Definitions** | 27+ | [15 types + sub-types + Tools](entities/overview.md) |
 
 **Total: 52+ repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) (public) and [AmadlaCom](https://github.com/AmadlaCom) (private).
 
@@ -62,7 +68,7 @@ Because every tool follows the same protocol (stdin/stdout, structured data, sta
 - [Architecture](architecture/ecosystem-overview.md) — Component map, data pipeline, [HERY](architecture/hery-concepts.md) data model, plugin system
 - [Tools](tools/overview.md) — Tool canvases for every CLI tool
 - [Libraries](libraries/overview.md) — Shared Go libraries and dependency graph
-- [Plugins](plugins/overview.md) — Doorman, judge, and weaver plugins
+- [Plugins](plugins/overview.md) — Raise, doorman, judge, weaver, and enjoin plugins
 - [Entities](entities/overview.md) — [HERY](architecture/hery-concepts.md) entity definitions and schemas
 - [Standards](standards/go-conventions.md) — Go conventions, testing, project structure, CLI patterns
 - [Roadmap](roadmap/current-state.md) — Current state, gaps, development plan, dependency graph

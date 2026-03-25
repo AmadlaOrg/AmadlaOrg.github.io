@@ -48,5 +48,5 @@ _body:
 
 | Tool | How It Uses Security/AppArmor |
 |------|-------------------------------|
-| enjoin-apparmor | Applies AppArmor profiles and sets enforcement modes |
-| judge | Validates that profiles are loaded and in the expected mode |
+| [enjoin](../tools/enjoin.md) | Manages AppArmor profiles via enjoin-apparmor plugin |
+| [judge](../tools/judge.md) | Validates that profiles are loaded and in the expected mode |

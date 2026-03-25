@@ -1,3 +1,7 @@
+---
+description: Amadla's application-centric approach to infrastructure automation — why resources should carry their own configuration instead of relying on environment-centric tools.
+---
+
 # Vision & Philosophy
 
 ## The Problem: Configuration is Far from the Resource

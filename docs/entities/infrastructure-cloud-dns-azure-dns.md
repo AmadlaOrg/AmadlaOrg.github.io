@@ -36,4 +36,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/DNS/Azure DNS |
 |------|-----------------------------------------------|
-| raise | Provisions Azure DNS zones via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure DNS zones via raise-azure plugin |

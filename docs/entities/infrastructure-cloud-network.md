@@ -20,11 +20,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [Network/AWS VPC](infrastructure-cloud-network-aws-vpc.md) | AWS Virtual Private Cloud | Stable |
-| [Network/GCP VPC](infrastructure-cloud-network-gcp-vpc.md) | Google Cloud VPC | Stable |
-| [Network/Azure VNet](infrastructure-cloud-network-azure-vnet.md) | Azure Virtual Network | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [Network/AWS VPC](infrastructure-cloud-network-aws-vpc.md) | AWS Virtual Private Cloud |
+| [Network/GCP VPC](infrastructure-cloud-network-gcp-vpc.md) | Google Cloud VPC |
+| [Network/Azure VNet](infrastructure-cloud-network-azure-vnet.md) | Azure Virtual Network |
 
 ## Example
 
@@ -50,4 +50,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Network |
 |------|----------------------------------------|
-| raise | Provisions virtual networks via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions virtual networks via provider-specific plugins |

@@ -53,6 +53,6 @@ _body:
 
 | Tool | How It Uses Application/FTP/Vsftpd |
 |------|-----------------------------------|
-| lay | Installs the `vsftpd` package |
-| weaver | Generates `/etc/vsftpd.conf` |
+| [lay](../tools/lay.md) | Installs the `vsftpd` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/vsftpd.conf` |
 | enjoin-service | Enables/starts `vsftpd` service |

@@ -47,4 +47,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Compute/DigitalOcean Droplet |
 |------|-------------------------------------------------------------|
-| raise | Provisions Droplets via raise-digitalocean plugin |
+| [raise](../tools/raise.md) | Provisions Droplets via raise-digitalocean plugin |

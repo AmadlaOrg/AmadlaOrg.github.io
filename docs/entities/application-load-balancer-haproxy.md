@@ -78,6 +78,6 @@ _body:
 
 | Tool | How It Uses Application/LoadBalancer/HAProxy |
 |------|----------------------------------------------|
-| lay | Installs the `haproxy` package |
-| weaver | Generates `/etc/haproxy/haproxy.cfg` |
+| [lay](../tools/lay.md) | Installs the `haproxy` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/haproxy/haproxy.cfg` |
 | enjoin-service | Enables/starts `haproxy` service |

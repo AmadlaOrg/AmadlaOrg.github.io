@@ -58,6 +58,6 @@ _body:
 
 | Tool | How It Uses Application/LoadBalancer |
 |------|--------------------------------------|
-| lay | Installs the load balancer application (haproxy, traefik, envoy) |
+| [lay](../tools/lay.md) | Installs the load balancer application (haproxy, traefik, envoy) |
 | enjoin-service | Enables/starts the load balancer service |
-| weaver | Generates configuration files (haproxy.cfg, traefik.yml, envoy.yaml) |
+| [weaver](../tools/weaver.md) | Generates configuration files (haproxy.cfg, traefik.yml, envoy.yaml) |

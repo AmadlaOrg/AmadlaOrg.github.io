@@ -44,4 +44,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Database/Azure Database |
 |------|--------------------------------------------------------|
-| raise | Provisions Azure Database instances via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions Azure Database instances via raise-azure plugin |

@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Infrastructure/DNS/PowerDNS |
 |------|-----------------------------------------|
-| lay | Installs the `pdns-server` package and backend |
-| weaver | Generates `pdns.conf` |
+| [lay](../tools/lay.md) | Installs the `pdns-server` package and backend |
+| [weaver](../tools/weaver.md) | Generates `pdns.conf` |
 | enjoin-service | Enables/starts the `pdns` service |

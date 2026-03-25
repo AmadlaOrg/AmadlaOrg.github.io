@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Application/SearchEngine |
 |------|--------------------------------------|
-| lay | Installs the search engine application (elasticsearch, opensearch, meilisearch) |
+| [lay](../tools/lay.md) | Installs the search engine application (elasticsearch, opensearch, meilisearch) |
 | enjoin-service | Enables/starts the search engine service |
-| weaver | Generates configuration files (elasticsearch.yml, opensearch.yml) |
+| [weaver](../tools/weaver.md) | Generates configuration files (elasticsearch.yml, opensearch.yml) |

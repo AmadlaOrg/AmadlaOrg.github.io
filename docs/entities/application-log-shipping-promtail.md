@@ -61,6 +61,6 @@ _body:
 
 | Tool | How It Uses Application/LogShipping/Promtail |
 |------|----------------------------------------------|
-| lay | Installs the `promtail` binary |
-| weaver | Generates `/etc/promtail/config.yml` |
+| [lay](../tools/lay.md) | Installs the `promtail` binary |
+| [weaver](../tools/weaver.md) | Generates `/etc/promtail/config.yml` |
 | enjoin-service | Enables/starts `promtail` service |

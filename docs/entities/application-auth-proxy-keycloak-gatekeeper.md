@@ -58,6 +58,6 @@ _body:
 
 | Tool | How It Uses Application/AuthProxy/KeycloakGatekeeper |
 |------|------------------------------------------------------|
-| lay | Installs the Keycloak Gatekeeper binary |
-| weaver | Generates gatekeeper configuration |
+| [lay](../tools/lay.md) | Installs the Keycloak Gatekeeper binary |
+| [weaver](../tools/weaver.md) | Generates gatekeeper configuration |
 | enjoin-service | Enables/starts the gatekeeper service |

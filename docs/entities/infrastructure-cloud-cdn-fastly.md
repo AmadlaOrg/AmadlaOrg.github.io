@@ -48,4 +48,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/CDN/Fastly |
 |------|---------------------------------------------|
-| raise | Provisions Fastly CDN services via raise-fastly plugin |
+| [raise](../tools/raise.md) | Provisions Fastly CDN services via raise-fastly plugin |

@@ -18,11 +18,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [Kubernetes/EKS](infrastructure-cloud-kubernetes-eks.md) | AWS Elastic Kubernetes Service | Stable |
-| [Kubernetes/GKE](infrastructure-cloud-kubernetes-gke.md) | Google Kubernetes Engine | Stable |
-| [Kubernetes/AKS](infrastructure-cloud-kubernetes-aks.md) | Azure Kubernetes Service | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [Kubernetes/EKS](infrastructure-cloud-kubernetes-eks.md) | AWS Elastic Kubernetes Service |
+| [Kubernetes/GKE](infrastructure-cloud-kubernetes-gke.md) | Google Kubernetes Engine |
+| [Kubernetes/AKS](infrastructure-cloud-kubernetes-aks.md) | Azure Kubernetes Service |
 
 ## Example
 
@@ -47,4 +47,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Kubernetes |
 |------|---------------------------------------------|
-| raise | Provisions managed Kubernetes clusters via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions managed Kubernetes clusters via provider-specific plugins |

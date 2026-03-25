@@ -20,11 +20,11 @@ These properties are common across all DNS resolver implementations. Sub-types a
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [DNSResolver/Unbound](application-dns-resolver-unbound.md) | Unbound — validating, recursive, caching DNS resolver | Security-focused |
-| [DNSResolver/Dnsmasq](application-dns-resolver-dnsmasq.md) | Dnsmasq — lightweight DNS/DHCP server | Simple setups, VMs |
-| [DNSResolver/SystemdResolved](application-dns-resolver-systemd-resolved.md) | systemd-resolved — network name resolution manager | Default on many systemd distros |
+| Sub-type | Application |
+|----------|-------------|
+| [DNSResolver/Unbound](application-dns-resolver-unbound.md) | Unbound — validating, recursive, caching DNS resolver |
+| [DNSResolver/Dnsmasq](application-dns-resolver-dnsmasq.md) | Dnsmasq — lightweight DNS/DHCP server |
+| [DNSResolver/SystemdResolved](application-dns-resolver-systemd-resolved.md) | systemd-resolved — network name resolution manager |
 
 ## Example
 
@@ -44,6 +44,6 @@ _body:
 
 | Tool | How It Uses Application/DNSResolver |
 |------|-------------------------------------|
-| lay | Installs the DNS resolver application (unbound, dnsmasq, etc.) |
+| [lay](../tools/lay.md) | Installs the DNS resolver application (unbound, dnsmasq, etc.) |
 | enjoin-service | Enables/starts the DNS resolver service |
-| weaver | Generates configuration files (unbound.conf, dnsmasq.conf) |
+| [weaver](../tools/weaver.md) | Generates configuration files (unbound.conf, dnsmasq.conf) |

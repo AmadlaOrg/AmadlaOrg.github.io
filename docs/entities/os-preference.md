@@ -58,7 +58,7 @@ _body:
 
 | Tool | How It Uses OS/Preference |
 |------|---------------------------|
-| lay | Selects package manager backend from `package_managers.default` |
-| enjoin | Selects firewall, network, cron, and service backends from preferences |
+| [lay](../tools/lay.md) | Selects package manager backend from `package_managers.default` |
+| [enjoin](../tools/enjoin.md) | Selects firewall, network, cron, and service backends from preferences |
 | enjoin-network | Uses `network` preference to choose configuration tool |
 | enjoin-selinux | Reads `mac` and `mac_mode` to determine SELinux configuration |

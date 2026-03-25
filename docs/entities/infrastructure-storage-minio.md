@@ -55,7 +55,7 @@ _body:
 
 | Tool | How It Uses Infrastructure/Storage/MinIO |
 |------|------------------------------------------|
-| raise | Provisions VMs/instances for MinIO nodes |
-| lay | Installs the `minio` binary |
-| weaver | Generates `/etc/default/minio` environment file |
+| [raise](../tools/raise.md) | Provisions VMs/instances for MinIO nodes |
+| [lay](../tools/lay.md) | Installs the `minio` binary |
+| [weaver](../tools/weaver.md) | Generates `/etc/default/minio` environment file |
 | enjoin-service | Enables/starts `minio` service |

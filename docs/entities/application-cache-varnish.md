@@ -42,6 +42,6 @@ _body:
 
 | Tool | How It Uses Application/Cache/Varnish |
 |------|---------------------------------------|
-| lay | Installs the `varnish` package |
-| weaver | Generates `/etc/varnish/default.vcl` and `/etc/default/varnish` |
+| [lay](../tools/lay.md) | Installs the `varnish` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/varnish/default.vcl` and `/etc/default/varnish` |
 | enjoin-service | Enables/starts `varnish` service |

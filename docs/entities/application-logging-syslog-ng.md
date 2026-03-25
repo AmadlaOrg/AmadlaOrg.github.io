@@ -66,6 +66,6 @@ _body:
 
 | Tool | How It Uses Application/Logging/SyslogNG |
 |------|------------------------------------------|
-| lay | Installs the `syslog-ng` package |
-| weaver | Generates `/etc/syslog-ng/syslog-ng.conf` |
+| [lay](../tools/lay.md) | Installs the `syslog-ng` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/syslog-ng/syslog-ng.conf` |
 | enjoin-service | Enables/starts `syslog-ng` service |

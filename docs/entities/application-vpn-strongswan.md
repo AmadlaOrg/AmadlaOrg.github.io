@@ -70,6 +70,6 @@ _body:
 
 | Tool | How It Uses Application/VPN/StrongSwan |
 |------|----------------------------------------|
-| lay | Installs the `strongswan` package |
-| weaver | Generates `/etc/swanctl/swanctl.conf` |
+| [lay](../tools/lay.md) | Installs the `strongswan` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/swanctl/swanctl.conf` |
 | enjoin-service | Enables/starts `strongswan` service |

@@ -22,11 +22,11 @@ These properties are common across all Git server implementations. Sub-types add
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [GitServer/Gitea](application-git-server-gitea.md) | Gitea — lightweight, self-hosted Git service | Most common |
-| [GitServer/GitLab](application-git-server-gitlab.md) | GitLab — full DevOps platform with CI/CD | Enterprise |
-| [GitServer/Gogs](application-git-server-gogs.md) | Gogs — painless self-hosted Git, minimal footprint | Lightweight |
+| Sub-type | Application |
+|----------|-------------|
+| [GitServer/Gitea](application-git-server-gitea.md) | Gitea — lightweight, self-hosted Git service |
+| [GitServer/GitLab](application-git-server-gitlab.md) | GitLab — full DevOps platform with CI/CD |
+| [GitServer/Gogs](application-git-server-gogs.md) | Gogs — painless self-hosted Git, minimal footprint |
 
 ## Example
 
@@ -45,6 +45,6 @@ _body:
 
 | Tool | How It Uses Application/GitServer |
 |------|-----------------------------------|
-| lay | Installs the Git server application |
+| [lay](../tools/lay.md) | Installs the Git server application |
 | enjoin-service | Enables/starts the Git server service |
-| weaver | Generates configuration files |
+| [weaver](../tools/weaver.md) | Generates configuration files |

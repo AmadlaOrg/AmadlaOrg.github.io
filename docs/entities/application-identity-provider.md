@@ -21,11 +21,11 @@ These properties are common across all identity provider implementations. Sub-ty
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [IdentityProvider/Keycloak](application-identity-provider-keycloak.md) | Keycloak — full-featured IAM with realms, SMTP, and proxy modes | Most common |
-| [IdentityProvider/Authentik](application-identity-provider-authentik.md) | Authentik — modern identity provider with flows and branding | Feature-rich |
-| [IdentityProvider/Dex](application-identity-provider-dex.md) | Dex — lightweight OIDC connector with pluggable backends | Lightweight |
+| Sub-type | Application |
+|----------|-------------|
+| [IdentityProvider/Keycloak](application-identity-provider-keycloak.md) | Keycloak — full-featured IAM with realms, SMTP, and proxy modes |
+| [IdentityProvider/Authentik](application-identity-provider-authentik.md) | Authentik — modern identity provider with flows and branding |
+| [IdentityProvider/Dex](application-identity-provider-dex.md) | Dex — lightweight OIDC connector with pluggable backends |
 
 ## Example
 
@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Application/IdentityProvider |
 |------|-------------------------------------------|
-| lay | Installs the identity provider application |
-| weaver | Generates configuration files |
+| [lay](../tools/lay.md) | Installs the identity provider application |
+| [weaver](../tools/weaver.md) | Generates configuration files |
 | enjoin-service | Enables/starts the identity provider service |

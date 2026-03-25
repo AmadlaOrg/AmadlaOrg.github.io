@@ -22,10 +22,10 @@ These properties are common across all mail relay implementations. Sub-types add
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [MailRelay/Postfix](application-mail-relay-postfix.md) | Postfix — full-featured MTA in relay mode | Most common on servers |
-| [MailRelay/Msmtp](application-mail-relay-msmtp.md) | msmtp — lightweight SMTP client | Minimal footprint |
+| Sub-type | Application |
+|----------|-------------|
+| [MailRelay/Postfix](application-mail-relay-postfix.md) | Postfix — full-featured MTA in relay mode |
+| [MailRelay/Msmtp](application-mail-relay-msmtp.md) | msmtp — lightweight SMTP client |
 
 ## Example
 
@@ -45,6 +45,6 @@ _body:
 
 | Tool | How It Uses Application/MailRelay |
 |------|----------------------------------|
-| lay | Installs the mail relay application (postfix, msmtp, etc.) |
+| [lay](../tools/lay.md) | Installs the mail relay application (postfix, msmtp, etc.) |
 | enjoin-service | Enables/starts the mail relay service |
-| weaver | Generates configuration files (main.cf, msmtprc) |
+| [weaver](../tools/weaver.md) | Generates configuration files (main.cf, msmtprc) |

@@ -46,6 +46,6 @@ _body:
 
 | Tool | How It Uses Application/Backup/Borg |
 |------|--------------------------------------|
-| lay | Installs the `borgbackup` package |
-| weaver | Generates backup scripts and systemd timer units |
+| [lay](../tools/lay.md) | Installs the `borgbackup` package |
+| [weaver](../tools/weaver.md) | Generates backup scripts and systemd timer units |
 | enjoin-service | Enables/starts `borg-backup.timer` |

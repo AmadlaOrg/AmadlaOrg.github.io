@@ -42,6 +42,6 @@ _body:
 
 | Tool | How It Uses Application/SearchEngine/Meilisearch |
 |------|--------------------------------------------------|
-| lay | Installs the `meilisearch` binary |
-| weaver | Generates Meilisearch environment configuration |
+| [lay](../tools/lay.md) | Installs the `meilisearch` binary |
+| [weaver](../tools/weaver.md) | Generates Meilisearch environment configuration |
 | enjoin-service | Enables/starts `meilisearch` service |

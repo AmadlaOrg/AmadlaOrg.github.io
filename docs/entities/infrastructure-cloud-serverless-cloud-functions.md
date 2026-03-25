@@ -47,4 +47,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Serverless/Cloud Functions |
 |------|-----------------------------------------------------------|
-| raise | Provisions Cloud Functions via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions Cloud Functions via raise-gcp plugin |

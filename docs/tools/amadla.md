@@ -14,16 +14,16 @@ The amadla tool itself is written in Go, but it is **replaceable** — the Pipel
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `amadla init` | Planned | Bootstrap `tools.hery` by scanning PATH for standard Amadla tools |
-| `amadla run <pipeline>` | Planned | Execute a Pipeline entity (order from `_requires` DAG) |
-| `amadla diagram <pipeline> --format d2` | Planned | Generate D2 diagram text from a Pipeline entity |
-| `amadla diagram <pipeline> --run-id latest --format d2` | Planned | Generate annotated diagram with pass/fail coloring |
-| `amadla list` | Planned | Show installed tools and their plugins |
-| `amadla doctor` | Planned | Check that all tools are installed and compatible |
-| `amadla settings` | Planned | Manage amadla configuration |
-| `amadla --config ./tools.hery` | Planned | Use a custom config file location |
+| Command | Description |
+|---------|-------------|
+| `amadla init` | Bootstrap `tools.hery` by scanning PATH for standard Amadla tools |
+| `amadla run <pipeline>` | Execute a Pipeline entity (order from `_requires` DAG) |
+| `amadla diagram <pipeline> --format d2` | Generate D2 diagram text from a Pipeline entity |
+| `amadla diagram <pipeline> --run-id latest --format d2` | Generate annotated diagram with pass/fail coloring |
+| `amadla list` | Show installed tools and their plugins |
+| `amadla doctor` | Check that all tools are installed and compatible |
+| `amadla settings` | Manage amadla configuration |
+| `amadla --config ./tools.hery` | Use a custom config file location |
 
 ## Pipeline Entity
 

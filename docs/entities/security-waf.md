@@ -22,10 +22,10 @@ These properties are common across all WAF implementations. Sub-types add engine
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [WAF/ModSecurity](security-waf-modsecurity.md) | ModSecurity — widely deployed WAF engine for Apache/Nginx | Most common |
-| [WAF/Coraza](security-waf-coraza.md) | Coraza — Go-native WAF compatible with ModSecurity rules | Modern alternative |
+| Sub-type | Application |
+|----------|-------------|
+| [WAF/ModSecurity](security-waf-modsecurity.md) | ModSecurity — widely deployed WAF engine for Apache/Nginx |
+| [WAF/Coraza](security-waf-coraza.md) | Coraza — Go-native WAF compatible with ModSecurity rules |
 
 ## Example
 
@@ -48,5 +48,5 @@ _body:
 
 | Tool | How It Uses Security/WAF |
 |------|--------------------------|
-| enjoin | Configures WAF engine and loads rule sets |
-| judge | Validates WAF rules and tests for bypasses |
+| [enjoin](../tools/enjoin.md) | Configures WAF engine and loads rule sets |
+| [judge](../tools/judge.md) | Validates WAF rules and tests for bypasses |

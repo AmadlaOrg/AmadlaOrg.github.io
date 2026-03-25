@@ -18,11 +18,11 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [Queue/SQS](infrastructure-cloud-queue-sqs.md) | AWS Simple Queue Service | Stable |
-| [Queue/Pub/Sub](infrastructure-cloud-queue-pubsub.md) | GCP Pub/Sub | Stable |
-| [Queue/Service Bus](infrastructure-cloud-queue-service-bus.md) | Azure Service Bus | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [Queue/SQS](infrastructure-cloud-queue-sqs.md) | AWS Simple Queue Service |
+| [Queue/Pub/Sub](infrastructure-cloud-queue-pubsub.md) | GCP Pub/Sub |
+| [Queue/Service Bus](infrastructure-cloud-queue-service-bus.md) | Azure Service Bus |
 
 ## Example
 
@@ -40,4 +40,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Queue |
 |------|---------------------------------------|
-| raise | Provisions message queues via provider-specific plugins |
+| [raise](../tools/raise.md) | Provisions message queues via provider-specific plugins |

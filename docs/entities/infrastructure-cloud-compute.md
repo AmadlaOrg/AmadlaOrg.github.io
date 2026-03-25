@@ -24,13 +24,13 @@
 
 ## Sub-types
 
-| Sub-type | Provider | Status |
-|----------|----------|--------|
-| [Compute/EC2](infrastructure-cloud-compute-ec2.md) | AWS EC2 | Stable |
-| [Compute/GCE](infrastructure-cloud-compute-gce.md) | Google Compute Engine | Stable |
-| [Compute/Azure VM](infrastructure-cloud-compute-azure-vm.md) | Azure Virtual Machines | Stable |
-| [Compute/Hetzner Server](infrastructure-cloud-compute-hetzner-server.md) | Hetzner Cloud | Stable |
-| [Compute/DigitalOcean Droplet](infrastructure-cloud-compute-digitalocean-droplet.md) | DigitalOcean | Stable |
+| Sub-type | Provider |
+|----------|----------|
+| [Compute/EC2](infrastructure-cloud-compute-ec2.md) | AWS EC2 |
+| [Compute/GCE](infrastructure-cloud-compute-gce.md) | Google Compute Engine |
+| [Compute/Azure VM](infrastructure-cloud-compute-azure-vm.md) | Azure Virtual Machines |
+| [Compute/Hetzner Server](infrastructure-cloud-compute-hetzner-server.md) | Hetzner Cloud |
+| [Compute/DigitalOcean Droplet](infrastructure-cloud-compute-digitalocean-droplet.md) | DigitalOcean |
 
 ## Example
 
@@ -55,4 +55,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Compute |
 |------|----------------------------------------|
-| raise | Provisions compute instances via raise-aws, raise-hetzner, raise-digitalocean plugins |
+| [raise](../tools/raise.md) | Provisions compute instances via raise-aws, raise-hetzner, raise-digitalocean plugins |

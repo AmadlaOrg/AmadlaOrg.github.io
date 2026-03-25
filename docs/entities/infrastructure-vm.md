@@ -73,5 +73,5 @@ Each concern is a separate entity file. `raise` reads the VM entity and its `_re
 
 | Tool | How It Uses Infrastructure/VM |
 |------|-------------------------------------|
-| raise | Provisions VMs via raise-libvirt, raise-virtualbox, or raise-vmware plugins |
-| conduct | Coordinates multi-VM deployments |
+| [raise](../tools/raise.md) | Provisions VMs via raise-libvirt, raise-virtualbox, or raise-vmware plugins |
+| [conduct](../tools/conduct.md) | Coordinates multi-VM deployments |

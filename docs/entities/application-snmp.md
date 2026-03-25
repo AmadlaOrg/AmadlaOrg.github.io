@@ -21,9 +21,9 @@ These properties are common across all SNMP implementations. Sub-types add appli
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [SNMP/Net-SNMP](application-snmp-net-snmp.md) | Net-SNMP (snmpd) -- full-featured SNMP agent and toolkit | Standard on most Linux |
+| Sub-type | Application |
+|----------|-------------|
+| [SNMP/Net-SNMP](application-snmp-net-snmp.md) | Net-SNMP (snmpd) -- full-featured SNMP agent and toolkit |
 
 ## Example
 
@@ -41,6 +41,6 @@ _body:
 
 | Tool | How It Uses Application/SNMP |
 |------|------------------------------|
-| lay | Installs the SNMP agent package (net-snmp) |
-| weaver | Generates configuration files (snmpd.conf) |
+| [lay](../tools/lay.md) | Installs the SNMP agent package (net-snmp) |
+| [weaver](../tools/weaver.md) | Generates configuration files (snmpd.conf) |
 | enjoin-service | Enables/starts the SNMP agent service |

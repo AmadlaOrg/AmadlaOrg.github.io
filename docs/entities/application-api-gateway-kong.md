@@ -54,6 +54,6 @@ _body:
 
 | Tool | How It Uses Application/APIGateway/Kong |
 |------|------------------------------------------|
-| lay | Installs Kong gateway |
-| weaver | Generates `kong.conf` and declarative config |
+| [lay](../tools/lay.md) | Installs Kong gateway |
+| [weaver](../tools/weaver.md) | Generates `kong.conf` and declarative config |
 | enjoin-service | Enables/starts the `kong` service |

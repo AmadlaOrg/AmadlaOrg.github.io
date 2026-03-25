@@ -48,4 +48,4 @@ _body:
 
 | Tool | How It Uses ProgrammingLanguage/Python |
 |------|----------------------------------------|
-| lay | Installs Python runtime, pip packages, virtualenv, Poetry, pipx tools |
+| [lay](../tools/lay.md) | Installs Python runtime, pip packages, virtualenv, Poetry, pipx tools |

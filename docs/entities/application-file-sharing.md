@@ -23,11 +23,11 @@ These properties are common across all file sharing implementations. Sub-types a
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [FileSharing/Nextcloud](application-file-sharing-nextcloud.md) | Nextcloud — self-hosted productivity platform with file sync | Most popular |
-| [FileSharing/Seafile](application-file-sharing-seafile.md) | Seafile — high-performance file sync with delta transfer | Enterprise |
-| [FileSharing/Syncthing](application-file-sharing-syncthing.md) | Syncthing — decentralized peer-to-peer file sync | No central server |
+| Sub-type | Application |
+|----------|-------------|
+| [FileSharing/Nextcloud](application-file-sharing-nextcloud.md) | Nextcloud — self-hosted productivity platform with file sync |
+| [FileSharing/Seafile](application-file-sharing-seafile.md) | Seafile — high-performance file sync with delta transfer |
+| [FileSharing/Syncthing](application-file-sharing-syncthing.md) | Syncthing — decentralized peer-to-peer file sync |
 
 ## Example
 
@@ -48,6 +48,6 @@ _body:
 
 | Tool | How It Uses Application/FileSharing |
 |------|-------------------------------------|
-| lay | Installs the file sharing application |
-| weaver | Generates configuration files |
+| [lay](../tools/lay.md) | Installs the file sharing application |
+| [weaver](../tools/weaver.md) | Generates configuration files |
 | enjoin-service | Enables/starts the file sharing service |

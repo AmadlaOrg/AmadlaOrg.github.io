@@ -59,6 +59,6 @@ _body:
 
 | Tool | How It Uses Application/DNSResolver/Unbound |
 |------|----------------------------------------------|
-| lay | Installs the `unbound` package |
-| weaver | Generates `/etc/unbound/unbound.conf` |
+| [lay](../tools/lay.md) | Installs the `unbound` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/unbound/unbound.conf` |
 | enjoin-service | Enables/starts `unbound` service |

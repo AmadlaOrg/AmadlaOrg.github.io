@@ -24,11 +24,11 @@ These properties are common across all forward proxy implementations. Sub-types 
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [Proxy/Squid](application-proxy-squid.md) | Squid — full-featured caching proxy | Most common |
-| [Proxy/Privoxy](application-proxy-privoxy.md) | Privoxy — privacy-enhancing filtering proxy | Privacy-focused |
-| [Proxy/Tinyproxy](application-proxy-tinyproxy.md) | Tinyproxy — lightweight HTTP proxy | Minimal footprint |
+| Sub-type | Application |
+|----------|-------------|
+| [Proxy/Squid](application-proxy-squid.md) | Squid — full-featured caching proxy |
+| [Proxy/Privoxy](application-proxy-privoxy.md) | Privoxy — privacy-enhancing filtering proxy |
+| [Proxy/Tinyproxy](application-proxy-tinyproxy.md) | Tinyproxy — lightweight HTTP proxy |
 
 ## Example
 
@@ -54,6 +54,6 @@ _body:
 
 | Tool | How It Uses Application/Proxy |
 |------|-------------------------------|
-| lay | Installs the proxy application |
+| [lay](../tools/lay.md) | Installs the proxy application |
 | enjoin-service | Enables/starts the proxy service |
-| weaver | Generates proxy configuration files |
+| [weaver](../tools/weaver.md) | Generates proxy configuration files |

@@ -42,4 +42,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/DNS/Cloud DNS |
 |------|-----------------------------------------------|
-| raise | Provisions Cloud DNS zones via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions Cloud DNS zones via raise-gcp plugin |

@@ -37,4 +37,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/ObjectStorage/GCS |
 |------|---------------------------------------------------|
-| raise | Provisions GCS buckets via raise-gcp plugin |
+| [raise](../tools/raise.md) | Provisions GCS buckets via raise-gcp plugin |

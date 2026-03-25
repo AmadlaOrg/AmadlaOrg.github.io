@@ -44,4 +44,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/DNS/Route53 |
 |------|---------------------------------------------|
-| raise | Provisions Route 53 zones and records via raise-aws plugin |
+| [raise](../tools/raise.md) | Provisions Route 53 zones and records via raise-aws plugin |

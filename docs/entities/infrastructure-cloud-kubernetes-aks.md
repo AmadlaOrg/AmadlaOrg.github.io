@@ -45,4 +45,4 @@ _body:
 
 | Tool | How It Uses Infrastructure/Cloud/Kubernetes/AKS |
 |------|------------------------------------------------|
-| raise | Provisions AKS clusters via raise-azure plugin |
+| [raise](../tools/raise.md) | Provisions AKS clusters via raise-azure plugin |

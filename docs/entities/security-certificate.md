@@ -60,5 +60,6 @@ _body:
 
 | Tool | How It Uses Certificate |
 |------|-------------------------------|
-| lay | Provisions certificates (ACME client, openssl for self-signed, or copies manual certs) |
-| doorman | Manages private key secrets |
+| [enjoin](../tools/enjoin.md) | Manages TLS certificates via enjoin-certificate plugin |
+| [lay](../tools/lay.md) | Provisions certificates (ACME client, openssl for self-signed, or copies manual certs) |
+| [doorman](../tools/doorman.md) | Manages private key secrets |

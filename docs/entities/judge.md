@@ -30,4 +30,4 @@ _body:
 
 | Tool | How It Uses Judge |
 |------|-------------------------|
-| judge | Reads audit rules and dispatches to appropriate judge plugins |
+| [judge](../tools/judge.md) | Reads audit rules and dispatches to appropriate judge plugins |

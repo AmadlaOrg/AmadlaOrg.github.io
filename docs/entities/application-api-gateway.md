@@ -26,11 +26,11 @@ These properties are common across all API gateway implementations. Sub-types ad
 
 ## Sub-types
 
-| Sub-type | Application | Status |
-|----------|-------------|--------|
-| [APIGateway/Kong](application-api-gateway-kong.md) | Kong — plugin-driven API gateway with DB or declarative mode | Most common |
-| [APIGateway/Tyk](application-api-gateway-tyk.md) | Tyk — open source API gateway with dashboard and analytics | Feature-rich |
-| [APIGateway/KrakenD](application-api-gateway-krakend.md) | KrakenD — ultra-performant stateless API gateway | High performance |
+| Sub-type | Application |
+|----------|-------------|
+| [APIGateway/Kong](application-api-gateway-kong.md) | Kong — plugin-driven API gateway with DB or declarative mode |
+| [APIGateway/Tyk](application-api-gateway-tyk.md) | Tyk — open source API gateway with dashboard and analytics |
+| [APIGateway/KrakenD](application-api-gateway-krakend.md) | KrakenD — ultra-performant stateless API gateway |
 
 ## Example
 
@@ -60,6 +60,6 @@ _body:
 
 | Tool | How It Uses Application/APIGateway |
 |------|-------------------------------------|
-| lay | Installs the API gateway application |
-| weaver | Generates gateway configuration files |
+| [lay](../tools/lay.md) | Installs the API gateway application |
+| [weaver](../tools/weaver.md) | Generates gateway configuration files |
 | enjoin-service | Enables/starts the gateway service |

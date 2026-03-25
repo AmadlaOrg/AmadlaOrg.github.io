@@ -62,4 +62,4 @@ This is like `xdg-open` — the registry just maps names to binaries, the binari
 
 | Tool | How It Uses Tools |
 |------|-------------------|
-| amadla | Reads tool inventory to discover, resolve, and orchestrate tools |
+| [amadla](../tools/amadla.md) | Reads tool inventory to discover, resolve, and orchestrate tools |

@@ -92,4 +92,4 @@ Downstream tools (lay, waiter) can move rendered files to their final destinatio
 
 | Tool | How It Uses Template |
 |------|---------------------------|
-| weaver | Discovers templates, matches against input entities, invokes the correct `weaver-*` plugin, writes rendered output |
+| [weaver](../tools/weaver.md) | Discovers templates, matches against input entities, invokes the correct `weaver-*` plugin, writes rendered output |

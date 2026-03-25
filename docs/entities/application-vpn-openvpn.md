@@ -57,6 +57,6 @@ _body:
 
 | Tool | How It Uses Application/VPN/OpenVPN |
 |------|-------------------------------------|
-| lay | Installs the `openvpn` package |
-| weaver | Generates `/etc/openvpn/server.conf` |
+| [lay](../tools/lay.md) | Installs the `openvpn` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/openvpn/server.conf` |
 | enjoin-service | Enables/starts `openvpn-server@server` service |

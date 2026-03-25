@@ -7,12 +7,12 @@
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `doorman settings` | Working | Manage doorman configuration |
-| `doorman resolve` | Planned | Resolve secret references in entity data (pipes to stdout) |
-| `doorman list` | Planned | List discovered `doorman-*` plugins and their supported entities |
-| `doorman get` | Planned | Retrieve a secret via the appropriate plugin |
+| Command | Description |
+|---------|-------------|
+| `doorman settings` | Manage doorman configuration |
+| `doorman resolve` | Resolve secret references in entity data (pipes to stdout) |
+| `doorman list` | List discovered `doorman-*` plugins and their supported entities |
+| `doorman get` | Retrieve a secret via the appropriate plugin |
 
 ## Dependencies
 
@@ -21,6 +21,12 @@
 | LibraryUtils | Configuration, file operations |
 | LibraryFramework | CLI framework (Cobra wrapper) |
 | LibraryPluginFramework | Plugin discovery (PATH scanning for `doorman-*`) |
+
+## Entity Types
+
+| Entity | What doorman Does |
+|--------|------------------|
+| [Secret](../entities/secret.md) | Resolves secret references to actual values via plugins |
 
 ## Pipeline Position
 
@@ -40,6 +46,10 @@ hery → [doorman] → raise → lay → weaver → judge
 ## Architecture
 
 ![doorman Internal Components](../diagrams/out/c3-doorman-internals.svg)
+
+### Secret Resolution Flow
+
+![Secret Resolution Sequence](../diagrams/out/seq-secret-resolution.svg)
 
 ### Core Flow
 

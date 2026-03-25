@@ -49,6 +49,6 @@ _body:
 
 | Tool | How It Uses Application/Cache/Redis |
 |------|-------------------------------------|
-| lay | Installs the `redis` package |
-| weaver | Generates `/etc/redis/redis.conf` |
+| [lay](../tools/lay.md) | Installs the `redis` package |
+| [weaver](../tools/weaver.md) | Generates `/etc/redis/redis.conf` |
 | enjoin-service | Enables/starts `redis-server` service |

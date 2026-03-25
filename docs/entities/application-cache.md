@@ -43,6 +43,6 @@ _body:
 
 | Tool | How It Uses Application/Cache |
 |------|-------------------------------|
-| lay | Installs the cache application (redis, memcached, varnish) |
+| [lay](../tools/lay.md) | Installs the cache application (redis, memcached, varnish) |
 | enjoin-service | Enables/starts the cache service |
-| weaver | Generates configuration files (redis.conf, memcached.conf, default.vcl) |
+| [weaver](../tools/weaver.md) | Generates configuration files (redis.conf, memcached.conf, default.vcl) |

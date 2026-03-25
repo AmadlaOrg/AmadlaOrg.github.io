@@ -65,6 +65,6 @@ _body:
 
 | Tool | How It Uses Infrastructure/DNS/BIND |
 |------|-------------------------------------|
-| lay | Installs the `bind` / `named` package |
-| weaver | Generates `named.conf` and zone files |
+| [lay](../tools/lay.md) | Installs the `bind` / `named` package |
+| [weaver](../tools/weaver.md) | Generates `named.conf` and zone files |
 | enjoin-service | Enables/starts the `named` service |
