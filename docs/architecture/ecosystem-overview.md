@@ -26,7 +26,8 @@ CLI applications that form the data pipeline.
 | [conduct](https://github.com/AmadlaOrg/conduct) | Multi-server orchestrator — coordinates waiter/lay across distributed nodes |
 | [lighthouse](https://github.com/AmadlaOrg/lighthouse) | Notification/alerting tool — sends via plugins (webhook, SMS, email, REST API) |
 | [garbage](https://github.com/AmadlaOrg/garbage) | Trash/uninstall tool — tracks and removes what's no longer needed |
-| [amadla](https://github.com/AmadlaOrg/amadla) | Meta-tool — executes Pipeline entities, generates D2 diagrams, tool inventory |
+| [enjoin](https://github.com/AmadlaOrg/enjoin) | System state configuration — users, services, cron, network, filesystem, firewall, IDS, certs, SELinux |
+| [amadla](https://github.com/AmadlaOrg/amadla) | Orchestrator — reads `.hery` entities, builds DAG from `_requires`, executes tools in parallel tiers |
 
 ### Libraries
 
@@ -39,6 +40,7 @@ Shared Go libraries that provide common functionality.
 | [LibraryPluginFramework](https://github.com/AmadlaOrg/LibraryPluginFramework) | Plugin system framework for loading and communicating with external plugins |
 | [LibraryDoormanFramework](https://github.com/AmadlaOrg/LibraryDoormanFramework) | Specialization of plugin framework for Doorman (secret source) plugins |
 | [LibraryJudgeFramework](https://github.com/AmadlaOrg/LibraryJudgeFramework) | Specialization of plugin framework for Judge plugins |
+| [LibraryEnjoinFramework](https://github.com/AmadlaOrg/LibraryEnjoinFramework) | Specialization of plugin framework for Enjoin (system state) plugins |
 
 ### Doorman Plugins (Secret Sources)
 
@@ -70,8 +72,8 @@ Each plugin checks a specific aspect of system compliance.
 | Repo | Validates |
 |------|--------|
 | [judge-application](https://github.com/AmadlaOrg/judge-application) | Whether required applications/packages are installed |
+| [judge-network](https://github.com/AmadlaOrg/judge-network) | Network connectivity, DNS resolution, HTTP checks |
 | [judge-system](https://github.com/AmadlaOrg/judge-system) | System-level requirements (OS, kernel, resources) |
-| [judge-infrastructure](https://github.com/AmadlaOrg/judge-infrastructure) | Infrastructure-level requirements (networking, storage) |
 
 ### Weaver Plugins (Template Engines)
 
@@ -79,10 +81,11 @@ Each weaver plugin provides a template rendering engine.
 
 | Repo | Engine |
 |------|--------|
-| [weaver-jinja](https://github.com/AmadlaOrg/weaver-jinja) | Jinja2 (Python-style) |
-| [weaver-js-handlebars](https://github.com/AmadlaOrg/weaver-js-handlebars) | Handlebars (JavaScript) |
-| [weaver-js-mustache](https://github.com/AmadlaOrg/weaver-js-mustache) | Mustache (JavaScript) |
-| [weaver-qute](https://github.com/AmadlaOrg/weaver-qute) | Qute (Java/Quarkus) |
+| [weaver-go](https://github.com/AmadlaOrg/weaver-go) | Go text/template |
+| [weaver-jinja2](https://github.com/AmadlaOrg/weaver-jinja2) | Jinja2 (Python) |
+| [weaver-mustache](https://github.com/AmadlaOrg/weaver-mustache) | Mustache (Go) |
+| [weaver-qute](https://github.com/AmadlaOrg/weaver-qute) | Qute (Java/GraalVM native) |
+| [weaver-freemarker](https://github.com/AmadlaOrg/weaver-freemarker) | FreeMarker (Java/GraalVM native) |
 
 ### Entity Definitions
 

@@ -22,7 +22,7 @@ Amadla's tools form a modular pipeline where each tool handles one responsibilit
 | [lighthouse](lighthouse.md) | Notifications/alerts — sends via plugins (webhook, WebRTC, Twilio SMS, AWS SES, REST API) | Entities from any tool | Notifications |
 | [garbage](garbage.md) | Trash/uninstall — tracks and removes what's no longer needed | Entity refs | Cleanup |
 | [dryrun](dryrun.md) | Safety — tests changes with auto-revert (prevents SSH lockout) | Any pipeline | Auto-reverted test |
-| [amadla](amadla.md) | Meta-tool — executes Pipeline entities, generates D2 diagrams, tool inventory | Pipeline entities | Pipeline execution + D2 text |
+| [amadla](amadla.md) | Orchestrator — reads `.hery` entities, builds DAG from `_requires`, executes tools in dependency order | `.hery` entity files | Tool execution (parallel tiers) |
 
 ## Pipeline Flow
 
@@ -42,7 +42,7 @@ conduct      (coordinates waiter/lay across multiple servers)
 lighthouse   (notifications from any tool output)
 garbage      (cleanup/uninstall)
 dryrun       (safely tests settings)
-amadla       (meta-tool: pipeline execution + D2 diagrams)
+amadla       (orchestrator: DAG resolution + parallel tool execution)
 ```
 
 ## Tool Interactions
@@ -52,7 +52,7 @@ amadla       (meta-tool: pipeline execution + D2 diagrams)
 - **unravel** wraps osquery (on-demand, stateless) — no caching, UNIX philosophy
 - **judge** receives expected entity (from hery) + actual entity (from unravel), outputs diff
 - Each tool handles its own rollback (waiter rollback, lay uninstall, raise destroy)
-- **amadla** reads Pipeline entities and orchestrates tool execution — but is replaceable
+- **amadla** reads `.hery` entities, builds a DAG from `_requires`, and orchestrates tool execution with parallel tiers — but is replaceable
 
 ## Common Patterns
 

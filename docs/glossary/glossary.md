@@ -9,7 +9,7 @@ Amadla-specific terminology and concepts.
 ## A
 
 ### amadla (tool)
-The Amadla meta-tool. Executes Pipeline entities, generates D2 diagrams for visualization, and manages tool inventory. Written in Go but replaceable — Pipeline entities are the portable part.
+The Amadla orchestrator CLI. Reads `.hery` entity files, builds a dependency graph (DAG) from `_requires` declarations, and executes registered tools in topologically sorted order with parallel execution of independent tiers. Written in Go but replaceable — the entities and tools are the portable parts.
 
 ### Judge Plugin
 A plugin for the **judge** tool that checks whether a system's actual state matches entity requirements. Examples: judge-application, judge-system, judge-infrastructure.
