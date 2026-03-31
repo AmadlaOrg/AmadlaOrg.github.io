@@ -66,10 +66,7 @@ weaver is an ETL-like tool — it can generate any text output. Config generatio
 **Input:** Infrastructure entity requirements
 **Output:** Provisioned servers, networks, storage
 
-raise reads infrastructure entity declarations and provisions the required resources. It wraps infrastructure-as-code tools (OpenTofu/Terraform) with Amadla's resource-centric model, using a plugin system for different cloud service APIs.
-
-!!! note "Planned"
-    raise is not yet implemented. This describes the intended design.
+raise reads infrastructure entity declarations and provisions the required resources. It wraps infrastructure-as-code tools via a plugin system for different providers. Available plugins: raise-libvirt (KVM/QEMU), raise-virtualbox, raise-wsl, raise-aws (EC2), raise-digitalocean, raise-quickemu, raise-opentofu (declarative IaC).
 
 ### 5. lay — Install Applications
 
@@ -128,7 +125,7 @@ unravel discover | judge audit | lighthouse notify
 | **lighthouse** | Notifications/alerts via plugins (webhook, SMS, email, REST API). Receives entity output from any tool |
 | **dryrun** | Safely tests settings by applying them and auto-reverting if something goes wrong |
 | **garbage** | Tracks what's no longer needed and handles cleanup/uninstallation |
-| **amadla** | Meta-tool — executes Pipeline entities, generates D2 diagrams, manages tool inventory |
+| **amadla** | Orchestrator — reads `.hery` entities, builds DAG from `_requires`, executes tools in parallel tiers |
 
 ## Data Flow Example
 

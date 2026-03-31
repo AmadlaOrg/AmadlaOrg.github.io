@@ -95,7 +95,7 @@ The Amadla pipeline flows from requirements to running infrastructure:
 | **lighthouse** | Notifications/alerts via plugins (webhook, SMS, email, REST API) |
 | **dryrun** | Safely tests settings with auto-revert (prevents SSH lockout, etc.) |
 | **garbage** | Tracks and removes what's no longer needed |
-| **amadla** | Meta-tool: executes Pipeline entities, generates D2 diagrams, tool inventory |
+| **amadla** | Orchestrator: reads `.hery` entities, builds DAG from `_requires`, executes tools in parallel tiers |
 
 ## Encouraged Infrastructure
 
@@ -110,16 +110,18 @@ Each tool that interfaces with external systems uses a **plugin architecture**:
 
 - **doorman-*** plugins extend doorman with new secret sources (Vault, AWS, KeePassXC, Keycloak, ...)
 - **judge-*** plugins extend judge with new validation targets (applications, systems, infrastructure)
-- **weaver-*** plugins extend weaver with new template engines (Jinja, Mustache, Handlebars, Qute)
+- **weaver-*** plugins extend weaver with new template engines (Go, Jinja2, Mustache, Qute, FreeMarker)
 - **raise-*** plugins extend raise with VM and cloud providers (libvirt, VirtualBox, AWS, Hetzner, OpenTofu)
-- **waiter-*** plugins extend waiter with deployment backends (Podman, Docker, systemd)
+- **waiter-*** plugins extend waiter with deployment backends (Podman, Docker, Quadlet) and proxy backends (HAProxy, Kamal Proxy)
 - **lighthouse-*** plugins extend lighthouse with notification channels (webhook, SMS, email, REST)
 - **unravel-*** plugins extend unravel with custom discovery backends
 
 Plugins are standalone CLI executables discovered via `$PATH` using a `<tool>-*` naming convention (e.g., `doorman-vault`, `judge-application`, `weaver-jinja`). They communicate via stdin/stdout/stderr following a standard protocol — no IPC, no daemons. Plugins can be written in any language. Go framework libraries are available as optional convenience wrappers to reduce boilerplate.
 
-## Pipeline Entities and the amadla Meta-Tool
+## The amadla Orchestrator
 
-For complex workflows, pipelines can be defined as HERY entities (`amadla.org/entity/Pipeline@v1.0.0`). The **amadla** meta-tool reads these entities and orchestrates tool execution. It can also generate D2 diagrams for visual debugging.
+The **amadla** CLI is the top-level orchestrator. It reads `.hery` entity files from a directory, builds a dependency graph (DAG) from `_requires` declarations, topologically sorts them, and executes the registered tool for each entity type. Independent entities within the same DAG tier run in parallel.
 
-Pipeline entities are **data** (like GitHub Actions YAML or podman-compose), not executable code. The amadla tool is written in Go but is **replaceable** — the pipeline entities are the portable part. Anyone can read a Pipeline entity and orchestrate the tools their own way.
+amadla uses a config-driven model for tool discovery (`~/.config/amadla/tools.hery`), with `<tool> info` cached discovery for automatic capability detection. The `amadla init` command bootstraps this config by scanning PATH for standard Amadla tool names.
+
+amadla is written in Go but is **replaceable** — the entities and tools are the portable parts. Anyone can read `.hery` files, resolve the DAG, and orchestrate the tools their own way.
