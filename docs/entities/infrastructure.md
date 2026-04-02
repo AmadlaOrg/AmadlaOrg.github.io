@@ -30,5 +30,5 @@ _body:
 
 | Tool | How It Uses Infrastructure |
 |------|----------------------------------|
-| [raise](../tools/raise.md) | Provisions the declared infrastructure resources |
+| [raise](../tools/raise.md) | Reads `provider` field to dispatch to the correct raise-* plugin |
 | [judge-infrastructure](../plugins/judges.md) | Checks whether infrastructure matches requirements |
