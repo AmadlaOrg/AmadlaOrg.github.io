@@ -1,6 +1,6 @@
 # Raise Plugins
 
-Raise plugins integrate with specific infrastructure providers. Each plugin knows how to provision, manage, and destroy infrastructure on one platform, translating `Infrastructure` and `Infrastructure/VM` entities into provider-specific operations.
+Raise plugins integrate with specific infrastructure providers. Each plugin declares the entity types it supports (e.g., `Infrastructure/VM`, `Infrastructure/Cloud/Compute`) via its `info` subcommand. The raise core tool aggregates these into its own `info` output so the amadla orchestrator can route entities correctly.
 
 ## Plugin Inventory
 
@@ -11,6 +11,10 @@ Raise plugins integrate with specific infrastructure providers. Each plugin know
 | `raise-libvirt` | KVM/QEMU via libvirt | Go | Local Linux VMs, reference implementation |
 | `raise-virtualbox` | VirtualBox | Go | Cross-platform local VMs |
 | `raise-wsl` | Windows Subsystem for Linux | Go | WSL2 distro management |
+| `raise-aws` | AWS EC2 | Go | Cloud instances (EC2 via aws CLI) |
+| `raise-digitalocean` | DigitalOcean | Go | Cloud instances (Droplets via doctl) |
+| `raise-quickemu` | Quickemu | Go | Desktop VMs via quickget/quickemu |
+| `raise-opentofu` | OpenTofu/Terraform | Go | Declarative IaC bridge (tofu CLI) |
 
 ### Planned
 
@@ -18,11 +22,7 @@ Raise plugins integrate with specific infrastructure providers. Each plugin know
 |--------|----------|----------|
 | `raise-xen` | Xen hypervisor | Xen PVH/HVM domain images for Amadla Linux |
 | `raise-oci` | OCI image builder | OCI container/system images for A/B updates |
-| `raise-vmware` | VMware Workstation/Fusion | VMware local VMs |
-| `raise-aws` | AWS EC2 | Cloud instances |
 | `raise-hetzner` | Hetzner Cloud | Cloud instances |
-| `raise-digitalocean` | DigitalOcean | Cloud instances |
-| `raise-opentofu` | OpenTofu/Terraform | Generic IaC provider bridge |
 
 ## Protocol
 
@@ -161,10 +161,8 @@ raise-xen
 
 ## Implementation Priority
 
-Suggested order based on Amadla Linux distro needs:
+Remaining plugins to build:
 
-1. **raise-xen** — Required for building the distro (domain templates, dom0 image)
+1. **raise-xen** — Required for building the Amadla Linux distro (domain templates, dom0 image)
 2. **raise-oci** — Required for A/B update image distribution
-3. **raise-aws** / **raise-hetzner** — Cloud provisioning (general Amadla use)
-4. **raise-vmware** — Local VM alternative
-5. **raise-opentofu** — Generic IaC bridge
+3. **raise-hetzner** — Cloud provisioning
