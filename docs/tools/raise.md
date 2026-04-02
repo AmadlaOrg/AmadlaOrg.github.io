@@ -49,11 +49,11 @@ This means adding a new plugin (e.g., `raise-kubernetes`) automatically surfaces
 
 ### Provider Resolution
 
-The `--from` flag is optional. If omitted, raise reads the `provider` field from the entity file passed via `-f`:
+The `--provider` flag is optional. If omitted, raise reads the `provider` field from the entity file passed via `-f`:
 
 ```bash
-raise up my-vm -f infrastructure.hery          # auto-detects provider from entity
-raise up my-vm --from libvirt -f vm.hery       # explicit provider override
+raise up my-vm -f infrastructure.hery              # auto-detects provider from entity
+raise up my-vm --provider libvirt -f vm.hery       # explicit provider override
 ```
 
 raise uses a **plugin system** for different providers, translating entity requirements into provider-specific resource definitions.
@@ -80,9 +80,9 @@ See [Raise Plugins](../plugins/raise-plugins.md) for the full plugin protocol an
 ```bash
 # Local VM workflow (like Vagrant)
 raise up my-dev-vm -f infrastructure.hery    # Auto-detects provider from entity
-raise ssh my-dev-vm --from libvirt           # SSH into the VM
-raise halt my-dev-vm --from libvirt          # Stop the VM
-raise destroy my-dev-vm --from libvirt       # Remove the VM
+raise ssh my-dev-vm --provider libvirt           # SSH into the VM
+raise halt my-dev-vm --provider libvirt          # Stop the VM
+raise destroy my-dev-vm --provider libvirt       # Remove the VM
 
 # Cloud workflow
 raise up my-prod-server -f infrastructure.hery
