@@ -89,16 +89,16 @@ Declares hard dependencies on other entities. Used by amadla to build a dependen
 
 ```yaml
 _requires:
-  - amadla.org/entity/application/db/rdbms@^v1.0.0   # any RDBMS entity
-  - github.com/SomeOrg/WordPress#php.hery                          # specific element
-  - #database.hery                                                  # local element (same directory)
+  - ./database.hery                                                 # local file (same directory)
+  - github.com/SomeOrg/base-infra/database.hery@v1.0.0             # external file (specific version)
+  - amadla.org/entity/application/db/rdbms@^v1.0.0                  # type URI (any entity of this type)
 ```
 
-`_requires` references can be:
+`_requires` supports three reference forms:
 
-- **Entity type URIs** — "at least one entity of this type must exist and be processed before me." Supports version constraints (`@v1.0.0` exact, `@^v1.0.0` compatible range).
-- **`#filename.hery`** — targets a specific element within an entity (local or remote).
-- Relative paths are **sandboxed** to the entity directory (no `../` escape).
+- **Local file path** (`./database.hery`) — requires a specific file in the same directory. Must be relative (no absolute paths). Paths are sandboxed to the entity directory (no `../` escape).
+- **External file path** (`github.com/SomeOrg/base-infra/database.hery@v1.0.0`) — requires a specific file from another repository. Version follows the same rules as `_type` (`@v1.0.0` exact, `@^v1.0.0` compatible range, `@latest`).
+- **Type URI** (`amadla.org/entity/application/db/rdbms@^v1.0.0`) — "at least one entity of this type must exist and be processed before me." Useful when you want to include a base type and then provide your own local entity of the same type to override it.
 
 `_requires` is orthogonal to `_extends`: `_extends` handles data inheritance (merge), `_requires` handles execution ordering. Use both when you need inheritance AND ordering.
 
