@@ -114,7 +114,7 @@ Go module `replace` directive in `go.mod` that points to a sibling directory for
 ## R
 
 ### Requires (`_requires`)
-One of HERY's five reserved YAML properties. Declares hard dependencies on other entities for execution ordering. amadla builds a DAG from `_requires` declarations and topologically sorts. References entity type URIs (with version constraints), `#filename.hery` for specific elements, or local `#element.hery`. Orthogonal to `_extends` (which handles data merge, not ordering).
+One of HERY's five reserved YAML properties. Declares hard dependencies on other entities for execution ordering. amadla builds a DAG from `_requires` declarations and topologically sorts. Supports three reference forms: local file paths (`./file.hery`), external file paths with version (`github.com/org/repo/file.hery@v1.0.0`), and type URIs (`amadla.org/entity/type@v1.0.0`). Orthogonal to `_extends` (which handles data merge, not ordering).
 
 ## T
 
@@ -152,4 +152,4 @@ HERY reserved property (optional): metadata for filtering and search.
 HERY reserved property (optional): the actual entity data content. Validated against the entity's JSON Schema.
 
 ### `_requires`
-HERY reserved property (optional): declares hard dependencies on other entities. Used by amadla to build a DAG and determine execution order. Supports versioned entity type URIs and `#element.hery` references.
+HERY reserved property (optional): declares hard dependencies on other entities. Used by amadla to build a DAG and determine execution order. Three forms: local file path (`./file.hery`), external file path (`github.com/org/repo/file.hery@v1.0.0`), type URI (`amadla.org/entity/type@v1.0.0`).
