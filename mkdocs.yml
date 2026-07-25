@@ -44,6 +44,7 @@ extra_css:
 
 nav:
   - Home: index.md
+  - What is Amadla?: what-is-amadla.md
 
   - Vision:
       - Philosophy: vision/philosophy.md
