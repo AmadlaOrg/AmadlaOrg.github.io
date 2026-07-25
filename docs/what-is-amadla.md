@@ -62,18 +62,16 @@ Because every tool follows the same protocol (stdin/stdout, structured data, sta
 
 **Total: 52+ repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) (public) and [AmadlaCom](https://github.com/AmadlaCom) (private).
 
-## Sections
-
-- [Vision & Philosophy](vision/philosophy.md) — Application-centric approach, UNIX philosophy, pipeline model
-- [Architecture](architecture/ecosystem-overview.md) — Component map, data pipeline, [HERY](architecture/hery-concepts.md) data model, plugin system
-- [Tools](tools/overview.md) — Tool canvases for every CLI tool
-- [Libraries](libraries/overview.md) — Shared Go libraries and dependency graph
-- [Plugins](plugins/overview.md) — Raise, doorman, judge, weaver, and enjoin plugins
-- [Entities](entities/overview.md) — [HERY](architecture/hery-concepts.md) entity definitions and schemas
-- [Standards](standards/go-conventions.md) — Go conventions, testing, project structure, CLI patterns
-- [Roadmap](roadmap/current-state.md) — Current state, gaps, development plan, dependency graph
-- [Glossary](glossary/glossary.md) — Amadla-specific terminology
-
 ## Key Technologies
 
-[HERY](architecture/hery-concepts.md) is **YAML-based**, entities are validated against **JSON Schema**, and versioning requires **Git**.
+[HERY](architecture/hery-concepts.md) is **YAML-based**, entities are validated against **JSON Schema**, and versioning requires **Git**. All tools and libraries are written in **Go**.
+
+| Concern | Technology |
+|---------|-----------|
+| Language | Go 1.24+ |
+| CLI Framework | Cobra (wrapped by [LibraryFramework](libraries/library-framework.md)) |
+| Data Storage | YAML + SQLite caching ([HERY](architecture/hery-concepts.md)) |
+| Schema Validation | JSON Schema |
+| Entity Versioning | Git |
+| Secrets | Encrypted in-memory cache ([doorman](tools/doorman.md)) |
+| Template Engines | Jinja, Mustache, Handlebars, Qute (via [weaver plugins](plugins/weavers.md)) |
