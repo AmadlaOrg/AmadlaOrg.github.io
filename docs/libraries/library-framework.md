@@ -6,7 +6,6 @@
 | **Module** | `github.com/AmadlaOrg/LibraryFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryFramework](https://github.com/AmadlaOrg/LibraryFramework) |
-| **Go Version** | 1.24.0 |
 
 ## What It Provides
 
@@ -23,19 +22,11 @@ LibraryFramework wraps [Cobra](https://github.com/spf13/cobra) to give all Amadl
 |---------|---------|
 | LibraryUtils | Foundation utilities |
 
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/spf13/cobra` | CLI framework |
-| `github.com/onsi/ginkgo/v2` | BDD test framework |
-| `github.com/onsi/gomega` | BDD assertions |
-
 ## Consumers
 
 - hery
 - doorman
-- LibraryAuditFramework (and by extension, auditor plugins)
+- LibraryJudgeFramework (and by extension, judge plugins)
 
 ## Development Notes
 

@@ -1,0 +1,46 @@
+@startuml c2-library-dependencies
+!pragma layout smetana
+!define RELATIVE_INCLUDE ""
+!include ../vendor/C4-PlantUML/C4_Container.puml
+
+title Amadla — Library Dependencies (C2)
+
+System_Boundary(libs, "Shared Libraries") {
+    Container(utils, "LibraryUtils", "Go Library", "Foundation: git, file,\ndatabase, IPC, encryption,\nconfiguration")
+
+    Container(framework, "LibraryFramework", "Go Library", "CLI framework:\nCobra wrapper,\ndecorator pattern")
+
+    Container(pluginfw, "LibraryPlugin\nFramework", "Go Library", "Plugin system:\ndiscovery, loading,\nIPC communication")
+
+    Container(doormanfw, "LibraryDoorman\nFramework", "Go Library", "Doorman specialization:\nsecret fetching,\nD-Bus / named pipes")
+
+    Container(auditfw, "LibraryJudge\nFramework", "Go Library", "Judge specialization:\naudit checks,\ncompliance reporting")
+}
+
+System_Boundary(tools, "Core Tools") {
+    Container(hery, "hery", "Go CLI", "HERY data storage")
+    Container(doorman, "doorman", "Go Daemon", "Secrets management")
+    Container(weaver, "weaver", "Go CLI", "Template generator")
+}
+
+System_Boundary(plugins, "Plugins") {
+    Container(doorman_plugins, "doorman-*", "Go CLI", "Secret store plugins\n(16 repos)")
+    Container(auditors, "judge-*", "Go CLI", "Audit plugins\n(3 repos)")
+}
+
+Rel(framework, utils, "depends on")
+Rel(pluginfw, utils, "depends on")
+Rel(doormanfw, utils, "depends on")
+Rel(auditfw, utils, "depends on")
+Rel(auditfw, framework, "depends on")
+
+Rel(hery, utils, "depends on")
+Rel(hery, framework, "depends on")
+Rel(doorman, utils, "depends on")
+Rel(doorman, framework, "depends on")
+Rel(weaver, utils, "depends on")
+
+Rel(doorman_plugins, doormanfw, "depends on")
+Rel(auditors, auditfw, "depends on")
+
+@enduml

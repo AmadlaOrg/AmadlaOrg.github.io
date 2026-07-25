@@ -1,0 +1,38 @@
+@startuml c3-hery-internals
+!pragma layout smetana
+!define RELATIVE_INCLUDE ""
+!include ../vendor/C4-PlantUML/C4_Component.puml
+
+title hery — Internal Components (C3)
+
+Container_Boundary(hery, "hery") {
+    Component(cmd, "cmd/", "Cobra Commands", "CLI entry points:\nentity, collection,\nquery, compose, settings")
+
+    Component(entity, "entity/", "Core Logic", "Entity operations:\nbuild, get, validate,\ncompose, query")
+
+    Component(schema, "entity/schema/", "Schema", "JSON Schema loading\nand validation")
+
+    Component(version, "entity/version/", "Version", "Semver resolution\nfrom Git tags")
+
+    Component(collection, "collection/", "Collection", "Collection management:\ninit, list")
+
+    Component(cache, "cache/", "Cache", "SQLite caching layer:\nparse, store, query")
+
+    Component(storage, "storage/", "Storage", "Filesystem abstraction:\nread/write YAML files")
+}
+
+System_Ext(sqlite, "SQLite", "Cache database")
+System_Ext(git, "Git", "Entity version control")
+System_Ext(fs, "Filesystem", "YAML entity files")
+
+Rel(cmd, entity, "Delegates to")
+Rel(cmd, collection, "Delegates to")
+Rel(entity, schema, "Validates against")
+Rel(entity, version, "Resolves versions")
+Rel(entity, cache, "Reads/writes cache")
+Rel(entity, storage, "Reads/writes files")
+Rel(cache, sqlite, "SQLite operations")
+Rel(version, git, "Reads Git tags")
+Rel(storage, fs, "File I/O")
+
+@enduml

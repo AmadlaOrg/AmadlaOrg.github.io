@@ -1,136 +1,168 @@
+---
+description: How Amadla tools form a data pipeline — from defining requirements in HERY entities through provisioning, installation, configuration, and auditing.
+---
+
 # Data Pipeline
 
-The Amadla pipeline transforms application requirements into running, audited infrastructure. Each tool handles one stage, reading structured data from upstream and emitting JSON for the next stage.
+The Amadla pipeline transforms application requirements into running, audited infrastructure. Each tool handles one stage, reading structured entity data from upstream and emitting JSON for the next stage.
 
 ## Pipeline Stages
 
-<!-- Diagram placeholder -->
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg)
 
 ## Stage Details
 
-### 1. hery — Define Requirements
+### 1. hery — Source of Truth
 
 **Input:** YAML entity files on disk (or in Git repos)
 **Output:** Structured entity data as JSON
 
-hery reads YAML files that describe what an application needs. Each file is an **entity** — a versioned, schema-validated document with references to other entities.
+hery reads `.hery` files that describe what an application needs. Each file is an **entity** — a versioned, schema-validated document with five reserved properties (`_type`, `_extends`, `_meta`, `_body`, `_requires`). Entity identity is derived from the git path (directory position in repo). The `_requires` property declares dependencies between entities — amadla builds a DAG and topologically sorts to determine execution order.
 
 ```bash
-# Query all application entities in a collection
-hery query --collection my-stack "EntityApplication"
+# Query all application entities
+hery query --type '*/application@*'
 
 # Get a specific entity
-hery entity get --collection my-stack "github.com/AmadlaOrg/EntityApplication@v1.0.0"
+hery entity get "amadla.org/entity/application@v1.0.0"
 ```
 
-Entities are cached in SQLite for fast querying. The source of truth remains the YAML files (optionally version-controlled via Git).
+Entities are cached in SQLite for fast querying. The source of truth remains the `.hery` files (optionally version-controlled via Git).
 
 ### 2. doorman — Resolve Secrets
 
 **Input:** Entity data containing secret references
 **Output:** Entity data with secrets resolved to actual values
 
-doorman is a daemon that pulls secrets from various backends (Vault, AWS, KeePassXC, etc.) via **Clerk plugins**. Resolved secrets are held in an encrypted in-memory cache with TTL.
+doorman discovers `doorman-*` plugins on PATH and routes secret requests to the appropriate backend (Vault, AWS, KeePassXC, etc.). Each plugin outputs secrets in a universal entity format.
 
 ```bash
-# Start the doorman daemon
-doorman start
+# Resolve secrets in a pipeline
+hery query --type '*/application@*' -o json | doorman resolve -o json
 
-# Secrets are resolved via IPC when downstream tools request them
+# List available secret backends
+doorman list
 ```
 
-The cache uses platform-specific encryption:
+### 3. weaver — Generate Configuration
 
-- **Linux:** TPM-backed encryption (planned; currently AES-GCM)
-- **Windows:** DPAPI
+**Input:** Templates + entity data (with resolved secrets), via UNIX piping or direct cache queries
+**Output:** Rendered configuration files (Quadlet, nginx.conf, podman-compose, k8s, GitHub Actions, or any text file)
 
-### 3. raise — Provision Infrastructure
+weaver takes template files and fills them with data from [HERY](hery-concepts.md) entities. It supports multiple template engines via **Weaver plugins** (Jinja, Mustache, Handlebars, Qute).
+
+```bash
+# Render templates — weaver discovers template entities from hery automatically
+hery query --type '*/application@*' -o json | doorman resolve -o json | weaver render
+
+# Template entities define which engine to use and where templates live
+# No --template flag needed — it's all in the entity data
+```
+
+weaver is an ETL-like tool — it can generate any text output. Config generation is weaver's job (including Quadlet unit files, nginx configs, CI/CD pipelines, etc.).
+
+### 4. raise — Provision Infrastructure
 
 **Input:** Infrastructure entity requirements
 **Output:** Provisioned servers, networks, storage
 
-raise reads `EntityInfrastructure` declarations and provisions the required resources. It wraps infrastructure-as-code tools (OpenTofu/Terraform) with Amadla's application-centric model.
+raise reads infrastructure entity declarations and provisions the required resources. It wraps infrastructure-as-code tools via a plugin system for different providers. Available plugins: raise-libvirt (KVM/QEMU), raise-virtualbox, raise-wsl, raise-aws (EC2), raise-digitalocean, raise-quickemu, raise-opentofu (declarative IaC).
 
-!!! note "Planned"
-    raise is not yet implemented. This describes the intended design.
-
-### 4. lay — Install Applications
+### 5. lay — Install Applications
 
 **Input:** Application and system entity requirements
-**Output:** Installed packages and services
+**Output:** Installed packages, applications, JARs, container images (outputs image ref entity)
 
-lay reads `EntityApplication` and `EntitySystem` declarations and installs the required software. It wraps package managers (apt, yum, brew) and configuration management tools (Ansible) with entity-driven requirements.
-
-!!! note "Planned"
-    lay is not yet implemented. This describes the intended design.
-
-### 5. weaver — Generate Configuration
-
-**Input:** Templates + entity data (with resolved secrets)
-**Output:** Rendered configuration files
-
-weaver takes template files and fills them with data from HERY entities. It supports multiple template engines via **Weaver plugins** (Jinja, Mustache, Handlebars, Qute).
+lay installs required software: packages via system package managers, applications, JAR files, and container image pull/build. For containers, lay handles build and pull — waiter handles the rest.
 
 ```bash
-# Render a template using entity data
-weaver weave --template nginx.conf.j2 --collection my-stack
+# Install packages
+lay install
+
+# Pull container image, pipe to waiter for deployment
+lay pull my-app:v2 | waiter deploy --strategy canary
 ```
 
-### 6. judge — Audit Compliance
+### 6. waiter — Deploy
 
-**Input:** Expected state from entity requirements
-**Output:** Compliance report (pass/fail per requirement)
+**Input:** Entities + rendered config files (from weaver)
+**Output:** Deployed application with traffic management
 
-judge runs **Auditor plugins** that check whether the actual state of a system matches the declared requirements. Each auditor handles a different domain (applications, system, infrastructure).
+waiter handles the deployment lifecycle using strategies (blue-green, canary, rolling). It consumes container image refs from lay and rendered configs from weaver.
 
-!!! note "Planned"
-    judge is not yet implemented. This describes the intended design.
+```bash
+# Full deployment pipeline
+hery query --type '*/application@*' | doorman resolve | weaver render --template quadlet | waiter deploy --strategy canary
+
+# Promote canary to full traffic
+waiter promote my-app
+
+# Rollback
+waiter rollback my-app
+```
+
+### 7. judge — Validate
+
+**Input:** Expected state (from hery) + actual state (from unravel)
+**Output:** Judge entity (diff — pass/fail per requirement)
+
+judge compares "what IS" (via unravel) vs "what SHOULD BE" (via hery entities) and outputs an judge entity — a diff in entity format. Supports both generic deep diff and type-aware judge plugins.
+
+```bash
+# Drift detection
+unravel discover --type network | judge audit
+
+# Reconciliation loop (on cron/systemd timer)
+unravel discover | judge audit | lighthouse notify
+```
 
 ## Supporting Tools
 
 | Tool | Role |
 |------|------|
-| **waiter** | Orchestrates the full pipeline — sequences stages, handles errors, manages retries |
-| **unravel** | Inspects and debugs pipeline state — shows what data flows between stages |
+| **unravel** | Discovers existing system state as entities. Wraps osquery (on-demand, stateless) + custom plugins |
+| **conduct** | Multi-server orchestration — coordinates waiter/lay across distributed nodes |
+| **lighthouse** | Notifications/alerts via plugins (webhook, SMS, email, REST API). Receives entity output from any tool |
+| **dryrun** | Safely tests settings by applying them and auto-reverting if something goes wrong |
+| **garbage** | Tracks what's no longer needed and handles cleanup/uninstallation |
+| **amadla** | Orchestrator — reads `.hery` entities, builds DAG from `_requires`, executes tools in parallel tiers |
 
 ## Data Flow Example
 
 The following sequence diagram shows the full pipeline execution:
 
-<!-- Diagram placeholder -->
+![Pipeline Execution Flow](../diagrams/out/seq-pipeline-flow.svg)
 
-A complete flow for deploying a web application:
+A complete flow for deploying a containerized web application:
 
 ```yaml
-# 1. Define the application (HERY entity)
-_entity: github.com/AmadlaOrg/EntityApplication@v1.0.0
+# yaml-language-server: $schema=https://amadla.org/entity/hery/v1.0.0/schema.hery.json
+---
+_type: amadla.org/entity/application/webserver@v1.0.0
+_meta:
+  name: my-web-app
+  description: Web application with TLS
 _body:
   name: my-web-app
-  requires:
-    - _entity: github.com/AmadlaOrg/EntitySystem@v1.0.0
-      _body:
-        package: nginx
-        version: ">=1.24"
-    - _entity: github.com/AmadlaOrg/EntitySecret@v1.0.0
-      _body:
-        key: tls-certificate
-        source: vault
-        path: secret/data/my-web-app/tls
-    - _entity: github.com/AmadlaOrg/EntityInfrastructure@v1.0.0
-      _body:
-        provider: digitalocean
-        type: droplet
-        size: s-1vcpu-1gb
+  port: 443
+  network:
+    ports:
+      - 80
+      - 443
 ```
 
 ```bash
-# 2. Pipeline execution
-hery query --collection prod "EntityApplication" \
-  | doorman resolve \
-  | raise provision \
-  | lay install \
-  | weaver weave --template-dir ./templates \
-  | judge audit
+# Pipeline execution
+hery query --type '*/application@*' -o json \
+  | doorman resolve -o json \
+  | weaver render -o json \
+  | waiter deploy --strategy canary --weight 5
+
+# Validate
+unravel discover | judge audit
+
+# Promote if OK
+waiter promote my-app
 ```
 
-Each `|` represents a JSON hand-off between tools.
+Each `|` represents a JSON entity hand-off between tools.

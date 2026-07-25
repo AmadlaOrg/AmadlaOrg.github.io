@@ -6,7 +6,6 @@
 | **Module** | `github.com/AmadlaOrg/LibraryPluginFramework` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryPluginFramework](https://github.com/AmadlaOrg/LibraryPluginFramework) |
-| **Go Version** | 1.24.0 |
 
 ## What It Provides
 
@@ -17,22 +16,13 @@ LibraryPluginFramework is the base for all Amadla plugin types. It provides:
 - IPC channel setup
 - Message serialization (JSON)
 
-## Dependencies
-
-### External Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/spf13/cobra` | CLI framework |
-| `github.com/stretchr/testify` | Testing assertions and mocks |
-
 ## Consumers
 
-- LibraryClerkFramework (specializes for secret source plugins)
-- LibraryAuditFramework (specializes for audit plugins)
+- LibraryDoormanFramework (specializes for secret source plugins)
+- LibraryJudgeFramework (specializes for audit plugins)
 
 ## Development Notes
 
 - **Phase 2** in the development plan
 - Needs solidification alongside LibraryFramework
-- The specialization pattern (Clerk, Audit) should be clearly documented
+- The specialization pattern (Doorman, Judge) should be clearly documented

@@ -6,7 +6,6 @@
 | **Module** | `github.com/AmadlaOrg/LibraryUtils` |
 | **Status** | Active |
 | **Repo** | [AmadlaOrg/LibraryUtils](https://github.com/AmadlaOrg/LibraryUtils) |
-| **Go Version** | 1.24.0 |
 
 ## Package Structure
 
@@ -25,24 +24,13 @@
 | `packaging/desktop/` | Desktop package generation |
 | `packaging/document/` | Document package generation |
 
-## Key Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `github.com/go-git/go-git/v5` | Git operations |
-| `github.com/mattn/go-sqlite3` | SQLite database |
-| `github.com/dgraph-io/ristretto` | In-memory caching |
-| `github.com/spf13/afero` | Filesystem abstraction |
-| `github.com/spf13/viper` | Configuration management |
-| `gopkg.in/yaml.v3` | YAML parsing |
-
 ## Consumers
 
 Every Go project in the ecosystem depends on LibraryUtils:
 
 - hery, doorman, weaver (directly)
-- LibraryFramework, LibraryClerkFramework, LibraryAuditFramework
-- auditor-application, clerk-keepassxc
+- LibraryFramework, LibraryDoormanFramework, LibraryJudgeFramework
+- judge-application, doorman-keepassxc
 
 ## Development Notes
 
@@ -55,8 +43,8 @@ Every Go project in the ecosystem depends on LibraryUtils:
 
 | Path | Purpose |
 |------|---------|
-| `git/git.go` | `IGit` / `SGit` — Git operations interface |
-| `file/file.go` | `IFile` / `SFile` — File system operations |
+| `git/git.go` | `Git` interface — Git operations |
+| `file/file.go` | `File` interface — File system operations |
 | `database/sqlite3/` | SQLite3 wrapper with full interface coverage |
 | `encryption/aes_gcm/` | AES-GCM encryption service |
 | `interconnection/` | Platform-specific IPC implementations |

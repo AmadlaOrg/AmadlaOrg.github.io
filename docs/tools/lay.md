@@ -2,17 +2,19 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Package and application installer — installs software based on entity requirements |
-| **Module** | — |
-| **Status** | Planned |
+| **Purpose** | Package and application installer — installs packages, applications, JARs, and container images |
 | **Repo** | [AmadlaOrg/lay](https://github.com/AmadlaOrg/lay) |
+
+## Overview
+
+lay handles installation: packages via system package managers, applications, JAR files, and container image pull/build. For containers, lay takes care of building and pulling — waiter handles the rest (Quadlet setup, deployment strategies).
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `lay install` | Planned | Install applications from entity requirements |
-| `lay settings` | Planned | Manage lay configuration |
+| Command | Description |
+|---------|-------------|
+| `lay install` | Install applications from entity requirements |
+| `lay settings` | Manage lay configuration |
 
 ## Dependencies
 
@@ -23,17 +25,46 @@
 
 ## Pipeline Position
 
-lay sits **after raise** (infrastructure provisioning) and **before weaver** (configuration generation). It installs the applications that the provisioned servers need.
+lay sits **after raise** (infrastructure provisioning). For containers, its output (image reference entity) feeds into waiter for deployment.
 
 ```
-hery → doorman → raise → [lay] → weaver → judge
+hery → doorman → raise → [lay] → waiter
+                           │
+                    pull/build container image
+                    install packages/JARs
+                    output: image ref entity
 ```
 
-## Intended Design
+## Responsibility Split with waiter
 
-lay will read `EntityApplication` and `EntitySystem` declarations and install the required software using the appropriate package manager for the target system (apt, yum, brew, etc.). It may wrap or integrate with existing configuration management tools like Ansible.
+| Concern | Tool |
+|---------|------|
+| Pull container image | **lay** |
+| Build container image | **lay** |
+| Install system packages | **lay** |
+| Install JAR applications | **lay** |
+| Deploy with strategy | **waiter** |
 
-## Current Gaps
+## Entity Types
 
-- Repository exists as a stub only
-- No Go code or module definition
+| Entity | What lay Does |
+|--------|--------------|
+| [Package](../entities/package.md) | Installs packages via the appropriate package manager |
+| [Application](../entities/application.md) | Installs applications, JAR files, and container images |
+| [ProgrammingLanguage](../entities/programming-language.md) | Installs language runtimes and version managers |
+| [Container](../entities/container.md) | Pulls or builds container images |
+
+## Output
+
+When pulling or building container images, lay outputs an entity with the image reference that waiter can consume:
+
+```bash
+lay pull my-app:v2 | waiter deploy --strategy canary
+```
+
+## Current Status
+
+- 42 packages, all tests passing
+- Idiomatic Go names
+- JAR application support (`binary/jar/`)
+- `--name` flag for targeted installation

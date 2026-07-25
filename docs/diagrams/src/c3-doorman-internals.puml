@@ -1,0 +1,37 @@
+@startuml c3-doorman-internals
+!pragma layout smetana
+!define RELATIVE_INCLUDE ""
+!include ../vendor/C4-PlantUML/C4_Component.puml
+
+title doorman — Internal Components (C3)
+
+Container_Boundary(doorman, "doorman") {
+    Component(cmd, "internal/cmd/", "Cobra Commands", "CLI entry points:\nsettings, start, resolve")
+
+    Component(cache, "internal/cache/", "Encrypted Cache", "Ristretto in-memory cache\nwith platform-specific\nencryption (TPM/DPAPI)")
+
+    Component(ipc_server, "IPC Server", "Unix Socket / Named Pipe", "Listens for secret\nrequests from\nclient applications")
+}
+
+System_Boundary(doorman_plugins, "Doorman Plugins") {
+    Component(dm_vault, "doorman-vault", "Go CLI", "HashiCorp Vault\n/ OpenBao")
+    Component(dm_aws, "doorman-aws", "Go CLI", "AWS Secrets\nManager / SSM")
+    Component(dm_keepassxc, "doorman-keepassxc", "Go CLI", "KeePassXC via\nD-Bus")
+}
+
+System_Ext(vault, "Vault / OpenBao", "Secret store")
+System_Ext(aws, "AWS", "Cloud secrets")
+System_Ext(keepassxc, "KeePassXC", "Password manager")
+System_Ext(client_app, "Client Application", "Requests secrets\nvia IPC")
+
+Rel(client_app, ipc_server, "Request secret")
+Rel(ipc_server, cache, "Check cache")
+Rel(cache, cmd, "Cache miss:\ntrigger fetch")
+Rel(cmd, dm_vault, "IPC: fetch secret")
+Rel(cmd, dm_aws, "IPC: fetch secret")
+Rel(cmd, dm_keepassxc, "IPC: fetch secret")
+Rel(dm_vault, vault, "API call")
+Rel(dm_aws, aws, "API call")
+Rel(dm_keepassxc, keepassxc, "D-Bus")
+
+@enduml

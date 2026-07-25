@@ -2,36 +2,31 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Secrets management daemon — pulls secrets from Clerk plugins and stores them in an encrypted in-memory cache with TTL |
-| **Module** | `github.com/AmadlaOrg/doorman` |
-| **Status** | Early |
+| **Purpose** | Secrets management — discovers `doorman-*` plugins on PATH and provides a unified interface for retrieving secrets from any backend |
 | **Repo** | [AmadlaOrg/doorman](https://github.com/AmadlaOrg/doorman) |
-| **Go Version** | 1.24.0 |
 
 ## Commands
 
-| Command | Status | Description |
-|---------|--------|-------------|
-| `doorman settings` | Working | Manage doorman configuration |
-| `doorman collection` | Stubbed | Collection management (commented out in code) |
-| `doorman compose` | Stubbed | Entity composition (commented out in code) |
-| `doorman start` | Planned | Start the secrets daemon |
-| `doorman resolve` | Planned | Resolve secret references in entity data |
+| Command | Description |
+|---------|-------------|
+| `doorman settings` | Manage doorman configuration |
+| `doorman resolve` | Resolve secret references in entity data (pipes to stdout) |
+| `doorman list` | List discovered `doorman-*` plugins and their supported entities |
+| `doorman get` | Retrieve a secret via the appropriate plugin |
 
 ## Dependencies
 
 | Library | Purpose |
 |---------|---------|
-| LibraryUtils | IPC (Unix sockets / named pipes), encryption, configuration |
+| LibraryUtils | Configuration, file operations |
 | LibraryFramework | CLI framework (Cobra wrapper) |
+| LibraryPluginFramework | Plugin discovery (PATH scanning for `doorman-*`) |
 
-### External Dependencies
+## Entity Types
 
-| Package | Purpose |
-|---------|---------|
-| `github.com/dgraph-io/ristretto` | High-performance in-memory cache with TTL |
-| `github.com/spf13/cobra` | CLI framework |
-| `golang.org/x/sys` | Platform-specific system calls |
+| Entity | What doorman Does |
+|--------|------------------|
+| [Secret](../entities/secret.md) | Resolves secret references to actual values via plugins |
 
 ## Pipeline Position
 
@@ -41,7 +36,7 @@ doorman sits **between hery and raise** in the pipeline. It receives entity data
 hery → [doorman] → raise → lay → weaver → judge
          │
     ┌────┴────────┐
-    │ Clerk       │
+    │ Doorman     │
     │ Plugins     │
     │ (vault,     │
     │  aws, ...)  │
@@ -50,13 +45,19 @@ hery → [doorman] → raise → lay → weaver → judge
 
 ## Architecture
 
-<!-- Diagram placeholder -->
+![doorman Internal Components](../diagrams/out/c3-doorman-internals.svg)
+
+### Secret Resolution Flow
+
+![Secret Resolution Sequence](../diagrams/out/seq-secret-resolution.svg)
 
 ### Core Flow
 
 ```
-Secret Source (Vault, AWS, KeePassXC, ...) → Clerk Plugin → Doorman Daemon → IPC → Client App
+Entity with secret refs → doorman → doorman-* plugin (via stdin/stdout) → Secret entity (universal format) → stdout
 ```
+
+doorman is a **wrapper tool**, not a daemon. It discovers `doorman-*` plugins on PATH, routes entity data to the appropriate plugin based on entity type support, and outputs secrets in a universal entity format.
 
 ### Package Structure
 
@@ -69,27 +70,12 @@ internal/
     └── settings.go     # Settings command implementation
 ```
 
-### Cache Encryption
-
-The in-memory cache encrypts secrets at rest using platform-specific mechanisms:
-
-| Platform | Mechanism | Status |
-|----------|-----------|--------|
-| Linux | TPM-backed AES-GCM | Planned (currently XOR placeholder) |
-| Windows | DPAPI | Planned |
-
-<!-- Diagram placeholder -->
-
-!!! warning "Security Note"
-    Cache encryption currently uses XOR as a placeholder. Production use requires proper AES-GCM backed by TPM or platform keystore.
-
 ## Current Gaps
 
-- Only `settings` command is functional; `collection` and `compose` are commented out
-- No `start` (daemon) or `resolve` commands yet
-- Cache encryption uses XOR placeholder — needs AES-GCM for production
-- TPM integration is incomplete (TODO in cache.go)
-- No Clerk plugin loading or IPC communication yet
+- Only `settings` command is functional
+- Plugin discovery (PATH scanning for `doorman-*`) not yet implemented
+- `resolve`, `list`, and `get` commands not yet implemented
+- Legacy daemon/IPC code needs removal (replaced by UNIX stdin/stdout protocol)
 - No tests beyond basic structure
 
 ## Key Files
