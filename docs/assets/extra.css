@@ -46,6 +46,18 @@
   margin-top: 0;
 }
 
+/* On very wide screens the auto-fit grid packs all cards into one narrow row.
+   Break the grid out of the centered content column and lock it to three
+   roomier columns so the cards get wider. */
+@media screen and (min-width: 2000px) {
+  .md-typeset .amadla-features {
+    width: min(1500px, 80vw);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* Quick links */
 .md-typeset .amadla-links {
   display: flex;
