@@ -309,6 +309,12 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/AmadlaOrg
 
+# The vendored C4-PlantUML library is a diagram-generation dependency, not
+# site content. Its README links to files (.vscode/C4.code-snippets) that are
+# not part of this repo, which aborts the build in strict mode.
+exclude_docs: |
+  diagrams/vendor/
+
 plugins:
   - search
   - glightbox
