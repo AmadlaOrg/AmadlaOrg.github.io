@@ -2,97 +2,58 @@
 
 Known gaps in the Amadla ecosystem, identified through code exploration.
 
-## Critical Gaps
+## Resolved (as of March 2026)
 
-### 1. No Working Pipeline
+The following critical gaps have been addressed:
 
-The core pipeline (hery → doorman → raise → lay → weaver → judge) cannot be run end-to-end. Only hery and weaver have partial implementations. This means:
+- **Pipeline orchestration** — amadla CLI complete (DAG from `_requires`, parallel execution, `init`/`run`/`list`/`doctor` commands, InfoCache with mtime-based invalidation, 62 tests)
+- **Infrastructure provisioning** — raise core + 7 plugins (libvirt, wsl, virtualbox, aws, digitalocean, quickemu, opentofu)
+- **System state configuration** — enjoin core + 10 plugins (user, service, cron, network, filesystem, firewall, certificate, ids, mac, sysctl)
+- **Deployment strategies** — waiter core + 6 plugins (podman, docker, quadlet, proxy-haproxy, proxy-kamal, judge-waiter), 86+ tests
+- **Multi-server orchestration** — conduct built
+- **Notifications/alerting** — lighthouse core + 4 plugins (webhook, slack, email, sms), 65+ tests
+- **System discovery** — unravel core complete, 11 tests
+- **Secrets management** — doorman core + 3 plugins (vault, keepassxc, bitwarden), plugin discovery via PATH
+- **Template rendering** — weaver core + 5 plugins (go, jinja2, mustache, qute, freemarker), 30 E2E tests
+- **Validation/auditing** — judge core + 2 plugins (application, network)
+- **Installation** — lay core, 42 packages passing
+- **Trash/cleanup** — garbage core, 86 tests
+- **All libraries** — LibraryUtils, LibraryFramework, LibraryPluginFramework, LibraryDoormanFramework, LibraryJudgeFramework, LibraryEnjoinFramework
 
-- No infrastructure provisioning (raise)
-- No application installation (lay)
-- No compliance auditing (judge)
-- No pipeline orchestration (waiter)
-- No pipeline debugging (unravel)
+## Remaining Gaps
 
-### 2. doorman Has No Daemon Mode
+### End-to-End Integration
 
-doorman's core function — running as a secrets daemon — is not implemented. Only the `settings` command works. Missing:
+- No end-to-end integration tests across the full pipeline (raise -> lay -> enjoin -> weaver -> waiter)
+- No example project showing the complete pipeline in action
+- No CI/CD for the ecosystem as a whole (only per-project GitHub Actions)
 
-- `start` command (daemon mode)
-- `resolve` command (secret resolution)
-- Clerk plugin loading and IPC
-- Proper cache encryption (current XOR placeholder is insecure)
+### hery Incomplete Areas
 
-### 3. hery Has Significant Incomplete Code
-
-34 files contain TODO markers. Key gaps:
-
+- 34 files with TODO comments
 - Cache rebuild edge cases
 - Advanced query engine capabilities
 - Entity composition limitations
-- Documentation gaps within the project
 
-## Library Gaps
+### Plugin Stubs
 
-### LibraryUtils
+- 13 of 16 doorman plugins are stubs (only vault, keepassxc, bitwarden implemented)
+- 1 of 3 judge plugins is a stub (judge-system)
+- Several raise plugin stubs (beyond the 7 implemented)
 
-- Test coverage needs audit and improvement
-- Code duplicated in downstream projects needs consolidation
-- Some interfaces may need stabilization
+### Documentation
 
-### LibraryFramework
-
-- CLI decorator pattern needs solidification
-- Plugin loading integration incomplete
-
-### LibraryPluginFramework
-
-- Plugin discovery and lifecycle management needs testing
-- IPC protocol documentation missing
-
-### LibraryClerkFramework / LibraryAuditFramework
-
-- Only one reference implementation each (clerk-keepassxc, auditor-application)
-- Platform-specific IPC (Windows) untested
-
-## Plugin Gaps
-
-### Clerk Plugins
-
-- 15 of 16 clerk plugins are stubs (README-only)
-- Only clerk-keepassxc has Go code
-- Most enterprise-critical clerks (vault, aws, keycloak) are not implemented
-
-### Auditor Plugins
-
-- 2 of 3 auditor plugins are stubs
-- Only auditor-application has Go code
-
-### Weaver Plugins
-
-- All 4 weaver plugins are stubs
-- No template engine integration exists yet
-
-## Test Coverage Gaps
-
-| Repo | Coverage Status |
-|------|----------------|
-| LibraryUtils | Needs comprehensive audit |
-| LibraryFramework | Unknown |
-| hery | Has tests (Ginkgo) but many TODOs |
-| doorman | Minimal tests |
-| weaver | Limited coverage |
-
-## Documentation Gaps
-
-- No central documentation site existed before this repo
-- Most projects lack detailed CLAUDE.md (only 3 of 52 repos have one)
-- No architecture diagrams
+- Entity schemas exist but human-readable documentation is incomplete for some types
 - No API documentation for libraries
-- Entity schemas exist but are not documented for humans
+- Some tool pages still describe planned rather than implemented features
 
-## Integration Gaps
+### Platform Coverage
 
-- No end-to-end integration tests across tools
-- No example project showing the full pipeline
-- No CI/CD for the ecosystem as a whole (only per-project GitHub Actions)
+- Platform-specific IPC (Windows) untested in libraries
+- WSL plugin only tested on Linux with WSL2 available
+
+### amadla CLI
+
+- D2 diagram generation from DAG not yet implemented
+- `settings` command not yet implemented
+- No `amadla` integration tests that exercise real tool binaries end-to-end

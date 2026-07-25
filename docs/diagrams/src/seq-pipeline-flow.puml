@@ -1,0 +1,57 @@
+@startuml seq-pipeline-flow
+
+title Amadla — Pipeline Execution Flow
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "DevOps Engineer" as user
+participant "waiter" as waiter
+participant "hery" as hery
+participant "doorman" as doorman
+participant "raise" as raise
+participant "lay" as lay
+participant "weaver" as weaver
+participant "judge" as judge
+
+database "YAML files" as yaml
+database "Secret Stores" as secrets
+participant "Cloud Provider" as cloud
+
+== 1. Define Requirements ==
+user -> hery : hery entity get\n--collection prod
+hery -> yaml : Read YAML entities
+yaml --> hery : Entity data
+hery -> hery : Validate against\nJSON Schema
+hery --> user : JSON: entity data
+
+== 2. Resolve Secrets ==
+user -> doorman : doorman resolve
+doorman -> secrets : Fetch via\nDoorman plugins
+secrets --> doorman : Secret values
+doorman -> doorman : Cache encrypted\nin memory
+doorman --> user : JSON: data + secrets
+
+== 3. Provision Infrastructure ==
+user -> raise : raise provision
+raise -> cloud : Create servers,\nnetworks, storage
+cloud --> raise : Provisioned resources
+raise --> user : JSON: infra details
+
+== 4. Install Applications ==
+user -> lay : lay install
+lay -> raise : Connect to\nprovisioned servers
+lay -> lay : Install packages\nvia apt/yum/brew
+lay --> user : JSON: installed apps
+
+== 5. Generate Configuration ==
+user -> weaver : weaver weave\n--template-dir ./templates
+weaver -> weaver : Render templates\nwith entity data
+weaver --> user : Generated config files
+
+== 6. Audit Compliance ==
+user -> judge : judge audit
+judge -> judge : Run judge plugins
+judge --> user : Compliance report\n(pass/fail per check)
+
+@enduml
