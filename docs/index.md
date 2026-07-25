@@ -25,6 +25,8 @@ hide:
 
 **Amadla** is an infrastructure automation ecosystem built on the UNIX philosophy. Instead of describing environments, you describe what your applications *need* — and those requirements flow through a pipeline of modular CLI tools that each do one thing well.
 
+[Read the longer introduction](what-is-amadla.md) for the ideas behind it, the full pipeline, and the ecosystem at a glance.
+
 <div class="amadla-features" markdown>
 
 <div class="amadla-feature" markdown>
@@ -55,7 +57,7 @@ Hierarchical Entity Relational YAML — a structured way to define application r
 
 ### Plugin Architecture
 
-Extend tools with plugins for secret sources (Clerks), template engines (Weavers), and compliance auditing (Auditors).
+Extend tools with plugins for secret sources (doorman-*), infrastructure providers (raise-*), template engines (weaver-*), system configuration (enjoin-*), and validation (judge-*).
 
 </div>
 
@@ -83,47 +85,22 @@ Each tool reads structured data, does its job, and passes results downstream as 
 
 <div class="amadla-pipeline" markdown>
 
-`hery` &rarr; `doorman` &rarr; `raise` &rarr; `lay` &rarr; `weaver` &rarr; `judge`
+`hery` &rarr; `doorman` &rarr; `raise` &rarr; `lay` &rarr; `enjoin` &rarr; `weaver` &rarr; `judge`
 
 </div>
 
 | Stage | Tool | What it does |
 |-------|------|-------------|
 | **Define** | [hery](tools/hery.md) | Manage YAML entities with schema validation and SQLite caching |
-| **Secrets** | [doorman](tools/doorman.md) | Resolve secrets from any source via Clerk plugins |
-| **Provision** | [raise](tools/raise.md) | Provision infrastructure using IaC wrappers |
-| **Install** | [lay](tools/lay.md) | Install applications via package managers |
-| **Configure** | [weaver](tools/weaver.md) | Generate config files from templates + entity data |
-| **Audit** | [judge](tools/judge.md) | Verify compliance via Auditor plugins |
-
-## Ecosystem at a Glance
-
-| Category | Count | Examples |
-|----------|-------|---------|
-| **Core Tools** | 8 | hery, doorman, weaver, judge, lay, raise, waiter, unravel |
-| **Libraries** | 5 | LibraryUtils, LibraryFramework, LibraryPluginFramework, ... |
-| **Clerk Plugins** | 16 | clerk-vault, clerk-aws, clerk-keepassxc, clerk-keycloak, ... |
-| **Auditor Plugins** | 3 | auditor-application, auditor-system, auditor-infrastructure |
-| **Weaver Plugins** | 4 | weaver-jinja, weaver-js-handlebars, weaver-js-mustache, weaver-qute |
-| **Entity Definitions** | 8 | Entity, EntityApplication, EntitySystem, EntityInfrastructure, ... |
-
-**Total: 52+ repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) and AmadlaCom.
-
-## Technology
-
-All tools and libraries are written in **Go**. The ecosystem uses:
-
-| Concern | Technology |
-|---------|-----------|
-| Language | Go 1.24+ |
-| CLI Framework | Cobra (wrapped by LibraryFramework) |
-| Data Storage | YAML + SQLite caching (HERY) |
-| Schema Validation | JSON Schema |
-| Entity Versioning | Git |
-| Secrets | Encrypted in-memory cache (Doorman) |
-| Template Engines | Jinja, Mustache, Handlebars, Qute (via plugins) |
+| **Secrets** | [doorman](tools/doorman.md) | Resolve secrets from any source via doorman plugins |
+| **Provision** | [raise](tools/raise.md) | Provision VMs and cloud instances via raise plugins |
+| **Install** | [lay](tools/lay.md) | Install packages, applications, and language runtimes |
+| **Configure** | [enjoin](tools/enjoin.md) | Set system state — users, services, cron, security |
+| **Generate** | [weaver](tools/weaver.md) | Generate config files from templates + entity data |
+| **Audit** | [judge](tools/judge.md) | Verify state and compliance via judge plugins |
 
 <div class="amadla-links" markdown>
+[What is Amadla?](what-is-amadla.md){ .secondary }
 [Architecture](architecture/ecosystem-overview.md){ .secondary }
 [Tools](tools/overview.md){ .secondary }
 [Roadmap](roadmap/current-state.md){ .secondary }
