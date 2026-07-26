@@ -120,3 +120,24 @@
 .md-typeset .amadla-pipeline code {
   font-size: 0.95rem;
 }
+
+/* glightbox + Material light/dark image pairs: every diagram is published as a
+   #only-light / #only-dark pair. Material hides the inactive scheme's <img> but
+   leaves its wrapping <a class="glightbox"> in place, so clicking can open the
+   wrong variant (the light diagram while the site is in dark mode). Hide the
+   whole anchor for the inactive scheme so only the current theme's diagram is
+   clickable and is what opens in the lightbox. */
+[data-md-color-scheme="slate"] a.glightbox:has(img[src$="#only-light"]),
+[data-md-color-scheme="default"] a.glightbox:has(img[src$="#only-dark"]) {
+  display: none;
+}
+
+/* The dark diagrams render on a transparent background so they sit on the page
+   surface rather than punching a black rectangle into it. In the lightbox that
+   leaves them on glightbox's near-black overlay, where the dark blues lose
+   contrast — give them the page's own surface color to sit on. */
+[data-md-color-scheme="slate"] .glightbox-container .gslide-image img[src*="-dark.svg"] {
+  background: var(--md-default-bg-color);
+  padding: 1rem;
+  border-radius: 0.25rem;
+}

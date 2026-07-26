@@ -117,7 +117,8 @@ JSON Schema definitions that describe the structure of HERY entities.
 
 ## How Components Connect
 
-![Library Dependencies](../diagrams/out/c2-library-dependencies.svg)
+![Library Dependencies](../diagrams/out/c2-library-dependencies.svg#only-light)
+![Library Dependencies](../diagrams/out/c2-library-dependencies-dark.svg#only-dark)
 
 All Go projects use `replace` directives in `go.mod` to reference sibling directories during development:
 

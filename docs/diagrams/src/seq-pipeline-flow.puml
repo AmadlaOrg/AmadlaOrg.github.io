@@ -6,52 +6,65 @@ skinparam sequenceArrowThickness 1.5
 skinparam sequenceParticipantBorderColor #444
 
 actor "DevOps Engineer" as user
-participant "waiter" as waiter
+participant "amadla" as amadla
 participant "hery" as hery
 participant "doorman" as doorman
 participant "raise" as raise
 participant "lay" as lay
+participant "enjoin" as enjoin
 participant "weaver" as weaver
 participant "judge" as judge
-
 database "YAML files" as yaml
 database "Secret Stores" as secrets
 participant "Cloud Provider" as cloud
 
-== 1. Define Requirements ==
-user -> hery : hery entity get\n--collection prod
-hery -> yaml : Read YAML entities
+== 1. Plan the run ==
+
+user -> amadla : amadla run ./entities
+amadla -> hery : Query entities
+hery -> yaml : Read .hery entities
 yaml --> hery : Entity data
 hery -> hery : Validate against\nJSON Schema
-hery --> user : JSON: entity data
+hery --> amadla : JSON: entity data
+amadla -> amadla : Build DAG from _requires,\ntopologically sort
 
 == 2. Resolve Secrets ==
-user -> doorman : doorman resolve
-doorman -> secrets : Fetch via\nDoorman plugins
+
+amadla -> doorman : Secret entities
+doorman -> secrets : Fetch via\ndoorman-* plugins
 secrets --> doorman : Secret values
-doorman -> doorman : Cache encrypted\nin memory
-doorman --> user : JSON: data + secrets
+doorman --> amadla : JSON: data + secrets
 
 == 3. Provision Infrastructure ==
-user -> raise : raise provision
+
+amadla -> raise : Infrastructure entities
 raise -> cloud : Create servers,\nnetworks, storage
 cloud --> raise : Provisioned resources
-raise --> user : JSON: infra details
+raise --> amadla : JSON: infra details
 
 == 4. Install Applications ==
-user -> lay : lay install
-lay -> raise : Connect to\nprovisioned servers
-lay -> lay : Install packages\nvia apt/yum/brew
-lay --> user : JSON: installed apps
 
-== 5. Generate Configuration ==
-user -> weaver : weaver weave\n--template-dir ./templates
+amadla -> lay : Package, Application,\nProgrammingLanguage entities
+lay -> lay : Install via package\nmanagers per platform
+lay --> amadla : JSON: installed apps
+
+== 5. Configure the System ==
+
+amadla -> enjoin : User, Service, Cron,\nSystem/*, Security/* entities
+enjoin -> enjoin : Apply state via\nenjoin-* plugins
+enjoin --> amadla : JSON: configured system
+
+== 6. Generate Configuration ==
+
+amadla -> weaver : Template entities
 weaver -> weaver : Render templates\nwith entity data
-weaver --> user : Generated config files
+weaver --> amadla : Generated config files
 
-== 6. Audit Compliance ==
-user -> judge : judge audit
-judge -> judge : Run judge plugins
-judge --> user : Compliance report\n(pass/fail per check)
+== 7. Audit State ==
+
+amadla -> judge : Validation entities
+judge -> judge : Run judge-* plugins
+judge --> amadla : Compliance report\n(pass/fail per check)
+amadla --> user : Run summary
 
 @enduml
