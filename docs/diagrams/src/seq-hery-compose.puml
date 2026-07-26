@@ -1,0 +1,47 @@
+@startuml seq-hery-compose
+
+title hery compose — Flatten Entities
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/resolve/" as resolve
+participant "entity/compose/" as compose
+participant "storage/" as storage
+participant "entity/" as ent
+participant "entity/merge/" as merge
+participant "Filesystem" as fs
+
+== Local directory: --dir ==
+
+user -> cmd : hery compose --dir <dir> [--layer N]
+cmd -> resolve : Resolve(dir)
+resolve -> fs : Read *.hery per directory\n(breadth-first over layers)
+resolve -> resolve : Order documents by _requires
+resolve -> merge : OrderedDeepMerge for\nlocal ./ _extends refs
+resolve --> cmd : Merge layers + warnings\n(non-local refs warn, stay unmerged)
+cmd --> user : Warnings on stderr
+cmd --> user : Multi-document YAML on stdout\n(--layer N emits one layer)
+
+== Cached entity: positional URI ==
+
+user -> cmd : hery compose <entity-uri>
+cmd -> compose : ComposeEntity(uri)
+compose -> storage : Paths()
+compose -> ent : ReadAll(entity cache)
+ent -> fs : Read every cached *.hery
+compose -> merge : ResolveExtendsChain\n+ DeepMerge per document
+merge --> compose : Resolved documents
+compose -> merge : DeepMerge all into one
+compose --> cmd : Single merged document
+cmd --> user : YAML on stdout\n(or ./composed.hery when --print=false)
+
+== Errors ==
+
+user -> cmd : hery compose (no arg, no --dir)
+cmd --> user : "entity argument required" + usage, exit 1
+cmd --> user : --layer N beyond resolved layers:\nerror on stderr, exit 1
+
+@enduml
