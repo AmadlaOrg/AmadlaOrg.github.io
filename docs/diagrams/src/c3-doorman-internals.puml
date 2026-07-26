@@ -6,32 +6,39 @@
 title doorman — Internal Components (C3)
 
 Container_Boundary(doorman, "doorman") {
-    Component(cmd, "internal/cmd/", "Cobra Commands", "CLI entry points:\nsettings, start, resolve")
+    Component(main, "main.go", "Entry Point", "Wires the root\nCobra command")
 
-    Component(cache, "internal/cache/", "Encrypted Cache", "Ristretto in-memory cache\nwith platform-specific\nencryption (TPM/DPAPI)")
+    Component(cmd_get, "cmd/get.go", "Cobra Command", "doorman get <key>\n--from <plugin>")
 
-    Component(ipc_server, "IPC Server", "Unix Socket / Named Pipe", "Listens for secret\nrequests from\nclient applications")
+    Component(cmd_plugins, "cmd/plugins.go", "Cobra Command", "doorman plugins:\nlists what was found")
+
+    Component(plugin, "plugin/", "Plugin Service", "Discovers doorman-*\nbinaries on PATH,\nexecutes them, reads\ntheir JSON output")
 }
 
 System_Boundary(doorman_plugins, "Doorman Plugins") {
     Component(dm_vault, "doorman-vault", "Go CLI", "HashiCorp Vault\n/ OpenBao")
-    Component(dm_aws, "doorman-aws", "Go CLI", "AWS Secrets\nManager / SSM")
-    Component(dm_keepassxc, "doorman-keepassxc", "Go CLI", "KeePassXC via\nD-Bus")
+    Component(dm_bitwarden, "doorman-bitwarden", "Go CLI", "Bitwarden /\nVaultwarden")
+    Component(dm_keepassxc, "doorman-keepassxc", "Go CLI", "KeePassXC")
 }
 
+System_Ext(path, "PATH", "Where plugin binaries\nare discovered")
 System_Ext(vault, "Vault / OpenBao", "Secret store")
-System_Ext(aws, "AWS", "Cloud secrets")
+System_Ext(bitwarden, "Bitwarden", "Secret store")
 System_Ext(keepassxc, "KeePassXC", "Password manager")
-System_Ext(client_app, "Client Application", "Requests secrets\nvia IPC")
+System_Ext(caller, "Caller", "Pipeline tool or\nuser shell")
 
-Rel(client_app, ipc_server, "Request secret")
-Rel(ipc_server, cache, "Check cache")
-Rel(cache, cmd, "Cache miss:\ntrigger fetch")
-Rel(cmd, dm_vault, "IPC: fetch secret")
-Rel(cmd, dm_aws, "IPC: fetch secret")
-Rel(cmd, dm_keepassxc, "IPC: fetch secret")
+Rel(caller, cmd_get, "doorman get")
+Rel(caller, cmd_plugins, "doorman plugins")
+Rel(main, cmd_get, "Registers")
+Rel(main, cmd_plugins, "Registers")
+Rel(cmd_get, plugin, "Get(plugin, key)")
+Rel(cmd_plugins, plugin, "Discover()")
+Rel(plugin, path, "Scans for doorman-*")
+Rel(plugin, dm_vault, "Executes, reads JSON")
+Rel(plugin, dm_bitwarden, "Executes, reads JSON")
+Rel(plugin, dm_keepassxc, "Executes, reads JSON")
 Rel(dm_vault, vault, "API call")
-Rel(dm_aws, aws, "API call")
-Rel(dm_keepassxc, keepassxc, "D-Bus")
+Rel(dm_bitwarden, bitwarden, "API call")
+Rel(dm_keepassxc, keepassxc, "Database / D-Bus")
 
 @enduml

@@ -74,7 +74,8 @@ Amadla follows the UNIX philosophy:
 
 The Amadla pipeline flows from requirements to running infrastructure:
 
-![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg)
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg#only-light)
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline-dark.svg#only-dark)
 
 | Stage | Tool | Input | Output |
 |-------|------|-------|--------|

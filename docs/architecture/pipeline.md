@@ -8,7 +8,8 @@ The Amadla pipeline transforms application requirements into running, audited in
 
 ## Pipeline Stages
 
-![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg)
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline.svg#only-light)
+![Tool Pipeline](../diagrams/out/c2-tool-pipeline-dark.svg#only-dark)
 
 ## Stage Details
 
@@ -131,7 +132,8 @@ unravel discover | judge audit | lighthouse notify
 
 The following sequence diagram shows the full pipeline execution:
 
-![Pipeline Execution Flow](../diagrams/out/seq-pipeline-flow.svg)
+![Pipeline Execution Flow](../diagrams/out/seq-pipeline-flow.svg#only-light)
+![Pipeline Execution Flow](../diagrams/out/seq-pipeline-flow-dark.svg#only-dark)
 
 A complete flow for deploying a containerized web application:
 

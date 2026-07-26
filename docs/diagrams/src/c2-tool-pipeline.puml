@@ -7,37 +7,43 @@ title Amadla Ecosystem — Tool Pipeline (C2)
 
 Person(devops, "DevOps Engineer", "Runs the pipeline")
 
-System_Boundary(amadla, "Amadla Ecosystem") {
+System_Boundary(amadla_system, "Amadla Ecosystem") {
+    Container(amadla, "amadla", "Go CLI", "Orchestrator:\nbuilds a DAG from\n_requires and runs\ntools in order")
+
     Container(hery, "hery", "Go CLI", "HERY data storage:\nentity management,\nschema validation,\nSQLite caching")
 
-    Container(doorman, "doorman", "Go Daemon", "Secrets management:\nencrypted cache,\nDoorman plugin IPC")
+    Container(doorman, "doorman", "Go CLI", "Secrets management:\ndelegates to doorman-*\nplugins on PATH")
 
-    Container(raise, "raise", "Go CLI", "Infrastructure provisioner:\nwraps OpenTofu/Terraform")
+    Container(raise, "raise", "Go CLI", "Infrastructure provisioner:\nVMs and cloud instances\nvia raise-* plugins")
 
-    Container(lay, "lay", "Go CLI", "App installer:\nwraps package managers")
+    Container(lay, "lay", "Go CLI", "Installer: packages,\napplications, and\nlanguage runtimes")
+
+    Container(enjoin, "enjoin", "Go CLI", "System state:\nusers, services, cron,\nnetwork, security")
 
     Container(weaver, "weaver", "Go CLI", "Template generator:\npluggable engines")
 
     Container(judge, "judge", "Go CLI", "Audit orchestrator:\nruns judge plugins")
 
-    Container(waiter, "waiter", "Go CLI", "Pipeline orchestrator:\nsequences stages")
+    Container(waiter, "waiter", "Go CLI", "Deployment strategies:\nblue-green, canary,\nrolling")
 }
 
 System_Ext(secrets, "Secret Stores", "Vault, AWS, KeePassXC, ...")
 System_Ext(cloud, "Cloud Providers", "DO, AWS, Linode, ...")
 System_Ext(git, "Git Repos", "Entity definitions")
 
-Rel(devops, waiter, "Runs pipeline")
+Rel(devops, amadla, "Runs pipeline")
 Rel(devops, hery, "Defines entities")
-Rel(waiter, hery, "1. Query entities")
+Rel(amadla, hery, "1. Query entities")
 Rel(hery, doorman, "JSON: entity data")
 Rel(doorman, raise, "JSON: data + secrets")
 Rel(raise, lay, "JSON: provisioned infra")
-Rel(lay, weaver, "JSON: installed apps")
+Rel(lay, enjoin, "JSON: installed apps")
+Rel(enjoin, weaver, "JSON: configured system")
 Rel(weaver, judge, "JSON: generated configs")
+Rel(judge, waiter, "JSON: audited state")
 
 Rel(hery, git, "Fetches entities")
-Rel(doorman, secrets, "Resolves secrets\nvia Doorman plugins")
+Rel(doorman, secrets, "Resolves secrets\nvia doorman-* plugins")
 Rel(raise, cloud, "Provisions resources")
 
 @enduml
