@@ -33,7 +33,8 @@ A package entity goes to [lay](tools/lay.md) (the installer). A template entity 
 
 ## The Pipeline
 
-![Amadla Ecosystem Context](diagrams/out/c1-ecosystem-context.svg)
+![Amadla Ecosystem Context](diagrams/out/c1-ecosystem-context.svg#only-light)
+![Amadla Ecosystem Context](diagrams/out/c1-ecosystem-context-dark.svg#only-dark)
 
 ```
 Define requirements (hery) → Resolve secrets (doorman) → Provision infra (raise)

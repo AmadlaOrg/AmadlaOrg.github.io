@@ -24,7 +24,8 @@ Amadla uses a plugin architecture to extend tools with external integrations. Pl
 
 ## Architecture
 
-![Plugin Architecture](../diagrams/out/c2-plugin-architecture.svg)
+![Plugin Architecture](../diagrams/out/c2-plugin-architecture.svg#only-light)
+![Plugin Architecture](../diagrams/out/c2-plugin-architecture-dark.svg#only-dark)
 
 ### Plugin Discovery
 

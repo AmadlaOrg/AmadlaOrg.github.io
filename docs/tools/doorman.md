@@ -45,11 +45,13 @@ hery → [doorman] → raise → lay → weaver → judge
 
 ## Architecture
 
-![doorman Internal Components](../diagrams/out/c3-doorman-internals.svg)
+![doorman Internal Components](../diagrams/out/c3-doorman-internals.svg#only-light)
+![doorman Internal Components](../diagrams/out/c3-doorman-internals-dark.svg#only-dark)
 
 ### Secret Resolution Flow
 
-![Secret Resolution Sequence](../diagrams/out/seq-secret-resolution.svg)
+![Secret Resolution Sequence](../diagrams/out/seq-secret-resolution.svg#only-light)
+![Secret Resolution Sequence](../diagrams/out/seq-secret-resolution-dark.svg#only-dark)
 
 ### Core Flow
 

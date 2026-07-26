@@ -35,7 +35,8 @@ No tool feeds into hery — it is the data source.
 
 ## Architecture
 
-![hery Internal Components](../diagrams/out/c3-hery-internals.svg)
+![hery Internal Components](../diagrams/out/c3-hery-internals.svg#only-light)
+![hery Internal Components](../diagrams/out/c3-hery-internals-dark.svg#only-dark)
 
 ### Package Structure
 
