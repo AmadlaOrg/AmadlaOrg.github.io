@@ -3,6 +3,7 @@
 !define RELATIVE_INCLUDE ""
 !include ../vendor/C4-PlantUML/C4_Container.puml
 
+' Mirrors the dependency hierarchy documented in docs/libraries/overview.md.
 title Amadla — Library Dependencies (C2)
 
 System_Boundary(libs, "Shared Libraries") {
@@ -12,35 +13,46 @@ System_Boundary(libs, "Shared Libraries") {
 
     Container(pluginfw, "LibraryPlugin\nFramework", "Go Library", "Plugin system:\ndiscovery, loading,\nIPC communication")
 
-    Container(doormanfw, "LibraryDoorman\nFramework", "Go Library", "Doorman specialization:\nsecret fetching,\nD-Bus / named pipes")
+    Container(doormanfw, "LibraryDoorman\nFramework", "Go Library", "Doorman specialization:\nsecret source plugins")
 
-    Container(auditfw, "LibraryJudge\nFramework", "Go Library", "Judge specialization:\naudit checks,\ncompliance reporting")
+    Container(judgefw, "LibraryJudge\nFramework", "Go Library", "Judge specialization:\naudit checks,\ncompliance reporting")
+
+    Container(enjoinfw, "LibraryEnjoin\nFramework", "Go Library", "Enjoin specialization:\nsystem state\nconfiguration plugins")
 }
 
 System_Boundary(tools, "Core Tools") {
     Container(hery, "hery", "Go CLI", "HERY data storage")
-    Container(doorman, "doorman", "Go Daemon", "Secrets management")
+    Container(doorman, "doorman", "Go CLI", "Secrets management")
     Container(weaver, "weaver", "Go CLI", "Template generator")
+    Container(enjoin, "enjoin", "Go CLI", "System state configuration")
 }
 
 System_Boundary(plugins, "Plugins") {
     Container(doorman_plugins, "doorman-*", "Go CLI", "Secret store plugins\n(16 repos)")
-    Container(auditors, "judge-*", "Go CLI", "Audit plugins\n(3 repos)")
+    Container(judge_plugins, "judge-*", "Go CLI", "Audit plugins\n(3 repos)")
+    Container(enjoin_plugins, "enjoin-*", "Go CLI", "System state plugins\n(10 repos)")
+    Container(other_plugins, "raise-* / weaver-*", "Go CLI", "Provider and template\nengine plugins\n(14 repos)")
 }
 
 Rel(framework, utils, "depends on")
 Rel(pluginfw, utils, "depends on")
 Rel(doormanfw, utils, "depends on")
-Rel(auditfw, utils, "depends on")
-Rel(auditfw, framework, "depends on")
+Rel(judgefw, utils, "depends on")
+Rel(judgefw, framework, "depends on")
+Rel(enjoinfw, utils, "depends on")
+Rel(enjoinfw, framework, "depends on")
 
 Rel(hery, utils, "depends on")
 Rel(hery, framework, "depends on")
 Rel(doorman, utils, "depends on")
 Rel(doorman, framework, "depends on")
 Rel(weaver, utils, "depends on")
+Rel(enjoin, utils, "depends on")
+Rel(enjoin, framework, "depends on")
 
 Rel(doorman_plugins, doormanfw, "depends on")
-Rel(auditors, auditfw, "depends on")
+Rel(judge_plugins, judgefw, "depends on")
+Rel(enjoin_plugins, enjoinfw, "depends on")
+Rel(other_plugins, pluginfw, "depends on")
 
 @enduml

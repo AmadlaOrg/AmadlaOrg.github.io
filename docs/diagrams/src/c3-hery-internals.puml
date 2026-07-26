@@ -6,15 +6,27 @@
 title hery — Internal Components (C3)
 
 Container_Boundary(hery, "hery") {
-    Component(cmd, "cmd/", "Cobra Commands", "CLI entry points:\nentity, collection,\nquery, compose, settings")
+    Component(cmd, "cmd/", "Cobra Commands", "CLI entry points:\nentity, query,\ncompose, settings")
 
-    Component(entity, "entity/", "Core Logic", "Entity operations:\nbuild, get, validate,\ncompose, query")
+    Component(entity_cmd, "entity/cmd/", "Entity Commands", "entity get, init,\nlist, valid")
 
-    Component(schema, "entity/schema/", "Schema", "JSON Schema loading\nand validation")
+    Component(build, "entity/build/", "Build", "Builds entity metadata\nfrom local and\nremote sources")
+
+    Component(get, "entity/get/", "Get", "Fetches entity\ndefinitions from\nGit repositories")
+
+    Component(resolve, "entity/resolve/", "Resolve", "Resolves _extends and\n_requires references\nto their targets")
+
+    Component(merge, "entity/merge/", "Merge", "Deep merge for\n_extends inheritance,\norder preserved")
+
+    Component(compose, "entity/compose/", "Compose", "Layers entities into\na single composed\ndocument")
+
+    Component(query, "entity/query/", "Query", "Queries entities from\nfiles, directories,\nor the cache")
+
+    Component(validation, "entity/validation/", "Validation", "Validates documents\nagainst their schema")
+
+    Component(schema, "entity/schema/", "Schema", "JSON Schema loading\nand resolution")
 
     Component(version, "entity/version/", "Version", "Semver resolution\nfrom Git tags")
-
-    Component(collection, "collection/", "Collection", "Collection management:\ninit, list")
 
     Component(cache, "cache/", "Cache", "SQLite caching layer:\nparse, store, query")
 
@@ -25,14 +37,23 @@ System_Ext(sqlite, "SQLite", "Cache database")
 System_Ext(git, "Git", "Entity version control")
 System_Ext(fs, "Filesystem", "YAML entity files")
 
-Rel(cmd, entity, "Delegates to")
-Rel(cmd, collection, "Delegates to")
-Rel(entity, schema, "Validates against")
-Rel(entity, version, "Resolves versions")
-Rel(entity, cache, "Reads/writes cache")
-Rel(entity, storage, "Reads/writes files")
+Rel(cmd, entity_cmd, "Delegates to")
+Rel(cmd, compose, "Composes layers")
+Rel(cmd, query, "Runs queries")
+Rel(entity_cmd, build, "Builds entities")
+Rel(entity_cmd, get, "Fetches definitions")
+Rel(entity_cmd, validation, "Validates")
+Rel(build, resolve, "Resolves references")
+Rel(resolve, merge, "Merges _extends")
+Rel(resolve, version, "Resolves versions")
+Rel(compose, merge, "Merges layers")
+Rel(validation, schema, "Loads schemas")
+Rel(query, cache, "Reads cache")
+Rel(build, cache, "Writes cache")
+Rel(get, storage, "Reads/writes files")
 Rel(cache, sqlite, "SQLite operations")
 Rel(version, git, "Reads Git tags")
+Rel(get, git, "Clones/fetches")
 Rel(storage, fs, "File I/O")
 
 @enduml

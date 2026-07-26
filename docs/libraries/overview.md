@@ -19,7 +19,8 @@ Amadla's shared Go libraries provide common functionality used across all tools 
 
 ## Dependency Graph
 
-![Library Dependencies](../diagrams/out/c2-library-dependencies.svg)
+![Library Dependencies](../diagrams/out/c2-library-dependencies.svg#only-light)
+![Library Dependencies](../diagrams/out/c2-library-dependencies-dark.svg#only-dark)
 
 ## Build Order
 
