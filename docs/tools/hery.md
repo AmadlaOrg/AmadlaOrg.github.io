@@ -16,6 +16,8 @@
 | `hery compose` | Compose multiple entities into a unified view |
 | `hery settings` | Manage hery configuration |
 
+Per-command sequence diagrams: [hery Commands](hery-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |
