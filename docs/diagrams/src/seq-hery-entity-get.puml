@@ -1,0 +1,54 @@
+@startuml seq-hery-entity-get
+
+title hery entity get — Fetch Entities into the Cache
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/cmd/" as ecmd
+participant "storage/" as storage
+participant "entity/get/" as get
+participant "entity/build/" as build
+participant "entity/version/" as version
+participant "Git remote" as git
+participant "entity/" as ent
+participant "entity/merge/" as merge
+participant "Filesystem\n(~/.cache/hery/entity)" as fs
+
+== Resolving versions ==
+
+user -> cmd : hery entity get <uri>...
+cmd -> ecmd : GetCmd.Run
+ecmd -> storage : Paths()\n(HERY_STORAGE_PATH or ~/.cache/hery)
+ecmd -> get : Get(paths, uris)
+get -> build : Meta(uri) for each URI
+build -> version : Resolve version
+version -> git : List remote tags
+git --> version : Tags
+version --> build : Latest tag, explicit @version,\nor pseudo-version from HEAD hash
+
+== Downloading ==
+
+get -> fs : MkdirAll <entities>/<uri>
+get -> git : Clone repository\n(one goroutine per entity)
+git --> fs : Working tree
+get -> git : Checkout tag\n(skipped for pseudo-versions)
+get -> ent : ReadAll(entity dir)
+ent -> fs : Read every *.hery file
+
+== Resolving references ==
+
+get -> merge : ResolveExtendsChain per document
+merge -> build : Meta for _extends / _type URIs
+build -> git : Fetch referenced entities\n(recursive clone)
+merge -> merge : DeepMerge parent into child
+get --> ecmd : Done — silent on success\n(no SQLite writes)
+
+== Fetch failure ==
+
+git --> get : Clone / unknown tag error
+get --> user : Error on stderr, exit 1
+
+@enduml
