@@ -1,0 +1,50 @@
+@startuml seq-hery-query
+
+title hery query — Two-Stage Entity Query
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/query/" as query
+participant "cache/database/" as cdb
+database "SQLite\n(~/.cache/hery/hery.db)" as db
+participant "entity/resolve/" as resolve
+participant "Filesystem" as fs
+
+== Stage 1 — selection ==
+
+user -> cmd : hery query --type --meta --tag\n[--from | --dir] [--jq] [-o] [--hery]
+
+alt default source: cache
+  cmd -> cdb : Open hery.db (WAL mode)
+  cmd -> query : Query(selection opts)
+  query -> cdb : SELECT merged_json FROM entities\nWHERE type GLOB / meta LIKE ...
+  cdb -> db : Read rows
+  db --> query : merged_json rows,\ndecoded into documents
+else --from <file> or -
+  cmd -> fs : Open file (or stdin)
+  cmd -> query : LoadDocs — sniff JSON vs\nmulti-doc YAML
+  cmd -> query : QueryDocs(selection opts)
+else --dir <dir>
+  cmd -> resolve : Resolve(dir) into merge layers
+  resolve -> fs : Read *.hery files
+  cmd --> user : Resolve warnings on stderr
+  cmd -> query : LoadDocs + QueryDocs\nover the layered docs
+end
+
+== Stage 2 — transformation ==
+
+cmd -> query : ApplyJQToAll(--jq expression)
+query --> cmd : Object results only
+
+== Output ==
+
+cmd --> user : table | json | yaml on stdout\n(--hery wraps in HERY envelope)\nexit 0, or exit 2 when no results
+
+== Errors ==
+
+cmd --> user : "hery query: <error>" on stderr, exit 1\n(missing cache db, bad --jq,\n--from with --dir)
+
+@enduml
