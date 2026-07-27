@@ -1,0 +1,32 @@
+@startuml seq-hery-entity
+
+title hery entity — Subcommand Dispatch
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/cmd/" as ecmd
+
+== Registration (process start) ==
+
+cmd -> ecmd : Register subcommands:\ninit, get, list, valid\n(package init, before Execute)
+
+== Dispatch ==
+
+user -> cmd : hery entity <subcommand>
+cmd -> ecmd : Route to the subcommand's Run
+ecmd --> user : Subcommand output
+
+== Bare invocation ==
+
+user -> cmd : hery entity
+cmd --> user : Help text on stdout,\nexit 0
+
+== Unknown subcommand ==
+
+user -> cmd : hery entity bogus
+cmd --> user : unknown command error\n+ usage on stderr, exit 1
+
+@enduml

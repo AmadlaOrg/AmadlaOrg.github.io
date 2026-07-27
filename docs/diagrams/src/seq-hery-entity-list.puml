@@ -1,0 +1,35 @@
+@startuml seq-hery-entity-list
+
+title hery entity list — List Cached Entities
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/cmd/" as ecmd
+participant "storage/" as storage
+participant "entity/" as ent
+participant "Filesystem\n(~/.cache/hery/entity)" as fs
+
+== Scanning the entity cache ==
+
+user -> cmd : hery entity list
+cmd -> ecmd : ListCmd.Run
+ecmd -> storage : Paths()
+storage --> ecmd : Entities dir
+ecmd -> ent : CrawlDirectoriesParallel(dir)
+ent -> fs : Walk + stat directories\n(10 parallel workers)
+fs --> ent : Dirs matching <name>@<version>
+ent --> ecmd : map of name to\n{origin, version}
+
+== Output ==
+
+ecmd --> user : Entity Origin | Entity Name | Version\ntable on stdout
+
+== Cache dir missing ==
+
+ent --> ecmd : Walk error
+ecmd --> user : Error message printed,\nexit 0
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml seq-hery-settings
+
+title hery settings — Paths and Environment
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "storage/" as storage
+participant "env/" as env
+participant "Filesystem" as fs
+
+== Resolving the storage root ==
+
+user -> cmd : hery settings
+cmd -> storage : Main()
+storage -> storage : HERY_STORAGE_PATH if set,\nelse user cache dir + /hery
+storage --> cmd : Collections path
+
+== Collecting env vars ==
+
+cmd -> env : List()
+env -> fs : Parse env/types.go in the\ncurrent working directory
+fs --> env : Env var names
+env --> cmd : Names
+cmd -> cmd : os.Getenv for each name
+
+== Output ==
+
+cmd --> user : Setting | Value table\non stdout
+
+== Outside the source tree ==
+
+cmd -> env : List()
+env --> cmd : env/types.go not found
+cmd --> user : Error on stderr, exit 1
+
+@enduml

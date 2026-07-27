@@ -1,0 +1,48 @@
+@startuml seq-hery-entity-validate
+
+title hery entity valid — Validate Cached Entities
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/cmd/" as ecmd
+participant "storage/" as storage
+participant "entity/" as ent
+participant "entity/validation/" as val
+participant "entity/get/" as get
+participant "Filesystem" as fs
+
+== Validate everything: --all ==
+
+user -> cmd : hery entity valid --all
+cmd -> ecmd : ValidateCmd.Run
+ecmd -> storage : Paths()
+ecmd -> ent : CrawlDirectoriesParallel(entities dir)
+ent -> fs : Walk entity cache
+ent --> ecmd : Cached entities
+loop each entity
+  ecmd -> ent : ReadAll(entity path)
+  ent -> fs : Read *.hery documents
+  ecmd -> val : Entity(document)
+  val --> ecmd : valid / validation failed
+  ecmd --> user : Per-document result on stdout
+end
+
+== Fetch and inspect: --rm <uri> ==
+
+user -> cmd : hery entity valid --rm <uri>
+cmd -> ecmd : ValidateCmd.Run
+ecmd -> get : GetInTmp(uris)
+get -> storage : TmpPaths()\n(mktemp hery_*)
+get -> get : Full get flow:\nresolve, clone, read, merge
+get --> ecmd : Temp entities dir
+ecmd --> user : Temp path printed
+
+== No arguments ==
+
+user -> cmd : hery entity valid
+cmd --> user : Help text, exit 0
+
+@enduml
