@@ -1,0 +1,29 @@
+@startuml seq-hery-entity-init
+
+title hery entity init — Scaffold a New Entity
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/cmd/" as ecmd
+participant "Filesystem\n(current dir)" as fs
+
+== Scaffolding ==
+
+user -> cmd : hery entity init <entity-uri>
+cmd -> ecmd : InitCmd.Run
+ecmd -> ecmd : Derive <name> from URI\n(basename, @version stripped)
+ecmd -> fs : Write ./<name>.hery.json\n(JSON Schema draft 2020-12 stub,\n$id urn:hery:<uri>)
+ecmd --> user : Created ./<name>.hery.json
+ecmd -> fs : Write ./default.hery\n(_type: <uri>, empty _body)
+ecmd --> user : Created ./default.hery
+
+== Write failure ==
+
+ecmd -> fs : Write file
+fs --> ecmd : Permission denied
+ecmd --> user : Error on stderr, exit 1
+
+@enduml

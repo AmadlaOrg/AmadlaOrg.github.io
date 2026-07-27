@@ -59,6 +59,7 @@ nav:
   - Tools:
       - Overview: tools/overview.md
       - hery: tools/hery.md
+      - hery Commands: tools/hery-commands.md
       - doorman: tools/doorman.md
       - weaver: tools/weaver.md
       - judge: tools/judge.md
@@ -315,6 +316,7 @@ extra:
 # not part of this repo, which aborts the build in strict mode.
 exclude_docs: |
   diagrams/vendor/
+  superpowers/
 
 plugins:
   - search
