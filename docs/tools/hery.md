@@ -10,8 +10,9 @@
 | Command | Description |
 |---------|-------------|
 | `hery entity get` | Retrieve a specific entity |
+| `hery entity init` | Scaffold a new entity (schema stub + default.hery) |
 | `hery entity list` | List entities |
-| `hery entity validate` | Validate entity content against JSON Schema |
+| `hery entity valid` | Validate entity content against JSON Schema |
 | `hery query` | Query entities with selection flags + jq transformation |
 | `hery compose` | Compose multiple entities into a unified view |
 | `hery settings` | Manage hery configuration |

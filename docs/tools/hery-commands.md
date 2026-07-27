@@ -6,7 +6,8 @@ the [C3 diagram](hery.md#architecture), so each diagram zooms into the same
 boxes: `cmd/`, `entity/cmd/`, `entity/get/`, `entity/resolve/`,
 `entity/merge/`, `entity/compose/`, `entity/query/`, `entity/validation/`,
 `entity/version/`, `entity/build/`, `cache/database/`, `storage/` — plus
-the externals they talk to (filesystem, Git remotes, SQLite).
+`entity/` and `env/` where the code calls them directly, and the externals
+they talk to (filesystem, Git remotes, SQLite).
 
 ## hery entity
 
