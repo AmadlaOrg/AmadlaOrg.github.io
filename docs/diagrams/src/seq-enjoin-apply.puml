@@ -1,0 +1,42 @@
+@startuml seq-enjoin-apply
+
+title enjoin apply — Apply System State via Plugin
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "enjoin-<name>" as sub
+participant "stdin" as stdin
+
+== Apply from file: -f ==
+
+user -> cmd : enjoin apply --from user -f users.yaml
+cmd -> plugin : Apply("enjoin-user", filePath, stdout)
+plugin -> plugin : exec.LookPath("enjoin-user")
+plugin -> sub : run: enjoin-user apply -f users.yaml\n(file is opened by the plugin,\nnever by enjoin itself)
+sub --> user : plugin results streamed to stdout\n(plugin stderr passes through)
+sub --> plugin : exit code
+plugin --> cmd : nil
+
+== Apply from pipe: no -f ==
+
+user -> cmd : hery compose ... | enjoin apply --from user
+cmd -> plugin : Apply("enjoin-user", "", stdout)
+plugin -> sub : run: enjoin-user apply\n(inherits enjoin's stdin)
+stdin -> sub : entity YAML/JSON
+sub --> user : plugin results streamed to stdout
+
+== Errors ==
+
+user -> cmd : enjoin apply (no --from)
+cmd --> user : required flag error + usage\non stderr, exit 1
+user -> cmd : enjoin apply --from nosuch
+plugin --> cmd : "plugin enjoin-nosuch\nnot found in PATH"
+cmd --> user : "apply failed: ..." on stderr, exit 1
+sub --> plugin : plugin exits non-zero (1 or 2)
+cmd --> user : "apply failed: exit status N"\non stderr, always exit 1
+
+@enduml

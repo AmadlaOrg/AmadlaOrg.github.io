@@ -1,0 +1,17 @@
+@startuml seq-weaver-settings
+
+title weaver settings — Placeholder Settings Table
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+
+== Render ==
+
+user -> cmd : weaver settings
+cmd -> cmd : storage path and environment\nvariable lookups are commented out
+cmd --> user : two-column table on stdout with a\nsingle hardcoded row\n"Collections path" = "...", exit 0
+
+@enduml

@@ -1,0 +1,46 @@
+@startuml seq-lay-package-search
+
+title lay package search / list — Query Packages
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "package_manager/" as pm
+participant "package_manager/<mgr>/" as mgr
+participant "Package manager process\n(apt-cache, dnf, ...)" as proc
+participant "output/" as out
+
+== search ==
+
+user -> cmd : lay package search <query>
+cmd -> pm : Detect(--manager override)
+pm --> cmd : manager name -> Manager
+cmd -> mgr : Search(query)
+mgr -> proc : e.g. apt-cache search <query>\n(captured stdout)
+proc --> mgr : raw text output
+mgr -> mgr : parse into SearchResult\n(name, version, description)
+mgr --> cmd : []SearchResult
+cmd -> out : Result(results)
+out --> user : table on stdout\n(JSON array with --json)
+cmd --> user : no matches: info message, exit 0
+
+== list ==
+
+user -> cmd : lay package list
+cmd -> mgr : List()
+mgr -> proc : e.g. apt list --installed\n(captured stdout)
+mgr -> mgr : parse into PackageInfo\n(name, version)
+mgr --> cmd : []PackageInfo
+cmd -> out : Result(packages)
+out --> user : count + Name/Version table\n(JSON with --json)
+
+== Errors ==
+
+user -> cmd : lay package search foo\n(no manager on PATH)
+cmd --> user : Error on stderr, exit 1
+user -> cmd : subprocess fails
+cmd --> user : Error on stderr, exit 1
+
+@enduml

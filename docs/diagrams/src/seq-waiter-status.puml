@@ -1,0 +1,34 @@
+@startuml seq-waiter-status
+
+title waiter status — Show Deployment State
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Filesystem" as fs
+
+== Single service ==
+
+user -> cmd : waiter status <service>
+cmd -> state : Load(service)
+state -> fs : read ~/.local/share/waiter/<service>.json
+state --> cmd : DeploymentState
+cmd --> user : state as JSON on stdout
+
+== All services ==
+
+user -> cmd : waiter status
+cmd -> state : List()
+state -> fs : read every *.json in state dir\n(unparsable files silently skipped)
+state --> cmd : []DeploymentState
+cmd --> user : JSON array on stdout\n(empty dir: "No managed services found."\non stderr, exit 0)
+
+== Errors ==
+
+user -> cmd : waiter status <unknown service>
+cmd --> user : "no deployment state" on stderr, exit 1
+
+@enduml

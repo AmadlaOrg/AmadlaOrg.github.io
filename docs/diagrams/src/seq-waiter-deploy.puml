@@ -1,0 +1,63 @@
+@startuml seq-waiter-deploy
+
+title waiter deploy — Deploy a Service via a Strategy
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "strategy/" as strat
+participant "health/" as health
+participant "state/" as state
+participant "Engine plugin\n(waiter-<engine>)" as engine
+participant "Proxy plugin\n(waiter-proxy-*)" as proxy
+participant "Filesystem" as fs
+
+== Input & plugin resolution ==
+
+user -> cmd : waiter deploy -f <file|-> [--strategy]\n[--engine] [--proxy] [--name]
+cmd -> fs : read entity file (or stdin)
+cmd -> cmd : service name from --name\nor entity _body.name
+alt --engine / --proxy given
+  cmd -> cmd : prefix name with "waiter-"
+else auto-detect
+  cmd -> plugin : DiscoverByType("engine") /\nDiscoverByType("proxy")
+  plugin -> fs : scan PATH dirs for\nexecutable waiter-* binaries
+  plugin -> engine : <plugin> info -o json
+  engine --> plugin : Info JSON (type, version, ...)
+  plugin --> cmd : matches\n(exactly one required)
+end
+
+== Strategy execution (blue-green default) ==
+
+cmd -> strat : Get(--strategy).Deploy(ctx)
+strat -> state : Load(service)\npick free slot: blue/green
+state -> fs : read ~/.local/share/waiter/<service>.json
+strat -> engine : deploy -f - --name <svc>-<slot>\n--port 8081|8082 (entity on stdin)
+engine --> strat : {container, port, image}\nJSON on stdout
+strat -> health : WaitForHealthy(container,\n--health-timeout)
+loop poll every 2s until deadline
+  health -> engine : status <container>
+  engine --> health : {state, health} JSON
+end
+strat -> proxy : register <svc>-<slot>\nlocalhost:<port> --weight 0
+strat -> proxy : shift <svc>-<slot> --weight 256
+strat -> proxy : shift/drain/remove old slot\n(best-effort, errors ignored)
+strat -> engine : stop <old container>
+strat -> state : Save(new DeploymentState)
+state -> fs : write <service>.json
+strat --> cmd : DeploymentState
+cmd --> user : state as indented JSON on stdout\n(-o flag exists but is ignored)
+
+== Errors ==
+
+user -> cmd : file missing or unreadable
+cmd --> user : error on stderr, exit 2
+user -> cmd : unknown --strategy, no service name,\nzero or multiple auto-detected plugins
+cmd --> user : error on stderr, exit 1
+user -> cmd : health check times out
+cmd --> user : new container stopped (rolled back),\nerror on stderr, exit 1
+
+@enduml

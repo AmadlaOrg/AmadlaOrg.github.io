@@ -1,0 +1,39 @@
+@startuml seq-garbage-settings
+
+title garbage settings — Configuration and Statistics
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "db/" as dbpkg
+participant "trash/" as trash
+participant "output/" as out
+database "SQLite\n(~/.local/amadla/db.sqlite)" as db
+
+== Opening the shared database ==
+
+user -> cmd : garbage settings
+cmd -> dbpkg : Open() + Migrate()
+dbpkg -> db : open (WAL mode),\nCREATE TABLE IF NOT EXISTS trash_items
+cmd -> trash : NewService(conn, trashDir)
+
+== Collecting statistics ==
+
+cmd -> trash : Stats()
+trash -> db : SELECT COUNT(*),\nCOALESCE(SUM(size_bytes), 0)
+db --> trash : count, total bytes
+trash --> cmd : count, totalBytes
+
+== Output ==
+
+cmd -> out : Result({trash_dir, db_path,\nitem_count, total_bytes, total_size})
+out --> user : trash directory, database path,\nitem count, total size on stdout\nor JSON
+
+== Errors ==
+
+user -> cmd : garbage settings (home dir unresolvable\nor DB unreadable)
+cmd --> user : error on stderr, exit 1
+
+@enduml

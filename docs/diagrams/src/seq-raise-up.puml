@@ -1,0 +1,50 @@
+@startuml seq-raise-up
+
+title raise up — Provision Infrastructure
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "entity/" as ent
+participant "plugin/" as plug
+participant "raise-<provider>" as pl
+participant "Filesystem" as fs
+participant "stdin" as stdin
+
+== Provider auto-detect: -f <file> ==
+
+user -> cmd : raise up [name] -f infra.hery
+cmd -> ent : ReadProvider(path)
+ent -> fs : os.ReadFile(path)
+ent -> ent : Decode YAML docs until one\ncarries _body.provider
+ent --> cmd : provider name
+
+== Provider auto-detect: -f - (piped) ==
+
+user -> cmd : hery compose --dir . | raise up -f -
+cmd -> stdin : io.ReadAll (buffer whole\nmulti-doc YAML stream)
+cmd -> ent : ReadProviderFromData(buffer)
+ent --> cmd : provider from first document\nwith _body.provider
+
+== Delegate to plugin ==
+
+cmd -> plug : Exec("raise-" + provider,\n["up", name, "-f", path])
+plug -> fs : exec.LookPath("raise-<provider>")
+plug -> pl : spawn subprocess\n(stdin = buffered stream when -f -)
+pl -> fs : read entity file / stdin,\nwrite per-plugin state\n(~/.local/share/raise/<provider>/state.json)
+pl --> plug : exit code
+plug --> cmd : code
+cmd --> user : plugin stdout/stderr passed through\nraise exits with plugin's code
+
+== Errors ==
+
+user -> cmd : raise up (no --provider, no -f)
+cmd --> user : "either --provider or -f must be specified"\non stderr, exit 1
+user -> cmd : -f - with no _body.provider in any doc
+cmd --> user : "failed to detect provider from stdin"\non stderr, exit 1
+user -> cmd : plugin binary not in PATH
+cmd --> user : "plugin raise-<provider> not found in PATH"\non stderr, exit 1
+
+@enduml

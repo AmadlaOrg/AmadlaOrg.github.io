@@ -1,0 +1,27 @@
+@startuml seq-lay-settings
+
+title lay settings — Show Environment Configuration
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "output/" as out
+participant "Environment" as env
+
+== Listing ==
+
+user -> cmd : lay settings
+cmd -> env : read LAY_PACKAGE_MANAGER,\nLAY_CONTAINER_RUNTIME,\nLAY_BINARY_PATH
+env --> cmd : values (may be empty)
+cmd -> out : Result(settings)
+out --> user : Setting/Value table on stdout\nunset values shown as "(not set)"\n(--json emits raw values, empty strings)
+cmd --> user : exit 0
+
+== Version ==
+
+user -> cmd : lay version
+cmd --> user : "lay version 1.0.0" on stdout,\nexit 0 (registered by LibraryFramework)
+
+@enduml

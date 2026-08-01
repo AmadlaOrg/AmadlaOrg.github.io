@@ -1,0 +1,35 @@
+@startuml seq-conduct-status
+
+title conduct status — Show Deployment State
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Filesystem" as fs
+
+== Single deployment ==
+
+user -> cmd : conduct status <deployment>
+cmd -> state : Load(name)
+state -> fs : read ~/.local/share/conduct/<name>.json
+state --> cmd : *DeploymentState
+cmd --> user : name, status, created, updated\n+ node table (Node | Host | Status) on stdout
+
+== All deployments ==
+
+user -> cmd : conduct status
+cmd -> state : List()
+state -> fs : read every *.json in state dir\n(unreadable/corrupt files silently skipped)
+state --> cmd : []DeploymentState
+cmd --> user : table (Deployment | Status | Nodes | Updated)\non stdout
+cmd --> user : "No deployments found." on stderr, exit 0\n(when state dir empty or missing)
+
+== Errors ==
+
+user -> cmd : conduct status <unknown>
+cmd --> user : "deployment not found" on stderr, exit 1
+
+@enduml

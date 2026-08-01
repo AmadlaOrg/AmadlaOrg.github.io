@@ -1,0 +1,52 @@
+@startuml seq-garbage-empty
+
+title garbage empty — Permanently Delete Trashed Items
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "db/" as dbpkg
+participant "trash/" as trash
+participant "output/" as out
+database "SQLite\n(~/.local/amadla/db.sqlite)" as db
+participant "Filesystem\n(~/.local/amadla/trash/)" as fs
+
+== Opening the shared database ==
+
+user -> cmd : garbage empty [--older-than 30d] [--force]
+cmd -> dbpkg : Open() + Migrate()
+dbpkg -> db : open (WAL mode),\nCREATE TABLE IF NOT EXISTS trash_items
+cmd -> trash : NewService(conn, trashDir)
+
+== Without --force (safe default) ==
+
+cmd -> trash : Stats()
+trash -> db : SELECT COUNT(*), SUM(size_bytes)
+cmd --> user : "Trash contains N item(s) (size).\nUse --force to confirm" — exit 0, nothing deleted
+
+== With --force ==
+
+cmd -> trash : DeleteAll()\nor DeleteOlderThan(duration)
+trash -> db : SELECT items\n[WHERE trashed_at < cutoff]
+loop each item
+trash -> fs : RemoveAll trash/<uuid>/
+end
+trash -> db : DELETE FROM trash_items\n[WHERE trashed_at < cutoff]
+trash --> cmd : count, bytes freed
+cmd -> out : Result({deleted, bytes_freed})
+out --> user : "Permanently deleted N item(s),\nfreed <size>" or JSON on stdout
+
+== Dry run ==
+
+user -> cmd : garbage empty --dry-run [--older-than 30d]
+cmd -> trash : Stats() or List(OlderThan)
+cmd --> user : "Would permanently delete N item(s)"\n(no deletion, --force ignored)
+
+== Errors ==
+
+user -> cmd : garbage empty --older-than bogus
+cmd --> user : "invalid duration", exit 1
+
+@enduml

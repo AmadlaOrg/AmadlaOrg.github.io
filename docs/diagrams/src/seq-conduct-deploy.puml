@@ -1,0 +1,61 @@
+@startuml seq-conduct-deploy
+
+title conduct deploy — Multi-Node Deployment
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "topology/" as topo
+participant "plan/" as plan
+participant "state/" as state
+participant "executor/" as exec
+participant "Filesystem" as fs
+participant "ssh (remote node)" as ssh
+
+== Parse & plan ==
+
+user -> cmd : conduct deploy -f <file> [--dry-run]
+cmd -> fs : read topology file\n(or stdin when -f -)
+cmd -> topo : Parse(data)
+topo -> topo : try JSON, fall back to YAML
+topo -> topo : validate name, nodes, hosts,\ndepends_on refs; default user=root, port=22
+topo --> cmd : *Topology
+cmd -> plan : Build(topo)
+plan -> topo : ResolveOrder()\n(DFS topological sort, cycle check)
+plan -> plan : interpolate {{ node.host }} in vars\none Step per role, in node order
+plan --> cmd : *Plan (ordered steps)
+
+== Dry run: --dry-run ==
+
+cmd --> user : numbered plan on stderr\n(step, node, user@host:port, tool, vars)\nexit 0, nothing executed
+
+== Execute ==
+
+cmd -> state : Save(state "deploying",\nall nodes "pending")
+state -> fs : write ~/.local/share/conduct/<name>.json
+loop each step, sequentially
+  cmd --> user : "[n/N] node: running tool on host..." on stderr
+  cmd -> cmd : remoteCmd = tool + args,\nprefixed with export VAR="v"; per var
+  cmd -> exec : Run(host, port, user, key, remoteCmd)
+  exec -> ssh : ssh -o StrictHostKeyChecking=no\n-o UserKnownHostsFile=/dev/null\n-o BatchMode=yes [-i key] user@host cmd
+  ssh --> exec : stdout, stderr, exit code
+  exec --> cmd : *Result
+  cmd --> user : step stdout on stdout
+  cmd -> state : node -> "ready" (in memory)
+end
+cmd -> state : Save(state "deployed")
+state -> fs : write state JSON
+cmd --> user : "Deployment complete" on stderr
+cmd --> user : final DeploymentState JSON on stdout
+
+== Errors ==
+
+user -> cmd : bad file / invalid topology / dependency cycle
+cmd --> user : error on stderr, exit 1
+user -> cmd : step fails (ssh error or remote exit != 0)
+cmd -> state : node + deployment -> "failed", Save
+cmd --> user : "step N failed on node" on stderr, exit 1\n(remaining steps skipped)
+
+@enduml

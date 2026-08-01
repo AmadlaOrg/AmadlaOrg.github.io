@@ -17,6 +17,8 @@
 | `raise status` | Active | List all managed infrastructure and its state |
 | `raise plugins` | Active | List discovered raise-* plugins |
 
+Per-command sequence diagrams: [raise Commands](raise-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |

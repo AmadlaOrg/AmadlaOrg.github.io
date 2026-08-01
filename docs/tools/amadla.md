@@ -12,6 +12,8 @@ amadla is the top-level orchestrator for the Amadla tool pipeline. It reads `.he
 
 The amadla tool itself is **replaceable** — the entities and tools are the portable parts. Anyone can read `.hery` files, resolve the DAG, and orchestrate the tools their own way.
 
+Per-command sequence diagrams: [amadla Commands](amadla-commands.md).
+
 ## Commands
 
 | Command | Description |
