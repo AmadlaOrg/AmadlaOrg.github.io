@@ -1,0 +1,32 @@
+@startuml seq-raise-halt
+
+title raise halt — Stop Infrastructure
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plug
+participant "raise-<provider>" as pl
+participant "Filesystem" as fs
+
+== Delegate to plugin ==
+
+user -> cmd : raise halt [name] --provider <p>
+cmd -> plug : Exec("raise-" + provider,\n["halt", name])
+plug -> fs : exec.LookPath("raise-<provider>")
+plug -> pl : spawn subprocess,\nwire stdin/stdout/stderr
+pl -> fs : look up VM in state file\n(~/.local/share/raise/<provider>/state.json),\nstop it, update state
+pl --> plug : exit code
+plug --> cmd : code
+cmd --> user : plugin output passed through\nraise exits with plugin's code
+
+== Errors ==
+
+user -> cmd : raise halt (no --provider)
+cmd --> user : required flag "provider" not set\non stderr, exit 1
+user -> cmd : plugin binary not in PATH
+cmd --> user : "plugin raise-<provider> not found in PATH"\non stderr, exit 1
+
+@enduml

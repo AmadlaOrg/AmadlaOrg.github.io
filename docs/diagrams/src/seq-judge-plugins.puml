@@ -1,0 +1,47 @@
+@startuml seq-judge-plugins
+
+title judge plugins — Discover judge-* Plugins on PATH
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "judge-<name>\n(subprocess)" as proc
+
+== Discovery ==
+
+user -> cmd : judge plugins [-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : ReadDir each PATH directory\n(unreadable dirs skipped silently)
+fs --> plugin : entries
+plugin --> cmd : executable judge-* names\n(deduplicated, PATH order)
+
+alt no plugins found
+  cmd --> user : "No judge plugins found in PATH."\non stderr, exit 0
+end
+
+== Info per plugin ==
+
+loop each discovered plugin
+  cmd -> plugin : GetInfo(name)
+  plugin -> proc : judge-<name> info -o json
+  proc --> plugin : JSON on stdout\n(HERY envelope or flat, auto-detected)
+  plugin --> cmd : Info{engine, version,\ndescription, supports}
+end
+
+== Output ==
+
+cmd --> user : table | json | yaml on stdout\n(--hery wraps rows in _type/_body envelope)\nexit 0
+
+== Errors ==
+
+user -> cmd : a plugin's info call fails
+cmd --> user : that row rendered with "?" fields\nand the error text — still exit 0
+
+user -> cmd : -o with an unknown format
+cmd --> user : silently falls back to table output
+
+@enduml

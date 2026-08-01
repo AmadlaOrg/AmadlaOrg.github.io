@@ -1,0 +1,56 @@
+@startuml seq-unravel-discover
+
+title unravel discover — Plugin-Delegated System Discovery
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "unravel-* plugin\n(subprocess)" as plug
+participant "Filesystem\n($PATH dirs, -f file)" as fs
+
+== Input setup ==
+
+user -> cmd : unravel discover [--from <name>]\n[--type <uri>] [-f <file>|-] [-o]
+cmd -> fs : Open -f file\n(else pass os.Stdin through)
+
+== Targeted run (--from <name>) ==
+
+cmd -> plugin : Exec("unravel-<name>",\n["discover", "--type", <uri>])
+plugin -> fs : LookPath unravel-<name>
+plugin -> plug : spawn: unravel-<name> discover [--type <uri>]\nstdin piped, stdout/stderr inherited
+plug --> user : HERY entities as JSON,\nstreamed straight to stdout
+plug --> plugin : exit code
+plugin --> cmd : exit 0
+cmd --> user : exit 0
+
+== Fan-out run (no --from) ==
+
+cmd -> plugin : Discover()
+plugin -> fs : ReadDir each $PATH dir,\nmatch executable "unravel-*" (deduped)
+plugin --> cmd : plugin names
+
+loop each plugin, in PATH order
+  cmd -> plugin : Exec(name, ["discover", ...])\nsame stdin reader every time
+  plugin -> plug : spawn plugin discover
+  plug --> user : entities on stdout
+  plug --> plugin : exit code
+  plugin --> cmd : per-plugin result
+end
+
+cmd --> user : exit 0 — a failing plugin only prints\n"warning: plugin <name> failed" on stderr
+
+== Errors ==
+
+user -> cmd : -f <missing file>
+cmd --> user : "cannot open file" on stderr, exit 1
+
+user -> cmd : --from <name> not in PATH,\nor plugin exits non-zero
+cmd --> user : "plugin unravel-<name> not found" /\n"exited with code N" on stderr, exit 1
+
+user -> cmd : no unravel-* plugins on PATH
+cmd --> user : "no unravel-* plugins found in PATH"\non stderr, exit 0
+
+@enduml

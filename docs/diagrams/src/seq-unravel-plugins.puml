@@ -1,0 +1,41 @@
+@startuml seq-unravel-plugins
+
+title unravel plugins — List Discovered Plugins
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "unravel-* plugin\n(subprocess)" as plug
+participant "Filesystem\n($PATH dirs)" as fs
+
+== Discovery ==
+
+user -> cmd : unravel plugins\n[-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : ReadDir each $PATH dir,\nmatch executable "unravel-*" (deduped)
+plugin --> cmd : plugin names
+
+== Metadata ==
+
+loop each plugin
+  cmd -> plugin : GetInfo(name)
+  plugin -> fs : LookPath unravel-<name>
+  plugin -> plug : spawn: unravel-<name> info -o json\n(plugin stderr passes through)
+  plug --> plugin : JSON — HERY envelope\n(_type + _body) or flat Info
+  plugin --> cmd : Info{name, backend,\nversion, description}
+  note right of cmd : info failure → row kept with\n"?" fields + error text in\ndescription, still exit 0
+end
+
+== Output ==
+
+cmd --> user : table (default) | json | yaml on stdout, exit 0\n--hery wraps rows in _type\namadla.org/entity/tools/plugins@v1.0.0\n(json/yaml only — ignored for table)
+
+== Errors ==
+
+user -> cmd : no unravel-* plugins on PATH
+cmd --> user : "no unravel-* plugins found in PATH"\non stderr, exit 0
+
+@enduml

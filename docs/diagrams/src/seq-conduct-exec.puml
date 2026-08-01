@@ -1,0 +1,39 @@
+@startuml seq-conduct-exec
+
+title conduct exec — Run Command on a Node
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "executor/" as exec
+participant "Filesystem" as fs
+participant "ssh (remote node)" as ssh
+
+== Execute remote command ==
+
+user -> cmd : conduct exec <deployment> <node> -- <command...>
+cmd -> cmd : rebuild command from raw os.Args\n(everything after first "--")
+cmd -> state : Load(deployment)
+state -> fs : read ~/.local/share/conduct/<name>.json
+state --> cmd : *DeploymentState
+cmd -> cmd : find node by name in state
+cmd -> exec : Run(node.Host, 22, "root", "", command)\n(port/user/key always defaults — not from topology)
+exec -> ssh : ssh -o StrictHostKeyChecking=no\n-o UserKnownHostsFile=/dev/null\n-o BatchMode=yes root@host command
+ssh --> exec : stdout, stderr, exit code
+exec --> cmd : *Result
+cmd --> user : remote stdout on stdout,\nremote stderr on stderr
+cmd --> user : exit with remote exit code
+
+== Errors ==
+
+user -> cmd : no command after "--"
+cmd --> user : "no command specified" on stderr, exit 1
+user -> cmd : unknown deployment or node
+cmd --> user : "not found" on stderr, exit 1
+user -> cmd : ssh itself fails (unreachable, auth)
+cmd --> user : "command failed" on stderr, exit 1
+
+@enduml

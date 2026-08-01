@@ -1,0 +1,34 @@
+@startuml seq-waiter-abort
+
+title waiter abort — Abort a Canary Deployment
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Engine plugin\n(waiter-<engine>)" as engine
+participant "Proxy plugin\n(waiter-proxy-*)" as proxy
+participant "Filesystem" as fs
+
+== Abort ==
+
+user -> cmd : waiter abort <service>
+cmd -> state : Load(service)
+state -> fs : read ~/.local/share/waiter/<service>.json
+cmd -> cmd : require Canary slot in state
+cmd -> proxy : remove <svc>-canary\n(best-effort, errors ignored)
+cmd -> engine : stop <canary container>\n(best-effort, errors ignored)
+cmd -> state : Save(Canary cleared)
+state -> fs : write <service>.json
+cmd --> user : "Canary deployment aborted" on stderr,\nupdated state JSON on stdout
+
+== Errors ==
+
+user -> cmd : waiter abort <unknown service>
+cmd --> user : "no deployment state" on stderr, exit 1
+user -> cmd : no canary in progress
+cmd --> user : error on stderr, exit 1
+
+@enduml

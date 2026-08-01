@@ -1,0 +1,70 @@
+@startuml seq-lay-binary-install
+
+title lay binary install — Pre-built Binary from Forge Release, URL, or JAR
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "binary/target/" as target
+participant "binary/install/" as install
+participant "binary/forge/<forge>/" as forge
+participant "Forge API\n(HTTPS)" as api
+participant "binary/checksum/" as chk
+participant "binary/jar/" as jar
+participant "binary/manifest/" as manifest
+participant "Filesystem" as fs
+
+== Target resolution ==
+
+user -> cmd : lay binary install <owner/repo | url | file.jar>
+cmd -> target : Resolve(--to)
+target --> cmd : --to flag > LAY_BINARY_PATH env >\n~/.local/bin
+cmd -> target : Ensure(dir)
+target -> fs : mkdir -p target dir
+cmd --> user : --dry-run: "[dry-run] Would install..."\nexit 0 (nothing downloaded)
+
+== Forge release (owner/repo[@version], github:/gitlab:/codeberg: prefix) ==
+
+cmd -> install : Install(source, targetDir)
+install -> install : ParseSource: shorthand ->\nforge + owner + repo + version\n(default forge: github)
+install -> forge : GetLatestReleaseAssets or\nGetReleaseAssetsByTag(owner, repo, tag)
+forge -> api : GET /repos/<o>/<r>/releases/...\n(retries "v"-prefixed tag on miss)
+api --> forge : release JSON (assets + tag name)
+install -> install : DetectPlatform (GOOS/GOARCH)\n+ RankAssets by os/arch/libc match
+install -> install : no native asset ->\nfall back to .jar asset if present
+install -> api : download best asset to temp dir
+install -> chk : find checksum asset\n(SHA256SUMS etc.), verify download\n(best-effort: skipped if absent)
+install -> install : Extract archive (tar.gz, zip, xz...)\nFindBinary(hint=repo name)
+install -> fs : copy binary to target dir,\nchmod 0755, compute sha256
+install --> user : "Installed <bin> to <path>" on stdout
+
+== Direct URL ==
+
+install -> api : download URL as-is\n(no checksum verification)
+install -> install : extract + find + copy as above
+
+== Local JAR file ==
+
+install -> jar : DetectJava (java -version)
+install -> jar : CopyJar -> ~/.local/share/lay/jars/
+install -> jar : CreateLauncherScript wrapping\n"java -jar" in target dir\n(--name overrides command name)
+
+== Manifest recording ==
+
+cmd -> manifest : Load ~/.local/share/lay/installed.json
+cmd -> manifest : Remove old entry + Add\n(name, source, version, path,\nchecksum, installed_at)
+manifest -> fs : Save JSON
+cmd --> user : manifest failures are warnings\nvisible only with --verbose, still exit 0
+
+== Errors ==
+
+user -> cmd : no compatible asset for platform
+cmd --> user : Error on stderr, exit 1
+user -> cmd : checksum mismatch
+cmd --> user : "checksum verification failed"\non stderr, exit 1
+user -> cmd : local non-.jar file
+cmd --> user : "local file install only supports\n.jar files" on stderr, exit 1
+
+@enduml

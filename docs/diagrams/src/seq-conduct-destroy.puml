@@ -1,0 +1,26 @@
+@startuml seq-conduct-destroy
+
+title conduct destroy — Remove Deployment Record
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Filesystem" as fs
+
+== Remove record ==
+
+user -> cmd : conduct destroy <deployment>
+cmd -> state : Remove(name)
+state -> fs : delete ~/.local/share/conduct/<name>.json
+state --> cmd : ok
+cmd --> user : "Deployment removed" on stderr, exit 0\n(remote nodes untouched — record only)
+
+== Errors ==
+
+user -> cmd : conduct destroy <unknown>
+cmd --> user : "no deployment state" on stderr, exit 1
+
+@enduml

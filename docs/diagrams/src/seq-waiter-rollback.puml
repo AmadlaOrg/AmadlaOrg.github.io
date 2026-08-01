@@ -1,0 +1,44 @@
+@startuml seq-waiter-rollback
+
+title waiter rollback — Roll Back to the Previous Deployment
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "health/" as health
+participant "state/" as state
+participant "Engine plugin\n(waiter-<engine>)" as engine
+participant "Proxy plugin\n(waiter-proxy-*)" as proxy
+participant "Filesystem" as fs
+
+== Rollback ==
+
+user -> cmd : waiter rollback <service>\n[--drain-timeout] [--health-timeout]
+cmd -> state : Load(service)
+state -> fs : read ~/.local/share/waiter/<service>.json
+cmd -> cmd : require Previous slot in state
+cmd -> engine : start <previous container>\n(exit code checked)
+cmd -> health : WaitForHealthy(previous,\n--health-timeout)
+loop poll every 2s until deadline
+  health -> engine : status <container>
+  engine --> health : {state, health} JSON
+end
+cmd -> proxy : register <svc>-<prevslot>\nlocalhost:<port> --weight 256\n(exit code checked)
+cmd -> proxy : shift current --weight 0,\ndrain, remove\n(best-effort, errors ignored)
+cmd -> engine : stop <current container>\n(best-effort)
+cmd -> state : Save(Current and Previous swapped)
+state -> fs : write <service>.json
+cmd --> user : new state JSON on stdout
+
+== Errors ==
+
+user -> cmd : waiter rollback <unknown service>
+cmd --> user : "no deployment state" on stderr, exit 1
+user -> cmd : no Previous slot recorded
+cmd --> user : error on stderr, exit 1
+user -> cmd : start, health check, or\nproxy register fails
+cmd --> user : error on stderr, exit 1\n(no attempt to undo partial rollback)
+
+@enduml

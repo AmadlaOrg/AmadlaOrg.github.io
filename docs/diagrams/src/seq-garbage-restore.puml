@@ -1,0 +1,52 @@
+@startuml seq-garbage-restore
+
+title garbage restore — Restore a Trashed Item
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "db/" as dbpkg
+participant "trash/" as trash
+participant "output/" as out
+database "SQLite\n(~/.local/amadla/db.sqlite)" as db
+participant "Filesystem\n(~/.local/amadla/trash/)" as fs
+
+== Opening the shared database ==
+
+user -> cmd : garbage restore <id|name> [--to <path>]
+cmd -> dbpkg : Open() + Migrate()
+dbpkg -> db : open (WAL mode),\nCREATE TABLE IF NOT EXISTS trash_items
+cmd -> trash : NewService(conn, trashDir)
+
+== Finding the item ==
+
+cmd -> trash : Restore(idOrName, --to override)
+trash -> db : SELECT by exact ID,\nthen ID prefix (LIKE 'x%'),\nthen exact name
+db --> trash : matching item
+
+== Moving back ==
+
+trash -> fs : stat destination\n(error if it already exists)
+trash -> fs : mkdir -p parent dir
+trash -> fs : rename trash/<uuid>/<name> → destination\n(copy + delete across filesystems)
+trash -> db : DELETE FROM trash_items WHERE id=?
+trash -> fs : remove empty trash/<uuid>/ dir
+trash --> cmd : Item{restored path}
+cmd -> out : Result(item)
+out --> user : "Restored: <name> → <path>"\nor JSON on stdout
+
+== Dry run ==
+
+user -> cmd : garbage restore --dry-run <id|name>
+cmd -> trash : Find(idOrName)
+trash -> db : same 3-step lookup
+cmd --> user : "Would restore: <name> → <dest>"\nfor every match (no move)
+
+== Errors ==
+
+user -> cmd : garbage restore <unknown|ambiguous|occupied>
+cmd --> user : "no item found" / "ambiguous: N items match"\n/ "destination already exists", exit 1
+
+@enduml

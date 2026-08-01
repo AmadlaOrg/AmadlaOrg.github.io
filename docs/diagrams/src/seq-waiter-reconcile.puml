@@ -1,0 +1,45 @@
+@startuml seq-waiter-reconcile
+
+title waiter reconcile — Detect and Fix Deployment Drift
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "health/" as health
+participant "state/" as state
+participant "Engine plugin\n(waiter-<engine>)" as engine
+participant "Proxy plugin\n(waiter-proxy-*)" as proxy
+participant "Filesystem" as fs
+
+== Reconcile ==
+
+user -> cmd : waiter reconcile [service] [--fix]
+cmd -> state : Load(service) — or List()\nand loop over every service
+state -> fs : read state file(s) in\n~/.local/share/waiter/
+cmd -> engine : status <current container>
+engine --> cmd : {state, health} JSON
+alt container unreachable or not "running"
+  cmd -> cmd : mark "drifted"
+  opt with --fix
+    cmd -> engine : start <container>
+    cmd -> health : WaitForHealthy(30s)\n(only when status call failed outright)
+    cmd -> cmd : mark "fixed"
+  end
+end
+cmd -> proxy : health <svc>-<slot>
+proxy --> cmd : exit code
+alt proxy health fails
+  cmd -> cmd : mark "drifted"\n(--fix never repairs proxy drift)
+end
+cmd --> user : {service, status, issues}\nJSON on stdout
+
+== Errors ==
+
+user -> cmd : waiter reconcile <unknown service>
+cmd --> user : "no deployment state" on stderr, exit 1
+user -> cmd : waiter reconcile (all, one service errors)
+cmd --> user : that service reported as\nstatus "error" in the array, exit 0
+
+@enduml

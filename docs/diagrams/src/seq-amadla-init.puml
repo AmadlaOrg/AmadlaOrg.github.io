@@ -1,0 +1,35 @@
+@startuml seq-amadla-init
+
+title amadla init — Bootstrap tools.hery from PATH
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "toolconfig/" as toolconfig
+participant "Filesystem" as fs
+
+== Scan PATH & write config ==
+
+user -> cmd : amadla init
+cmd -> toolconfig : DefaultConfigPath()
+toolconfig --> cmd : ~/.config/amadla/tools.hery
+cmd -> fs : Stat(config path)\n(must not exist yet)
+cmd -> toolconfig : StandardToolNames()
+toolconfig --> cmd : 13 names (hery, doorman, weaver,\nlay, enjoin, waiter, raise, unravel, judge,\nconduct, lighthouse, garbage, dryrun)
+cmd -> fs : exec.LookPath(name)\nover PATH, per name
+cmd -> fs : MkdirAll(~/.config/amadla)\n+ write tools.hery\n(name entries only — supports comes\nlater via <tool> info enrichment)
+cmd --> user : "Created <path> with N tools:"\n+ list on stdout, exit 0
+
+== No tools found ==
+
+user -> cmd : amadla init (empty PATH)
+cmd --> user : "No Amadla tools found in PATH." on stderr,\nno file written, exit 0
+
+== Errors ==
+
+user -> cmd : amadla init (config already exists)
+cmd --> user : "config already exists at <path> — remove it\nfirst to reinitialize" on stderr, exit 1
+
+@enduml

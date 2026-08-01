@@ -1,0 +1,45 @@
+@startuml seq-lighthouse-plugins
+
+title lighthouse plugins — List Discovered Notification Plugins
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "lighthouse-* plugin\n(subprocess)" as sub
+
+== Discovery ==
+
+user -> cmd : lighthouse plugins\n[-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : scan each PATH directory\nfor executable lighthouse-* files
+plugin --> cmd : plugin names (deduplicated)
+
+alt no plugins found
+  cmd --> user : "No lighthouse plugins found\nin PATH." on stderr, exit 0
+end
+
+== Info collection ==
+
+loop each discovered plugin
+  cmd -> plugin : GetInfo(name)
+  plugin -> sub : lighthouse-<name> info -o json
+  sub --> plugin : Info JSON — flat or\nHERY envelope (_type/_body)
+  plugin --> cmd : {name, version,\nchannel, description}
+  note right of cmd : info failure becomes a row\nwith "?" fields — not fatal
+end
+
+== Output ==
+
+cmd --> user : table | json | yaml on stdout\n(--hery wraps rows in HERY envelope),\nexit 0
+
+== Errors ==
+
+user -> cmd : plugin info subprocess fails
+sub --> user : plugin stderr passes through
+cmd --> user : row rendered with "?" fields,\nstill exit 0
+
+@enduml
