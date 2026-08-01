@@ -1,0 +1,49 @@
+@startuml seq-lay-binary-update
+
+title lay binary update — Re-install Tracked Binaries from Source
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "binary/manifest/" as manifest
+participant "binary/install/" as install
+participant "Forge API\n(HTTPS)" as api
+participant "Filesystem" as fs
+
+== Selection ==
+
+user -> cmd : lay binary update [name...]
+cmd -> manifest : Load ~/.local/share/lay/installed.json
+cmd -> cmd : no names -> all entries;\nnamed entry missing -> error, exit 1
+cmd --> user : empty manifest:\n"No binaries tracked by lay", exit 0
+
+== Per-entry update ==
+
+loop each entry
+  cmd --> user : "Checking <name> (current: <ver>)..."
+  cmd -> install : Install(entry.Source,\ndir derived from entry.Path)
+  install -> api : full install flow re-runs:\nrelease lookup, download,\nextract, copy (see binary install)
+  install -> fs : binary overwritten in place
+  install --> cmd : result (new version)
+  cmd --> user : same version: "already at latest"\n(binary was still re-downloaded\nand re-installed first)
+  cmd -> manifest : Update(name, version, checksum)\non version change
+  cmd --> user : "Updated <name>: old -> new"
+  cmd --> user : per-entry failure: info message,\nloop continues, exit stays 0
+end
+
+cmd -> manifest : Save manifest
+manifest -> fs : write JSON
+
+== Dry run ==
+
+user -> cmd : lay binary update --dry-run
+cmd --> user : "[dry-run] Would update <name>..."\nper entry, no downloads, exit 0
+
+== Errors ==
+
+user -> cmd : lay binary update bogus
+cmd --> user : "binary not found in manifest:\nbogus" on stderr, exit 1
+
+@enduml

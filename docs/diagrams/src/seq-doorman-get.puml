@@ -1,0 +1,41 @@
+@startuml seq-doorman-get
+
+title doorman get — Retrieve a Secret via a Plugin
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem\n(PATH dirs)" as fs
+participant "doorman-<name>\n(subprocess)" as sub
+
+== Resolving the plugin ==
+
+user -> cmd : doorman get <key> --from <name>
+cmd -> cmd : pluginName = "doorman-" + <name>
+cmd -> plugin : Get(pluginName, key, os.Stdout)
+plugin -> fs : exec.LookPath(pluginName)
+fs --> plugin : Absolute binary path
+
+== Delegation ==
+
+plugin -> sub : exec: doorman-<name> get <key>\n(stdout/stderr wired straight through)
+sub --> user : Secret value on stdout, verbatim\n(plugin diagnostics go to stderr)
+sub --> plugin : Exit 0
+plugin --> cmd : nil
+cmd --> user : exit 0
+
+== Errors ==
+
+user -> cmd : doorman get <key>\n(missing --from)
+cmd --> user : required flag error\n+ usage on stderr, exit 1
+
+user -> cmd : doorman get <key> --from bogus
+plugin --> user : plugin doorman-bogus not found\nin PATH — error on stderr, exit 1
+
+sub --> plugin : Non-zero exit
+plugin --> user : "plugin ... get failed"\non stderr, exit 1\n(partial plugin output may already\nbe on stdout)
+
+@enduml

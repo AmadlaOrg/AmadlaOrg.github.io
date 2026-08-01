@@ -1,0 +1,43 @@
+@startuml seq-lay-binary-remove
+
+title lay binary remove — Delete Managed Binaries
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "binary/manifest/" as manifest
+participant "binary/jar/" as jar
+participant "Filesystem" as fs
+
+== Removal ==
+
+user -> cmd : lay binary remove <name>...
+cmd -> manifest : Load ~/.local/share/lay/installed.json
+
+loop each name
+  cmd -> manifest : Find(name)
+  cmd --> user : not in manifest:\n"Not found in manifest: <name>"\n(continues, still exit 0)
+  cmd -> jar : IsLauncherScript(path)?
+  jar -> fs : JAR launcher: parse script,\ndelete referenced .jar file
+  cmd -> fs : delete binary / launcher script\n(already-missing file tolerated)
+  cmd -> manifest : Remove(name)
+  cmd --> user : "Removed: <name>"
+end
+
+cmd -> manifest : Save manifest
+manifest -> fs : write JSON
+cmd --> user : exit 0
+
+== Dry run ==
+
+user -> cmd : lay binary remove --dry-run <name>
+cmd --> user : "[dry-run] Would remove: <name> (<path>)"\nmanifest not saved, exit 0
+
+== Errors ==
+
+user -> cmd : file deletion or manifest save fails
+cmd --> user : Error on stderr, exit 1
+
+@enduml

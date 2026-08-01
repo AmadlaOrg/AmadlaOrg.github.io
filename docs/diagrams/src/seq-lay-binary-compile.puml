@@ -1,0 +1,51 @@
+@startuml seq-lay-binary-compile
+
+title lay binary compile — Build from Source and Install
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "binary/target/" as target
+participant "binary/compile/" as compile
+participant "git process" as git
+participant "Build tool process\n(make, cargo, go, ...)" as build
+participant "binary/install/" as install
+participant "Filesystem" as fs
+
+== Source acquisition ==
+
+user -> cmd : lay binary compile <path | url | owner/repo>
+cmd -> target : Resolve(--to) + Ensure\n(--to > LAY_BINARY_PATH > ~/.local/bin)
+cmd -> compile : CloneOrDownload(source)
+compile -> fs : local directory? use it directly
+compile -> git : else: git clone --depth 1\n(shorthand assumes https://github.com/...)\ninto temp dir lay-compile-*
+
+== Build system detection ==
+
+cmd -> compile : Detect(srcDir, --build-system)
+compile -> fs : probe marker files in priority order:\nconfigure/configure.ac -> autotools\nCMakeLists.txt -> cmake, meson.build -> meson\nCargo.toml -> cargo, go.mod -> golang\nMakefile -> makefile
+compile --> cmd : build system name\n(--build-system returned unvalidated)
+cmd --> user : "Detected build system: <name>"
+cmd --> user : --dry-run: "[dry-run] Would compile..."\nexit 0
+
+== Build ==
+
+cmd -> compile : NewBuildSystemByName(name).Build(src, tmpPrefix)
+compile -> build : run build commands\n(e.g. cargo build --release, go build,\n./configure && make && make install)
+build --> compile : exit status
+
+== Install ==
+
+cmd -> install : FindBinary(tmpPrefix, hint)\nfallback: FindBinary(srcDir, hint)
+install -> fs : walk for executable files,\nprefer name matching hint
+cmd -> fs : copy binary to target dir,\nchmod 0755
+cmd --> user : "Installed <bin> to <path>"\n(not recorded in the manifest)
+
+== Errors ==
+
+user -> cmd : clone fails / no build system detected /\nbuild fails / no executable found
+cmd --> user : Error on stderr, exit 1
+
+@enduml

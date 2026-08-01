@@ -1,0 +1,40 @@
+@startuml seq-weaver-weave
+
+title weaver weave — Entity to Output via Go text/template
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "weave/" as weave
+participant "stdin" as stdin
+participant "Filesystem" as fs
+
+== Flag parsing (currently broken) ==
+
+user -> cmd : weaver weave -t <template>\n[-e <entity>] [-o <output>]
+cmd --> user : unknown flag error on stderr, exit 1\n(flags are registered inside the Run\nfunction, after Cobra has parsed argv)
+
+== Intended weave flow ==
+
+user -> cmd : weaver weave (flag-less invocation\nreaches Run)
+cmd -> cmd : register -t/-e/-o flags and\nMarkFlagRequired("template")\n— both too late to take effect
+cmd -> fs : os.Open(entity path)\nwhen -e is set
+cmd -> fs : os.Create(output path) when -o is set\n(truncates an existing file, no prompt)
+cmd -> weave : New(templatePath, input, output).Do()
+weave -> fs : template.ParseFiles(templatePath)
+weave -> stdin : io.ReadAll(input)\n(stdin by default, entity file with -e)
+weave -> weave : parseData — JSON array first,\nthen YAML sequence of maps
+loop each data item
+  weave -> fs : tmpl.Execute(output, item)\n(stdout by default, file with -o)
+end
+weave --> cmd : nil or error
+cmd --> user : rendered text on stdout
+
+== Errors ==
+
+user -> cmd : template missing / bad data /\nempty data set
+cmd --> user : "Weave process failed: <error>"\nprinted — but exit 0 (Run, not RunE)
+
+@enduml

@@ -1,0 +1,54 @@
+@startuml seq-lighthouse-resolve
+
+title lighthouse resolve — Send a Resolution Notification
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "alert/" as alert
+participant "config/" as config
+participant "engine/" as engine
+participant "state/" as state
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "lighthouse-* plugin\n(subprocess)" as sub
+
+== Input ==
+
+user -> cmd : lighthouse resolve -f <file>\n(-f - reads stdin)
+cmd -> fs : read alert file (or stdin)
+cmd -> alert : Parse(data) — JSON first,\nYAML fallback
+cmd -> cmd : force alert.Status = "resolved"
+cmd -> config : Load()
+config -> fs : ~/.config/lighthouse/config.yaml
+
+== Resolved path (engine.Process) ==
+
+cmd -> engine : Process(alert, now)
+engine -> state : LoadAlerts
+state -> fs : ~/.local/share/lighthouse/alerts.json
+
+alt fingerprint known
+  engine -> state : SaveAlerts — status=resolved,\nappend transition timestamp
+else fingerprint unknown
+  engine -> engine : synthesize one-shot\nAlertState (not persisted)
+end
+
+== Delivery (bypasses all suppression) ==
+
+engine -> plugin : Exec(channel, ["send"])
+plugin -> sub : lighthouse-<channel> send\nresolved payload JSON on stdin
+sub --> plugin : exit code
+engine --> cmd : {action: "resolved", channel}\nor {action: "delivery_failed"}
+cmd --> user : JSON result on stdout
+
+== Errors ==
+
+user -> cmd : -f file missing or unreadable
+cmd --> user : error on stderr, exit 2
+user -> cmd : invalid input (bad JSON/YAML,\nmissing source or name)
+cmd --> user : error on stderr, exit 1
+
+@enduml

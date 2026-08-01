@@ -1,0 +1,45 @@
+@startuml seq-garbage-list
+
+title garbage list — List Trashed Items
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "db/" as dbpkg
+participant "trash/" as trash
+participant "output/" as out
+database "SQLite\n(~/.local/amadla/db.sqlite)" as db
+
+== Opening the shared database ==
+
+user -> cmd : garbage list [--type file|directory]
+cmd -> dbpkg : Open() + Migrate()
+dbpkg -> db : open (WAL mode),\nCREATE TABLE IF NOT EXISTS trash_items
+cmd -> trash : NewService(conn, trashDir)
+
+== Selecting items ==
+
+cmd -> trash : List(ListFilter{Type})
+trash -> db : SELECT … FROM trash_items\n[WHERE item_type=?]\nORDER BY trashed_at DESC
+db --> trash : rows
+trash --> cmd : []Item
+
+== Output ==
+
+cmd -> out : Result(items)
+out --> user : borderless table (short ID, name,\ntype, original path, size, trashed at)\nor JSON array on stdout
+
+== Empty trash ==
+
+cmd -> trash : List(filter)
+trash --> cmd : 0 items
+cmd --> user : "Trash is empty." on stdout, exit 0
+
+== Errors ==
+
+user -> cmd : garbage list (DB unreadable)
+cmd --> user : "opening database: …", exit 1
+
+@enduml

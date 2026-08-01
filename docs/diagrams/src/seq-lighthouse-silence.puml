@@ -1,0 +1,30 @@
+@startuml seq-lighthouse-silence
+
+title lighthouse silence — Silence an Alert by Fingerprint
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Filesystem" as fs
+
+== Create silence ==
+
+user -> cmd : lighthouse silence <fingerprint>\n[--for 1h] [--reason "..."]
+cmd -> cmd : time.ParseDuration(--for)
+cmd -> state : LoadSilences()
+state -> fs : read ~/.local/share/lighthouse/\nsilences.json (missing file = empty)
+cmd -> state : SaveSilences — append\n{fingerprint, created_at,\nexpires_at, reason}
+state -> fs : write silences.json
+cmd --> user : JSON {fingerprint, silenced: true,\nexpires_at, reason} on stdout, exit 0
+
+== Errors ==
+
+user -> cmd : invalid --for duration
+cmd --> user : error on stderr, exit 1
+user -> cmd : missing fingerprint argument
+cmd --> user : usage error on stderr, exit 1
+
+@enduml

@@ -1,0 +1,75 @@
+@startuml seq-lighthouse-notify
+
+title lighthouse notify — Process an Alert Through the Suppression Pipeline
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "alert/" as alert
+participant "config/" as config
+participant "engine/" as engine
+participant "state/" as state
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "lighthouse-* plugin\n(subprocess)" as sub
+
+== Input ==
+
+user -> cmd : lighthouse notify -f <file>\n(-f - reads stdin)
+cmd -> fs : read alert file (or stdin)
+cmd -> alert : Parse(data) — JSON first,\nYAML fallback
+alert --> cmd : Alert (defaults severity=info,\nstatus=firing)
+cmd -> config : Load()
+config -> fs : ~/.config/lighthouse/config.yaml\n(built-in defaults if missing)
+
+== Suppression pipeline (engine.Process) ==
+
+cmd -> engine : Process(alert, now)
+engine -> alert : Fingerprint()\nSHA256(source|name|sorted labels)
+engine -> state : LoadAlerts / LoadSilences
+state -> fs : ~/.local/share/lighthouse/\nalerts.json, silences.json
+
+alt active silence for fingerprint
+  engine --> cmd : {action: "silenced"}
+else flapping (>= max_transitions\nin flap window)
+  engine -> state : SaveAlerts (Flapping=true)
+  engine --> cmd : {action: "flapping"}
+else duplicate within dedup_window
+  engine -> state : SaveAlerts (count++)
+  engine --> cmd : {action: "deduplicated"}
+else within backoff (now < NextNotifyAt)
+  engine -> state : SaveAlerts (count++)
+  engine --> cmd : {action: "suppressed",\nreason: "backoff"}
+else all configured channels\nrate limited (token buckets empty)
+  engine -> state : SaveAlerts (count++)
+  engine --> cmd : {action: "rate_limited"}
+else group_wait > 0 (default 30s)
+  engine -> state : SaveGroups — buffer alert\nunder source|name until FlushAfter
+  engine --> cmd : {action: "grouped"}
+else deliver
+  engine -> plugin : Exec(channel, ["send"])
+  plugin -> sub : lighthouse-<channel> send\nenriched payload JSON on stdin
+  sub --> plugin : exit code
+  engine -> state : SaveRateLimits\n(consume one token)
+  engine --> cmd : {action: "delivered", channel}\nor {action: "delivery_failed"}
+end
+
+== Flush due groups ==
+
+cmd -> engine : FlushGroups(now)
+engine -> state : LoadGroups
+engine -> plugin : Exec(channel, ["send"],\ngrouped payload) per due buffer
+plugin -> sub : lighthouse-<channel> send
+engine -> state : SaveGroups(remaining)
+cmd --> user : one JSON result per flushed group,\nthen the alert's own result, on stdout
+
+== Errors ==
+
+user -> cmd : -f file missing or unreadable
+cmd --> user : error on stderr, exit 2
+user -> cmd : invalid input (bad JSON/YAML,\nmissing source or name)
+cmd --> user : error on stderr, exit 1
+
+@enduml

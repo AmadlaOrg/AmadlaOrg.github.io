@@ -1,0 +1,45 @@
+@startuml seq-judge-run
+
+title judge run — Delegate Validation to a Plugin
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "judge-<name>\n(subprocess)" as proc
+participant "Filesystem" as fs
+
+== Resolve plugin ==
+
+user -> cmd : judge run --from <name> [-f <file>]
+cmd -> plugin : Judge("judge-<name>", filePath, stdout)
+plugin -> fs : exec.LookPath("judge-<name>")\nscan PATH for the binary
+fs --> plugin : binary path
+
+== Execute ==
+
+plugin -> proc : spawn: judge-<name> judge [-f <file>]
+
+alt -f <file> given
+  proc -> fs : plugin reads the data file itself\n(judge never opens it)
+else no -f
+  user -> proc : data piped through on stdin
+end
+
+proc --> user : results streamed to stdout unmodified\n(judge run has no -o flag)
+proc --> user : plugin diagnostics passed through\non stderr
+proc --> plugin : exit code
+plugin --> cmd : nil
+cmd --> user : exit 0
+
+== Errors ==
+
+user -> cmd : --from names a plugin not on PATH
+cmd --> user : "validation failed: plugin judge-<name>\nnot found in PATH" on stderr, exit 1
+
+user -> cmd : plugin exits non-zero (1 or 2)
+cmd --> user : "validation failed: plugin judge-<name>\njudge failed: exit status N" on stderr,\nexit 1 — the plugin's exit 2 is not propagated
+
+@enduml

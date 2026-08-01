@@ -1,0 +1,41 @@
+@startuml seq-enjoin-plugins
+
+title enjoin plugins — Discover Plugins on PATH
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "enjoin-<name>" as sub
+
+== Discovery ==
+
+user -> cmd : enjoin plugins [-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : ReadDir every directory in $PATH
+plugin -> plugin : keep executable files named enjoin-*\n(deduplicated — first PATH hit wins)
+plugin --> cmd : plugin names
+
+== Per-plugin info ==
+
+loop each discovered plugin
+  cmd -> plugin : GetInfo(name)
+  plugin -> sub : run: enjoin-<name> info -o json
+  sub --> plugin : JSON metadata\n(HERY envelope or flat JSON)
+  plugin --> cmd : Info{engine, version, description}
+end
+
+cmd -> cmd : render rows as table, JSON, or YAML\n(--hery wraps in _type/_body envelope)
+cmd --> user : plugin table on stdout, exit 0
+
+== No plugins / info failure ==
+
+user -> cmd : enjoin plugins (none installed)
+cmd --> user : "No enjoin plugins found in PATH."\non stderr, exit 0
+sub --> plugin : info call fails or output unparsable
+cmd --> user : row still rendered with "?" fields\nand the error as description, exit 0
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml seq-raise-plugins
+
+title raise plugins — List Discovered Plugins
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plug
+participant "raise-* plugins" as pl
+participant "Filesystem" as fs
+
+== Discovery ==
+
+user -> cmd : raise plugins [-o table|json|yaml] [--hery]
+cmd -> plug : Discover()
+plug -> fs : scan every PATH dir for\nexecutable raise-* files
+plug --> cmd : plugin names (deduped)
+
+== Per-plugin info ==
+
+loop each discovered plugin
+  cmd -> plug : GetInfo(name)
+  plug -> fs : exec.LookPath(name)
+  plug -> pl : run "<plugin> info -o json"
+  pl --> plug : JSON on stdout
+  plug -> plug : parse HERY envelope\n(_type/_body), fall back to flat JSON
+  plug --> cmd : Info{name, version,\nengine, description}
+end
+
+== Render ==
+
+cmd -> cmd : format rows per -o flag;\n--hery wraps in _type + _body envelope
+cmd --> user : table / JSON / YAML on stdout, exit 0
+
+== Errors ==
+
+user -> cmd : no raise-* plugins in PATH
+cmd --> user : "No raise plugins found in PATH."\non stderr, exit 0
+user -> cmd : a plugin's info call fails
+cmd --> user : row rendered with "?" fields and\nerror text in description, exit 0
+
+@enduml

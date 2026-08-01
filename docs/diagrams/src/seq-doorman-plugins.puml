@@ -1,0 +1,47 @@
+@startuml seq-doorman-plugins
+
+title doorman plugins — Discover and List doorman-* Plugins
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem\n(PATH dirs)" as fs
+participant "doorman-*\n(subprocess)" as sub
+
+== Discovery ==
+
+user -> cmd : doorman plugins\n[-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : ReadDir every $PATH directory\n(unreadable dirs skipped)
+fs --> plugin : Directory entries
+plugin -> plugin : Keep executable files named\ndoorman-*, dedup by name
+plugin --> cmd : Plugin names
+
+== Interrogation (per plugin) ==
+
+cmd -> plugin : GetInfo(name)
+plugin -> fs : exec.LookPath(name)
+plugin -> sub : exec: doorman-<x> info -o json
+sub --> plugin : JSON on stdout
+plugin -> plugin : Parse HERY envelope\n(_type + _body) first,\nfall back to flat JSON
+plugin --> cmd : Info{engine, version,\ndescription}
+
+== Rendering ==
+
+cmd -> cmd : renderPlugins — table (default),\njson, or yaml; --hery wraps rows in\namadla.org/entity/tools/plugins@v1.0.0
+cmd --> user : Listing on stdout, exit 0
+
+== No plugins / plugin errors ==
+
+user -> cmd : doorman plugins\n(nothing matches in PATH)
+cmd --> user : "No doorman plugins found in PATH."\non stderr, exit 0
+
+sub --> plugin : info exits non-zero\nor emits bad JSON
+plugin --> cmd : error
+cmd -> cmd : Row kept — engine/version "?",\nerror text in Description
+cmd --> user : Listing still printed, exit 0
+
+@enduml

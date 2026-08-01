@@ -1,0 +1,35 @@
+@startuml seq-lighthouse-status
+
+title lighthouse status — Show Stored Alerts and Silences
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Filesystem" as fs
+
+== Read state ==
+
+user -> cmd : lighthouse status
+cmd -> state : LoadAlerts()
+state -> fs : read ~/.local/share/lighthouse/\nalerts.json
+cmd -> state : LoadSilences()
+state -> fs : read silences.json
+
+== Output ==
+
+alt no alerts and no silences stored
+  cmd --> user : "No active alerts or silences."\non stderr, exit 0
+else state present
+  cmd --> user : "Active Alerts" table\n(fingerprint, source, name, severity,\nstatus, count, last seen) on stdout
+  cmd --> user : "Active Silences" table\n(fingerprint, expires at, reason)\non stdout, exit 0
+end
+
+== Errors ==
+
+user -> cmd : corrupt state JSON
+cmd --> user : error on stderr, exit 1
+
+@enduml

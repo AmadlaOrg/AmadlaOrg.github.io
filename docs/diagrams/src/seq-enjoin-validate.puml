@@ -1,0 +1,42 @@
+@startuml seq-enjoin-validate
+
+title enjoin validate — Dry-Run Validation via Plugin
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "enjoin-<name>" as sub
+participant "stdin" as stdin
+
+== Validate from file: -f ==
+
+user -> cmd : enjoin validate --from firewall -f fw.yaml
+cmd -> plugin : Validate("enjoin-firewall", filePath, stdout)
+plugin -> plugin : exec.LookPath("enjoin-firewall")
+plugin -> sub : run: enjoin-firewall validate -f fw.yaml\n(dry run — plugin reports what\nwould change, applies nothing)
+sub --> user : validation report on stdout\n(plugin stderr passes through)
+sub --> plugin : exit code
+plugin --> cmd : nil
+
+== Validate from pipe: no -f ==
+
+user -> cmd : hery compose ... | enjoin validate --from firewall
+cmd -> plugin : Validate("enjoin-firewall", "", stdout)
+plugin -> sub : run: enjoin-firewall validate\n(inherits enjoin's stdin)
+stdin -> sub : entity YAML/JSON
+sub --> user : validation report on stdout
+
+== Errors ==
+
+user -> cmd : enjoin validate (no --from)
+cmd --> user : required flag error + usage\non stderr, exit 1
+user -> cmd : enjoin validate --from nosuch
+plugin --> cmd : "plugin enjoin-nosuch\nnot found in PATH"
+cmd --> user : "validation failed: ..." on stderr, exit 1
+sub --> plugin : plugin exits non-zero (1 or 2)
+cmd --> user : "validation failed: exit status N"\non stderr, always exit 1
+
+@enduml

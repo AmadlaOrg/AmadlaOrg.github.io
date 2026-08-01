@@ -1,0 +1,32 @@
+@startuml seq-raise-ssh
+
+title raise ssh — Interactive SSH Session
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "raise-<provider>" as pl
+participant "Filesystem" as fs
+
+== Interactive session ==
+
+user -> cmd : raise ssh [name] --provider <p>
+cmd -> fs : exec.LookPath("raise-<provider>")\n(directly in cmd/, no plugin/ service)
+cmd -> pl : spawn "raise-<provider> ssh [name]"\nwith inherited stdin/stdout/stderr
+pl -> fs : read VM IP from state file,\nexec ssh client
+user <--> pl : interactive terminal session
+pl --> cmd : Run() returns when session ends
+cmd --> user : exit 0 on clean exit
+
+== Errors ==
+
+user -> cmd : raise ssh (no --provider)
+cmd --> user : required flag "provider" not set\non stderr, exit 1
+user -> cmd : plugin binary not in PATH
+cmd --> user : "plugin raise-<provider> not found in PATH"\non stderr, exit 1
+user -> cmd : ssh session exits non-zero
+cmd --> user : generic "exit status N" error, exit 1\n(plugin's exit code is not propagated)
+
+@enduml

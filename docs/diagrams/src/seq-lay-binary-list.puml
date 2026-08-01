@@ -1,0 +1,29 @@
+@startuml seq-lay-binary-list
+
+title lay binary list — Show Tracked Binaries
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "binary/manifest/" as manifest
+participant "output/" as out
+participant "Filesystem" as fs
+
+== Listing ==
+
+user -> cmd : lay binary list
+cmd -> manifest : Load ~/.local/share/lay/installed.json
+manifest -> fs : read JSON\n(missing file -> empty manifest)
+manifest --> cmd : entries
+cmd -> out : Result(entries)
+out --> user : count + Name/Version/Source/Path table\n(JSON array with --json)
+cmd --> user : empty manifest:\n"No binaries tracked by lay", exit 0
+
+== Errors ==
+
+user -> cmd : manifest unreadable/corrupt
+cmd --> user : Error on stderr, exit 1
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml seq-weaver-plugins
+
+title weaver plugins — Discover and List weaver-* Plugins
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "weaver-*\n(subprocess)" as pl
+
+== Discovery ==
+
+user -> cmd : weaver plugins\n[-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : ReadDir each PATH directory,\nkeep executable weaver-* files\n(deduped, PATH order)
+plugin --> cmd : plugin names
+
+== Info gathering ==
+
+loop each plugin
+  cmd -> plugin : GetInfo(name)
+  plugin -> pl : exec <plugin> info -o json
+  pl --> plugin : name, engine, version,\nfile_extensions, description\n(flat JSON or HERY envelope)
+  plugin --> cmd : Info — on failure the row is kept\nwith "?" fields and the error text
+end
+
+== Output ==
+
+cmd --> user : table | json | yaml on stdout, exit 0\n(--hery wraps rows in\namadla.org/entity/tools/plugins@v1.0.0)
+
+== Errors ==
+
+user -> cmd : no weaver-* binaries in PATH
+cmd --> user : "No weaver plugins found in PATH."\non stderr, exit 0
+
+@enduml

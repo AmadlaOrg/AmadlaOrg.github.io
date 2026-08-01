@@ -1,0 +1,49 @@
+@startuml seq-weaver-render
+
+title weaver render — Delegated Rendering via weaver-* Plugin
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "Filesystem" as fs
+participant "weaver-<engine>\n(subprocess)" as pl
+participant "stdin" as stdin
+
+== Engine selection ==
+
+user -> cmd : weaver render -t <template>\n[-f <data>] [-o <output>] [-e <engine>]
+
+alt --engine given
+  cmd -> cmd : pluginName = "weaver-" + engine
+else auto-detect from extension
+  cmd -> plugin : FindByExtension(filepath.Ext(template))
+  plugin -> fs : scan every PATH directory for\nexecutable weaver-* binaries
+  loop each discovered plugin, in PATH order
+    plugin -> pl : exec <plugin> info -o json
+    pl --> plugin : engine, version, file_extensions\n(flat JSON or HERY envelope)
+  end
+  plugin --> cmd : first plugin whose file_extensions\ncontains the extension (with dot,\ncase-insensitive)
+end
+
+== Delegation ==
+
+cmd -> plugin : Render(pluginName, -t, -f, -o)
+plugin -> pl : exec <plugin> render -t <template>\n[-f <data>] [-o <output>]
+stdin -> pl : wired as plugin stdin\nonly when -f is omitted
+pl -> fs : read template (and data file),\nwrite output file when -o set
+pl --> user : rendered output on stdout\n(plugin stdout/stderr passed through)
+cmd --> user : exit 0
+
+== Errors ==
+
+user -> cmd : template has no extension and no --engine
+cmd --> user : "cannot detect template engine" on stderr, exit 1
+user -> cmd : no plugin supports the extension /\nplugin not in PATH
+cmd --> user : error on stderr, exit 1
+pl --> cmd : non-zero plugin exit
+cmd --> user : "plugin <name> render failed" on stderr, exit 1
+
+@enduml
