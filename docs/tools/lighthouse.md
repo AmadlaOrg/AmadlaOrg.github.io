@@ -13,8 +13,13 @@ lighthouse grabs information from any tool's entity output and sends notificatio
 
 | Command | Description |
 |---------|-------------|
-| `lighthouse notify` | Send notification based on input entity data |
-| `lighthouse settings` | Manage lighthouse configuration |
+| `lighthouse notify` | Process an incoming alert through the suppression pipeline |
+| `lighthouse resolve` | Send a resolution notification for an alert |
+| `lighthouse silence` | Silence an alert by fingerprint for a duration |
+| `lighthouse status` | Show stored alerts and silences |
+| `lighthouse plugins` | List discovered lighthouse-* plugins |
+
+Per-command sequence diagrams: [lighthouse Commands](lighthouse-commands.md).
 
 ## Dependencies
 

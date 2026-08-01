@@ -21,8 +21,8 @@ This follows the principle that infrastructure changes should be reversible — 
 | `garbage empty` | Permanently delete trashed items |
 | `garbage info` | Show information about trashed items |
 | `garbage settings` | Manage garbage configuration |
-| `garbage binary` | Manage binary cleanup |
-| `garbage package` | Manage package cleanup |
+
+Per-command sequence diagrams: [garbage Commands](garbage-commands.md).
 
 ## Dependencies
 
@@ -59,18 +59,18 @@ garbage empty
 
 ```bash
 # Remove an old binary
-garbage binary rm /usr/local/bin/old-tool
+garbage rm /usr/local/bin/old-tool
 
-# List trashed packages
-garbage package list
+# List trashed files only
+garbage list --type file
 
-# Restore a specific trashed item
-garbage restore --id abc123
+# Restore a specific trashed item (full or partial ID, or name)
+garbage restore abc123
 
 # Show details about a trashed item
-garbage info --id abc123
+garbage info abc123
 ```
 
 ## Current State
 
-86 unit tests passing, integration tests ready. All 8 commands are implemented and working.
+86 unit tests passing, integration tests ready. All 6 commands (`rm`, `list`, `restore`, `empty`, `info`, `settings`) are implemented and working.

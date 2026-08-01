@@ -16,6 +16,8 @@ lay handles installation: packages via system package managers, applications, JA
 | `lay install` | Install applications from entity requirements |
 | `lay settings` | Manage lay configuration |
 
+Per-command sequence diagrams: [lay Commands](lay-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |

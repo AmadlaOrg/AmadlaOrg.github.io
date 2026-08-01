@@ -10,8 +10,12 @@
 | Command | Description |
 |---------|-------------|
 | `weaver weave` | Render templates with entity data |
+| `weaver render` | Render a template via a discovered weaver-* plugin |
+| `weaver plugins` | List discovered weaver-* plugins |
 | `weaver settings` | Manage weaver configuration |
 | `weaver version` | Show version information |
+
+Per-command sequence diagrams: [weaver Commands](weaver-commands.md).
 
 ## Dependencies
 

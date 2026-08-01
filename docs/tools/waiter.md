@@ -11,6 +11,8 @@ waiter handles the deployment lifecycle: deploying new versions alongside old on
 
 Inspired by [kamal-deploy.org](https://kamal-deploy.org/) and the VFRMate infra scripts.
 
+Per-command sequence diagrams: [waiter Commands](waiter-commands.md).
+
 ## Commands
 
 | Command | Description |

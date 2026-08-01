@@ -61,18 +61,30 @@ nav:
       - hery: tools/hery.md
       - hery Commands: tools/hery-commands.md
       - doorman: tools/doorman.md
+      - doorman Commands: tools/doorman-commands.md
       - weaver: tools/weaver.md
+      - weaver Commands: tools/weaver-commands.md
       - judge: tools/judge.md
+      - judge Commands: tools/judge-commands.md
       - lay: tools/lay.md
+      - lay Commands: tools/lay-commands.md
       - raise: tools/raise.md
+      - raise Commands: tools/raise-commands.md
       - waiter: tools/waiter.md
+      - waiter Commands: tools/waiter-commands.md
       - unravel: tools/unravel.md
+      - unravel Commands: tools/unravel-commands.md
       - conduct: tools/conduct.md
+      - conduct Commands: tools/conduct-commands.md
       - lighthouse: tools/lighthouse.md
+      - lighthouse Commands: tools/lighthouse-commands.md
       - dryrun: tools/dryrun.md
       - enjoin: tools/enjoin.md
+      - enjoin Commands: tools/enjoin-commands.md
       - garbage: tools/garbage.md
+      - garbage Commands: tools/garbage-commands.md
       - amadla: tools/amadla.md
+      - amadla Commands: tools/amadla-commands.md
 
   - Libraries:
       - Overview: libraries/overview.md
