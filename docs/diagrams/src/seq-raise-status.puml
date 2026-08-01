@@ -1,0 +1,44 @@
+@startuml seq-raise-status
+
+title raise status — Show Infrastructure Status
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plug
+participant "raise-* plugins" as pl
+participant "Filesystem" as fs
+
+== Single provider: --provider ==
+
+user -> cmd : raise status --provider <p>
+cmd -> plug : Exec("raise-" + provider, ["status"])
+plug -> fs : exec.LookPath("raise-<provider>")
+plug -> pl : spawn subprocess
+pl -> fs : read state file\n(~/.local/share/raise/<provider>/state.json)
+pl --> plug : exit code
+cmd --> user : plugin output on stdout\nraise exits with plugin's code
+
+== All providers (no flag) ==
+
+user -> cmd : raise status
+cmd -> plug : Discover()
+plug -> fs : scan every PATH dir for\nexecutable raise-* files
+plug --> cmd : plugin names (deduped)
+loop each discovered plugin
+  cmd --> user : "--- raise-<name> ---" header on stdout
+  cmd -> plug : Exec(name, ["status"])
+  plug -> pl : spawn subprocess
+  pl --> plug : exit code
+  cmd --> user : plugin output; per-plugin errors\ngo to stderr, loop continues
+end
+cmd --> user : exit 0 (even if some plugins failed)
+
+== Errors ==
+
+user -> cmd : no raise-* plugins in PATH
+cmd --> user : "No raise plugins found in PATH."\non stderr, exit 0
+
+@enduml

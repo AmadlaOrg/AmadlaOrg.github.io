@@ -1,0 +1,32 @@
+@startuml seq-lay-package
+
+title lay package — Subcommand Dispatch
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+
+== Registration (process start) ==
+
+cmd -> cmd : Register subcommands:\ninstall, remove, search,\nupdate, upgrade, list\n(package init, before Execute)
+cmd -> cmd : Persistent --manager flag\n(apt, dnf, yum, pacman, zypper,\napk, nix, snap, flatpak, dpkg, rpm, ...)
+
+== Dispatch ==
+
+user -> cmd : lay package <subcommand>
+cmd -> cmd : Route to the subcommand's Run
+cmd --> user : Subcommand output
+
+== Bare invocation ==
+
+user -> cmd : lay package
+cmd --> user : Help text on stdout,\nexit 0
+
+== Unknown subcommand ==
+
+user -> cmd : lay package bogus
+cmd --> user : unknown command error\n+ usage on stderr, exit 1
+
+@enduml

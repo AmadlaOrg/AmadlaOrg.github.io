@@ -1,0 +1,60 @@
+@startuml seq-lay-package-install
+
+title lay package install / remove — Idempotent Package Operations
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "package_manager/" as pm
+participant "package_manager/<mgr>/" as mgr
+participant "Package manager process\n(apt, dnf, pacman, ...)" as proc
+
+== Detection ==
+
+user -> cmd : lay package install <pkgs...>
+cmd -> pm : Detect(--manager override)
+pm -> pm : Priority: --manager flag >\nLAY_PACKAGE_MANAGER env >\nauto-detect via exec.LookPath\n(apt, dnf, yum, pacman, zypper, apk,\nnix, snap, flatpak, brew, choco, scoop, winget)
+pm --> cmd : manager name
+cmd -> pm : NewManagerByName(name)
+pm --> cmd : Manager implementation
+
+== Idempotency filter ==
+
+loop each package
+  cmd -> mgr : IsInstalled(pkg)
+  mgr -> proc : query installed state\n(e.g. dpkg -s, rpm -q)
+  mgr --> cmd : installed? (on error:\npackage kept in install list)
+end
+cmd --> user : "Already installed: <pkg>" per hit
+cmd --> user : all installed: message, exit 0
+
+== Install ==
+
+cmd -> mgr : Install(toInstall)
+mgr -> proc : sudo <mgr> install -y <pkgs>\n(sudo prefixed when uid != 0)\nstdin/stdout/stderr attached
+proc --> user : package manager output streams\ndirectly to the terminal
+mgr --> cmd : exit status
+cmd --> user : exit 0
+
+== remove (mirror flow) ==
+
+user -> cmd : lay package remove <pkgs...>
+cmd -> mgr : IsInstalled(pkg) per package\n(filters to installed only)
+cmd -> mgr : Remove(toRemove)
+mgr -> proc : sudo <mgr> remove -y <pkgs>
+
+== Dry run ==
+
+user -> cmd : lay package install --dry-run <pkgs...>
+cmd --> user : "[dry-run] Would install: [...]"\nno subprocess spawned, exit 0
+
+== Errors ==
+
+user -> cmd : lay package install foo\n(no manager on PATH)
+cmd --> user : Error: no supported package\nmanager found on stderr, exit 1
+user -> cmd : subprocess fails
+cmd --> user : Error on stderr, exit 1
+
+@enduml

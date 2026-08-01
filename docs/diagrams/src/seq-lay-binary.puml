@@ -1,0 +1,32 @@
+@startuml seq-lay-binary
+
+title lay binary — Subcommand Dispatch
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+
+== Registration (process start) ==
+
+cmd -> cmd : Register subcommands:\ninstall, remove, compile,\nlist, update\n(package init, before Execute)
+cmd -> cmd : Persistent flags:\n--to (install dir override)\n--name (command name override)
+
+== Dispatch ==
+
+user -> cmd : lay binary <subcommand>
+cmd -> cmd : Route to the subcommand's Run
+cmd --> user : Subcommand output
+
+== Bare invocation ==
+
+user -> cmd : lay binary
+cmd --> user : Help text on stdout,\nexit 0
+
+== Unknown subcommand ==
+
+user -> cmd : lay binary bogus
+cmd --> user : unknown command error\n+ usage on stderr, exit 1
+
+@enduml

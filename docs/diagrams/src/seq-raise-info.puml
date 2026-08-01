@@ -1,0 +1,23 @@
+@startuml seq-raise-info
+
+title raise info — Output Tool Metadata
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+
+== Static metadata ==
+
+user -> cmd : raise info [-o table|json|yaml] [--hery]
+cmd -> cmd : build RaiseInfo{name, version,\nsupports: [amadla.org/entity/infrastructure@^v1.0.0],\ndescription}
+cmd -> cmd : format per -o flag;\n--hery wraps in _type + _body envelope
+cmd --> user : table / JSON / YAML on stdout, exit 0
+
+== Notes ==
+
+user -> cmd : (no plugin aggregation)
+cmd --> user : supports list is static — plugin entity\ntypes are NOT aggregated despite a\nplugin.Service being constructed
+
+@enduml

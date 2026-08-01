@@ -14,6 +14,8 @@
 | `doorman list` | List discovered `doorman-*` plugins and their supported entities |
 | `doorman get` | Retrieve a secret via the appropriate plugin |
 
+Per-command sequence diagrams: [doorman Commands](doorman-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |

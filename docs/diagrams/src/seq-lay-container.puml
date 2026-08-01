@@ -1,0 +1,49 @@
+@startuml seq-lay-container
+
+title lay container — Runtime Passthrough
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "container/" as ct
+participant "container/<runtime>/" as rt
+participant "Runtime process\n(podman or docker)" as proc
+
+== Flag extraction (flag parsing disabled) ==
+
+user -> cmd : lay container [--runtime X] <args...>
+cmd -> cmd : DisableFlagParsing: manually\nextract --runtime / --runtime=X\nfrom raw args
+cmd -> cmd : first arg "docker" or "podman"?\n-> forces that runtime,\nrest of args pass through
+cmd --> user : no args or -h/--help:\nhelp text, exit 0
+
+== Detection ==
+
+cmd -> ct : Detect(override)
+ct -> ct : Priority: --runtime flag >\nLAY_CONTAINER_RUNTIME env >\nauto-detect via exec.LookPath\n(podman preferred over docker)
+ct --> cmd : runtime name
+cmd -> ct : NewRuntimeByName(name)
+ct --> cmd : Runtime implementation
+cmd --> user : "Using container runtime: <name>"
+
+== Passthrough execution ==
+
+cmd -> rt : Exec(args)
+rt -> proc : <runtime> <args...>\nstdin/stdout/stderr attached
+proc --> user : runtime output streams\ndirectly to the terminal
+rt --> cmd : exit status
+
+== Dry run ==
+
+user -> cmd : lay container --dry-run run alpine
+cmd --> user : "[dry-run] Would execute: ..."\nno subprocess, exit 0
+
+== Errors ==
+
+user -> cmd : lay container ps\n(neither podman nor docker on PATH)
+cmd --> user : Error: no supported container\nruntime found on stderr, exit 1
+user -> cmd : runtime subprocess fails
+cmd --> user : Error on stderr, exit 1\n(underlying exit code not forwarded)
+
+@enduml

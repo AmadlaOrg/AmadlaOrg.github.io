@@ -1,0 +1,43 @@
+@startuml seq-lay-package-update
+
+title lay package update / upgrade — Index Refresh and Upgrades
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "package_manager/" as pm
+participant "package_manager/<mgr>/" as mgr
+participant "Package manager process" as proc
+
+== update (refresh index) ==
+
+user -> cmd : lay package update
+cmd -> pm : Detect(--manager override)
+pm --> cmd : manager name -> Manager
+cmd -> mgr : Update()
+mgr -> proc : sudo <mgr> update\n(sudo when uid != 0)\nstdio attached
+proc --> user : output streams to terminal
+cmd --> user : exit 0
+
+== upgrade ==
+
+user -> cmd : lay package upgrade [pkgs...]
+cmd -> pm : Detect + NewManagerByName
+cmd -> mgr : Upgrade(pkgs)
+mgr -> proc : no args: sudo <mgr> upgrade -y (all)\nwith args: e.g. sudo apt install\n--only-upgrade -y <pkgs>
+proc --> user : output streams to terminal
+cmd --> user : exit 0
+
+== Dry run ==
+
+user -> cmd : lay package update --dry-run
+cmd --> user : "[dry-run] Would refresh..."\nno subprocess, exit 0
+
+== Errors ==
+
+user -> cmd : detection or subprocess failure
+cmd --> user : Error on stderr, exit 1
+
+@enduml

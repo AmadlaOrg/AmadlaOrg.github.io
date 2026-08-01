@@ -1,0 +1,37 @@
+@startuml seq-amadla-doctor
+
+title amadla doctor — Verify Tool Installation
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "toolconfig/" as toolconfig
+participant "Filesystem" as fs
+participant "Tool CLI" as tool
+
+== Checks ==
+
+user -> cmd : amadla doctor
+cmd -> toolconfig : Load(--config path or\n~/.config/amadla/tools.hery)
+toolconfig -> fs : Read tools.hery
+toolconfig --> cmd : Config (tools list)
+cmd -> toolconfig : EnrichWithInfo(cfg, InfoCache)
+cmd -> toolconfig : ResolvePath(tool) per tool
+toolconfig -> fs : Stat(explicit path)\nor PATH lookup
+toolconfig --> cmd : Path or "not found" error
+cmd -> tool : <tool> --version\n(for each resolved tool)
+tool --> cmd : Combined output\n("unknown" if --version fails —\nstill reported OK)
+cmd --> user : "  OK: <name> — <version> (<path>)"\nper tool on stdout
+cmd --> user : "SKIP: <name> — not found (optional)"\nfor missing optional tools
+cmd --> user : "All required tools are available.", exit 0
+
+== Errors ==
+
+user -> cmd : required tool not on PATH
+cmd --> user : "FAIL: <name> — required but not found\nin PATH" on stderr, then\n"N required tool(s) missing", exit 1
+user -> cmd : amadla doctor (config missing or unparsable)
+cmd --> user : "cannot read/parse config" on stderr, exit 1
+
+@enduml

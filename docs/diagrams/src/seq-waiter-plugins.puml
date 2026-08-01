@@ -1,0 +1,33 @@
+@startuml seq-waiter-plugins
+
+title waiter plugins — List Discovered Plugins
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "plugin/" as plugin
+participant "waiter-* plugin\n(subprocess)" as proc
+participant "Filesystem" as fs
+
+== Discover & describe ==
+
+user -> cmd : waiter plugins\n[-o table|json|yaml] [--hery]
+cmd -> plugin : Discover()
+plugin -> fs : scan each PATH dir for\nexecutable waiter-* binaries
+plugin --> cmd : plugin names
+loop per plugin
+  cmd -> plugin : GetInfo(name)
+  plugin -> proc : <plugin> info -o json
+  proc --> plugin : Info JSON\n(flat or HERY envelope)
+  plugin --> cmd : {type, engine, version, description}\n(errors become "?" rows)
+end
+cmd --> user : table, JSON, or YAML on stdout\n(--hery wraps in _type/_body envelope)
+
+== Errors ==
+
+user -> cmd : waiter plugins (none installed)
+cmd --> user : "No waiter plugins found in PATH."\non stderr, exit 0
+
+@enduml

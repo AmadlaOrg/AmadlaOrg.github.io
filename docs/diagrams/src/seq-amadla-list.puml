@@ -1,0 +1,35 @@
+@startuml seq-amadla-list
+
+title amadla list — Show Registered Tools
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "toolconfig/" as toolconfig
+participant "Filesystem" as fs
+participant "Tool CLI" as tool
+
+== Table ==
+
+user -> cmd : amadla list
+cmd -> toolconfig : Load(--config path or\n~/.config/amadla/tools.hery)
+toolconfig -> fs : Read tools.hery
+toolconfig --> cmd : Config (tools list)
+cmd -> toolconfig : EnrichWithInfo(cfg, InfoCache)
+toolconfig -> tool : <tool> info -o json\n(cache miss only)
+toolconfig --> cmd : supports filled in
+cmd -> toolconfig : ResolvePath(tool) per tool
+toolconfig -> fs : Stat(explicit path)\nor PATH lookup
+toolconfig --> cmd : Path or "not found" error
+cmd --> user : Table on stdout:\nTOOL / STATUS / PATH / ENTITY TYPES\n(found | missing | MISSING!)
+
+== Errors ==
+
+user -> cmd : amadla list (config missing or unparsable)
+cmd --> user : "cannot read/parse config" on stderr, exit 1
+user -> cmd : required tool not on PATH
+cmd --> user : status MISSING! + "error: required tool\n<name> not found" on stderr — but still exit 0\n(use amadla doctor for a failing check)
+
+@enduml

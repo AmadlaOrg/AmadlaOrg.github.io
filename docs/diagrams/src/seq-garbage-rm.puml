@@ -1,0 +1,49 @@
+@startuml seq-garbage-rm
+
+title garbage rm — Move Files or Directories to Trash
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "db/" as dbpkg
+participant "trash/" as trash
+participant "output/" as out
+database "SQLite\n(~/.local/amadla/db.sqlite)" as db
+participant "Filesystem\n(~/.local/amadla/trash/)" as fs
+
+== Opening the shared database ==
+
+user -> cmd : garbage rm <path>...
+cmd -> dbpkg : Open() + Migrate()
+dbpkg -> fs : mkdir -p ~/.local/amadla
+dbpkg -> db : open (WAL mode), ping,\nCREATE TABLE IF NOT EXISTS trash_items
+cmd -> trash : NewService(conn, trashDir)
+
+== Trashing each path ==
+
+loop each path argument
+cmd -> trash : Trash(path)
+trash -> fs : stat absolute path
+trash -> fs : mkdir trash/<uuid>/
+trash -> fs : rename → trash/<uuid>/<name>\n(copy + delete across filesystems)
+trash -> db : INSERT INTO trash_items
+trash --> cmd : Item{id, type, size, trashed_at}
+cmd -> out : Result(item)
+out --> user : "Trashed: <path> → <id>"\nor JSON on stdout
+end
+
+== Dry run ==
+
+user -> cmd : garbage rm --dry-run <path>
+cmd --> user : "Would trash: <path>"\n(no stat, no filesystem or DB change)
+
+== Errors ==
+
+user -> cmd : garbage rm <missing-path>
+cmd -> trash : Trash(path)
+trash --> cmd : stat/move error
+cmd --> user : "Error trashing …" on stderr,\ncontinues with next path — exit 0 even if all fail
+
+@enduml

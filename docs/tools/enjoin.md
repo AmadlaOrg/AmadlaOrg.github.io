@@ -19,6 +19,8 @@ Each concern is handled by a **fat plugin** (`enjoin-*`) with multiple OS-aware 
 | `enjoin validate --from <plugin> -f <data>` | Dry-run validation — shows what would change without applying |
 | `enjoin plugins` | List discovered enjoin plugins on PATH |
 
+Per-command sequence diagrams: [enjoin Commands](enjoin-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |

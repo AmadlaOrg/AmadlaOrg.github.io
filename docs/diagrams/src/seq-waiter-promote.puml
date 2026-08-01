@@ -1,0 +1,39 @@
+@startuml seq-waiter-promote
+
+title waiter promote — Promote Canary to Full Traffic
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "state/" as state
+participant "Engine plugin\n(waiter-<engine>)" as engine
+participant "Proxy plugin\n(waiter-proxy-*)" as proxy
+participant "Filesystem" as fs
+
+== Promote ==
+
+user -> cmd : waiter promote <service>\n[--drain-timeout N]
+cmd -> state : Load(service)
+state -> fs : read ~/.local/share/waiter/<service>.json
+cmd -> cmd : require Canary slot in state
+cmd -> proxy : shift <svc>-canary --weight 256\n(exit code checked)
+cmd -> proxy : shift <svc>-<oldslot> --weight 0,\ndrain --timeout N, remove\n(best-effort, errors ignored)
+cmd -> engine : stop <old container>\n(best-effort)
+cmd -> proxy : remove <svc>-canary
+cmd -> proxy : register <svc>-<newslot>\nlocalhost:<canary port> --weight 256
+cmd -> state : Save(canary becomes Current,\nStrategy set to "blue-green")
+state -> fs : write <service>.json
+cmd --> user : updated state JSON on stdout
+
+== Errors ==
+
+user -> cmd : waiter promote <unknown service>
+cmd --> user : "no deployment state" on stderr, exit 1
+user -> cmd : no canary in progress
+cmd --> user : error on stderr, exit 1
+user -> cmd : proxy shift-to-canary fails
+cmd --> user : error on stderr, exit 1\n(all later plugin calls are unchecked)
+
+@enduml

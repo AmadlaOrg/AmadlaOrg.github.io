@@ -1,0 +1,58 @@
+@startuml seq-amadla-run
+
+title amadla run — Execute the Pipeline DAG
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "toolconfig/" as toolconfig
+participant "dag/" as dag
+participant "Filesystem" as fs
+participant "Tool CLI\n(raise, lay, enjoin, weaver, ...)" as tool
+
+== Config load & enrichment ==
+
+user -> cmd : amadla run [entity-dir] [--dry-run]
+cmd -> toolconfig : Load(--config path or\n~/.config/amadla/tools.hery)
+toolconfig -> fs : Read tools.hery
+toolconfig --> cmd : Config (tools list)
+cmd -> toolconfig : EnrichWithInfo(cfg, InfoCache)
+toolconfig -> fs : Read ~/.cache/amadla/tool-info.json
+toolconfig -> tool : <tool> info -o json\n(only on cache miss or binary mtime change,\nonly for tools without supports in config)
+tool --> toolconfig : name, version, supports
+toolconfig -> fs : Write refreshed cache
+toolconfig --> cmd : supports filled in\n(enrichment failures are silent)
+cmd -> cmd : buildToolMap\n(entity type URI → tool)
+
+== DAG build ==
+
+cmd -> fs : ReadDir(entity-dir),\nread each *.hery file (non-recursive)
+cmd -> dag : Add(node) per document\n(URI = _type, edges = _requires)
+cmd -> dag : Levels() — Kahn's algorithm
+dag --> cmd : Parallel execution tiers
+
+== Dry run: --dry-run ==
+
+cmd --> user : Numbered execution order on stdout\n([parallel] marks concurrent tiers), exit 0
+
+== Execution (tier by tier) ==
+
+cmd -> toolconfig : ResolvePath(tool) per entity\n(explicit path, else PATH lookup)
+toolconfig --> cmd : Binary path
+cmd -> tool : Spawn tool — entity JSON on stdin\n+ AMADLA_ENTITY env var\n(one goroutine per entity in the tier)
+tool --> user : Tool stdout/stderr pass through
+tool --> cmd : Exit code
+cmd --> user : exit 0 when all tiers succeed
+
+== Errors ==
+
+user -> cmd : cycle in _requires
+cmd --> user : "DAG resolution failed: circular\n_requires reference detected" on stderr, exit 1
+user -> cmd : entity type with no registered tool
+cmd --> user : warning on stderr, entity skipped,\nrun continues
+user -> cmd : tool exits non-zero
+cmd --> user : "tool <name> failed for <uri>" on stderr, exit 1\n(other entities in the same tier still finish;\nonly the first error is reported)
+
+@enduml

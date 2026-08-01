@@ -1,0 +1,41 @@
+@startuml seq-garbage-info
+
+title garbage info — Show Details of a Trashed Item
+
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceParticipantBorderColor #444
+
+actor "User" as user
+participant "cmd/" as cmd
+participant "db/" as dbpkg
+participant "trash/" as trash
+participant "output/" as out
+database "SQLite\n(~/.local/amadla/db.sqlite)" as db
+
+== Opening the shared database ==
+
+user -> cmd : garbage info <id>
+cmd -> dbpkg : Open() + Migrate()
+dbpkg -> db : open (WAL mode),\nCREATE TABLE IF NOT EXISTS trash_items
+cmd -> trash : NewService(conn, trashDir)
+
+== Finding the item ==
+
+cmd -> trash : Find(id)
+trash -> db : SELECT by exact ID,\nthen ID prefix (LIKE 'x%'),\nthen exact name
+db --> trash : matching rows
+trash --> cmd : []Item (must be exactly one)
+
+== Output ==
+
+cmd -> out : Result(item)
+out --> user : ID, name, type, original path,\ntrash path, size, trashed at, metadata\nor JSON on stdout
+
+== Errors ==
+
+user -> cmd : garbage info <unknown-id>
+cmd --> user : "no item found for …", exit 1
+user -> cmd : garbage info <short-prefix matching several>
+cmd --> user : "ambiguous: N items match —\nuse the full ID", exit 1
+
+@enduml
