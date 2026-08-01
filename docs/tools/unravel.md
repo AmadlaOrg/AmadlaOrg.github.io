@@ -19,6 +19,8 @@ unravel is **stateless and on-demand** — it discovers and outputs, following t
 | `unravel discover --type <entity-type>` | Discover specific entity type (e.g., network) |
 | `unravel settings` | Manage unravel configuration |
 
+Per-command sequence diagrams: [unravel Commands](unravel-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |

@@ -11,6 +11,8 @@ conduct is like a conductor — each server plays a different part. Not all serv
 
 On a single server, Podman (rootless, Quadlet) with systemd handles container restarts. conduct handles what happens when you have multiple servers.
 
+Per-command sequence diagrams: [conduct Commands](conduct-commands.md).
+
 ## Commands
 
 | Command | Description |

@@ -18,6 +18,8 @@ judge supports both **generic deep diff** (works with any entity type) and **typ
 | `judge audit` | Compare expected vs actual state, output judge entity |
 | `judge settings` | Manage judge configuration |
 
+Per-command sequence diagrams: [judge Commands](judge-commands.md).
+
 ## Dependencies
 
 | Library | Purpose |
