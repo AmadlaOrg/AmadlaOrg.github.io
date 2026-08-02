@@ -78,7 +78,7 @@ A plugin for the **judge** tool that checks whether a system's actual state matc
 The Amadla package/application installer. Installs packages, applications, JARs, and container images (pull/build). For containers, lay handles build/pull; waiter handles deployment.
 
 ### lighthouse
-The Amadla notification/alerting tool. Sends notifications via plugins (webhook, Slack, email, SMS). Receives entity output from any tool via UNIX pipe.
+The Amadla notification/alerting tool. Sends notifications via plugins (webhook, Slack, email, SMS, WebRTC). Receives entity output from any tool via UNIX pipe.
 
 ### Lock file (`hery.lock`)
 A JSON file at the project root containing the merge state. Same data as the SQLite cache (`.hery.cache`) but in a portable format. Committed to Git for reproducibility. Should not be edited manually.
@@ -123,7 +123,7 @@ The Amadla discovery tool. Wraps osquery (on-demand, stateless) + custom plugins
 ## W
 
 ### waiter
-The Amadla deployment tool. Manages deployment strategies (blue-green, canary, rolling) with platform plugins (waiter-podman, waiter-docker, waiter-quadlet) and proxy plugins (waiter-proxy-haproxy, waiter-proxy-kamal). Consumes image refs from lay and config files from weaver.
+The Amadla deployment tool. Manages deployment strategies (blue-green, canary, rolling, restart) with engine plugins (waiter-podman, waiter-docker, waiter-quadlet, waiter-systemd) and proxy plugins (waiter-proxy-haproxy, waiter-proxy-kamal). Consumes image refs from lay and config files from weaver.
 
 ### weaver
 The Amadla template/config generator. Renders configuration files (Quadlet, nginx.conf, podman-compose, k8s, CI/CD, or any text file) using HERY entities and pluggable template engines (Go, Jinja2, Mustache, Qute, FreeMarker). ETL-like: transforms entity data into any text output.

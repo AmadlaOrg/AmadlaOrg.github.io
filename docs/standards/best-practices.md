@@ -19,7 +19,7 @@ This is not a reserved property — it lives inside `_body` and is schema-define
 ```yaml
 _type: amadla.org/entity/template@v1.0.0
 _body:
-  engine: jinja
+  engine: jinja2
   path: ./templates/nginx.conf.j2
   output: /etc/nginx/conf.d/myapp.conf
   supports:

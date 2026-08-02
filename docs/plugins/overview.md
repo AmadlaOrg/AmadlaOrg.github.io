@@ -13,11 +13,13 @@ Plugins can be written in **any language** — Go, Python, Bash, or anything tha
 | Category | Host Tool | Naming | Count | Active | Planned/Stubs |
 |----------|-----------|--------|-------|--------|---------------|
 | [Raise Plugins](raise-plugins.md) | raise | `raise-*` | 10 | 7 | 3 |
-| [Doorman Plugins](doorman-plugins.md) | doorman | `doorman-*` | 16 | 1 | 15 |
-| [Judge Plugins](judges.md) | judge | `judge-*` | 3 | 1 | 2 |
-| [Weaver Plugins](weavers.md) | weaver | `weaver-*` | 4 | 0 | 4 |
-| [Enjoin Plugins](enjoin-plugins.md) | enjoin | `enjoin-*` | 10 | 3 | 7 |
-| **Total** | | | **43** | **12** | **31** |
+| [Doorman Plugins](doorman-plugins.md) | doorman | `doorman-*` | 16 | 3 | 13 |
+| [Judge Plugins](judges.md) | judge | `judge-*` | 4 | 3 | 1 |
+| [Weaver Plugins](weavers.md) | weaver | `weaver-*` | 5 | 5 | 0 |
+| [Enjoin Plugins](enjoin-plugins.md) | enjoin | `enjoin-*` | 10 | 10 | 0 |
+| [Waiter Plugins](../tools/waiter.md) | waiter | `waiter-*` | 6 | 6 | 0 |
+| [Lighthouse Plugins](../tools/lighthouse.md) | lighthouse | `lighthouse-*` | 5 | 5 | 0 |
+| **Total** | | | **56** | **39** | **17** |
 
 ## Naming Convention
 
@@ -25,7 +27,7 @@ Plugins use the `<tool>-<name>` pattern, where the prefix matches the host tool 
 
 - `doorman-vault` — Doorman plugin for HashiCorp Vault
 - `judge-application` — Judge plugin for application validation
-- `weaver-jinja` — Weaver plugin for Jinja2 templates
+- `weaver-jinja2` — Weaver plugin for Jinja2 templates
 
 Tools discover plugins by scanning `$PATH` for binaries matching their prefix.
 

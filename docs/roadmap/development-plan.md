@@ -71,7 +71,7 @@ With stable foundations, build out the pipeline tools and plugins:
 
 - Complete `weave` command
 - Implement template plugin loading
-- Build first weaver plugin (weaver-jinja recommended)
+- Build first weaver plugin (weaver-jinja2 recommended)
 
 **Stage 4c: Priority plugins**
 

@@ -9,14 +9,15 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 | Core Tools | 14 | 12 | 1 | 1 |
 | Libraries | 6 | 6 | 0 | 0 |
 | Doorman Plugins | 16 | 3 | 0 | 13 |
-| Judge Plugins | 3 | 2 | 0 | 1 |
+| Judge Plugins | 4 | 3 | 0 | 1 |
 | Weaver Plugins | 5 | 5 | 0 | 0 |
 | Enjoin Plugins | 10 | 10 | 0 | 0 |
-| Waiter Plugins | 5 | 5 | 0 | 0 |
+| Waiter Plugins | 6 | 6 | 0 | 0 |
+| Lighthouse Plugins | 5 | 5 | 0 | 0 |
 | Raise Plugins | 10 | 7 | 0 | 3 |
 | Entity Definitions (Entities repo, ~170 schemas) | 1 | 1 | 0 | 0 |
 | Other | 8 | 4 | 0 | 4 |
-| **Total** | **78** | **55** | **1** | **22** |
+| **Total** | **85** | **62** | **1** | **22** |
 
 ## Core Tools Detail
 
@@ -51,7 +52,7 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 ### judge (Complete)
 
-- Core CLI + 2 plugins (application, network)
+- Core CLI + 3 plugins (application, network, waiter)
 - Plugin discovery via PATH
 - Commands: `run`, `plugins`
 
@@ -68,8 +69,8 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 ### waiter (Complete)
 
-- Core + 5 plugins — 86+ tests passing
-- Two-axis plugin model: engine plugins (podman, docker, quadlet) × proxy plugins (proxy-haproxy, proxy-kamal)
+- Core + 6 plugins (podman, docker, quadlet, systemd, proxy-haproxy, proxy-kamal) — 86+ tests passing
+- Two-axis plugin model: engine plugins (podman, docker, quadlet, systemd) × proxy plugins (proxy-haproxy, proxy-kamal)
 - Strategies: blue-green, canary, rolling, restart
 
 ### enjoin (Complete)
@@ -88,8 +89,8 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 ### lighthouse (Complete)
 
-- Core + 4 plugins (webhook, slack, email, sms) — 65+ tests
-- Intelligent suppression: dedup → silence → flap detection → backoff → rate limiting → grouping → delivery
+- Core + 5 plugins (webhook, slack, email, sms, webrtc) — 65+ tests
+- Intelligent suppression: silence → flap detection → dedup → backoff → rate limiting → grouping → delivery
 
 ### garbage (Complete)
 
