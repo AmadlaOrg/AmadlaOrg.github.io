@@ -5,7 +5,7 @@
 | **Purpose** | Defines network security posture — TLS requirements, network isolation, protocol hardening, DNS security |
 | **Repo** | [AmadlaOrg/Entities/Security/Network](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/security/network@v1.0.0` |
-| **Parent** | [Security](security.md) |
+| **Parent type** | [Security](security.md) |
 
 ## Schema
 

@@ -104,7 +104,7 @@ _requires:
 
 hery validates `_requires` syntax at parse time. amadla validates that referenced entities actually exist at orchestration time.
 
-Note: `_requires` declares entity-level dependencies. Application-specific dependencies (like podman-compose `depends_on`) go in `_body` as `require` — these are handled by the relevant tool (e.g., lay), not amadla.
+Note: `_requires` declares entity-level dependencies. Application-specific dependencies (like podman-compose `depends_on`) go in `_body` as `requires` — these are handled by the relevant tool (e.g., lay), not amadla.
 
 **Reservation rules:**
 
@@ -217,10 +217,10 @@ hery query --type 'amadla.org/entity/application@v*'
 hery query --tag production
 
 # Filter + extract fields with jq
-hery query --type '*/network@*' --jq '.[].\_body.port'
+hery query --type '*/network@*' --jq '.[]._body.port'
 
 # Combine with external tools (UNIX pipe)
-hery query --type '*/application@*' | doorman inject | weaver render
+hery query --type '*/application@*' | doorman resolve | weaver render
 ```
 
 Selection flags (`--type`, `--meta`, `--tag`) hit SQLite indexes for fast filtering. The `--jq` flag applies jq transformations without requiring jq to be installed. Users can also pipe to external `jq` directly.

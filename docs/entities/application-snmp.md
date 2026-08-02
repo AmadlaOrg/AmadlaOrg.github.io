@@ -23,7 +23,7 @@ These properties are common across all SNMP implementations. Sub-types add appli
 
 | Sub-type | Application |
 |----------|-------------|
-| [SNMP/Net-SNMP](application-snmp-net-snmp.md) | Net-SNMP (snmpd) -- full-featured SNMP agent and toolkit |
+| [SNMP/Net-SNMP](application-snmp-net-snmp.md) | Net-SNMP (snmpd) — full-featured SNMP agent and toolkit |
 
 ## Example
 

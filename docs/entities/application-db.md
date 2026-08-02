@@ -19,6 +19,12 @@ Application/DB describes database requirements:
 - Databases to create (name, owner, encoding)
 - Engine-specific config overrides
 
+## Sub-types
+
+| Sub-type | Purpose |
+|----------|---------|
+| [DB/RDBMS](application-db-rdbms.md) | Relational-specific: migrations, replication, backup, connection pooling |
+
 ## Example
 
 ```yaml
@@ -53,9 +59,3 @@ _body:
 | [doorman](../tools/doorman.md) | Resolves `admin_password_secret` |
 | [weaver](../tools/weaver.md) | Generates database configuration files |
 | [judge-application](../plugins/judges.md) | Validates database is installed and running correctly |
-
-## Sub-types
-
-| Sub-type | Purpose |
-|----------|---------|
-| [DB/RDBMS](application-db-rdbms.md) | Relational-specific: migrations, replication, backup, connection pooling |

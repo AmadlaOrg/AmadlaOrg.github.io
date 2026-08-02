@@ -5,7 +5,7 @@
 | **Purpose** | Defines SELinux policy configuration — mode, policy type, booleans, file contexts, port labels, modules |
 | **Repo** | [AmadlaOrg/Entities/Security/SELinux](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/security/selinux@v1.0.0` |
-| **Parent** | [Security](security.md) |
+| **Parent type** | [Security](security.md) |
 
 ## Schema
 

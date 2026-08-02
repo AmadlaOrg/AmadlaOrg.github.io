@@ -44,7 +44,8 @@ name, and moves the single match back to its original path — or to
 directories are recreated as needed; on success the database row and the
 item's trash directory are removed. Zero matches, multiple matches
 (ambiguous prefix or duplicate names), or an occupied destination exit 1.
-`--dry-run` prints every match it would restore without moving anything.
+`--dry-run` prints every match it would restore without moving anything —
+unlike a real restore, it lists all matches instead of failing on ambiguity.
 
 ![garbage restore](../diagrams/out/seq-garbage-restore.svg#only-light)
 ![garbage restore](../diagrams/out/seq-garbage-restore-dark.svg#only-dark)

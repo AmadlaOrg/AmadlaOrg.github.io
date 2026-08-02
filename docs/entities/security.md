@@ -18,11 +18,13 @@
 
 | Entity | Purpose | Handled By |
 |--------|---------|------------|
+| [Security/AppArmor](security-apparmor.md) | AppArmor mandatory access control profiles and policies | enjoin |
 | [Security/Certificate](security-certificate.md) | TLS/SSL certificate provisioning and renewal | enjoin, doorman |
 | [Security/Firewall](security-firewall.md) | Firewall rules — iptables, nftables, ufw, firewalld | enjoin-firewall |
 | [Security/IDS](security-ids.md) | Intrusion detection/prevention — fail2ban, OSSEC, Suricata, Snort, CrowdSec | enjoin |
 | [Security/Network](security-network.md) | Network security posture — TLS, isolation, protocol hardening, DNS security | enjoin-network |
 | [Security/SELinux](security-selinux.md) | SELinux policies, booleans, file contexts, port labels | enjoin-selinux |
+| [Security/WAF](security-waf.md) | Web Application Firewall engines and rule sets | enjoin |
 
 ## Example
 

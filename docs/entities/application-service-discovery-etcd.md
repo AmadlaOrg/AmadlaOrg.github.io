@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Etcd-specific configuration -- distributed key-value store, backbone of Kubernetes |
+| **Purpose** | Etcd-specific configuration — distributed key-value store, backbone of Kubernetes |
 | **Repo** | [AmadlaOrg/Entities/Application/ServiceDiscovery/Etcd](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/service-discovery/etcd@v1.0.0` |
 | **Parent type** | [Application/ServiceDiscovery](application-service-discovery.md) |

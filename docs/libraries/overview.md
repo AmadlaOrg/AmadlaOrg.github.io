@@ -41,5 +41,5 @@ All libraries follow these conventions:
 - **Struct implementations:** Unexported structs (`gitImpl`, `fileImpl`)
 - **Constructors:** `New()` functions returning interface types
 - **Mock generation:** Mockery v2 configured in `.mockery.yaml`
-- **Testing:** testify/assert + testify/mock (except hery which uses Ginkgo/Gomega)
+- **Testing:** testify/assert + testify/mock (except LibraryFramework, which uses Ginkgo/Gomega)
 - **Local references:** `replace` directives in `go.mod` for sibling directories

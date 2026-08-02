@@ -9,7 +9,7 @@
 
 ## What It Provides
 
-LibraryJudgeFramework extends LibraryPluginFramework for audit plugins:
+LibraryJudgeFramework implements the judge plugin protocol for validation/audit plugins:
 
 - Standard interface for running audit checks
 - Compliance reporting format (pass/fail per check)

@@ -5,7 +5,7 @@
 | **Purpose** | Declares preferred system tools per concern — package manager, firewall, network, cron, MAC |
 | **Repo** | [AmadlaOrg/Entities/OS/Preference](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/os/preference@v1.0.0` |
-| **Parent** | [OS](os.md) |
+| **Parent type** | [OS](os.md) |
 
 ## Schema
 

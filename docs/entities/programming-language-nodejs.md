@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Node.js specific configuration — npm/yarn/pnpm, registry, and Corepack settings |
+| **Purpose** | Node.js-specific configuration — npm/yarn/pnpm, registry, and Corepack settings |
 | **Repo** | [AmadlaOrg/Entities/ProgrammingLanguage/NodeJS](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/programming-language/nodejs@v1.0.0` |
 | **Parent type** | [ProgrammingLanguage](programming-language.md) |

@@ -3,8 +3,8 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines programming language runtime requirements — language version, runtime, build tools |
-| **Repo** | [AmadlaOrg/Entities/ProgrammingLanguage](https://github.com/AmadlaOrg/Entities/ProgrammingLanguage) |
-| **Entity URI** | `amadla.org/entity/programminglanguage@v1.0.0` |
+| **Repo** | [AmadlaOrg/Entities/ProgrammingLanguage](https://github.com/AmadlaOrg/Entities) |
+| **Entity URI** | `amadla.org/entity/programming-language@v1.0.0` |
 
 ## Schema
 

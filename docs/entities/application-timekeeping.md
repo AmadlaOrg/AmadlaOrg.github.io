@@ -13,7 +13,7 @@
 |----------|------|-------------|
 | `servers` | array of strings | Time server addresses (e.g., `time.google.com`) |
 | `pools` | array of strings | Pool addresses resolved to multiple servers (e.g., `pool.ntp.org`) |
-| `fallback_servers` | array of strings | Fallback servers when primary are unreachable |
+| `fallback_servers` | array of strings | Fallback servers when the primary servers are unreachable |
 | `enabled` | boolean | Whether time synchronization is active (default: `true`) |
 | `preferred` | string | Preferred server (marked with `prefer` option) |
 
@@ -23,11 +23,11 @@ These properties are common across all time sync implementations. Sub-types add 
 
 | Sub-type | Application |
 |----------|-------------|
-| [Time/NTP](application-timekeeping-ntp.md) | ntpd — classic NTP daemon |
-| [Time/Chrony](application-timekeeping-chrony.md) | chrony — modern NTP replacement |
-| [Time/Timesyncd](application-timekeeping-timesyncd.md) | systemd-timesyncd — lightweight SNTP client |
-| [Time/OpenNTPD](application-timekeeping-openntpd.md) | OpenNTPD — BSD-origin, simpler than ntpd |
-| [Time/PTP](application-timekeeping-ptp.md) | linuxptp — Precision Time Protocol, sub-microsecond |
+| [Timekeeping/NTP](application-timekeeping-ntp.md) | ntpd — classic NTP daemon |
+| [Timekeeping/Chrony](application-timekeeping-chrony.md) | chrony — modern NTP replacement |
+| [Timekeeping/Timesyncd](application-timekeeping-timesyncd.md) | systemd-timesyncd — lightweight SNTP client |
+| [Timekeeping/OpenNTPD](application-timekeeping-openntpd.md) | OpenNTPD — BSD-origin, simpler than ntpd |
+| [Timekeeping/PTP](application-timekeeping-ptp.md) | linuxptp — Precision Time Protocol, sub-microsecond |
 
 ## Example
 

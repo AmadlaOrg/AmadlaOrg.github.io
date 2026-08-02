@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines audit rules — what compliance checks to run and their expected outcomes |
-| **Repo** | [AmadlaOrg/Entities/Judge](https://github.com/AmadlaOrg/Entities/Judge) |
+| **Repo** | [AmadlaOrg/Entities/Judge](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/judge@v1.0.0` |
 
 ## Schema
