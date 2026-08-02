@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines infrastructure requirements — servers, networks, storage, cloud resources |
-| **Repo** | [AmadlaOrg/Entities/Infrastructure](https://github.com/AmadlaOrg/Entities/Infrastructure) |
+| **Repo** | [AmadlaOrg/Entities/Infrastructure](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/infrastructure@v1.0.0` |
 
 ## Schema

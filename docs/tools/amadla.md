@@ -73,7 +73,7 @@ amadla discovers tools via a **config-driven** model (like xdg-open):
 
 1. **`~/.config/amadla/tools.hery`** — lists tool names, optionally with explicit paths and entity types
 2. **PATH resolution** — amadla looks up each tool name on PATH. Explicit path overrides are optional
-3. **`<tool> info`** — for tools missing `entity_types` in config, amadla calls `<tool> info` to discover capabilities (entity types, version, description)
+3. **`<tool> info`** — for tools missing `supports` in config, amadla calls `<tool> info` to discover capabilities (entity types, version, description)
 4. **Cache** — `<tool> info` results are cached at `~/.cache/amadla/tool-info.json`. Cache invalidation is mtime-based: if the tool binary's mtime changes, amadla re-runs `info`
 5. **`amadla init`** — bootstraps a default `tools.hery` by scanning PATH for 13 standard Amadla tool names
 
@@ -85,7 +85,7 @@ _body:
   tools:
     - name: hery
       required: true
-      entity_types:
+      supports:
         - amadla.org/entity/application@v1.0.0
     - name: doorman
     - name: weaver
@@ -96,7 +96,7 @@ _body:
       path: /home/user/bin/my-tool
 ```
 
-Tools with explicit `entity_types` in the config skip the `<tool> info` call. Tools without `entity_types` are enriched automatically via cached discovery.
+Tools with explicit `supports` in the config skip the `<tool> info` call. Tools without `supports` are enriched automatically via cached discovery.
 
 ### Standard Tool Names
 

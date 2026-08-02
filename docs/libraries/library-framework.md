@@ -27,6 +27,7 @@ LibraryFramework wraps [Cobra](https://github.com/spf13/cobra) to give all Amadl
 - hery
 - doorman
 - LibraryJudgeFramework (and by extension, judge plugins)
+- LibraryEnjoinFramework (and by extension, enjoin plugins)
 
 ## Development Notes
 

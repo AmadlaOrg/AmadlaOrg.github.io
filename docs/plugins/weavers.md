@@ -6,10 +6,11 @@ Weaver plugins are template engine integrations for the **weaver** tool. Each pl
 
 | Plugin | Engine | Language |
 |--------|--------|----------|
+| `weaver-go` | Go templates | Go |
 | `weaver-jinja` | Jinja2 | Python |
-| `weaver-js-handlebars` | Handlebars | JavaScript |
-| `weaver-js-mustache` | Mustache | JavaScript |
+| `weaver-mustache` | Mustache | Go |
 | `weaver-qute` | Qute | Java (Quarkus) |
+| `weaver-freemarker` | FreeMarker | Java |
 
 ## How They Work
 
@@ -53,17 +54,21 @@ weaver-jinja render --template ./nginx.conf.j2 < entity.json > /etc/nginx/conf.d
 
 Python-based template engine. Widely used in infrastructure automation (Ansible, Salt). Supports inheritance, macros, filters.
 
-### Handlebars (weaver-js-handlebars)
+### Go templates (weaver-go)
 
-JavaScript template engine with logic-less philosophy plus helpers. Good for generating structured configs.
+Go's standard `text/template` engine. No external runtime needed — ships as a single binary like the rest of the ecosystem.
 
-### Mustache (weaver-js-mustache)
+### Mustache (weaver-mustache)
 
 Minimal logic-less template engine. Available in many languages. Simple variable substitution and sections.
 
 ### Qute (weaver-qute)
 
 Java template engine from the Quarkus ecosystem. Type-safe, compile-time validated.
+
+### FreeMarker (weaver-freemarker)
+
+Java template engine widely used in the JVM ecosystem. Rich directives and built-ins for structured output.
 
 ## Framework
 
@@ -72,6 +77,7 @@ Weaver plugins do not yet have a dedicated Go framework library (unlike Doorman 
 ## Implementation Priority
 
 1. **weaver-jinja** — Most familiar to infrastructure engineers
-2. **weaver-js-mustache** — Simplest engine, good for basic configs
-3. **weaver-js-handlebars** — More powerful than Mustache
+2. **weaver-go** — No external runtime, simplest to ship
+3. **weaver-mustache** — Simplest engine, good for basic configs
 4. **weaver-qute** — For Quarkus/Java ecosystem integration
+5. **weaver-freemarker** — For JVM ecosystem integration

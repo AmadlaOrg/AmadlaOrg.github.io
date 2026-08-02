@@ -81,8 +81,9 @@ stderr and exits 0; an unknown named service exits 1.
 
 Compares recorded state against reality: asks the engine plugin for the
 current container's status and the proxy plugin for backend health, and
-reports `ok`, `drifted`, or `fixed` per service (one service, or all when
-run bare). `--fix` only repairs container drift by starting the container —
+reports `ok`, `drifted`, or `fixed` per service — or `error` when a
+service's plugin calls fail (one service, or all when run bare). `--fix`
+only repairs container drift by starting the container —
 proxy drift is reported but never fixed, and in the "container exists but
 not running" branch the status is marked `fixed` without re-verifying
 health. In all-services mode a failing service becomes a `status: "error"`

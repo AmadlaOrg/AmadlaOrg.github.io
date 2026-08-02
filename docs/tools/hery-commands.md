@@ -77,8 +77,8 @@ table, JSON, or YAML (`-o`), optionally wrapped in a HERY envelope with
 ## hery compose
 
 Flattens entities into their final form. With `--dir`, a local directory
-of `.hery` files is resolved into ordered merge layers — `_requires`
-ordering within a layer, local `_extends` deep-merged, non-local
+of `.hery` files is resolved into ordered merge layers — documents within
+each layer ordered by `_requires`, local `_extends` deep-merged, non-local
 references left as warnings — and emitted as a multi-document YAML stream
 (`--layer N` picks one layer); this is the stream `raise up -f -`
 consumes. With a positional entity URI, the cached entity's `_extends`

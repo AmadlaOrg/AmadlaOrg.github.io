@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | StrongSwan-specific configuration -- IPsec/IKEv2 VPN for site-to-site and remote access |
+| **Purpose** | StrongSwan-specific configuration — IPsec/IKEv2 VPN for site-to-site and remote access |
 | **Repo** | [AmadlaOrg/Entities/Application/VPN/StrongSwan](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/vpn/strongswan@v1.0.0` |
 | **Parent type** | [Application/VPN](application-vpn.md) |

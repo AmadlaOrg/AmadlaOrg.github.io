@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Consul-specific configuration -- service mesh, health checking, and distributed KV store |
+| **Purpose** | Consul-specific configuration — service mesh, health checking, and distributed KV store |
 | **Repo** | [AmadlaOrg/Entities/Application/ServiceDiscovery/Consul](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/service-discovery/consul@v1.0.0` |
 | **Parent type** | [Application/ServiceDiscovery](application-service-discovery.md) |

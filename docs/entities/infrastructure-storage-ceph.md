@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Ceph-specific configuration -- unified distributed storage providing block, object, and file interfaces |
+| **Purpose** | Ceph-specific configuration — unified distributed storage providing block, object, and file interfaces |
 | **Repo** | [AmadlaOrg/Entities/Infrastructure/Storage/Ceph](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/infrastructure/storage/ceph@v1.0.0` |
 | **Parent type** | [Infrastructure/Storage](infrastructure-storage.md) |

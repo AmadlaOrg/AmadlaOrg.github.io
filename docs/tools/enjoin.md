@@ -95,8 +95,8 @@ Each enjoin plugin is a **fat plugin** — it contains multiple backends interna
 | `enjoin-network` | Network config | ip, nmcli, netplan, ifupdown | [System/Network](../entities/system-network.md) |
 | `enjoin-filesystem` | Mounts, fstab | mount, fstab, tmpfs | [System/Filesystem](../entities/system-filesystem.md) |
 | `enjoin-certificate` | TLS certificates | certbot, openssl, mkcert | [Security/Certificate](../entities/security-certificate.md) |
-| `enjoin-selinux` | SELinux policies | semanage, setsebool, restorecon | — |
-| `enjoin-apparmor` | AppArmor profiles | aa-enforce, aa-complain | — |
+| `enjoin-selinux` | SELinux policies | semanage, setsebool, restorecon | [Security/SELinux](../entities/security-selinux.md) |
+| `enjoin-apparmor` | AppArmor profiles | aa-enforce, aa-complain | [Security/AppArmor](../entities/security-apparmor.md) |
 | `enjoin-sysctl` | Kernel parameters | sysctl.conf | — |
 
 Plugins are discovered via PATH (`enjoin-*` naming convention). Each plugin declares supported entity types via its `info` subcommand.

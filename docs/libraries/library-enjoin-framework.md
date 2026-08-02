@@ -47,7 +47,7 @@ func main() {
 // RunApply applies system state and returns success + details.
 type RunApply func(*io.Reader) (bool, map[string]any)
 
-// RunValidate dry-run checks without making changes.
+// RunValidate performs dry-run checks without making changes.
 type RunValidate func(*io.Reader) (bool, map[string]any)
 ```
 

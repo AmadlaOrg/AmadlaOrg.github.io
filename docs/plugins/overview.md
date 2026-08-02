@@ -12,11 +12,12 @@ Plugins can be written in **any language** — Go, Python, Bash, or anything tha
 
 | Category | Host Tool | Naming | Count | Active | Planned/Stubs |
 |----------|-----------|--------|-------|--------|---------------|
-| [Raise Plugins](raise-plugins.md) | raise | `raise-*` | 10 | 3 | 7 |
+| [Raise Plugins](raise-plugins.md) | raise | `raise-*` | 10 | 7 | 3 |
 | [Doorman Plugins](doorman-plugins.md) | doorman | `doorman-*` | 16 | 1 | 15 |
 | [Judge Plugins](judges.md) | judge | `judge-*` | 3 | 1 | 2 |
 | [Weaver Plugins](weavers.md) | weaver | `weaver-*` | 4 | 0 | 4 |
-| **Total** | | | **33** | **5** | **28** |
+| [Enjoin Plugins](enjoin-plugins.md) | enjoin | `enjoin-*` | 10 | 3 | 7 |
+| **Total** | | | **43** | **12** | **31** |
 
 ## Naming Convention
 
@@ -54,6 +55,7 @@ See [Plugin System Architecture](../architecture/plugin-system.md) for the full 
 |-----------|-----|----------|
 | LibraryDoormanFramework | Doorman plugins | Secret-fetching boilerplate, output formatting |
 | LibraryJudgeFramework | Judge plugins | Validation boilerplate, pass/fail reporting |
+| LibraryEnjoinFramework | Enjoin plugins | Apply/validate boilerplate, output formatting |
 | — | Weaver plugins | No framework yet (direct protocol implementation) |
 
 These frameworks are **convenience wrappers** that reduce boilerplate for Go authors. They are not required — any language that implements the protocol works.
@@ -65,6 +67,10 @@ Active plugins serve as reference implementations:
 - **raise-libvirt** — Reference Raise plugin (Go) — local KVM/QEMU VMs
 - **raise-virtualbox** — Raise plugin for VirtualBox (Go)
 - **raise-wsl** — Raise plugin for WSL2 (Go)
+- **raise-quickemu** — Raise plugin for Quickemu (Go)
+- **raise-aws** — Raise plugin for AWS EC2 (Go)
+- **raise-digitalocean** — Raise plugin for DigitalOcean droplets (Go)
+- **raise-opentofu** — Raise plugin for OpenTofu-managed infrastructure (Go)
 - **doorman-keepassxc** — Reference Doorman plugin (Go)
 - **judge-application** — Reference Judge plugin (Go)
 

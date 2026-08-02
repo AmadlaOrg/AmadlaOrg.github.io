@@ -98,7 +98,7 @@ Plugins are discovered via PATH (`judge-*` naming convention). Each plugin decla
 
 ## Current Gaps
 
-- Repository exists in early development
+- Repository exists but is in early development
 - Judge entity schema not yet finalized
 - Generic diff engine not yet implemented
 - Type-aware plugin integration not yet started

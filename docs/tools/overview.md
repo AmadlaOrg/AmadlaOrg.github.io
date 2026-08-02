@@ -14,6 +14,7 @@ Amadla's tools form a modular pipeline where each tool handles one responsibilit
 | [doorman](doorman.md) | Secrets management — resolves secret references via doorman-* plugins | Entity data with secret refs | Entity data with secrets resolved |
 | [weaver](weaver.md) | Config generation — renders templates from entities (Quadlet, nginx.conf, podman-compose, k8s, CI/CD, etc.) | Entities + templates | Config files |
 | [lay](lay.md) | Install — packages, applications, JARs, container image pull/build | Entity requirements | Installed software + image ref entity |
+| [enjoin](enjoin.md) | System state configuration — User, Service, Cron, System/*, Security/* entities | Entity requirements | Configured system state |
 | [waiter](waiter.md) | Deployment — blue-green, canary, rolling strategies with platform plugins | Entities + rendered configs (from weaver) | Deployed application |
 | [raise](raise.md) | Infrastructure provisioning — wraps IaC tools via plugin system per cloud API | Infrastructure entities | Provisioned resources |
 | [unravel](unravel.md) | Discovery — discovers existing system state as entities. Wraps osquery + custom plugins | System state | "What IS" entities |
@@ -34,7 +35,7 @@ hery query --type '*/application@*' -o json \
 ```
 
 ```
-hery → doorman → weaver → lay → waiter → judge
+hery → doorman → raise → lay → enjoin → weaver → waiter → judge
                                            │
                               unravel ──────┘ (drift detection)
 

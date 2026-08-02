@@ -3,6 +3,8 @@
 This document describes real-world scenarios that the Amadla entity system must support.
 Each story tests different aspects of the contract model: requirements, alternatives, overrides, cross-entity data flow, and automatic tool dispatch.
 
+*Note: the examples on this page are abbreviated — payload fields shown at the document root belong under `_body` in real entities.*
+
 ---
 
 ## Story 1: WordPress — Full-Stack Web Application
@@ -102,7 +104,7 @@ ports:
 ```yaml
 _type: amadla.org/entity/template@v1.0.0
 engine: jinja2
-source: wp-config.php.j2
+path: wp-config.php.j2
 output: /var/www/wordpress/wp-config.php
 description: WordPress configuration file
 ```
@@ -268,7 +270,7 @@ provider: libvirt
 cpus: 2
 memory: 4096
 disk: 40G
-box: ubuntu-24.04
+image: ubuntu-24.04
 ```
 
 ### What happens
@@ -331,7 +333,8 @@ github.com/SomeOrg/WordPress/
 ```yaml
 _type: amadla.org/entity/application@v1.0.0
 name: elasticsearch
-optional: true          # Not required for WordPress to function
+_body:
+  optional: true        # Not required for WordPress to function
 version: ["8.17", "7.17"]
 install:
   - method: container

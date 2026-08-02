@@ -35,7 +35,7 @@ Per-command sequence diagrams: [doorman Commands](doorman-commands.md).
 doorman sits **between hery and raise** in the pipeline. It receives entity data containing secret references and resolves them to actual values before passing data downstream.
 
 ```
-hery → [doorman] → raise → lay → weaver → judge
+hery → [doorman] → raise → lay → enjoin → weaver → waiter → judge
          │
     ┌────┴────────┐
     │ Doorman     │

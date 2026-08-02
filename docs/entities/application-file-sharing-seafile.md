@@ -19,7 +19,7 @@
 | `database.user` | string | Database username |
 | `database.password_secret` | string | Doorman secret reference for the database password |
 | `file_server_port` | integer | Port for the Seafile file server |
-| `max_upload_size` | integer | Maximum upload file size in MB |
+| `max_upload_size` | string | Maximum upload file size (e.g. `5G`) |
 | `enable_thumbnail` | boolean | Whether to enable thumbnail generation for files |
 | `storage_backend.type` | string | Storage backend type (`filesystem`, `s3`, or `ceph`) |
 | `storage_backend.config` | object | Backend-specific configuration parameters |
@@ -41,7 +41,7 @@ _body:
     user: seafile
     password_secret: doorman://vault/seafile/db-password
   file_server_port: 8082
-  max_upload_size: 5120
+  max_upload_size: 5G
   enable_thumbnail: true
   storage_backend:
     type: filesystem

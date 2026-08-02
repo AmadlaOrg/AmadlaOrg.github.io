@@ -45,7 +45,36 @@ hery query --type '*/application@*' -o json | doorman resolve -o json
 doorman list
 ```
 
-### 3. weaver — Generate Configuration
+### 3. raise — Provision Infrastructure
+
+**Input:** Infrastructure entity requirements
+**Output:** Provisioned servers, networks, storage
+
+raise reads infrastructure entity declarations and provisions the required resources. It wraps infrastructure-as-code tools via a plugin system for different providers. Available plugins: raise-libvirt (KVM/QEMU), raise-virtualbox, raise-wsl, raise-aws (EC2), raise-digitalocean, raise-quickemu, raise-opentofu (declarative IaC).
+
+### 4. lay — Install Applications
+
+**Input:** Application and system entity requirements
+**Output:** Installed packages, applications, JARs, container images (outputs image ref entity)
+
+lay installs required software: packages via system package managers, applications, JAR files, and container image pull/build. For containers, lay handles build and pull — waiter handles the rest.
+
+```bash
+# Install packages
+lay install
+
+# Pull container image, pipe to waiter for deployment
+lay pull my-app:v2 | waiter deploy --strategy canary
+```
+
+### 5. enjoin — Configure System State
+
+**Input:** System state entity requirements (User, Service, Cron, System/*, Security/*)
+**Output:** Applied system state on the target machine
+
+enjoin applies system state configuration — users, services, cron jobs, and System/* and Security/* settings — by routing each entity to the matching `enjoin-*` plugin.
+
+### 6. weaver — Generate Configuration
 
 **Input:** Templates + entity data (with resolved secrets), via UNIX piping or direct cache queries
 **Output:** Rendered configuration files (Quadlet, nginx.conf, podman-compose, k8s, GitHub Actions, or any text file)
@@ -62,29 +91,7 @@ hery query --type '*/application@*' -o json | doorman resolve -o json | weaver r
 
 weaver is an ETL-like tool — it can generate any text output. Config generation is weaver's job (including Quadlet unit files, nginx configs, CI/CD pipelines, etc.).
 
-### 4. raise — Provision Infrastructure
-
-**Input:** Infrastructure entity requirements
-**Output:** Provisioned servers, networks, storage
-
-raise reads infrastructure entity declarations and provisions the required resources. It wraps infrastructure-as-code tools via a plugin system for different providers. Available plugins: raise-libvirt (KVM/QEMU), raise-virtualbox, raise-wsl, raise-aws (EC2), raise-digitalocean, raise-quickemu, raise-opentofu (declarative IaC).
-
-### 5. lay — Install Applications
-
-**Input:** Application and system entity requirements
-**Output:** Installed packages, applications, JARs, container images (outputs image ref entity)
-
-lay installs required software: packages via system package managers, applications, JAR files, and container image pull/build. For containers, lay handles build and pull — waiter handles the rest.
-
-```bash
-# Install packages
-lay install
-
-# Pull container image, pipe to waiter for deployment
-lay pull my-app:v2 | waiter deploy --strategy canary
-```
-
-### 6. waiter — Deploy
+### 7. waiter — Deploy
 
 **Input:** Entities + rendered config files (from weaver)
 **Output:** Deployed application with traffic management
@@ -93,7 +100,7 @@ waiter handles the deployment lifecycle using strategies (blue-green, canary, ro
 
 ```bash
 # Full deployment pipeline
-hery query --type '*/application@*' | doorman resolve | weaver render --template quadlet | waiter deploy --strategy canary
+hery query --type '*/application@*' | doorman resolve | weaver render | waiter deploy --strategy canary
 
 # Promote canary to full traffic
 waiter promote my-app
@@ -102,12 +109,12 @@ waiter promote my-app
 waiter rollback my-app
 ```
 
-### 7. judge — Validate
+### 8. judge — Validate
 
 **Input:** Expected state (from hery) + actual state (from unravel)
 **Output:** Judge entity (diff — pass/fail per requirement)
 
-judge compares "what IS" (via unravel) vs "what SHOULD BE" (via hery entities) and outputs an judge entity — a diff in entity format. Supports both generic deep diff and type-aware judge plugins.
+judge compares "what IS" (via unravel) vs "what SHOULD BE" (via hery entities) and outputs a judge entity — a diff in entity format. Supports both generic deep diff and type-aware judge plugins.
 
 ```bash
 # Drift detection

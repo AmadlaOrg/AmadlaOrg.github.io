@@ -11,7 +11,7 @@
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `restrict` | array | Access control restrictions (ntp.conf `restrict` directives) |
+| `restrict` | array of objects | Access control restrictions (ntp.conf `restrict` directives) |
 | `restrict[].address` | string | IP address or `default` |
 | `restrict[].mask` | string | Netmask |
 | `restrict[].options` | array of strings | Flags: `nomodify`, `notrap`, `nopeer`, `noquery` |

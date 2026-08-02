@@ -6,17 +6,17 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 | Category | Total | Complete | Active/Partial | Stub/Planned |
 |----------|-------|----------|---------------|--------------|
-| Core Tools | 14 | 12 | 2 | 0 |
+| Core Tools | 14 | 12 | 1 | 1 |
 | Libraries | 6 | 6 | 0 | 0 |
 | Doorman Plugins | 16 | 3 | 0 | 13 |
 | Judge Plugins | 3 | 2 | 0 | 1 |
 | Weaver Plugins | 5 | 5 | 0 | 0 |
 | Enjoin Plugins | 10 | 10 | 0 | 0 |
-| Waiter Plugins | 6 | 6 | 0 | 0 |
-| Raise Plugins | 7 | 7 | 0 | 0 |
-| Entity Definitions | 8 | 8 | 0 | 0 |
+| Waiter Plugins | 5 | 5 | 0 | 0 |
+| Raise Plugins | 10 | 7 | 0 | 3 |
+| Entity Definitions (Entities repo, ~170 schemas) | 1 | 1 | 0 | 0 |
 | Other | 8 | 4 | 0 | 4 |
-| **Total** | **83** | **63** | **2** | **18** |
+| **Total** | **78** | **55** | **1** | **22** |
 
 ## Core Tools Detail
 
@@ -68,7 +68,7 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 ### waiter (Complete)
 
-- Core + 6 plugins — 86+ tests passing
+- Core + 5 plugins — 86+ tests passing
 - Two-axis plugin model: engine plugins (podman, docker, quadlet) × proxy plugins (proxy-haproxy, proxy-kamal)
 - Strategies: blue-green, canary, rolling, restart
 
@@ -104,8 +104,8 @@ Full inventory of every repository in the Amadla ecosystem as of March 2026.
 
 All entity types contain JSON Schema definitions as `<name>.hery.json`:
 
-- 17 entity types + Tools, ~153 sub-types — ~170 schemas total
-- Top-level: Application, Container, Infrastructure, OS, Package, ProgrammingLanguage, Secret, Security, System, Template, Tools, User, Service, Cron
+- 14 entity types + Tools, plus sub-types — ~170 schemas total, in a single Entities repo
+- Top-level: Application, Container, Cron, Infrastructure, Judge, OS, Package, ProgrammingLanguage, Secret, Security, Service, System, Template, User (+ Tools)
 
 ## Plugin Stubs
 

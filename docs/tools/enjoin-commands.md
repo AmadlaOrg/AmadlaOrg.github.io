@@ -24,7 +24,7 @@ dispatcher.
 ## enjoin validate
 
 Identical wiring to `apply`, but runs the plugin's `validate` subcommand: a
-dry run that reports what would change without touching the system. Whether
+dry-run mode intended to report what would change without touching the system. Whether
 anything is actually mutated is entirely the plugin's contract — enjoin itself
 only picks the subcommand. Same `--from` (required) and `-f`/stdin behavior;
 failures surface as `validation failed: ...` on stderr with exit 1.
@@ -34,8 +34,8 @@ failures surface as `validation failed: ...` on stderr with exit 1.
 
 ## enjoin plugins
 
-Scans every `$PATH` directory for executable files named `enjoin-*`
-(duplicates deduplicated, first PATH hit wins), then calls each one's
+Scans every `PATH` directory for executable files named `enjoin-*`
+(deduplicated by name, first PATH hit wins), then calls each one's
 `info -o json` and renders a table — or JSON/YAML via `-o`, optionally
 wrapped in a HERY `_type`/`_body` envelope with `--hery`. Info responses in
 either HERY envelope or flat JSON form are accepted. Finding no plugins is

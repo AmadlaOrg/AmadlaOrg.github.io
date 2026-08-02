@@ -16,6 +16,7 @@ Amadla uses a plugin architecture to extend tools with external integrations. Pl
 |----------|-----------|--------|---------|------------------------|
 | **Doorman plugins** | doorman | `doorman-*` | Secret store integrations | LibraryDoormanFramework |
 | **Judge plugins** | judge | `judge-*` | System/application validation | LibraryJudgeFramework |
+| **Enjoin plugins** | enjoin | `enjoin-*` | System state configuration | LibraryEnjoinFramework |
 | **Weaver plugins** | weaver | `weaver-*` | Template engine integrations | — |
 | **Raise plugins** | raise | `raise-*` | Infrastructure providers | — |
 | **Waiter plugins** | waiter | `waiter-*` | Deployment platform backends | — |
@@ -130,7 +131,8 @@ Weaver queries hery for template entities, matches against the input entity type
 ```
 LibraryPluginFramework          # Base: PATH scanning, info parsing, I/O piping
 ├── LibraryDoormanFramework       # Doorman plugins: secret fetching convenience
-└── LibraryJudgeFramework       # Judge plugins: audit checks, compliance reporting
+├── LibraryJudgeFramework       # Judge plugins: audit checks, compliance reporting
+└── LibraryEnjoinFramework      # Enjoin plugins: system state configuration
 ```
 
 The Go frameworks are **convenience wrappers** that implement the plugin protocol. They reduce boilerplate for Go plugin authors but are not required. A plugin written in Python or Bash that follows the protocol works identically.

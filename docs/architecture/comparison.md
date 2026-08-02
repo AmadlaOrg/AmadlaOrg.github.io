@@ -31,7 +31,7 @@ How does Amadla's encouraged stack compare to the mainstream approaches for runn
 | **Daemon tax** | 0 (systemd manages) | kubelet, kube-proxy, CoreDNS, etcd, API server, controller, scheduler | k3s agent | Nomad, Consul, Vault agents | 0 (push-based) |
 | **RAM overhead (idle)** | ~50 MB (HAProxy + Podman) | ~500-800 MB | ~200-400 MB | ~300-500 MB | 0 (runs on demand) |
 | **Learning curve** | Moderate (UNIX skills transfer) | Steep | Moderate | Moderate-Steep | Low-Moderate |
-| **YAML complexity** | 4 reserved properties | 50+ resource types, deep nesting | Same as K8s | HCL (different language) | Playbook YAML |
+| **YAML complexity** | 5 reserved properties | 50+ resource types, deep nesting | Same as K8s | HCL (different language) | Playbook YAML |
 | **Smallest useful deployment** | 1 server, 1 container | 1 node (kind/minikube) | 1 node | 1 node | 1 server |
 | **Scales to** | Hundreds of nodes (conduct) | Thousands of nodes | Hundreds of nodes | Thousands of nodes | Hundreds (with effort) |
 
@@ -63,15 +63,15 @@ raise fills the same role as Vagrant — managing VM lifecycles — but extends 
 | **Local VMs** | Plugin-based (libvirt, VirtualBox, VMware) | Provider-based (VirtualBox, libvirt, VMware) |
 | **Cloud instances** | Plugin-based (AWS, Hetzner, DigitalOcean) | Limited (community plugins, not core focus) |
 | **VM definition** | [HERY](hery-concepts.md) entity (`Infrastructure`) | Vagrantfile (Ruby DSL) |
-| **Provisioning** | Pipeline: raise → lay → weaver | Built-in: shell, Ansible, Puppet, Chef |
+| **Provisioning** | Pipeline: raise → lay → enjoin → weaver → waiter | Built-in: shell, Ansible, Puppet, Chef |
 | **Multi-machine** | conduct orchestrates across machines | Multi-machine Vagrantfile |
 | **Secret injection** | doorman (separate tool, UNIX philosophy) | Vault (HashiCorp integration) |
 | **Config generation** | weaver (separate tool) | Embedded in Vagrantfile |
 | **Language** | Go (entity-driven, no code in config) | Ruby DSL (code in config) |
 | **License** | Open source | BSL (Business Source License) since 2023 — not open source |
-| **Integration** | Part of Amadla pipeline (hery → raise → lay → weaver) | Standalone or with Terraform/Packer |
+| **Integration** | Part of Amadla pipeline (hery → raise → lay → enjoin → weaver) | Standalone or with Terraform/Packer |
 
-The key difference: Vagrant is a standalone VM manager with provisioning bolted on. raise is one tool in a composable pipeline — it creates the machine, then hands off to lay (install), weaver (configure), and waiter (deploy). The same entity that defines a VM also drives every other tool in the chain.
+The key difference: Vagrant is a standalone VM manager with provisioning bolted on. raise is one tool in a composable pipeline — it creates the machine, then hands off to lay (install), enjoin (system state), weaver (configure), and waiter (deploy). The same entity that defines a VM also drives every other tool in the chain.
 
 ## Where Amadla Shines
 
