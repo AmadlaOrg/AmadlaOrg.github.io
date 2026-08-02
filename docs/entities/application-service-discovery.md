@@ -22,9 +22,9 @@ These properties are common across all service discovery implementations. Sub-ty
 
 | Sub-type | Application |
 |----------|-------------|
-| [ServiceDiscovery/Consul](application-service-discovery-consul.md) | Consul -- service mesh, health checking, KV store |
-| [ServiceDiscovery/Etcd](application-service-discovery-etcd.md) | etcd -- distributed key-value store, Kubernetes backbone |
-| [ServiceDiscovery/ZooKeeper](application-service-discovery-zookeeper.md) | ZooKeeper -- coordination service for distributed systems |
+| [ServiceDiscovery/Consul](application-service-discovery-consul.md) | Consul — service mesh, health checking, KV store |
+| [ServiceDiscovery/Etcd](application-service-discovery-etcd.md) | etcd — distributed key-value store, Kubernetes backbone |
+| [ServiceDiscovery/ZooKeeper](application-service-discovery-zookeeper.md) | ZooKeeper — coordination service for distributed systems |
 
 ## Example
 

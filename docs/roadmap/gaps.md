@@ -9,7 +9,7 @@ The following critical gaps have been addressed:
 - **Pipeline orchestration** — amadla CLI complete (DAG from `_requires`, parallel execution, `init`/`run`/`list`/`doctor` commands, InfoCache with mtime-based invalidation, 62 tests)
 - **Infrastructure provisioning** — raise core + 7 plugins (libvirt, wsl, virtualbox, aws, digitalocean, quickemu, opentofu)
 - **System state configuration** — enjoin core + 10 plugins (user, service, cron, network, filesystem, firewall, certificate, ids, mac, sysctl)
-- **Deployment strategies** — waiter core + 6 plugins (podman, docker, quadlet, proxy-haproxy, proxy-kamal, judge-waiter), 86+ tests
+- **Deployment strategies** — waiter core + 5 plugins (podman, docker, quadlet, proxy-haproxy, proxy-kamal), 86+ tests
 - **Multi-server orchestration** — conduct built
 - **Notifications/alerting** — lighthouse core + 4 plugins (webhook, slack, email, sms), 65+ tests
 - **System discovery** — unravel core complete, 11 tests

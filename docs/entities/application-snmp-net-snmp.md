@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Net-SNMP-specific configuration -- full-featured SNMP agent, toolkit, and extensible monitoring |
+| **Purpose** | Net-SNMP-specific configuration — full-featured SNMP agent, toolkit, and extensible monitoring |
 | **Repo** | [AmadlaOrg/Entities/Application/SNMP/NetSNMP](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/snmp/net-snmp@v1.0.0` |
 | **Parent type** | [Application/SNMP](application-snmp.md) |

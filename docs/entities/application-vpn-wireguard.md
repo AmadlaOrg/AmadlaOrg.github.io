@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | WireGuard-specific configuration -- kernel-level VPN with minimal code and strong cryptography |
+| **Purpose** | WireGuard-specific configuration — kernel-level VPN with minimal code and strong cryptography |
 | **Repo** | [AmadlaOrg/Entities/Application/VPN/WireGuard](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/vpn/wireguard@v1.0.0` |
 | **Parent type** | [Application/VPN](application-vpn.md) |
@@ -48,10 +48,10 @@ _body:
 
 ## Why WireGuard
 
-- Lives in the Linux kernel -- fewer context switches, better performance
-- ~4,000 lines of code vs ~100,000 for OpenVPN -- smaller attack surface
+- Lives in the Linux kernel — fewer context switches, better performance
+- ~4,000 lines of code vs ~100,000 for OpenVPN — smaller attack surface
 - Modern cryptography only (Curve25519, ChaCha20, BLAKE2s)
-- Stateless design -- no connection state machine, silent when idle
+- Stateless design — no connection state machine, silent when idle
 - Default VPN on most modern Linux distributions
 
 ## Consumers

@@ -2,9 +2,9 @@
 
 Recommended conventions for writing HERY entities and building Amadla-compatible tools. These are not enforced by the system — they are good hygiene that makes entities more discoverable, composable, and maintainable.
 
-## `entity_types` Convention
+## `supports` Convention
 
-When an entity needs to communicate which entity types it supports, targets, or operates on, use the field name **`entity_types`** in `_body`.
+When an entity needs to communicate which entity types it supports, targets, or operates on, use the field name **`supports`** in `_body`.
 
 This is not a reserved property — it lives inside `_body` and is schema-defined. But using a consistent name across the ecosystem makes entities easier to understand and query.
 
@@ -12,24 +12,24 @@ This is not a reserved property — it lives inside `_body` and is schema-define
 
 | Entity | Field | Purpose |
 |--------|-------|---------|
-| Template | `entity_types` | Which entity types this template can render for |
+| Template | `supports` | Which entity types this template can render for |
 
 ### Example
 
 ```yaml
 _type: amadla.org/entity/template@v1.0.0
 _body:
-  engine: jinja2
-  source: ./templates/nginx.conf.j2
+  engine: jinja
+  path: ./templates/nginx.conf.j2
   output: /etc/nginx/conf.d/myapp.conf
-  entity_types:
+  supports:
     - amadla.org/entity/application@^v1.0.0
     - amadla.org/entity/application/webserver@^v1.0.0
 ```
 
 ### Why Not a Reserved Property?
 
-Reserved properties (`_type`, `_extends`, `_meta`, `_body`, `_requires`) are fixed — they have universal meaning across all entities. `entity_types` is domain-specific: its meaning depends on context (a template "renders for" certain types). Keeping it in `_body` means each schema defines its own semantics.
+Reserved properties (`_type`, `_extends`, `_meta`, `_body`, `_requires`) are fixed — they have universal meaning across all entities. `supports` is domain-specific: its meaning depends on context (a template "renders for" certain types). Keeping it in `_body` means each schema defines its own semantics.
 
 ## Tools Entity: Keep It Minimal
 
@@ -84,7 +84,7 @@ _requires:
   - amadla.org/entity/package@v1.0.0
 _body:
   engine: go
-  source: nginx.conf.tmpl
+  path: nginx.conf.tmpl
   output: /etc/nginx/nginx.conf
 ```
 

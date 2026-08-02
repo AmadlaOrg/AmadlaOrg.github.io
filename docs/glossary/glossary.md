@@ -11,9 +11,6 @@ Amadla-specific terminology and concepts.
 ### amadla (tool)
 The Amadla orchestrator CLI. Reads `.hery` entity files, builds a dependency graph (DAG) from `_requires` declarations, and executes registered tools in topologically sorted order with parallel execution of independent tiers. Written in Go but replaceable — the entities and tools are the portable parts.
 
-### Judge Plugin
-A plugin for the **judge** tool that checks whether a system's actual state matches entity requirements. Examples: judge-application, judge-system, judge-infrastructure.
-
 ## B
 
 ### Body (`_body`)
@@ -30,7 +27,7 @@ The Amadla multi-server orchestrator. Coordinates waiter/lay across distributed 
 HERY's merge strategy: objects merge recursively (child overrides, parent-only keys preserved), arrays replace entirely, scalars use child value. Applied during `_extends` inheritance and layer composition to `_body`, `_meta`, and `_requires`.
 
 ### doorman
-The Amadla secrets management CLI tool. Resolves secrets from Doorman plugins on demand via the `resolve` command.
+The Amadla secrets management CLI tool. Resolves secrets from Doorman plugins on demand via the `get` command.
 
 ### dryrun
 A tool that safely tests settings by applying them and automatically reverting if something goes wrong (e.g., prevents SSH lockout). Currently written in Python, may move to Go.
@@ -45,6 +42,9 @@ A specific `.hery` document with actual data. Analogous to a row.
 
 ### Entity Composition
 The technique of nesting entity data via JSON Schema `$ref`. The schema declares which parts of `_body` correspond to other entity types. No HERY-specific markup is needed inside `_body`.
+
+### Extends (`_extends`)
+One of HERY's five reserved YAML properties. A URI pointing to another entity instance of the same type. Purely a data/merge operation — no execution ordering implied. The extended entity's `_body`, `_meta`, and `_requires` are deep-merged as defaults — the child only specifies overrides. `_type` is never merged. Targets specific elements via filename path segment (e.g., `github.com/SomeOrg/WordPress/database.hery`). Extends chains can cascade transitively. Cycles are detected and rejected.
 
 ## G
 
@@ -69,13 +69,16 @@ Amadla uses idiomatic Go naming: no `I` prefix on interfaces, no `S` prefix on s
 ### judge
 The Amadla validation tool. Checks that requirements across merged entities are satisfied, detects cross-entity conflicts (e.g., port collisions), and compares actual system state (via unravel) against entity declarations for drift detection.
 
+### Judge Plugin
+A plugin for the **judge** tool that checks whether a system's actual state matches entity requirements. Examples: judge-application, judge-network, judge-system.
+
 ## L
 
 ### lay
 The Amadla package/application installer. Installs packages, applications, JARs, and container images (pull/build). For containers, lay handles build/pull; waiter handles deployment.
 
 ### lighthouse
-The Amadla notification/alerting tool. Sends notifications via plugins (webhook, WebRTC, Twilio SMS, AWS SES, REST API). Receives entity output from any tool via UNIX pipe.
+The Amadla notification/alerting tool. Sends notifications via plugins (webhook, Slack, email, SMS). Receives entity output from any tool via UNIX pipe.
 
 ### Lock file (`hery.lock`)
 A JSON file at the project root containing the merge state. Same data as the SQLite cache (`.hery.cache`) but in a portable format. Committed to Git for reproducibility. Should not be edited manually.
@@ -96,11 +99,6 @@ URI resolution mechanism for custom domains. hery sends `GET https://host/path?h
 ### New()
 Constructor pattern used across all Amadla Go code. `New()` returns an interface type when there is one primary type per package, enabling dependency injection.
 
-## P
-
-### Extends (`_extends`)
-One of HERY's five reserved YAML properties. A URI pointing to another entity instance of the same type. Purely a data/merge operation — no execution ordering implied. The extended entity's `_body`, `_meta`, and `_requires` are deep-merged as defaults — the child only specifies overrides. `_type` is never merged. Targets specific elements via filename path segment (e.g., `github.com/SomeOrg/WordPress/database.hery`). Extends chains can cascade transitively. Cycles are detected and rejected.
-
 ## R
 
 ### raise
@@ -109,17 +107,13 @@ The Amadla infrastructure provisioner. Provisions cloud resources from entities 
 ### Replace Directive
 Go module `replace` directive in `go.mod` that points to a sibling directory for local development (e.g., `replace github.com/AmadlaOrg/LibraryUtils => ../LibraryUtils`).
 
-## S
-
-## R
-
 ### Requires (`_requires`)
 One of HERY's five reserved YAML properties. Declares hard dependencies on other entities for execution ordering. amadla builds a DAG from `_requires` declarations and topologically sorts. Supports three reference forms: local file paths (`./file.hery`), external file paths with version (`github.com/org/repo/file.hery@v1.0.0`), and type URIs (`amadla.org/entity/type@v1.0.0`). Orthogonal to `_extends` (which handles data merge, not ordering).
 
 ## T
 
 ### Type (`_type`)
-One of HERY's five reserved YAML properties (the only required one). A URI declaring the entity's schema/type and version (e.g., `amadla.org/entity/Network@v1.0.0`). Determines which JSON Schema validates the document. When used with `_extends`, `_type` declares the schema while `_extends` declares data inheritance — both can be present simultaneously.
+One of HERY's five reserved YAML properties (the only required one). A URI declaring the entity's schema/type and version (e.g., `amadla.org/entity/network@v1.0.0`). Determines which JSON Schema validates the document. When used with `_extends`, `_type` declares the schema while `_extends` declares data inheritance — both can be present simultaneously.
 
 ## U
 
@@ -129,10 +123,10 @@ The Amadla discovery tool. Wraps osquery (on-demand, stateless) + custom plugins
 ## W
 
 ### waiter
-The Amadla deployment tool. Manages deployment strategies (blue-green, canary, rolling) with platform plugins (waiter-podman, waiter-docker, waiter-systemd). Consumes image refs from lay and config files from weaver.
+The Amadla deployment tool. Manages deployment strategies (blue-green, canary, rolling) with platform plugins (waiter-podman, waiter-docker, waiter-quadlet) and proxy plugins (waiter-proxy-haproxy, waiter-proxy-kamal). Consumes image refs from lay and config files from weaver.
 
 ### weaver
-The Amadla template/config generator. Renders configuration files (Quadlet, nginx.conf, podman-compose, k8s, CI/CD, or any text file) using HERY entities and pluggable template engines (Jinja, Mustache, Handlebars, Qute). ETL-like: transforms entity data into any text output.
+The Amadla template/config generator. Renders configuration files (Quadlet, nginx.conf, podman-compose, k8s, CI/CD, or any text file) using HERY entities and pluggable template engines (Go, Jinja2, Mustache, Qute, FreeMarker). ETL-like: transforms entity data into any text output.
 
 ### Weaver Plugin
 A template engine plugin for the weaver tool. Each provides a different rendering engine.
@@ -140,7 +134,7 @@ A template engine plugin for the weaver tool. Each provides a different renderin
 ## Symbols
 
 ### `_type`
-HERY reserved property (required): the schema/type URI with version. Determines validation and entity type. Can be inherited from `_extends` when not explicitly set.
+HERY reserved property (required): the schema/type URI with version. Determines validation and entity type. Never merged or inherited via `_extends`.
 
 ### `_extends`
 HERY reserved property (optional): URI to another instance of the same type. Enables deep merge inheritance of `_body`, `_meta`, and `_requires`. Purely a data/merge operation — does not imply execution ordering. Targets specific elements via filename path segment.

@@ -16,7 +16,7 @@
 | `retention_days` | integer | Number of days to keep logs before deletion |
 | `compress` | boolean | Compress rotated log files (default: `true`) |
 | `remote_target.host` | string | Remote syslog server hostname or IP |
-| `remote_target.port` | integer | Remote syslog server port (default 514) |
+| `remote_target.port` | integer | Remote syslog server port (default: `514`) |
 | `remote_target.protocol` | string | Transport protocol for remote logging (`tcp`, `udp`, `relp`) |
 
 These properties are common across all logging implementations. Sub-types add application-specific settings.

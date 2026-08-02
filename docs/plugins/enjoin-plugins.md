@@ -42,7 +42,7 @@ enjoin-user validate -f users.yaml
 Each fat plugin selects its backend at runtime:
 
 1. **OS/Preference entity** — explicit declaration (e.g., `firewall: firewalld`)
-2. **Runtime detection** — probes PATH for available tools (fallback if no OS entity)
+2. **Runtime detection** — probes PATH for available tools (fallback if no OS/Preference entity)
 3. **Mismatch warning** — if entity declares firewalld but system has ufw, warn/error
 
 Example: `enjoin-service` detects:

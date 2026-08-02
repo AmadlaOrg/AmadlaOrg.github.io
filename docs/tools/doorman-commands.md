@@ -4,7 +4,7 @@ Sequence diagrams for each `doorman` subcommand — the C4 dynamics level of
 the [doorman architecture](doorman.md). Participants are doorman's two
 internal components — `cmd/` (Cobra command handlers) and `plugin/`
 (discovery and subprocess delegation) — plus the externals they talk to:
-the filesystem (`$PATH` directories) and the `doorman-*` plugin
+the filesystem (`PATH` directories) and the `doorman-*` plugin
 subprocesses. The current code ships exactly these two subcommands; the
 `resolve`, `list`, and `settings` commands mentioned in older docs are not
 present in the source.
@@ -25,8 +25,8 @@ form without `--from`; the code has no such path — the flag is mandatory.
 
 ## doorman plugins
 
-Scans every `$PATH` directory for executable files named `doorman-*`
-(unreadable directories are silently skipped, duplicates deduped by name),
+Scans every `PATH` directory for executable files named `doorman-*`
+(unreadable directories are silently skipped, deduplicated by name),
 then runs `<plugin> info -o json` on each and parses the reply — HERY
 envelope (`_type`/`_body`) first, flat JSON as fallback. Output is a
 table by default, or `-o json|yaml`; `--hery` wraps the rows in an

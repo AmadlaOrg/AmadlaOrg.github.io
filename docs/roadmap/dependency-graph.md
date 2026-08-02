@@ -50,7 +50,7 @@ Level 0: LibraryUtils
 Level 1: LibraryFramework, LibraryPluginFramework, LibraryDoormanFramework
 Level 2: LibraryJudgeFramework, hery, doorman, weaver
 Level 3: judge-application, doorman-keepassxc
-Level 4: (future tools: raise, lay, judge, waiter, unravel)
+Level 4: (consumers: raise, lay, judge, waiter, unravel)
 ```
 
 ## Impact Analysis
@@ -59,9 +59,9 @@ Changes to foundational libraries have cascading impact:
 
 | Change In | Affects |
 |-----------|---------|
-| LibraryUtils | **Everything** — all 10 other Go projects |
+| LibraryUtils | **Everything** — every other Go project in the ecosystem |
 | LibraryFramework | hery, doorman, LibraryJudgeFramework, judge-application |
-| LibraryPluginFramework | LibraryDoormanFramework, LibraryJudgeFramework |
+| LibraryPluginFramework | No direct dependents in the matrix above (used directly by plugin-hosting tools) |
 | LibraryDoormanFramework | All doorman plugins |
 | LibraryJudgeFramework | All judge plugins |
 

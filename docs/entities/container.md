@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines container/image requirements — base images, build configurations, runtime settings |
-| **Repo** | [AmadlaOrg/Entities/Container](https://github.com/AmadlaOrg/Entities/Container) |
+| **Repo** | [AmadlaOrg/Entities/Container](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/container@v1.0.0` |
 
 ## Schema

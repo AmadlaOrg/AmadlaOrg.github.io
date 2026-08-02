@@ -10,9 +10,9 @@ Traditional IaC tools (Terraform, Ansible, Puppet) are **environment-centric**: 
 
 Requirements are often given in documentation format — or not at all. The knowledge of "what does this application need to run?" is scattered across READMEs, wiki pages, and tribal knowledge.
 
-## The Solution: Resource-Centric Configuration
+## The Solution: Application-Centric Configuration
 
-Amadla inverts this. It is **resource-centric**: each resource (application, service, database) carries its own configuration as a schema-validated [HERY](../architecture/hery-concepts.md) entity. Requirements are **declared explicitly** — not buried in docs — and enforced by schemas.
+Amadla inverts this. It is **application-centric**: each application — along with its services, databases, and other components — carries its own configuration as a schema-validated [HERY](../architecture/hery-concepts.md) entity. Requirements are **declared explicitly** — not buried in docs — and enforced by schemas.
 
 ### Example
 
@@ -27,7 +27,7 @@ Amadla inverts this. It is **resource-centric**: each resource (application, ser
 
 You must know that this app needs nginx, where the config goes, and how to start it. This knowledge is baked into the playbook. Forget a requirement? You'll find out at deploy time.
 
-**Resource-centric (Amadla):**
+**Application-centric (Amadla):**
 ```yaml
 # yaml-language-server: $schema=https://amadla.org/entity/hery/v1.0.0/schema.hery.json
 ---
@@ -41,7 +41,7 @@ _body:
   port: 80
 ```
 
-The resource declares its own requirements and dependencies. The schema enforces them. `_requires` declares what must be processed first — amadla builds a dependency graph (DAG) and topologically sorts execution order. Tools downstream (raise, lay, weaver, waiter, judge) read these declarations and act accordingly.
+The application declares its own requirements and dependencies. The schema enforces them. `_requires` declares what must be processed first — amadla builds a dependency graph (DAG) and topologically sorts execution order. Tools downstream (raise, lay, enjoin, weaver, waiter, judge) read these declarations and act accordingly.
 
 ## Layered Composition
 
@@ -81,9 +81,10 @@ The Amadla pipeline flows from requirements to running infrastructure:
 |-------|------|-------|--------|
 | **Define** | hery | `.hery` entity files | Merged entity JSON |
 | **Resolve secrets** | doorman | Entity data with secret refs | Entity data with resolved secrets |
-| **Generate config** | weaver | Templates + entity data | Config files (Quadlet, nginx.conf, etc.) |
 | **Provision** | raise | Infrastructure entities | Provisioned servers/resources |
 | **Install** | lay | Application entities | Installed software + image ref entity |
+| **Configure** | enjoin | System state entities (User, Service, Cron, System/*, Security/*) | Applied system state |
+| **Generate config** | weaver | Templates + entity data | Config files (Quadlet, nginx.conf, etc.) |
 | **Deploy** | waiter | Entities + configs | Deployed application |
 | **Validate** | judge | Expected + actual entities | Judge entity (diff) |
 
@@ -93,7 +94,7 @@ The Amadla pipeline flows from requirements to running infrastructure:
 |------|------|
 | **unravel** | Discovers existing system state as entities (wraps osquery, stateless) |
 | **conduct** | Multi-server orchestration (coordinates waiter/lay across nodes) |
-| **lighthouse** | Notifications/alerts via plugins (webhook, SMS, email, REST API) |
+| **lighthouse** | Notifications/alerts via plugins (webhook, Slack, email, SMS) |
 | **dryrun** | Safely tests settings with auto-revert (prevents SSH lockout, etc.) |
 | **garbage** | Tracks and removes what's no longer needed |
 | **amadla** | Orchestrator: reads `.hery` entities, builds DAG from `_requires`, executes tools in parallel tiers |
@@ -112,9 +113,9 @@ Each tool that interfaces with external systems uses a **plugin architecture**:
 - **doorman-*** plugins extend doorman with new secret sources (Vault, AWS, KeePassXC, Keycloak, ...)
 - **judge-*** plugins extend judge with new validation targets (applications, systems, infrastructure)
 - **weaver-*** plugins extend weaver with new template engines (Go, Jinja2, Mustache, Qute, FreeMarker)
-- **raise-*** plugins extend raise with VM and cloud providers (libvirt, VirtualBox, AWS, Hetzner, OpenTofu)
+- **raise-*** plugins extend raise with VM and cloud providers (libvirt, VirtualBox, WSL, QuickEmu, AWS, DigitalOcean, OpenTofu)
 - **waiter-*** plugins extend waiter with deployment backends (Podman, Docker, Quadlet) and proxy backends (HAProxy, Kamal Proxy)
-- **lighthouse-*** plugins extend lighthouse with notification channels (webhook, SMS, email, REST)
+- **lighthouse-*** plugins extend lighthouse with notification channels (webhook, Slack, email, SMS)
 - **unravel-*** plugins extend unravel with custom discovery backends
 
 Plugins are standalone CLI executables discovered via `$PATH` using a `<tool>-*` naming convention (e.g., `doorman-vault`, `judge-application`, `weaver-jinja`). They communicate via stdin/stdout/stderr following a standard protocol — no IPC, no daemons. Plugins can be written in any language. Go framework libraries are available as optional convenience wrappers to reduce boilerplate.

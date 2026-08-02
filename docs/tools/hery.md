@@ -45,7 +45,7 @@ No tool feeds into hery — it is the data source.
 
 ```
 cmd/                    # Cobra CLI commands
-├── entity.go           # hery entity (get, list, validate)
+├── entity.go           # hery entity (get, list, valid)
 ├── query.go            # hery query
 ├── compose.go          # hery compose
 └── settings.go         # hery settings

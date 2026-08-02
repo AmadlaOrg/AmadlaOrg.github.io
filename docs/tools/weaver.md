@@ -28,7 +28,7 @@ Per-command sequence diagrams: [weaver Commands](weaver-commands.md).
 weaver sits **near the end** of the pipeline, after infrastructure is provisioned and applications installed. It generates configuration files from templates filled with entity data.
 
 ```
-hery → doorman → raise → lay → [weaver] → judge
+hery → doorman → raise → lay → enjoin → [weaver] → waiter → judge
                                    │
                           ┌────────┴─────────┐
                           │ Weaver Plugins   │
@@ -65,14 +65,15 @@ weaver supports multiple template engines via plugins:
 
 | Plugin | Engine | Language |
 |--------|--------|----------|
+| weaver-go | Go templates | Go |
 | weaver-jinja | Jinja2 | Python |
-| weaver-js-handlebars | Handlebars | JavaScript |
-| weaver-js-mustache | Mustache | JavaScript |
+| weaver-mustache | Mustache | Go |
 | weaver-qute | Qute | Java |
+| weaver-freemarker | FreeMarker | Java |
 
 ### Template Entity
 
-Weaver routing is **template-driven**, not plugin-driven. A Template entity (`.hery` file alongside the template) tells weaver which engine to use and what entities the template supports:
+weaver routing is **template-driven**, not plugin-driven. A Template entity (`.hery` file alongside the template) tells weaver which engine to use and what entities the template supports:
 
 ```yaml
 _type: amadla.org/entity/template@v1.0.0
@@ -85,7 +86,7 @@ _body:
     - amadla.org/entity/infrastructure@^v1.0.0
 ```
 
-Weaver queries hery for template entities, matches against the input entity type, resolves the template path, and invokes the right `weaver-*` plugin. Multiple templates can match the same entity type — weaver renders all of them, each producing its own output file.
+weaver queries hery for template entities, matches against the input entity type, resolves the template path, and invokes the right `weaver-*` plugin. Multiple templates can match the same entity type — weaver renders all of them, each producing its own output file.
 
 The `output` field can be absolute (`/etc/nginx/conf.d/myapp.conf`) or relative (`./output/nginx.conf`). Downstream tools (lay, waiter) can move files if needed.
 

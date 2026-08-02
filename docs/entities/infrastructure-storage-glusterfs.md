@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | GlusterFS-specific configuration -- distributed POSIX filesystem with transparent replication |
+| **Purpose** | GlusterFS-specific configuration — distributed POSIX filesystem with transparent replication |
 | **Repo** | [AmadlaOrg/Entities/Infrastructure/Storage/GlusterFS](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/infrastructure/storage/glusterfs@v1.0.0` |
 | **Parent type** | [Infrastructure/Storage](infrastructure-storage.md) |

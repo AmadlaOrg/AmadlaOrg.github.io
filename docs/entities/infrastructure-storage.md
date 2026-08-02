@@ -23,9 +23,9 @@ These properties are common across all distributed storage implementations. Sub-
 
 | Sub-type | Application |
 |----------|-------------|
-| [Storage/MinIO](infrastructure-storage-minio.md) | MinIO -- S3-compatible object storage |
-| [Storage/Ceph](infrastructure-storage-ceph.md) | Ceph -- unified block, object, and file storage |
-| [Storage/GlusterFS](infrastructure-storage-glusterfs.md) | GlusterFS -- distributed POSIX filesystem |
+| [Storage/MinIO](infrastructure-storage-minio.md) | MinIO — S3-compatible object storage |
+| [Storage/Ceph](infrastructure-storage-ceph.md) | Ceph — unified block, object, and file storage |
+| [Storage/GlusterFS](infrastructure-storage-glusterfs.md) | GlusterFS — distributed POSIX filesystem |
 
 ## Example
 

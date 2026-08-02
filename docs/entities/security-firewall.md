@@ -1,10 +1,11 @@
-# Firewall
+# Security/Firewall
 
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines firewall rules — iptables, nftables, ufw, or firewalld |
-| **Repo** | [AmadlaOrg/Entities/Firewall](https://github.com/AmadlaOrg/Entities) |
-| **Entity URI** | `amadla.org/entity/firewall@v1.0.0` |
+| **Repo** | [AmadlaOrg/Entities/Security/Firewall](https://github.com/AmadlaOrg/Entities) |
+| **Entity URI** | `amadla.org/entity/security/firewall@v1.0.0` |
+| **Parent type** | [Security](security.md) |
 
 ## Schema
 
@@ -18,7 +19,7 @@ Firewall describes firewall configuration:
 ## Example
 
 ```yaml
-_type: amadla.org/entity/firewall@v1.0.0
+_type: amadla.org/entity/security/firewall@v1.0.0
 _body:
   backend: nftables
   default_policy:

@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | MinIO-specific configuration -- S3-compatible object storage for private clouds |
+| **Purpose** | MinIO-specific configuration — S3-compatible object storage for private clouds |
 | **Repo** | [AmadlaOrg/Entities/Infrastructure/Storage/MinIO](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/infrastructure/storage/minio@v1.0.0` |
 | **Parent type** | [Infrastructure/Storage](infrastructure-storage.md) |

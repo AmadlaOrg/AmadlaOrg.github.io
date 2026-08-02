@@ -14,7 +14,7 @@
 | `gopath` | string | GOPATH directory |
 | `gobin` | string | GOBIN directory for installed binaries |
 | `goproxy` | string | Module proxy URL (e.g., `https://proxy.golang.org,direct`) |
-| `gonosumcheck` | string | Patterns to skip checksum verification |
+| `gonosumdb` | string | Patterns to skip checksum verification |
 | `goprivate` | string | Private module patterns (e.g., `github.com/myorg/*`) |
 | `go_install` | array of strings | Tools to install via `go install` |
 | `cgo_enabled` | boolean | Enable CGO for C interop |

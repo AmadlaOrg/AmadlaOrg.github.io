@@ -60,7 +60,7 @@ lay pull → (image ref entity) → waiter deploy
 weaver render → (Quadlet files) → waiter deploy
 ```
 
-## Responsibility Split with lay
+## Responsibility Split with lay and weaver
 
 | Concern | Tool |
 |---------|------|

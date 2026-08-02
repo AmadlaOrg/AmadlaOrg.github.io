@@ -65,7 +65,7 @@ Extend tools with plugins for secret sources (doorman-*), infrastructure provide
 
 ### Secrets Management
 
-Doorman daemon resolves secrets from any source — Vault, AWS, KeePassXC, Keycloak — via encrypted in-memory cache.
+Doorman resolves secrets from any source — Vault, AWS, KeePassXC, Keycloak — via encrypted in-memory cache.
 
 </div>
 
@@ -73,7 +73,7 @@ Doorman daemon resolves secrets from any source — Vault, AWS, KeePassXC, Keycl
 
 ### Template Generation
 
-Weaver generates configuration files using pluggable template engines: Jinja, Mustache, Handlebars, and Qute.
+Weaver generates configuration files using pluggable template engines: Go, Jinja2, Mustache, Qute, and FreeMarker.
 
 </div>
 
@@ -85,7 +85,7 @@ Each tool reads structured data, does its job, and passes results downstream as 
 
 <div class="amadla-pipeline" markdown>
 
-`hery` &rarr; `doorman` &rarr; `raise` &rarr; `lay` &rarr; `enjoin` &rarr; `weaver` &rarr; `judge`
+`hery` &rarr; `doorman` &rarr; `raise` &rarr; `lay` &rarr; `enjoin` &rarr; `weaver` &rarr; `waiter` &rarr; `judge`
 
 </div>
 
@@ -97,6 +97,7 @@ Each tool reads structured data, does its job, and passes results downstream as 
 | **Install** | [lay](tools/lay.md) | Install packages, applications, and language runtimes |
 | **Configure** | [enjoin](tools/enjoin.md) | Set system state — users, services, cron, security |
 | **Generate** | [weaver](tools/weaver.md) | Generate config files from templates + entity data |
+| **Deploy** | [waiter](tools/waiter.md) | Deploy applications with blue-green, canary, and rolling strategies |
 | **Audit** | [judge](tools/judge.md) | Verify state and compliance via judge plugins |
 
 <div class="amadla-links" markdown>

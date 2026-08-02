@@ -5,7 +5,7 @@
 | **Purpose** | Defines intrusion detection/prevention configuration — fail2ban jails, Suricata/Snort rules, alerting |
 | **Repo** | [AmadlaOrg/Entities/Security/IDS](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/security/ids@v1.0.0` |
-| **Parent** | [Security](security.md) |
+| **Parent type** | [Security](security.md) |
 
 ## Schema
 
