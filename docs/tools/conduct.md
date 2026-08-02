@@ -2,12 +2,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Multi-server orchestrator — coordinates waiter/lay across distributed nodes |
+| **Purpose** | Multi-server orchestrator — runs Amadla tools across distributed nodes in dependency order |
 | **Repo** | [AmadlaOrg/conduct](https://github.com/AmadlaOrg/conduct) |
 
 ## Overview
 
-conduct is like a conductor — each server plays a different part. Not all servers are equal; conduct supports heterogeneous node roles and coordinates deployment, installation, and health checking across them.
+conduct is like a conductor — each server plays a different part. Not all servers are equal; conduct supports heterogeneous node roles: it reads a topology file describing which servers exist and what each one runs, then executes the assigned tools on each node over SSH in dependency order.
 
 On a single server, Podman (rootless, Quadlet) with systemd handles container restarts. conduct handles what happens when you have multiple servers.
 
@@ -17,16 +17,18 @@ Per-command sequence diagrams: [conduct Commands](conduct-commands.md).
 
 | Command | Description |
 |---------|-------------|
-| `conduct orchestrate` | Coordinate waiter/lay across nodes based on topology entity |
-| `conduct status` | Show cluster-wide status |
-| `conduct settings` | Manage conduct configuration |
+| `conduct deploy -f <topology>` | Parse a topology file (YAML or JSON, `-` for stdin), build an execution plan, and run each node's tools sequentially over SSH in topological order. `--dry-run` prints the plan without executing |
+| `conduct status [deployment]` | List all deployments, or show per-node status for one |
+| `conduct exec <deployment> <node> -- <command...>` | Run an arbitrary command on a node via SSH |
+| `conduct destroy <deployment>` | Remove the local deployment record only — does **not** tear anything down on the remote nodes |
 
 ## Dependencies
 
 | Library | Purpose |
 |---------|---------|
-| LibraryUtils | File operations, configuration |
-| LibraryFramework | CLI framework |
+| spf13/cobra | CLI framework |
+| olekukonko/tablewriter | Status table output |
+| gopkg.in/yaml.v3 | Topology parsing |
 
 ## Pipeline Position
 
@@ -40,24 +42,55 @@ Server C ─── lay + waiter (database tier)
 
 ## How It Works
 
-conduct reads topology/cluster entities that describe which servers exist, what role each plays, and how they relate. It then coordinates [lay](lay.md) and [waiter](waiter.md) across those nodes — installing software and deploying services in the right order on the right machines.
+`conduct deploy` runs in three stages:
 
-- Reads topology/cluster entities describing node roles and placement
-- Orchestrates [waiter](waiter.md)/[lay](lay.md) across distributed nodes
-- Handles role-based placement, replica management, failover
-- Supports heterogeneous node roles (not all servers run the same thing)
+1. **Topology** — parses and validates the topology file (unique node names, valid `depends_on` references, no self-dependencies), defaulting `user` to `root` and `port` to `22`.
+2. **Plan** — topologically sorts nodes by `depends_on` (rejecting cycles) and flattens each node's roles into one ordered step per role. Node `vars` are interpolated: `{{ node-name.host }}` resolves to that node's host.
+3. **Execute** — for each step in order, shells out to the system `ssh` client and runs the role's tool on the node (`vars` are exported as environment variables first). Any non-zero exit stops the deployment.
+
+Deployment state is written to `~/.local/share/conduct/<name>.json` — deployment status plus per-node name, host, and status (`pending`/`ready`/`failed`). This record is what `status`, `exec`, and `destroy` operate on.
+
+### Topology Example
+
+```yaml
+name: webapp
+nodes:
+  - name: db
+    host: 10.0.0.10
+    user: admin                  # optional, defaults to root
+    port: 22                     # optional, defaults to 22
+    key: /home/me/.ssh/id_ed25519  # optional SSH identity file
+    roles:
+      - tool: lay
+        args: ["up", "-f", "postgres.hery"]
+  - name: web
+    host: 10.0.0.11
+    depends_on: [db]
+    vars:
+      DB_HOST: "{{ db.host }}"   # interpolated, exported as env var on the node
+    roles:
+      - tool: waiter
+        args: ["deploy", "-f", "webapp.yaml"]
+```
 
 ### Example Usage
 
 ```bash
-# Deploy across a 3-node cluster
-conduct orchestrate -f cluster.yaml
+# Preview the execution plan
+conduct deploy -f cluster.yaml --dry-run
 
-# Check status of all nodes
+# Deploy across the cluster (sequential, dependency order)
+conduct deploy -f cluster.yaml
+
+# Check status of all deployments, then one in detail
 conduct status
+conduct status webapp
 
-# Deploy only the web tier
-conduct orchestrate -f cluster.yaml --role web
+# Run a command on one node
+conduct exec webapp db -- systemctl status postgresql
+
+# Forget the deployment (local record only)
+conduct destroy webapp
 ```
 
 ## Encouraged Infrastructure
@@ -69,5 +102,17 @@ conduct orchestrate -f cluster.yaml --role web
 
 ## Current Gaps
 
-- Concept stage — no repository or code yet
-- Topology entity type not yet defined
+- Execution is strictly sequential — independent branches of the dependency graph do not run in parallel
+- `exec` always connects as `root@host:22` with no key — the topology's per-node `user`/`port`/`key` are not persisted into state
+- `destroy` only deletes the local state file; there is no remote teardown
+- SSH runs with `StrictHostKeyChecking=no` and a null known-hosts file — no host-key verification
+- `roles[].entities` (entity type/file references) are parsed but unused — plans are built from `tool` + `args` only
+- Cross-node value injection is limited to `{{ node-name.host }}` — one node's outputs cannot flow into another
+
+## Planned
+
+- **Cross-node value injection** — conduct is the architectural home for passing values between nodes (e.g. a database node's generated credentials into an app node's config), beyond the current host-only interpolation
+- **Pipeline driving** — routing full `raise` → `lay` → `enjoin` → `weaver` → `waiter` runs per node from entity types, rather than explicit tool/args
+- **Parallel execution** of independent dependency-graph branches
+- **Topology as a HERY entity** — validated schema instead of a free-standing YAML file
+- Replica management, failover, and cluster-wide health checking

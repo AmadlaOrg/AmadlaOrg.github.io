@@ -56,12 +56,14 @@ Because every tool follows the same protocol (stdin/stdout, structured data, sta
 | **Libraries** | 6 | [LibraryUtils](libraries/library-utils.md), [LibraryFramework](libraries/library-framework.md), [LibraryPluginFramework](libraries/library-plugin-framework.md), [LibraryDoormanFramework](libraries/library-doorman-framework.md), [LibraryJudgeFramework](libraries/library-judge-framework.md), [LibraryEnjoinFramework](libraries/library-enjoin-framework.md) |
 | **Doorman Plugins** | 16 | [doorman-vault, doorman-aws, doorman-keepassxc, doorman-keycloak, ...](plugins/doorman-plugins.md) |
 | **Raise Plugins** | 7 (+3 planned) | [raise-libvirt, raise-virtualbox, raise-wsl, raise-quickemu, ...](plugins/raise-plugins.md) |
-| **Judge Plugins** | 3 | [judge-application, judge-network, judge-system](plugins/judges.md) |
-| **Weaver Plugins** | 5 | [weaver-go, weaver-jinja, weaver-mustache, weaver-qute, weaver-freemarker](plugins/weavers.md) |
+| **Judge Plugins** | 3 (+1 stub) | [judge-application, judge-network, judge-waiter](plugins/judges.md) |
+| **Weaver Plugins** | 5 | [weaver-go, weaver-jinja2, weaver-mustache, weaver-qute, weaver-freemarker](plugins/weavers.md) |
 | **Enjoin Plugins** | 10 | [enjoin-user, enjoin-service, enjoin-firewall, enjoin-cron, ...](plugins/enjoin-plugins.md) |
+| **Waiter Plugins** | 6 | [waiter-podman, waiter-docker, waiter-quadlet, waiter-systemd, waiter-proxy-haproxy, waiter-proxy-kamal](tools/waiter.md) |
+| **Lighthouse Plugins** | 5 | [lighthouse-webhook, lighthouse-slack, lighthouse-email, lighthouse-sms, lighthouse-webrtc](tools/lighthouse.md) |
 | **Entity Definitions** | ~170 schemas | [14 types + sub-types + Tools](entities/overview.md) |
 
-**Total: 78 repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) (public) and [AmadlaCom](https://github.com/AmadlaCom) (private).
+**Total: 85 repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) (public) and [AmadlaCom](https://github.com/AmadlaCom) (private).
 
 ## Key Technologies
 

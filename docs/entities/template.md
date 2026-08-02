@@ -25,7 +25,7 @@ _meta:
   name: nginx-app-config
   description: Generates nginx configuration for application entities
 _body:
-  engine: jinja
+  engine: jinja2
   path: ./templates/nginx.conf.j2
   output: /etc/nginx/conf.d/myapp.conf
   supports:
@@ -43,7 +43,7 @@ _type: amadla.org/entity/template@v1.0.0
 _meta:
   name: nginx-config
 _body:
-  engine: jinja
+  engine: jinja2
   path: ./templates/nginx.conf.j2
   output: /etc/nginx/conf.d/myapp.conf
   supports:
@@ -64,7 +64,7 @@ _body:
     - amadla.org/entity/application@^v1.0.0
 ```
 
-When weaver receives an Application entity, both templates match — weaver renders both, producing `nginx.conf` via `weaver-jinja` and `myapp.service` via `weaver-mustache`.
+When weaver receives an Application entity, both templates match — weaver renders both, producing `nginx.conf` via `weaver-jinja2` and `myapp.service` via `weaver-mustache`.
 
 ## How Weaver Uses Template
 

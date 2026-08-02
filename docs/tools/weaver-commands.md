@@ -5,7 +5,7 @@ the [weaver architecture](weaver.md). Participants are weaver's internal
 packages: `cmd/` (Cobra commands), `weave/` (built-in Go `text/template`
 engine), and `plugin/` (PATH discovery and subprocess delegation) — plus
 the externals they talk to: the filesystem, stdin, and `weaver-*` plugin
-subprocesses (e.g. `weaver-jinja`). The `fs/`, `template/`, `hery/`, and
+subprocesses (e.g. `weaver-jinja2`). The `fs/`, `template/`, `hery/`, and
 `entity/` packages exist in the repo but are dead code — no command calls
 them. `weaver version` simply prints the version string and is not
 diagrammed.
