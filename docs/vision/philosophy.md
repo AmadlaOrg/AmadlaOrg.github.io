@@ -94,7 +94,7 @@ The Amadla pipeline flows from requirements to running infrastructure:
 |------|------|
 | **unravel** | Discovers existing system state as entities (wraps osquery, stateless) |
 | **conduct** | Multi-server orchestration (coordinates waiter/lay across nodes) |
-| **lighthouse** | Notifications/alerts via plugins (webhook, Slack, email, SMS) |
+| **lighthouse** | Notifications/alerts via plugins (webhook, Slack, email, SMS, WebRTC) |
 | **dryrun** | Safely tests settings with auto-revert (prevents SSH lockout, etc.) |
 | **garbage** | Tracks and removes what's no longer needed |
 | **amadla** | Orchestrator: reads `.hery` entities, builds DAG from `_requires`, executes tools in parallel tiers |
@@ -115,10 +115,10 @@ Each tool that interfaces with external systems uses a **plugin architecture**:
 - **weaver-*** plugins extend weaver with new template engines (Go, Jinja2, Mustache, Qute, FreeMarker)
 - **raise-*** plugins extend raise with VM and cloud providers (libvirt, VirtualBox, WSL, QuickEmu, AWS, DigitalOcean, OpenTofu)
 - **waiter-*** plugins extend waiter with deployment backends (Podman, Docker, Quadlet) and proxy backends (HAProxy, Kamal Proxy)
-- **lighthouse-*** plugins extend lighthouse with notification channels (webhook, Slack, email, SMS)
+- **lighthouse-*** plugins extend lighthouse with notification channels (webhook, Slack, email, SMS, WebRTC)
 - **unravel-*** plugins extend unravel with custom discovery backends
 
-Plugins are standalone CLI executables discovered via `$PATH` using a `<tool>-*` naming convention (e.g., `doorman-vault`, `judge-application`, `weaver-jinja`). They communicate via stdin/stdout/stderr following a standard protocol — no IPC, no daemons. Plugins can be written in any language. Go framework libraries are available as optional convenience wrappers to reduce boilerplate.
+Plugins are standalone CLI executables discovered via `$PATH` using a `<tool>-*` naming convention (e.g., `doorman-vault`, `judge-application`, `weaver-jinja2`). They communicate via stdin/stdout/stderr following a standard protocol — no IPC, no daemons. Plugins can be written in any language. Go framework libraries are available as optional convenience wrappers to reduce boilerplate.
 
 ## The amadla Orchestrator
 

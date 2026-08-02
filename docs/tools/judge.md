@@ -2,21 +2,21 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | Validation — compares "what IS" (unravel) vs "what SHOULD BE" (hery), outputs judge entity (diff) |
+| **Purpose** | Validation/audit — dispatches input data to `judge-*` plugins, streams their verdicts through |
 | **Repo** | [AmadlaOrg/judge](https://github.com/AmadlaOrg/judge) |
 
 ## Overview
 
-judge takes two inputs: the expected state (from hery entities) and the actual state (from unravel). It compares them and outputs a judge entity — a diff in entity format that communicates whether the environment matches expectations and which parts are wrong.
+judge is a thin dispatcher for validation plugins. It discovers `judge-*` binaries on PATH and delegates validation to **one plugin per run**, explicitly named with the required `--from` flag. Input (JSON or YAML) is passed via `-f <file>` or stdin; the plugin's output and verdict pass straight through.
 
-judge supports both **generic deep diff** (works with any entity type) and **type-aware plugins** (judge plugins that understand the semantics of specific entity types, e.g., a network judge plugin that knows port equivalences).
+Each plugin understands the semantics of what it checks — e.g., `judge-network` knows how to test connectivity, DNS resolution, and HTTP endpoints. The core CLI does no comparison itself.
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `judge audit` | Compare expected vs actual state, output judge entity |
-| `judge settings` | Manage judge configuration |
+| `judge run` | Run validation via a single plugin: `--from <name>` (required) invokes `judge-<name> judge`, forwarding `-f <file>` or stdin |
+| `judge plugins` | Discover `judge-*` binaries on PATH and list them with metadata from each plugin's `info` (`-o table\|json\|yaml`, `--hery` envelope) |
 
 Per-command sequence diagrams: [judge Commands](judge-commands.md).
 
@@ -24,34 +24,67 @@ Per-command sequence diagrams: [judge Commands](judge-commands.md).
 
 | Library | Purpose |
 |---------|---------|
-| LibraryUtils | File operations, configuration |
-| LibraryFramework | CLI framework |
-| LibraryJudgeFramework | Judge plugin loading and communication |
+| spf13/cobra | CLI commands and flags |
+| olekukonko/tablewriter | Table output for `judge plugins` |
+| gopkg.in/yaml.v3 | YAML output format |
+| stretchr/testify | Tests |
+
+The core CLI intentionally uses no Amadla libraries. LibraryJudgeFramework exists for **building** `judge-*` plugins in Go — it is not a dependency of judge itself.
 
 ## Pipeline Position
 
-judge is typically the **final validation stage**. Combined with unravel for drift detection:
+judge is typically the **final validation stage**, run independently of the main `raise` → `lay` → `enjoin` → `weaver` → `waiter` pipeline:
 
 ```bash
-# Drift detection: compare expected vs actual
-unravel discover --type network | judge audit
+# Validate network checks from a file
+judge run --from network -f checks.yaml
 
-# Reconciliation loop (on cron/systemd timer)
-unravel discover | judge audit
+# Pipe check definitions in via stdin
+cat apps.yaml | judge run --from application
+
+# Pre-flight validation before a waiter deployment
+judge run --from waiter -f deploy.yaml
 ```
 
 ## How It Works
 
 ```
+judge run --from network -f checks.yaml
+        │
+        ├── looks up judge-network on PATH
+        ├── executes: judge-network judge -f checks.yaml
+        │   (stdin is forwarded when no -f is given)
+        └── plugin stdout/stderr pass through unchanged
+```
+
+Plugin exit codes follow the UNIX plugin protocol: 0 = pass, 1 = fail, 2 = usage error. Note that the dispatcher flattens any plugin failure to its own exit 1, so callers cannot currently distinguish a validation failure from a usage error.
+
+## Judge Plugins
+
+| Plugin | Status | Validates |
+|--------|--------|-----------|
+| `judge-application` | Available | Applications/binaries installed at required versions ([Application](../entities/application.md), [Package](../entities/package.md)) |
+| `judge-network` | Available | Connectivity, DNS resolution, HTTP endpoints ([System/Network](../entities/system-network.md)) |
+| `judge-waiter` | Available | Pre-flight checks for waiter deployments (strategy, plugins, ports, image, state dir) |
+| `judge-system` | Planned | System-level requirements (OS, kernel, resources) — [System](../entities/system.md) |
+| `judge-infrastructure` | Planned | Infrastructure requirements (networking, storage, compute) — [Infrastructure](../entities/infrastructure.md) |
+
+Plugins are discovered via PATH (`judge-*` naming convention) and describe themselves via their `info` subcommand. See [Judge Plugins](../plugins/judges.md).
+
+## Planned
+
+The longer-term design makes judge the drift detector for the ecosystem: compare "what SHOULD BE" (hery entities) against "what IS" (unravel output) and emit a **judge entity** — a diff in entity format:
+
+```
 hery query --type network        →  "what SHOULD BE" entity
 unravel discover --type network  →  "what IS" entity
                                           │
-                                    judge audit
+                                    judge (deep diff)
                                           │
                                     judge entity (diff)
 ```
 
-Example: you expect ports 80 and 443 open. unravel reports ports 80, 443, and 8080 are open. judge outputs:
+Example: you expect ports 80 and 443 open; unravel reports 80, 443, and 8080. judge would output:
 
 ```yaml
 _type: amadla.org/entity/judge@v1.0.0
@@ -66,39 +99,17 @@ _body:
       message: "unexpected port 8080 open"
 ```
 
-This judge entity can then pipe to lighthouse for alerting:
+This judge entity could then pipe to lighthouse for alerting, enabling a reconciliation loop on a cron/systemd timer.
 
-```bash
-unravel discover | judge audit | lighthouse notify
-```
+Also planned:
 
-## Entity Types
-
-judge can validate any entity type via its generic deep diff engine. Type-aware plugins add semantic understanding for specific entities:
-
-| Entity | Plugin | What It Checks |
-|--------|--------|---------------|
-| [Package](../entities/package.md) | [judge-application](../plugins/judges.md) | Required packages installed at correct versions |
-| [Application](../entities/application.md) | [judge-application](../plugins/judges.md) | Required applications present and configured |
-| [System](../entities/system.md) | [judge-system](../plugins/judges.md) | OS, kernel, and resource requirements met |
-| [Infrastructure](../entities/infrastructure.md) | [judge-infrastructure](../plugins/judges.md) | Networking, storage, and compute requirements met |
-| [Judge](../entities/judge.md) | — | Audit rule definitions (judge's own output format) |
-
-## Judge Plugins
-
-Each judge plugin understands the semantics of a specific entity type:
-
-| Plugin | Validates |
-|--------|--------|
-| `judge-application` | Whether required apps/packages are installed |
-| `judge-system` | System-level requirements (OS, kernel, resources) |
-| `judge-infrastructure` | Infrastructure requirements (networking, storage) |
-
-Plugins are discovered via PATH (`judge-*` naming convention). Each plugin declares supported entity types via its `info` subcommand. If multiple plugins support the same entity type, **all are called** — they may validate different aspects. Overall verdict: fail if ANY plugin fails.
+- **Generic deep-diff engine** — validate any entity type without a dedicated plugin.
+- **Entity-type routing** — select plugins automatically from the input's `_type` using the `supports` list each plugin declares via `info`. If multiple plugins support the same entity type, all are called — they may validate different aspects. Overall verdict: fail if ANY plugin fails.
+- The [Judge](../entities/judge.md) entity schema for the diff output format above.
 
 ## Current Gaps
 
-- Repository exists but is in early development
-- Judge entity schema not yet finalized
-- Generic diff engine not yet implemented
-- Type-aware plugin integration not yet started
+- No generic deep-diff engine — `judge run` only delegates raw input to a plugin
+- No entity-type routing or multi-plugin fan-out — exactly one plugin per run, named explicitly via `--from`
+- Plugin exit code 2 (usage error) is flattened to exit 1 by the dispatcher
+- Judge entity (diff) output schema not implemented in the core; plugin output passes through as-is

@@ -25,7 +25,13 @@ Per-command sequence diagrams: [enjoin Commands](enjoin-commands.md).
 
 | Library | Purpose |
 |---------|---------|
-| LibraryEnjoinFramework | Enjoin plugin loading and communication |
+| cobra | CLI framework |
+| tablewriter | Table output for `plugins` |
+| yaml.v3 | Entity file parsing |
+
+The core CLI has no Amadla library dependencies — it discovers and executes
+`enjoin-*` plugins itself. [LibraryEnjoinFramework](../libraries/library-enjoin-framework.md)
+is used by the plugins, not by enjoin.
 
 ## Entity Types
 

@@ -7,7 +7,7 @@ Weaver plugins are template engine integrations for the **weaver** tool. Each pl
 | Plugin | Engine | Language |
 |--------|--------|----------|
 | `weaver-go` | Go templates | Go |
-| `weaver-jinja` | Jinja2 | Python |
+| `weaver-jinja2` | Jinja2 | Python |
 | `weaver-mustache` | Mustache | Go |
 | `weaver-qute` | Qute | Java (Quarkus) |
 | `weaver-freemarker` | FreeMarker | Java |
@@ -19,7 +19,7 @@ Weaver plugins are generic template engines — they don't know about entity typ
 ```yaml
 _type: amadla.org/entity/template@v1.0.0
 _body:
-  engine: jinja                          # which weaver-* plugin to invoke
+  engine: jinja2                          # which weaver-* plugin to invoke
   path: ./templates/nginx.conf.j2        # relative path from entity location
   output: /etc/nginx/conf.d/myapp.conf   # rendered output path (absolute or relative)
   supports:                              # which entity types this template can render
@@ -41,16 +41,16 @@ Weaver plugins follow the standard [Plugin Protocol](../architecture/plugin-syst
 
 ```bash
 # Plugin metadata
-weaver-jinja info
-# {"name": "weaver-jinja", "version": "1.0.0", "supports": ["amadla.org/entity/template@^v1.0.0"], ...}
+weaver-jinja2 info
+# {"name": "weaver-jinja2", "version": "1.0.0", "supports": ["amadla.org/entity/template@^v1.0.0"], ...}
 
 # Render a template (entity data + template path via stdin/args)
-weaver-jinja render --template ./nginx.conf.j2 < entity.json > /etc/nginx/conf.d/myapp.conf
+weaver-jinja2 render --template ./nginx.conf.j2 < entity.json > /etc/nginx/conf.d/myapp.conf
 ```
 
 ## Template Engines
 
-### Jinja2 (weaver-jinja)
+### Jinja2 (weaver-jinja2)
 
 Python-based template engine. Widely used in infrastructure automation (Ansible, Salt). Supports inheritance, macros, filters.
 
@@ -76,7 +76,7 @@ Weaver plugins do not yet have a dedicated Go framework library (unlike Doorman 
 
 ## Implementation Priority
 
-1. **weaver-jinja** — Most familiar to infrastructure engineers
+1. **weaver-jinja2** — Most familiar to infrastructure engineers
 2. **weaver-go** — No external runtime, simplest to ship
 3. **weaver-mustache** — Simplest engine, good for basic configs
 4. **weaver-qute** — For Quarkus/Java ecosystem integration

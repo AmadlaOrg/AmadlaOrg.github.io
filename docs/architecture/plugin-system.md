@@ -36,7 +36,7 @@ Tools discover plugins by scanning `$PATH` for binaries matching the `<tool>-*` 
 doorman-vault         # doorman discovers this as a secret source plugin
 doorman-aws           # another doorman plugin
 judge-application     # judge discovers this as a validation plugin
-weaver-jinja          # weaver discovers this as a template engine plugin
+weaver-jinja2          # weaver discovers this as a template engine plugin
 raise-libvirt         # raise discovers this as an infrastructure plugin
 ```
 
@@ -116,7 +116,7 @@ Weaver plugins are generic template engines (Jinja, Mustache, etc.) — they don
 ```yaml
 _type: amadla.org/entity/template@v1.0.0
 _body:
-  engine: jinja                          # which weaver-* plugin to invoke
+  engine: jinja2                          # which weaver-* plugin to invoke
   path: ./templates/nginx.conf.j2        # relative path from entity location
   output: /etc/nginx/conf.d/myapp.conf   # where rendered file goes (absolute or relative)
   supports:                              # which entity types this template can render

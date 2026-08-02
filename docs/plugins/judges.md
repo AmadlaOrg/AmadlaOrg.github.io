@@ -4,11 +4,13 @@ Judge plugins validate whether a system's actual state matches the requirements 
 
 ## Plugin Inventory
 
-| Plugin | Validates | Entity |
-|--------|-----------|--------|
-| `judge-application` | Whether required apps/packages are installed | Application |
-| `judge-system` | System-level requirements (OS, kernel, resources) | System |
-| `judge-infrastructure` | Infrastructure requirements (networking, storage) | Infrastructure |
+| Plugin | Validates | Entity | Status |
+|--------|-----------|--------|--------|
+| `judge-application` | Whether required apps/packages are installed | Application | Available |
+| `judge-network` | Network requirements (interfaces, routes, connectivity) | System/Network | Available |
+| `judge-waiter` | Pre-flight validation of waiter deployments | — | Available |
+| `judge-system` | System-level requirements (OS, kernel, resources) | System | Stub |
+| `judge-infrastructure` | Infrastructure requirements (networking, storage) | Infrastructure | Planned |
 
 ## Protocol
 
@@ -25,9 +27,9 @@ cat application.yaml | judge-application validate
 # Exit code: 0 = pass, 1 = fail
 ```
 
-### Multi-Plugin Routing
+### Multi-Plugin Routing (planned)
 
-When judge receives an entity, it discovers all `judge-*` plugins on PATH that support that entity type. If multiple plugins match, **all are called** — they may validate different aspects (e.g., `judge-application` checks packages, `judge-security` checks vulnerabilities). The overall verdict is **fail if ANY plugin fails**.
+Today `judge run` invokes exactly one plugin, named explicitly with `--from`. The planned routing model: judge discovers all `judge-*` plugins on PATH that support the entity's type, and if multiple plugins match, **all are called** — they may validate different aspects (e.g., `judge-application` checks packages, `judge-security` checks vulnerabilities). The overall verdict is **fail if ANY plugin fails**.
 
 ## Go Framework (Optional)
 
@@ -50,7 +52,7 @@ Plugins can also be written in any other language — just implement the protoco
 ## Workflow
 
 ```
-Entity requirements -> judge -> judge-* plugin (via stdin/stdout) -> pass/fail + details -> aggregated result
+Entity requirements -> judge run --from <plugin> -> judge-* plugin (via stdin/stdout) -> pass/fail + details
 ```
 
 Each plugin:
@@ -59,4 +61,3 @@ Each plugin:
 2. Checks the actual system state against the entity requirements
 3. Outputs pass/fail results with details to stdout
 4. Returns exit code 0 (pass) or 1 (fail)
-5. judge aggregates results from all matching plugins
