@@ -71,7 +71,7 @@ raise uses a **plugin system** for different providers, translating entity requi
 | `raise-digitalocean` | DigitalOcean | Cloud instances (Droplets via doctl) | Active |
 | `raise-quickemu` | Quickemu | Desktop VMs via quickget/quickemu | Active |
 | `raise-opentofu` | OpenTofu/Terraform | Declarative IaC bridge (tofu CLI) | Active |
-| [`raise-xen`](../plugins/raise-plugins.md#raise-xen-planned) | Xen hypervisor | Xen domain images for Amadla Linux | Planned |
+| [`raise-xen`](../plugins/raise-plugins.md#raise-xen) | Xen hypervisor | Xen domain images for Amadla Linux | Planned |
 | `raise-oci` | OCI image builder | OCI images for A/B updates | Planned |
 | `raise-hetzner` | Hetzner Cloud | Cloud instances | Stub |
 
@@ -91,7 +91,7 @@ raise up my-prod-server -f infrastructure.hery
 raise status                                 # List all managed infrastructure
 
 # In a pipeline
-amadla run --config tools.hery -f .
+amadla run . --config tools.hery
 ```
 
 ## Current Status

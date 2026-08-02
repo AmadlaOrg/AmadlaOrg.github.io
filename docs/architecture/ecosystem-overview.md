@@ -94,14 +94,14 @@ JSON Schema definitions that describe the structure of HERY entities.
 | Repo | Defines |
 |------|---------|
 | [Entity](https://github.com/AmadlaOrg/Entity) | Base HERY schema — common `_type`, `_extends`, `_meta`, `_body`, `_requires` structure |
-| [Application](https://github.com/AmadlaOrg/Entities/Application) | Application requirements (packages, services, configurations) |
-| [System](https://github.com/AmadlaOrg/Entities/System) | System requirements (OS, kernel, resources) |
-| [Infrastructure](https://github.com/AmadlaOrg/Entities/Infrastructure) | Infrastructure requirements (servers, networks, storage) |
-| [ProgrammingLanguage](https://github.com/AmadlaOrg/Entities/ProgrammingLanguage) | Programming language runtime requirements |
-| [Container](https://github.com/AmadlaOrg/Entities/Container) | Container/image definitions |
-| [Secret](https://github.com/AmadlaOrg/Entities/Secret) | Secret references and metadata |
-| [Judge](https://github.com/AmadlaOrg/Entities/Judge) | Audit rule definitions |
-| [Entities/Tools](https://github.com/AmadlaOrg/Entities) | Tool inventory and discovery configuration |
+| [Application](https://github.com/AmadlaOrg/Entities/tree/master/Application) | Application requirements (packages, services, configurations) |
+| [System](https://github.com/AmadlaOrg/Entities/tree/master/System) | System requirements (OS, kernel, resources) |
+| [Infrastructure](https://github.com/AmadlaOrg/Entities/tree/master/Infrastructure) | Infrastructure requirements (servers, networks, storage) |
+| [ProgrammingLanguage](https://github.com/AmadlaOrg/Entities/tree/master/ProgrammingLanguage) | Programming language runtime requirements |
+| [Container](https://github.com/AmadlaOrg/Entities/tree/master/Container) | Container/image definitions |
+| [Secret](https://github.com/AmadlaOrg/Entities/tree/master/Secret) | Secret references and metadata |
+| [Judge](https://github.com/AmadlaOrg/Entities/tree/master/Judge) | Audit rule definitions |
+| [Entities/Tools](https://github.com/AmadlaOrg/Entities/tree/master/Tools) | Tool inventory and discovery configuration |
 
 ### Other Repositories
 

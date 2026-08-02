@@ -84,8 +84,8 @@ With stable foundations, build out the pipeline tools and plugins:
 - raise — Infrastructure provisioning
 - lay — Application installation
 - judge — Audit orchestration
-- waiter — Pipeline orchestration
-- unravel — Debugging
+- waiter — Deployment strategies
+- unravel — System discovery
 
 ## Approach Per Repo
 
@@ -111,4 +111,4 @@ For each repository, follow this sequence:
 | P3 | doorman-aws | Cloud deployment support |
 | P3 | LibraryJudgeFramework | Audit pipeline foundation |
 | P4 | raise, lay, judge | Pipeline completion |
-| P4 | waiter, unravel | Orchestration and debugging |
+| P4 | waiter, unravel | Deployment and discovery |

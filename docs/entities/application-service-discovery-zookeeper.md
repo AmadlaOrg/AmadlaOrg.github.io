@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | ZooKeeper-specific configuration -- coordination service for distributed systems (Kafka, Hadoop) |
+| **Purpose** | ZooKeeper-specific configuration — coordination service for distributed systems (Kafka, Hadoop) |
 | **Repo** | [AmadlaOrg/Entities/Application/ServiceDiscovery/ZooKeeper](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/service-discovery/zookeeper@v1.0.0` |
 | **Parent type** | [Application/ServiceDiscovery](application-service-discovery.md) |

@@ -1,10 +1,11 @@
-# Certificate
+# Security/Certificate
 
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines TLS/SSL certificate configuration — provisioning method, domains, renewal |
-| **Repo** | [AmadlaOrg/Entities/Certificate](https://github.com/AmadlaOrg/Entities) |
-| **Entity URI** | `amadla.org/entity/certificate@v1.0.0` |
+| **Repo** | [AmadlaOrg/Entities/Security/Certificate](https://github.com/AmadlaOrg/Entities) |
+| **Entity URI** | `amadla.org/entity/security/certificate@v1.0.0` |
+| **Parent type** | [Security](security.md) |
 
 ## Schema
 
@@ -22,7 +23,7 @@ Certificate describes TLS/SSL certificate requirements:
 ## Example
 
 ```yaml
-_type: amadla.org/entity/certificate@v1.0.0
+_type: amadla.org/entity/security/certificate@v1.0.0
 _body:
   provider: acme
   domains:
@@ -41,7 +42,7 @@ _body:
 ### Self-signed example
 
 ```yaml
-_type: amadla.org/entity/certificate@v1.0.0
+_type: amadla.org/entity/security/certificate@v1.0.0
 _body:
   provider: self-signed
   domains:

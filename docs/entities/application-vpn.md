@@ -22,9 +22,9 @@ These properties are common across all VPN implementations. Sub-types add applic
 
 | Sub-type | Application |
 |----------|-------------|
-| [VPN/WireGuard](application-vpn-wireguard.md) | WireGuard -- kernel-level VPN, minimal attack surface |
-| [VPN/OpenVPN](application-vpn-openvpn.md) | OpenVPN -- TLS-based VPN, broad platform support |
-| [VPN/StrongSwan](application-vpn-strongswan.md) | StrongSwan -- IPsec/IKEv2, standards-compliant |
+| [VPN/WireGuard](application-vpn-wireguard.md) | WireGuard — kernel-level VPN, minimal attack surface |
+| [VPN/OpenVPN](application-vpn-openvpn.md) | OpenVPN — TLS-based VPN, broad platform support |
+| [VPN/StrongSwan](application-vpn-strongswan.md) | StrongSwan — IPsec/IKEv2, standards-compliant |
 
 ## Example
 

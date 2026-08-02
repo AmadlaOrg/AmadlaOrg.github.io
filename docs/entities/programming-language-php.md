@@ -9,19 +9,24 @@
 
 ## Schema
 
-ProgrammingLanguage/PHP extends the ProgrammingLanguage entity with PHP-specific features:
-
-- PHP extensions to install (e.g., pdo_mysql, gd, redis, xdebug)
-- php.ini directives as key-value pairs
-- PHP-FPM configuration: enabled flag, pool definitions (name, user, group, listen socket, process manager settings)
-- Composer: install flag, global packages
-- SAPIs to install: cli, fpm, apache2, cgi
+| Property | Type | Description |
+|----------|------|-------------|
+| `extensions` | array of strings | PHP extensions to install (e.g., `pdo_mysql`, `gd`, `redis`, `xdebug`) |
+| `ini` | object | php.ini directives as key-value pairs |
+| `fpm.enabled` | boolean | Enable PHP-FPM |
+| `fpm.pools` | array of objects | Pool definitions (name, user, group, listen socket, process manager settings) |
+| `composer.install` | boolean | Install Composer |
+| `composer.global_packages` | array of strings | Composer packages to install globally |
+| `sapi` | array of strings | SAPIs to install (`cli`, `fpm`, `apache2`, `cgi`) |
 
 ## Example
 
 ```yaml
 _type: amadla.org/entity/programming-language/php@v1.0.0
+_extends: amadla.org/entity/programming-language@v1.0.0
 _body:
+  language: php
+  version: "8.3"
   extensions:
     - pdo_mysql
     - gd

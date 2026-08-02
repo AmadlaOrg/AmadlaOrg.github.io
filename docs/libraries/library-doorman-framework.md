@@ -9,7 +9,7 @@
 
 ## What It Provides
 
-LibraryDoormanFramework extends LibraryPluginFramework for secret source plugins:
+LibraryDoormanFramework implements the doorman plugin protocol for secret source plugins:
 
 - Standard interface for fetching secrets by key/path
 - Integration hooks for doorman's encrypted cache

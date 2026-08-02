@@ -108,7 +108,7 @@ local source directory, detects the build system by marker files
 (autotools, cmake, meson, cargo, golang, makefile — in that priority
 order), builds into a temporary prefix, then locates the produced
 executable and copies it to the target directory. A `--build-system`
-override is returned without validation, so a typo surfaces later as an
+override is accepted without validation, so a typo surfaces later as an
 "unsupported build system" error. Compiled binaries are not recorded in
 the manifest, so `binary list`/`update`/`remove` do not know about them;
 for cloned sources the binary-name hint is the random temp directory name,

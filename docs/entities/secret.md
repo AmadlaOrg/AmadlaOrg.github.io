@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines secret references — what secrets an application needs and where to find them |
-| **Repo** | [AmadlaOrg/Entities/Secret](https://github.com/AmadlaOrg/Entities/Secret) |
+| **Repo** | [AmadlaOrg/Entities/Secret](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/secret@v1.0.0` |
 
 ## Schema

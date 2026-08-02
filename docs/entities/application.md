@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines application requirements — what packages, services, and configurations an application needs |
-| **Repo** | [AmadlaOrg/Entities/Application](https://github.com/AmadlaOrg/Entities/Application) |
+| **Repo** | [AmadlaOrg/Entities/Application](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application@v1.0.0` |
 
 ## Schema

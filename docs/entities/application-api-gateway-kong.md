@@ -20,7 +20,7 @@
 | `declarative_config` | string | Path to declarative YAML config file (used in DB-less mode) |
 | `plugins` | array of strings | Enabled plugins (e.g., `rate-limiting`, `key-auth`, `jwt`, `oauth2`) |
 | `proxy_listen` | string | Proxy listener address and port (e.g., `0.0.0.0:8000`) |
-| `admin_listen` | string | Admin API listener address and port (e.g., `127.0.0.1:8001`) |
+| `admin_listen` | string | Admin API listener address (e.g., `127.0.0.1`) |
 | `status_listen` | string | Status API listener address and port (e.g., `0.0.0.0:8100`) |
 | `nginx_worker_processes` | string | Number of Nginx worker processes (`auto` or a number) |
 
@@ -45,7 +45,8 @@ _body:
     - cors
     - jwt
   proxy_listen: "0.0.0.0:8000"
-  admin_listen: "127.0.0.1:8001"
+  admin_listen: 127.0.0.1
+  admin_port: 8001
   status_listen: "0.0.0.0:8100"
   nginx_worker_processes: auto
 ```

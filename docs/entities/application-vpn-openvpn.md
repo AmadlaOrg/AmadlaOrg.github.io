@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Purpose** | OpenVPN-specific configuration -- TLS-based VPN with broad platform support |
+| **Purpose** | OpenVPN-specific configuration — TLS-based VPN with broad platform support |
 | **Repo** | [AmadlaOrg/Entities/Application/VPN/OpenVPN](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/application/vpn/openvpn@v1.0.0` |
 | **Parent type** | [Application/VPN](application-vpn.md) |

@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Purpose** | Defines template configuration — which template engine to use, where the template file lives, where to write output, and which entity types the template supports |
-| **Repo** | [AmadlaOrg/Entities/Template](https://github.com/AmadlaOrg/Entities/Template) |
+| **Repo** | [AmadlaOrg/Entities/Template](https://github.com/AmadlaOrg/Entities) |
 | **Entity URI** | `amadla.org/entity/template@v1.0.0` |
 
 ## Schema
@@ -64,7 +64,7 @@ _body:
     - amadla.org/entity/application@^v1.0.0
 ```
 
-When weaver receives an Application entity, both templates match — weaver renders both, producing `nginx.conf` via `weaver-jinja` and `myapp.service` via `weaver-js-mustache`.
+When weaver receives an Application entity, both templates match — weaver renders both, producing `nginx.conf` via `weaver-jinja` and `myapp.service` via `weaver-mustache`.
 
 ## How Weaver Uses Template
 

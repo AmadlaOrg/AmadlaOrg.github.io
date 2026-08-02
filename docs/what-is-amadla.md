@@ -9,7 +9,7 @@ Amadla is an infrastructure automation ecosystem for setting up and managing ser
 Each tool reads specific types of [HERY](architecture/hery-concepts.md) entities (structured YAML files that describe *what* you need) and figures out *how* to make it happen on the target platform. Tools communicate via stdin/stdout, piping YAML or JSON between each other.
 
 !!! info "Core Differentiator"
-    Amadla is **resource-centric**: instead of defining environments (like Terraform or Ansible), each resource (application, service, database) carries its own schema-validated configuration. Requirements are declared explicitly — not buried in documentation — and enforced by schemas. Layers compose and merge, giving a single queryable source of truth.
+    Amadla is **application-centric**: instead of defining environments (like Terraform or Ansible), each application — along with its services, databases, and other components — carries its own schema-validated configuration. Requirements are declared explicitly — not buried in documentation — and enforced by schemas. Layers compose and merge, giving a single queryable source of truth.
 
 ## The Idea: Lists and Specialists
 
@@ -55,17 +55,17 @@ Because every tool follows the same protocol (stdin/stdout, structured data, sta
 | **Core Tools** | 14 | [hery](tools/hery.md), [doorman](tools/doorman.md), [weaver](tools/weaver.md), [judge](tools/judge.md), [lay](tools/lay.md), [raise](tools/raise.md), [enjoin](tools/enjoin.md), [waiter](tools/waiter.md), [unravel](tools/unravel.md), [conduct](tools/conduct.md), [lighthouse](tools/lighthouse.md), [garbage](tools/garbage.md), [dryrun](tools/dryrun.md), [amadla](tools/amadla.md) |
 | **Libraries** | 6 | [LibraryUtils](libraries/library-utils.md), [LibraryFramework](libraries/library-framework.md), [LibraryPluginFramework](libraries/library-plugin-framework.md), [LibraryDoormanFramework](libraries/library-doorman-framework.md), [LibraryJudgeFramework](libraries/library-judge-framework.md), [LibraryEnjoinFramework](libraries/library-enjoin-framework.md) |
 | **Doorman Plugins** | 16 | [doorman-vault, doorman-aws, doorman-keepassxc, doorman-keycloak, ...](plugins/doorman-plugins.md) |
-| **Raise Plugins** | 10 | [raise-libvirt, raise-virtualbox, raise-wsl, raise-xen, ...](plugins/raise-plugins.md) |
-| **Judge Plugins** | 3 | [judge-application, judge-system, judge-infrastructure](plugins/judges.md) |
-| **Weaver Plugins** | 4 | [weaver-jinja, weaver-js-handlebars, weaver-js-mustache, weaver-qute](plugins/weavers.md) |
+| **Raise Plugins** | 7 (+3 planned) | [raise-libvirt, raise-virtualbox, raise-wsl, raise-quickemu, ...](plugins/raise-plugins.md) |
+| **Judge Plugins** | 3 | [judge-application, judge-network, judge-system](plugins/judges.md) |
+| **Weaver Plugins** | 5 | [weaver-go, weaver-jinja, weaver-mustache, weaver-qute, weaver-freemarker](plugins/weavers.md) |
 | **Enjoin Plugins** | 10 | [enjoin-user, enjoin-service, enjoin-firewall, enjoin-cron, ...](plugins/enjoin-plugins.md) |
-| **Entity Definitions** | 27+ | [15 types + sub-types + Tools](entities/overview.md) |
+| **Entity Definitions** | ~170 schemas | [14 types + sub-types + Tools](entities/overview.md) |
 
-**Total: 52+ repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) (public) and [AmadlaCom](https://github.com/AmadlaCom) (private).
+**Total: 78 repositories** across [AmadlaOrg](https://github.com/AmadlaOrg) (public) and [AmadlaCom](https://github.com/AmadlaCom) (private).
 
 ## Key Technologies
 
-[HERY](architecture/hery-concepts.md) is **YAML-based**, entities are validated against **JSON Schema**, and versioning requires **Git**. All tools and libraries are written in **Go**.
+[HERY](architecture/hery-concepts.md) is **YAML-based**, entities are validated against **JSON Schema**, and versioning requires **Git**. All tools and libraries are written in **Go** (except [dryrun](tools/dryrun.md), currently Python).
 
 | Concern | Technology |
 |---------|-----------|
@@ -75,4 +75,4 @@ Because every tool follows the same protocol (stdin/stdout, structured data, sta
 | Schema Validation | JSON Schema |
 | Entity Versioning | Git |
 | Secrets | Encrypted in-memory cache ([doorman](tools/doorman.md)) |
-| Template Engines | Jinja, Mustache, Handlebars, Qute (via [weaver plugins](plugins/weavers.md)) |
+| Template Engines | Go, Jinja2, Mustache, Qute, FreeMarker (via [weaver plugins](plugins/weavers.md)) |

@@ -30,7 +30,7 @@ Per-command sequence diagrams: [lay Commands](lay-commands.md).
 lay sits **after raise** (infrastructure provisioning). For containers, its output (image reference entity) feeds into waiter for deployment.
 
 ```
-hery → doorman → raise → [lay] → waiter
+hery → doorman → raise → [lay] → enjoin → weaver → waiter
                            │
                     pull/build container image
                     install packages/JARs
@@ -61,7 +61,7 @@ hery → doorman → raise → [lay] → waiter
 When pulling or building container images, lay outputs an entity with the image reference that waiter can consume:
 
 ```bash
-lay pull my-app:v2 | waiter deploy --strategy canary
+lay install -f app.hery && waiter deploy -f app.hery
 ```
 
 ## Current Status
